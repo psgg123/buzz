@@ -2,6 +2,14 @@
 
 This v1 manifest contains the English source strings extracted from the bounded Settings, main sidebar, message composer/actions, and Agents surfaces. The two Chinese locale scaffolds intentionally contain empty values so the app falls back to English until native-quality translations are supplied.
 
+The Korean development branch additionally uses the `ui` namespace (`en.ui.json`,
+`ko.ui.json`, and `ui-keys.json`) for authored UI strings across desktop 0.5.28.
+Its catalogue currently contains 3,358 entries. This is a resource count, not a
+claim that every visible string has been translated or reviewed. Source call
+sites provide the rendering context; `ko.grammar-slots.json` records English
+grammatical slots expressed directly in Korean. Provenance is documented in
+`docs/korean/THIRD_PARTY.md` at the repository root.
+
 | Key | English source | UI context |
 | --- | --- | --- |
 | `settings.nav.backToApp` | Back to app | Settings sidebar navigation |
