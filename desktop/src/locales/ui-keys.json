@@ -4191,5 +4191,15 @@
   "Drop image here": "mf02f9ff77b56c67c",
   "Drag or browse": "me3830ddaa4af3cd3",
   "Loading reply context…": "m432e9abf66302857",
-  "Replying to an unavailable note": "mf1583d20c7cf192a"
+  "Replying to an unavailable note": "mf1583d20c7cf192a",
+  "{0}m ago": "m80e8bfb2c2e94921",
+  "{0}h ago": "m4dcb47019f486537",
+  "{0}d ago": "m1fccd42cb34cbe2b",
+  "{0}w ago": "mac944c0b25b368ad",
+  "project channel": "m5d83f10df6055a72",
+  "private ephemeral channel": "md1d7a108abc28294",
+  "private channel": "m1fe928748b353da7",
+  "ephemeral channel": "m5c33c029d7b2e872",
+  "regular channel": "me2bcf0f7128b48fc",
+  "Just now": "m66f53417d3b7797a"
 }

@@ -93,7 +93,7 @@ export function useChannelIntro({
         actions,
         channelKindLabel: isWelcomeChannel(activeChannel)
           ? uiT("private welcome channel")
-          : getChannelIntroKind(activeChannel, projectHome),
+          : uiT(getChannelIntroKind(activeChannel, projectHome)),
         channelName: activeChannel.name,
         description: isWelcomeChannel(activeChannel)
           ? null
@@ -148,7 +148,7 @@ export function useChannelIntro({
 
     return {
       actions,
-      channelKindLabel: getChannelIntroKind(activeChannel, projectHome),
+      channelKindLabel: uiT(getChannelIntroKind(activeChannel, projectHome)),
       channelName: activeChannel.name,
       description: getChannelIntroDescription(activeChannel),
       hideBeginning: projectHome,

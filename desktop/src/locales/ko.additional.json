@@ -1438,5 +1438,15 @@
   "Drop image here": "이미지를 여기에 놓으세요",
   "Drag or browse": "끌어 놓거나 찾아보기",
   "Loading reply context…": "답글 컨텍스트를 불러오는 중…",
-  "Replying to an unavailable note": "볼 수 없는 노트에 답글을 쓰는 중"
+  "Replying to an unavailable note": "볼 수 없는 노트에 답글을 쓰는 중",
+  "{0}m ago": "{0}분 전",
+  "{0}h ago": "{0}시간 전",
+  "{0}d ago": "{0}일 전",
+  "{0}w ago": "{0}주 전",
+  "project channel": "프로젝트 채널",
+  "private ephemeral channel": "비공개 임시 채널",
+  "private channel": "비공개 채널",
+  "ephemeral channel": "임시 채널",
+  "regular channel": "일반 채널",
+  "Just now": "방금"
 }

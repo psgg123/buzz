@@ -680,32 +680,32 @@ function LiveActivityOpenButton({
 
 function formatLastLiveLabel(timestamp: number | null, now: number): string {
   if (timestamp === null) {
-    return "No activity yet";
+    return uiT("No activity yet");
   }
 
   const elapsedMs = Math.max(0, now - timestamp);
   const totalSeconds = Math.floor(elapsedMs / 1000);
   if (totalSeconds < 60) {
-    return "Just now";
+    return uiT("Just now");
   }
 
   const totalMinutes = Math.floor(totalSeconds / 60);
   if (totalMinutes < 60) {
-    return `${totalMinutes}m ago`;
+    return uiT("{0}m ago", { p0: totalMinutes });
   }
 
   const totalHours = Math.floor(totalMinutes / 60);
   if (totalHours < 24) {
-    return `${totalHours}h ago`;
+    return uiT("{0}h ago", { p0: totalHours });
   }
 
   const totalDays = Math.floor(totalHours / 24);
   if (totalDays < 7) {
-    return `${totalDays}d ago`;
+    return uiT("{0}d ago", { p0: totalDays });
   }
 
   const totalWeeks = Math.floor(totalDays / 7);
-  return `${totalWeeks}w ago`;
+  return uiT("{0}w ago", { p0: totalWeeks });
 }
 
 function ArchiveStatusTooltip() {

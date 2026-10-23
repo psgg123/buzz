@@ -753,9 +753,11 @@ export function InboxListPane({
             <div className="flex h-full min-h-64 items-center justify-center px-6 text-center">
               <div>
                 <p className="text-sm font-medium text-foreground">
-                  {unreadOnly
-                    ? INBOX_UNREAD_EMPTY_STATE_TITLES[filter]
-                    : INBOX_EMPTY_STATE_TITLES[filter]}
+                  {uiT(
+                    unreadOnly
+                      ? INBOX_UNREAD_EMPTY_STATE_TITLES[filter]
+                      : INBOX_EMPTY_STATE_TITLES[filter],
+                  )}
                 </p>
                 <p className="mt-1 text-sm text-muted-foreground">
                   {unreadOnly
