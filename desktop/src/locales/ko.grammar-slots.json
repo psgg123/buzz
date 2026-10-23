@@ -1,0 +1,167 @@
+{
+  "me6c99bfa4d16486c": {
+    "source": "This team references {0} agent {1} that {2} no longer in My Agents. Add them back or edit the team before deploying.",
+    "omitted": ["p1", "p2"],
+    "reason": "English grammatical or fixed noun slot expressed directly in Korean; counts and names are retained."
+  },
+  "m37fa261ff577f6d3": {
+    "source": "Deploy {0} {1}",
+    "omitted": ["p1"],
+    "reason": "English grammatical or fixed noun slot expressed directly in Korean; counts and names are retained."
+  },
+  "med42fee0aa3c8d88": {
+    "source": "Saved. Restarted {0} agent{1}.{2}",
+    "omitted": ["p1"],
+    "reason": "English grammatical or fixed noun slot expressed directly in Korean; counts and names are retained."
+  },
+  "mc3a353202415e8a0": {
+    "source": "{0} {1} memory entr {2}",
+    "omitted": ["p2"],
+    "reason": "English grammatical or fixed noun slot expressed directly in Korean; counts and names are retained."
+  },
+  "mb689164efda4a2c2": {
+    "source": "Respond-to allowlist ({0} entr {1})",
+    "omitted": ["p1"],
+    "reason": "English grammatical or fixed noun slot expressed directly in Korean; counts and names are retained."
+  },
+  "m3ecfaeacff735a4b": {
+    "source": "Memory partially restored: {0} of {1} entr {2} written. The agent exists but some memory entries failed to publish.",
+    "omitted": ["p2"],
+    "reason": "English grammatical or fixed noun slot expressed directly in Korean; counts and names are retained."
+  },
+  "m0a1a7a225014d437": {
+    "source": "{0} memory entr {1} restored.",
+    "omitted": ["p1"],
+    "reason": "English grammatical or fixed noun slot expressed directly in Korean; counts and names are retained."
+  },
+  "m78fb53a9b264fd02": {
+    "source": "{0} event{1}",
+    "omitted": ["p1"],
+    "reason": "English grammatical or fixed noun slot expressed directly in Korean; counts and names are retained."
+  },
+  "m0ec3beb29e792eee": {
+    "source": "Remove {0} member{1}?",
+    "omitted": ["p1"],
+    "reason": "English grammatical or fixed noun slot expressed directly in Korean; counts and names are retained."
+  },
+  "m8449ca5a74b18530": {
+    "source": "{0} entr {1} not a valid npub or 64-char hex public key and will be ignored.",
+    "omitted": ["p1"],
+    "reason": "English grammatical or fixed noun slot expressed directly in Korean; counts and names are retained."
+  },
+  "m8ecbfa5fac18f3f2": {
+    "source": "{0} valid pubkey{1} ready.",
+    "omitted": ["p1"],
+    "reason": "English grammatical or fixed noun slot expressed directly in Korean; counts and names are retained."
+  },
+  "m17cb21c36752c0c4": {
+    "source": "This team references {0} agent {1} that {2} no longer in My Agents. Save to remove them, or add them back to My Agents first.",
+    "omitted": ["p1", "p2"],
+    "reason": "English grammatical or fixed noun slot expressed directly in Korean; counts and names are retained."
+  },
+  "me6292ccbcaf83436": {
+    "source": ", but {0} member{1} failed to publish {2}.",
+    "omitted": ["p1", "p2"],
+    "reason": "English grammatical or fixed noun slot expressed directly in Korean; counts and names are retained."
+  },
+  "mbc5961478b44d685": {
+    "source": "successfully with {0} member{1}.",
+    "omitted": ["p1"],
+    "reason": "English grammatical or fixed noun slot expressed directly in Korean; counts and names are retained."
+  },
+  "mf6b2b1235d540491": {
+    "source": "Memory partially restored: {0} of {1} entr {2} written across all members.",
+    "omitted": ["p2"],
+    "reason": "English grammatical or fixed noun slot expressed directly in Korean; counts and names are retained."
+  },
+  "m8387e6739d63bc60": {
+    "source": "{0} memory entr {1} restored across all members.",
+    "omitted": ["p1"],
+    "reason": "English grammatical or fixed noun slot expressed directly in Korean; counts and names are retained."
+  },
+  "mefb692e194791547": {
+    "source": "{0} agent {1} in this team {2} no longer in your agents. Edit the team to fix it before deploying or sharing.",
+    "omitted": ["p1", "p2"],
+    "reason": "English grammatical or fixed noun slot expressed directly in Korean; counts and names are retained."
+  },
+  "m86069a7de6ecba62": {
+    "source": "Show {0} more {1}",
+    "omitted": ["p1"],
+    "reason": "English grammatical or fixed noun slot expressed directly in Korean; counts and names are retained."
+  },
+  "m98b5228770ce7b1a": {
+    "source": "Showing commits from {0} of {1} repositories. {2} {3} not be loaded.",
+    "omitted": ["p3"],
+    "reason": "English grammatical or fixed noun slot expressed directly in Korean; counts and names are retained."
+  },
+  "m4e0e5c7a49c0baf7": {
+    "source": "Show {0} earlier {1}",
+    "omitted": ["p1"],
+    "reason": "English grammatical or fixed noun slot expressed directly in Korean; counts and names are retained."
+  },
+  "mda9ac5937fb99ed5": {
+    "source": "{0} prior action {1} against this target — {2}",
+    "omitted": ["p1"],
+    "reason": "English grammatical or fixed noun slot expressed directly in Korean; counts and names are retained."
+  },
+  "m983f73f8571f975d": {
+    "source": "{0} channel{1} set individually.",
+    "omitted": ["p1"],
+    "reason": "English grammatical or fixed noun slot expressed directly in Korean; counts and names are retained."
+  },
+  "m8b9ef20f4777d32e": {
+    "source": "{0} attachment {1}",
+    "omitted": ["p1"],
+    "reason": "English grammatical or fixed noun slot expressed directly in Korean; counts and names are retained."
+  },
+  "mab4d58caabcd8e91": {
+    "source": "{0} new message{1}",
+    "omitted": ["p1"],
+    "reason": "English grammatical or fixed noun slot expressed directly in Korean; counts and names are retained."
+  },
+  "ma33fb097cefe0333": {
+    "source": "{0} {1} not in this channel. {2}",
+    "omitted": ["p1"],
+    "reason": "English grammatical or fixed noun slot expressed directly in Korean; counts and names are retained."
+  },
+  "mbcd7674c246ad473": {
+    "source": "This removes {0} for everyone.",
+    "omitted": ["p0"],
+    "reason": "English grammatical or fixed noun slot expressed directly in Korean; counts and names are retained."
+  },
+  "m570466c7a41362db": {
+    "source": "Huddle active — {0} participant{1}",
+    "omitted": ["p1"],
+    "reason": "English grammatical or fixed noun slot expressed directly in Korean; counts and names are retained."
+  },
+  "m8bbf5932cd656a5d": {
+    "source": "unread notification{0}",
+    "omitted": ["p0"],
+    "reason": "English grammatical or fixed noun slot expressed directly in Korean; counts and names are retained."
+  },
+  "ma7cd42a57e877be5": {
+    "source": "{0}{1} with relay members.",
+    "omitted": ["p0"],
+    "reason": "English grammatical or fixed noun slot expressed directly in Korean; counts and names are retained."
+  },
+  "m65eb350e8c5e8fd7": {
+    "source": "Missing {0}: {1}",
+    "omitted": ["p0"],
+    "reason": "English grammatical or fixed noun slot expressed directly in Korean; counts and names are retained."
+  },
+  "m8ceb3f217b3986a0": {
+    "source": "{0} attachment {1} not shown (display limit reached).",
+    "omitted": ["p1"],
+    "reason": "English grammatical or fixed noun slot expressed directly in Korean; counts and names are retained."
+  },
+  "m807b90d433aacb19": {
+    "source": "This team references {0} agent{1} that {2} no longer in My Agents. Add them back or edit the team before deploying.",
+    "omitted": ["p1", "p2"],
+    "reason": "English grammatical or fixed noun slot expressed directly in Korean; counts and names are retained."
+  },
+  "mf18f404f8133bb8c": {
+    "source": "This team references {0} agent{1} that {2} no longer in My Agents. Save to remove them, or add them back to My Agents first.",
+    "omitted": ["p1", "p2"],
+    "reason": "English grammatical or fixed noun slot expressed directly in Korean; counts and names are retained."
+  }
+}
