@@ -53,9 +53,9 @@ node desktop/scripts/import-korean-catalog.mjs /path/to/40-korean.patch
 
 변경 후 타입 검사, Biome 검사, 파일 크기 검사, 전체 desktop 테스트를 수행합니다. 원본과 같은 기능 선택으로 실제 macOS `.app`을 빌드하고 실행 화면을 확인합니다. 브라우저 mock 검증과 네이티브 앱 검증은 구분해서 기록합니다.
 
-저장소 전체 `just ci`, desktop 테스트 7,010개, 실제 macOS 앱의 로컬 릴레이 연결·메시지 저장·한글 파일명 첨부/다운로드, 검색과 시험 하네스의 시작·중지 경로를 검증했습니다. macOS 키체인 재승인, 최종 패키지 재시작과 VoiceOver 등 남은 수용 항목은 `ACCEPTANCE.md`에 구분합니다. 3~5일 실사용은 사용자 요청으로 제외했습니다. upstream 제출은 공식 대상 결정과 별도 제출 요청 후 진행하며, 사람의 직접 시험을 완료로 대신 표시하지 않습니다.
+저장소 전체 `just ci`, desktop 테스트 7,010개, 실제 macOS 앱의 로컬 릴레이 연결·메시지 저장·한글 파일명 첨부/다운로드, 검색과 시험 하네스의 시작·중지 경로를 검증했습니다. 키체인 승인 후 패키지 교체·재실행에서 한국어 설정·신원·초안 복원과 번들 도구 실행, 공식 앱 복귀도 확인했습니다. 전체 CI 이후 작은 표시 문구 변경은 영향 검사로 따로 검증했습니다. OS 알림 실제 배달과 운영 데이터 재연결 등 남은 항목은 `ACCEPTANCE.md`에 구분합니다. 3~5일 실사용과 VoiceOver 직접 검증은 사용자 요청으로 제외했습니다. upstream 제출은 공식 대상 결정과 별도 제출 요청 후 진행하며, 사람의 전체 직접 시험을 완료로 대신 표시하지 않습니다.
 
 출처와 작성자는 [THIRD_PARTY.md](THIRD_PARTY.md)에 기록했습니다.
-첫 개발판에서 실제로 수행한 검사와 남은 범위는 [ACCEPTANCE.md](ACCEPTANCE.md)에 기록했습니다.
+실제로 수행한 검사와 남은 범위는 [ACCEPTANCE.md](ACCEPTANCE.md)에 기록했습니다. 첫 개발판의 과거 기록은 [VALIDATION.md](VALIDATION.md)에 보존했습니다.
 
 용어와 번역 경계는 [GLOSSARY.md](GLOSSARY.md), 업데이트·복귀 절차는 [MAINTENANCE.md](MAINTENANCE.md), 공개 제안 비교와 PR 초안·사람의 확인 절차는 [CONTRIBUTION.md](CONTRIBUTION.md)에 정리했습니다.
