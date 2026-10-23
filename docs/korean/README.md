@@ -56,3 +56,4 @@ node desktop/scripts/import-korean-catalog.mjs /path/to/40-korean.patch
 실제 계정의 대화·파일·에이전트 사용, 한국어 IME 조합 입력, VoiceOver, 보조 도구 실행, 최소 3~5일 실사용 검증은 별도의 수용 단계입니다. 이 단계가 끝나기 전에는 전체 계획이나 배포 준비를 완료로 표시하지 않습니다. upstream PR은 지원 방향이 정해진 뒤 최신 원본을 기준으로 변경을 분리하고, 저장소가 요구하는 전체 검사와 사용자 직접 시험을 마친 후 준비합니다.
 
 출처와 작성자는 [THIRD_PARTY.md](THIRD_PARTY.md)에 기록했습니다.
+첫 개발판에서 실제로 수행한 검사와 남은 범위는 [VALIDATION.md](VALIDATION.md)에 기록했습니다.
