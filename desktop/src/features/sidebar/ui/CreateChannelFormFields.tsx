@@ -165,7 +165,9 @@ export function CreateChannelFormFields({
         <DropdownMenu modal={false}>
           <DropdownMenuTrigger asChild>
             <Button
-              aria-label={`Template: ${selectedTemplate?.name ?? "None"}`}
+              aria-label={uiT("Template: {0}", {
+                p0: selectedTemplate?.name ?? "None",
+              })}
               className="-mr-2.5 ml-auto h-9 min-w-0 max-w-[60%] justify-end px-2.5 text-right text-sm font-medium text-foreground hover:bg-muted/50"
               data-testid="create-channel-template"
               disabled={isCreating}
@@ -174,7 +176,7 @@ export function CreateChannelFormFields({
               variant="ghost"
             >
               <span className="truncate text-right">
-                {selectedTemplate?.name ?? "None"}
+                {selectedTemplate?.name ?? uiT("None")}
               </span>
               <ChevronDown className="size-4 shrink-0 text-muted-foreground/70" />
             </Button>
@@ -256,7 +258,7 @@ export function CreateChannelFormFooter({
       >
         {isCreating
           ? uiT("Creating...")
-          : (submitLabel ?? `Create ${kindLabel}`)}
+          : (submitLabel ?? uiT("Create {0}", { p0: kindLabel }))}
       </Button>
     </div>
   );

@@ -219,7 +219,9 @@ export function ProjectHomeWorkspaceSheet({
   const detail = React.useMemo<ProjectHomeWorkspaceDetail | null>(() => {
     if (tab === "issues" && selectedIssueId) {
       return {
-        backLabel: "Back to Tasks",
+        get backLabel() {
+          return uiT("Back to Tasks");
+        },
         navigation: {
           issueId: selectedIssueId,
           repositoryId: selectedIssueItem?.project.id,
@@ -229,14 +231,18 @@ export function ProjectHomeWorkspaceSheet({
     }
     if (tab === "prs" && selectedPullRequestId) {
       return {
-        backLabel: "Back to Reviews",
+        get backLabel() {
+          return uiT("Back to Reviews");
+        },
         navigation: { pullRequestId: selectedPullRequestId },
         onBack: () => setSelectedPullRequestId(null),
       };
     }
     if (tab === "commits" && selectedCommitHash) {
       return {
-        backLabel: "Back to Commits",
+        get backLabel() {
+          return uiT("Back to Commits");
+        },
         navigation: {
           commitHash: selectedCommitHash,
           repositoryId: selectedCommitRepository.id,
@@ -249,7 +255,9 @@ export function ProjectHomeWorkspaceSheet({
     }
     if (tab === "files" && filesContext?.onBack) {
       return {
-        backLabel: "Back to Files",
+        get backLabel() {
+          return uiT("Back to Files");
+        },
         navigation: { filePath: filesContext.path },
         onBack: filesContext.onBack,
       };

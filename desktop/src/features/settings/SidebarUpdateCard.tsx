@@ -70,11 +70,11 @@ export function SidebarUpdateCompactCard({
 
   return (
     <SidebarCompactActionCard
-      actionAriaLabel="Update now"
+      actionAriaLabel={uiT("Update now")}
       actionDisabled={pending}
       actionTestId={actionTestId}
       description={pending ? uiT("Updating") : uiT("Click to update")}
-      dismissLabel="Dismiss update notification"
+      dismissLabel={uiT("Dismiss update notification")}
       icon={
         pending ? (
           <Spinner aria-hidden="true" className="h-5 w-5 border-2" />
@@ -103,13 +103,13 @@ export function SidebarUpdateCard({ onDismiss }: SidebarUpdateCardProps) {
   if (status.state === "manual-required") {
     return (
       <SidebarCompactActionCard
-        actionAriaLabel="Download update from GitHub"
+        actionAriaLabel={uiT("Download update from GitHub")}
         actionTestId="sidebar-update-download-github"
         description={uiT(
           "v{0} available — download from GitHub. Switch to AppImage for automatic updates.",
           { p0: status.version },
         )}
-        dismissLabel="Dismiss update notification"
+        dismissLabel={uiT("Dismiss update notification")}
         icon={<ExternalLink aria-hidden="true" className="h-5 w-5" />}
         iconKey="manual"
         onAction={() => void openUrl(status.releaseUrl)}

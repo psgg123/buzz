@@ -198,7 +198,7 @@ export function TeamDialog({
                   disabled={isPending}
                   id="team-name"
                   onChange={(event) => setName(event.target.value)}
-                  placeholder="Engineering Squad"
+                  placeholder={uiT("Engineering Squad")}
                   value={name}
                 />
               </div>

@@ -18,7 +18,12 @@ export function uiT(
 ): string {
   const normalized = source.replace(/\s+/g, " ").trim();
   const key = keys[normalized];
-  if (!key) return source;
+  if (!key)
+    return source.replace(/\{(\d+)\}/g, (slot, index) =>
+      Object.hasOwn(values, `p${index}`)
+        ? String(values[`p${index}`] ?? "")
+        : slot,
+    );
   const prefix = source.match(/^\s*/)?.[0] ?? "";
   const suffix = source.match(/\s*$/)?.[0] ?? "";
   const fallback = normalized.replace(/\{(\d+)\}/g, (_, n) => `{{p${n}}}`);
@@ -42,7 +47,9 @@ export function uiMessage(
       (i18n.getResource(i18n.resolvedLanguage ?? "en", "ui", key) ||
         i18n.getResource("en", "ui", key))) ||
     normalized.replace(/\{(\d+)\}/g, (_, n) => `{{p${n}}}`);
-  return String(template)
+  const prefix = source.match(/^\s*/)?.[0] ?? "";
+  const suffix = source.match(/\s*$/)?.[0] ?? "";
+  return `${prefix}${String(template)}${suffix}`
     .split(/(\{\{p\d+\}\})/g)
     .map((part, index) => {
       const parameter = /^\{\{(p\d+)\}\}$/.exec(part)?.[1];

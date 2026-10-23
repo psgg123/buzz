@@ -153,7 +153,7 @@ function AgentCardViewerContent({
     } else if (sent === false) {
       toast.error(
         sendController.getCurrentError() ??
-          "Couldn’t send the card. Try again.",
+          uiT("Couldn’t send the card. Try again."),
       );
     }
   }
@@ -178,12 +178,20 @@ function AgentCardViewerContent({
                 ? uiT(
                     "The card carries the agent — anyone who imports this PNG gets a working copy (config only, fresh identity, no memories).",
                   )
-                : `The card carries the agent — anyone who imports this PNG gets a working copy (fresh identity) including its ${card.memoryLevel === "core" ? "core memory" : "memories"}, stored as plaintext.`}
+                : uiT(
+                    "The card carries the agent — anyone who imports this PNG gets a working copy (fresh identity) including its {0}, stored as plaintext.",
+                    {
+                      p0:
+                        card.memoryLevel === "core"
+                          ? "core memory"
+                          : "memories",
+                    },
+                  )}
           </DialogDescription>
         </DialogHeader>
         <div className="flex flex-col gap-4">
           <img
-            alt={`${agentName} trading card`}
+            alt={uiT("{0} trading card", { p0: agentName })}
             className="mx-auto max-h-[28rem] rounded-lg border shadow-lg"
             data-testid="agent-card-preview"
             onContextMenu={(event) => {
@@ -370,7 +378,7 @@ function AgentCardGalleryContent() {
               >
                 {entry.thumbJpegBase64 ? (
                   <img
-                    alt={`${entry.agentName} trading card`}
+                    alt={uiT("{0} trading card", { p0: entry.agentName })}
                     className="aspect-2/3 w-full rounded-lg border object-cover shadow-sm transition-transform group-hover:scale-[1.02]"
                     src={`data:image/jpeg;base64,${entry.thumbJpegBase64}`}
                   />

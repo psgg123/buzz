@@ -214,7 +214,7 @@ export function MessageThreadPanel({
   autoSendDraftKey = null,
   onAutoSubmitComplete,
 }: MessageThreadPanelProps) {
-  useUiLanguage();
+  const __buzzLanguage = useUiLanguage();
 
   const threadBodyRef = React.useRef<HTMLDivElement>(null);
   const threadContentRef = React.useRef<HTMLDivElement>(null);
@@ -393,6 +393,7 @@ export function MessageThreadPanel({
       startIndex,
     };
   }, [deferredThreadReplies, hoveredCollapseBranchId, threadHeadId]);
+  // biome-ignore lint/correctness/useExhaustiveDependencies: Display copy and dates depend on the selected UI language.
   const threadReplyRenderItems = React.useMemo(() => {
     if (!threadHead) {
       return [];
@@ -431,8 +432,8 @@ export function MessageThreadPanel({
               depth: ancestor.message.depth,
               label:
                 ancestor.message.id === threadHead.id
-                  ? "Collapse thread"
-                  : "Collapse replies",
+                  ? uiT("Collapse thread")
+                  : uiT("Collapse replies"),
               message: ancestor.message,
             }))
           : undefined;
@@ -472,6 +473,7 @@ export function MessageThreadPanel({
     hoveredCollapseBranchId,
     isHuddleTranscript,
     threadHead,
+    __buzzLanguage,
   ]);
 
   const {
@@ -676,7 +678,7 @@ export function MessageThreadPanel({
                           channelId={channelId}
                           currentPubkey={currentPubkey}
                           collapseDepthGuideActions={collapseDepthGuideActions}
-                          collapseDescendantsLabel="Collapse replies"
+                          collapseDescendantsLabel={uiT("Collapse replies")}
                           connectDescendants={
                             shouldShowThreadBranchGuides &&
                             connectsToVisibleChild
@@ -866,7 +868,7 @@ export function MessageThreadPanel({
               placeholder={
                 isHuddleTranscript
                   ? uiT("Message the huddle")
-                  : `Reply in thread to ${threadHead.author}`
+                  : uiT("Reply in thread to {0}", { p0: threadHead.author })
               }
               profiles={profiles}
               recentMentionPubkeys={recentMentionPubkeys}

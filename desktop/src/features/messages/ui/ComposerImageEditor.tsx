@@ -336,7 +336,7 @@ export function ComposerImageEditor({
       await onSave(bytes);
       // On success the parent closes the lightbox and unmounts this component.
     } catch {
-      setSaveError("Could not save the drawing. Please try again.");
+      setSaveError(uiT("Could not save the drawing. Please try again."));
       setSavingState(false);
     }
   }, [onSave, saving, setSavingState, sourceType, sourceUrl, strokes]);
@@ -427,7 +427,7 @@ export function ComposerImageEditor({
           <div className="flex items-center gap-1.5">
             {PEN_COLORS.map((color) => (
               <button
-                aria-label={`${color.label} pen`}
+                aria-label={uiT("{0} pen", { p0: color.label })}
                 aria-pressed={activeColor === color.value}
                 className={cn(
                   "flex h-5 w-5 items-center justify-center rounded-full transition-transform",

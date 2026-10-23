@@ -117,11 +117,11 @@ export function AgentDropdownSelect({
   ariaRequired,
   className,
   disabled = false,
-  emptyOptionsLabel = "No options available",
+  emptyOptionsLabel = uiT("No options available"),
   id,
   onValueChange,
   options,
-  placeholder = "Select",
+  placeholder = uiT("Select"),
   placeholderClassName,
   placeholderValue,
   searchable = false,
@@ -356,7 +356,7 @@ export function AgentModelField({
   modelDiscoveryStatus,
   onIsCustomModelEditingChange,
   onModelChange,
-  placeholder = "Select model",
+  placeholder = uiT("Select model"),
   placeholderClassName,
   provider,
   fieldClassName,
@@ -536,7 +536,7 @@ export function AgentModelField({
     discoveredModelOptions === null &&
     trimmedModel.length === 0 &&
     !isCustomModelEditing
-      ? "Loading models..."
+      ? uiT("Loading models...")
       : placeholder;
   const statusMessage = resolveModelFieldStatusMessage({
     discoveredModelOptions,
@@ -549,7 +549,7 @@ export function AgentModelField({
       ariaRequired={isRequired}
       className={selectClassName}
       disabled={selectDisabled}
-      emptyOptionsLabel="Couldn't load models"
+      emptyOptionsLabel={uiT("Couldn't load models")}
       id={id}
       onValueChange={handleModelSelectChange}
       options={modelOptions}

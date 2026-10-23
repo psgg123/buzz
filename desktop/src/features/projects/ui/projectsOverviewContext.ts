@@ -249,7 +249,9 @@ export function projectsOverviewContext(
         },
         testId: "projects-overview-add-repository",
       },
-      detailsTitle: "Repository activity",
+      get detailsTitle() {
+        return uiT("Repository activity");
+      },
       people,
       stats: [
         {
@@ -292,7 +294,9 @@ export function projectsOverviewContext(
         },
         testId: "projects-overview-add-channel",
       },
-      detailsTitle: "Details",
+      get detailsTitle() {
+        return uiT("Details");
+      },
       people,
       stats: [
         {
@@ -335,7 +339,9 @@ export function projectsOverviewContext(
         },
         testId: "projects-overview-create-issue",
       },
-      detailsTitle: "Details",
+      get detailsTitle() {
+        return uiT("Details");
+      },
       people,
       stats: [
         {
@@ -378,7 +384,9 @@ export function projectsOverviewContext(
         },
         testId: "projects-overview-create-pull-request",
       },
-      detailsTitle: "Review activity",
+      get detailsTitle() {
+        return uiT("Review activity");
+      },
       people,
       stats: [
         {
@@ -415,7 +423,9 @@ export function projectsOverviewContext(
   if (filter === "all") {
     return {
       action: null,
-      detailsTitle: "Details",
+      get detailsTitle() {
+        return uiT("Details");
+      },
       people,
       stats: [
         {
@@ -467,7 +477,9 @@ export function projectsOverviewContext(
 
   return {
     action: createProjectAction(),
-    detailsTitle: "Details",
+    get detailsTitle() {
+      return uiT("Details");
+    },
     people,
     stats: [
       {

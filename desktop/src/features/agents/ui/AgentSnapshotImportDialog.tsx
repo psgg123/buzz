@@ -67,10 +67,10 @@ export function AgentSnapshotImportDialog({
   const hasMemory = preview.memoryEntryCount > 0;
   const memoryLevelLabel =
     preview.memoryLevel === "core"
-      ? "core"
+      ? uiT("core")
       : preview.memoryLevel === "everything"
-        ? "all"
-        : "none";
+        ? uiT("all")
+        : uiT("none");
 
   return (
     <Dialog onOpenChange={onOpenChange} open={open}>

@@ -165,7 +165,7 @@ function RuntimeStatus({
     return (
       <div className="flex flex-col items-center gap-1.5">
         <Button
-          aria-label={`Sign in to ${runtime.label}`}
+          aria-label={uiT("Sign in to {0}", { p0: runtime.label })}
           className="h-7 shrink-0 rounded-full bg-foreground px-3 text-xs font-normal text-background shadow-none hover:bg-foreground/85 hover:text-background"
           data-testid={`onboarding-runtime-instructions-${runtime.id}`}
           onClick={() => {
@@ -219,7 +219,7 @@ function RuntimeStatus({
   if (isInstalling) {
     return (
       <div
-        aria-label={`Installing ${runtime.label}`}
+        aria-label={uiT("Installing {0}", { p0: runtime.label })}
         className="flex h-5 items-center gap-2 rounded-md bg-white/60 px-2.5 text-xs font-medium text-foreground/70"
         role="status"
       >
@@ -235,7 +235,7 @@ function RuntimeStatus({
     if (runtimesQuery.isError) {
       return (
         <Button
-          aria-label={`Check ${runtime.label} again`}
+          aria-label={uiT("Check {0} again", { p0: runtime.label })}
           className="buzz-onboarding-runtime-setup h-5 rounded-md bg-[var(--buzz-welcome-chartreuse)]/30 px-2.5 text-xs font-medium text-foreground hover:bg-[var(--buzz-welcome-chartreuse)]/40"
           data-testid={`onboarding-runtime-recheck-${runtime.id}`}
           onClick={() => void runtimesQuery.forceRefresh()}
@@ -255,7 +255,7 @@ function RuntimeStatus({
   ) {
     return (
       <Button
-        aria-label={`Check ${runtime.label} again`}
+        aria-label={uiT("Check {0} again", { p0: runtime.label })}
         className="buzz-onboarding-runtime-setup h-5 rounded-md bg-[var(--buzz-welcome-chartreuse)]/30 px-2.5 text-xs font-medium text-foreground hover:bg-[var(--buzz-welcome-chartreuse)]/40"
         disabled={runtimesQuery.isFetching}
         onClick={() => void runtimesQuery.forceRefresh()}
@@ -267,7 +267,7 @@ function RuntimeStatus({
     );
   }
 
-  const installLabel = installError ? "Retry install" : "Install";
+  const installLabel = installError ? uiT("Retry install") : uiT("Install");
   if (runtime.canAutoInstall) {
     return (
       <Button
@@ -285,7 +285,7 @@ function RuntimeStatus({
 
   return (
     <Button
-      aria-label={`View ${runtime.label} install instructions`}
+      aria-label={uiT("View {0} install instructions", { p0: runtime.label })}
       className="buzz-onboarding-runtime-setup h-5 rounded-md bg-[var(--buzz-welcome-chartreuse)]/30 px-2.5 text-xs font-medium text-foreground hover:bg-[var(--buzz-welcome-chartreuse)]/40"
       data-testid={`onboarding-runtime-instructions-${runtime.id}`}
       onClick={() => void openUrl(runtime.installInstructionsUrl)}

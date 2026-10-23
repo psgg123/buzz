@@ -442,10 +442,10 @@ export function buildOwnerFields({
 }
 
 function orderProfileFields(fields: ProfileField[]) {
-  const visibilityLabel = "Visibility";
-  const publicKeyLabel = "Public key";
-  const managedByLabel = "Managed by";
-  const statusLabel = "Status";
+  const visibilityLabel = uiT("Visibility");
+  const publicKeyLabel = uiT("Public key");
+  const managedByLabel = uiT("Managed by");
+  const statusLabel = uiT("Status");
   return [
     ...fields.filter((field) => field.label === visibilityLabel),
     ...fields.filter((field) => field.label === publicKeyLabel),

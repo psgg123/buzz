@@ -63,8 +63,10 @@ export function UserProfileAgentSettingsMenu({
     return null;
   }
 
-  const archiveLabel = isBot ? "Archive agent" : "Archive identity";
-  const unarchiveLabel = isBot ? "Unarchive agent" : "Unarchive identity";
+  const archiveLabel = isBot ? uiT("Archive agent") : uiT("Archive identity");
+  const unarchiveLabel = isBot
+    ? uiT("Unarchive agent")
+    : uiT("Unarchive identity");
 
   return (
     <>

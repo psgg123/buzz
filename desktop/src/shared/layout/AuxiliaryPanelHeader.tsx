@@ -1,5 +1,5 @@
+import { uiT, useUiLanguage } from "@/shared/i18n/uiTranslation";
 // Buzz source localisation: authored UI strings only; user values stay unchanged.
-import { useUiLanguage } from "@/shared/i18n/uiTranslation";
 import * as React from "react";
 import { ArrowLeft, X } from "lucide-react";
 
@@ -266,7 +266,7 @@ export function getAuxiliaryPanelBodyClass({
 
 export function AuxiliaryPanelHeaderGroup({
   align = "center",
-  backButtonAriaLabel = "Back",
+  backButtonAriaLabel = uiT("Back"),
   backButtonTestId,
   leading,
   mode,

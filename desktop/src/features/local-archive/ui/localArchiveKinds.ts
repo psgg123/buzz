@@ -102,23 +102,23 @@ export const KIND_GROUPS: ReadonlyArray<KindGroup> = [
 function kindLabel(kind: number): string {
   switch (kind) {
     case 5:
-      return "Event deletions (kind 5)";
+      return uiT("Event deletions (kind 5)");
     case 7:
-      return "Reactions (kind 7)";
+      return uiT("Reactions (kind 7)");
     case 9:
-      return "Stream messages (kind 9)";
+      return uiT("Stream messages (kind 9)");
     case 9005:
-      return "Buzz-native deletions (kind 9005)";
+      return uiT("Buzz-native deletions (kind 9005)");
     case 40002:
-      return "Stream messages v2 (kind 40002)";
+      return uiT("Stream messages v2 (kind 40002)");
     case 40003:
-      return "Message edits (kind 40003)";
+      return uiT("Message edits (kind 40003)");
     case 45001:
-      return "Forum posts (kind 45001)";
+      return uiT("Forum posts (kind 45001)");
     case 45003:
-      return "Forum comments (kind 45003)";
+      return uiT("Forum comments (kind 45003)");
     default:
-      return `Kind ${kind}`;
+      return uiT("Kind {0}", { p0: kind });
   }
 }
 

@@ -166,7 +166,9 @@ export function CronExpressionInput({
         role={firstError ? "alert" : undefined}
       >
         {firstError ??
-          "UTC · Paste all 5 fields, or use wildcards, lists, ranges, and steps."}
+          uiT(
+            "UTC · Paste all 5 fields, or use wildcards, lists, ranges, and steps.",
+          )}
       </p>
     </fieldset>
   );

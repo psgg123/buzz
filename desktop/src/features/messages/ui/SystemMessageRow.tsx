@@ -1,5 +1,5 @@
 // Buzz source localisation: authored UI strings only; user values stay unchanged.
-import { uiT, useUiLanguage } from "@/shared/i18n/uiTranslation";
+import { uiMessage, uiT, useUiLanguage } from "@/shared/i18n/uiTranslation";
 import { AgentManagementMarker } from "@/features/agents/ui/OtherSetupAgentMarker";
 import { SmilePlus } from "lucide-react";
 import * as React from "react";
@@ -307,7 +307,7 @@ function MemberNamesInlineList({
       })}
       {hiddenTargets.length > 0 ? (
         <>
-          , and{" "}
+          {uiT(", and")}{" "}
           <Tooltip>
             <TooltipTrigger asChild>
               <button
@@ -454,7 +454,7 @@ function describeGroupedArrivals({
       title: membershipTitle,
       action: (
         <>
-          {addedActionPrefix(isTargetCurrentUser)} along with{" "}
+          {addedActionPrefix(isTargetCurrentUser)} {uiT(" along with")}{" "}
           <MemberNamesInlineList
             agentPubkeys={agentPubkeys}
             currentPubkey={currentPubkey}
@@ -602,10 +602,7 @@ function describeSystemEvent(
       return {
         title: actorName,
         action: (
-          <>
-            {uiT("removed")}
-            {targetName} {uiT("from the channel")}
-          </>
+          <>{uiMessage("removed {0} from the channel", { p0: targetName })}</>
         ),
       };
     case "topic_changed":

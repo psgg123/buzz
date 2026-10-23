@@ -324,9 +324,9 @@ export function InboxListPane({
     const hasReopenError = isReopenErrored?.(item.item.channelId) ?? false;
     const canOpen = hasChannelTarget && !isReopening;
     const openLabel = !hasChannelTarget
-      ? "No channel link"
+      ? uiT("No channel link")
       : isReopening
-        ? "Reopening…"
+        ? uiT("Reopening…")
         : uiT("Open in channel");
     const typeLabel = getInboxTypeLabel(item);
     const videoReviewCommentRootId = getInboxVideoReviewCommentRootId(item);
@@ -358,7 +358,7 @@ export function InboxListPane({
         }
       >
         <button
-          aria-label={`Open inbox item from ${item.senderLabel}`}
+          aria-label={uiT("Open inbox item from {0}", { p0: item.senderLabel })}
           className="absolute inset-0 z-0 block w-full border-l border-l-transparent text-left"
           onClick={() => onSelect(item.id)}
           type="button"

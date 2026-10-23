@@ -198,7 +198,9 @@ export function AgentCardMintDialog({
       );
     },
     onError: (error) =>
-      toast.error(typeof error === "string" ? error : "Couldn't save the key."),
+      toast.error(
+        typeof error === "string" ? error : uiT("Couldn't save the key."),
+      ),
   });
 
   function beginMint() {

@@ -1,5 +1,5 @@
+import { uiMessage, uiT, useUiLanguage } from "@/shared/i18n/uiTranslation";
 // Buzz source localisation: authored UI strings only; user values stay unchanged.
-import { uiMessage, useUiLanguage } from "@/shared/i18n/uiTranslation";
 import { Bot, ChevronDown, ChevronRight } from "lucide-react";
 import * as React from "react";
 
@@ -40,7 +40,7 @@ function StatusDot({ status }: { status: "online" | "away" | "offline" }) {
         : "bg-zinc-400";
   return (
     <span
-      aria-label={`Agent ${status}`}
+      aria-label={uiT("Agent {0}", { p0: status })}
       role="img"
       className={`inline-block h-2 w-2 rounded-full ${color}`}
     />
@@ -72,7 +72,7 @@ export function AgentActivityCard({
           role={"bot" as const}
         >
           <button
-            aria-label={`Open profile for ${displayName}`}
+            aria-label={uiT("Open profile for {0}", { p0: displayName })}
             className="relative flex shrink-0 rounded-xl pt-1 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring"
             type="button"
           >

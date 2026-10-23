@@ -304,7 +304,7 @@ function AgentPersonaCard({
         avatarUrl,
         isAgentCardAvatarLoading(Boolean(agent), profileQuery.isPending),
       )}
-      ariaLabel={`${title} agent profile`}
+      ariaLabel={uiT("{0} agent profile", { p0: title })}
       avatar={
         agent ? (
           <AgentRuntimeAvatarControl
@@ -411,7 +411,7 @@ function StandaloneAgentCard({
 
   return (
     <AgentIdentityCard
-      ariaLabel={`${title} agent profile`}
+      ariaLabel={uiT("{0} agent profile", { p0: title })}
       avatar={
         <AgentRuntimeAvatarControl
           activeTestId={`agent-runtime-active-${agent.pubkey}`}

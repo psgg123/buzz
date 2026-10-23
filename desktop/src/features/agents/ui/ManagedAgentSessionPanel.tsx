@@ -66,7 +66,9 @@ export function ManagedAgentSessionPanel({
   autoTail = false,
   channelId = null,
   className,
-  emptyDescription = "Mention this agent in a channel to watch the next turn.",
+  emptyDescription = uiT(
+    "Mention this agent in a channel to watch the next turn.",
+  ),
   emptyState = "idle",
   panelPadding = true,
   rawLayout = "responsive",
@@ -197,7 +199,7 @@ function SessionHeader({
         <p className="mt-1 text-sm text-muted-foreground">
           {hasObserver
             ? latestSessionId
-              ? `Session ${shorten(latestSessionId)}`
+              ? uiT("Session {0}", { p0: shorten(latestSessionId) })
               : uiT("Waiting for the next agent turn.")
             : uiT("Restart this local agent to attach the observer feed.")}
         </p>

@@ -111,7 +111,9 @@ function EditProfileMetadataButton({
 }) {
   const Icon = isEditing ? Check : Pencil;
   const actionLabel = isEditing ? uiT("Done") : uiT("Edit");
-  const accessibleLabel = isEditing ? `Done editing ${label}` : `Edit ${label}`;
+  const accessibleLabel = isEditing
+    ? uiT("Done editing {0}", { p0: label })
+    : uiT("Edit {0}", { p0: label });
 
   return (
     <button
@@ -616,7 +618,9 @@ export function ProfileSettingsCard({
                           />
                           {shouldShowAnimatedPreview ? null : emojiAvatarPreview ? (
                             <div
-                              aria-label={`${resolvedName} avatar`}
+                              aria-label={uiT("{0} avatar", {
+                                p0: resolvedName,
+                              })}
                               className="relative flex h-full w-full shrink-0 items-center justify-center overflow-hidden rounded-full shadow-xs"
                               data-testid="profile-avatar-preview"
                               role="img"

@@ -108,17 +108,23 @@ const PROVIDER_CREDENTIAL_CONFIG: Partial<
   anthropic: {
     requiredEnvKeys: ["ANTHROPIC_API_KEY"],
     secretEnvVar: "ANTHROPIC_API_KEY",
-    apiKeyLabel: "Anthropic API Key",
+    get apiKeyLabel() {
+      return uiT("Anthropic API Key");
+    },
   },
   openai: {
     requiredEnvKeys: ["OPENAI_COMPAT_API_KEY"],
     secretEnvVar: "OPENAI_COMPAT_API_KEY",
-    apiKeyLabel: "OpenAI Runtime API Key",
+    get apiKeyLabel() {
+      return uiT("OpenAI Runtime API Key");
+    },
   },
   "openai-compat": {
     requiredEnvKeys: ["OPENAI_COMPAT_API_KEY"],
     secretEnvVar: "OPENAI_COMPAT_API_KEY",
-    apiKeyLabel: "OpenAI-compatible Runtime API Key",
+    get apiKeyLabel() {
+      return uiT("OpenAI-compatible Runtime API Key");
+    },
   },
   databricks: {
     // DATABRICKS_TOKEN is NOT required — OAuth PKCE is the normal path.
@@ -137,7 +143,9 @@ const PROVIDER_CREDENTIAL_CONFIG: Partial<
   openrouter: {
     requiredEnvKeys: ["OPENROUTER_API_KEY"],
     secretEnvVar: "OPENROUTER_API_KEY",
-    apiKeyLabel: "OpenRouter API Key",
+    get apiKeyLabel() {
+      return uiT("OpenRouter API Key");
+    },
   },
 };
 
@@ -519,10 +527,10 @@ export function buildPersonaRuntimeDropdownOptions({
   runtimeDropdownOptions: PersonaDropdownOption[];
 } {
   const blankRuntimeOptionLabel = runtimesLoading
-    ? "Loading harnesses..."
+    ? uiT("Loading harnesses...")
     : isCreateMode
-      ? "Choose a harness"
-      : "No preference (use app default)";
+      ? uiT("Choose a harness")
+      : uiT("No preference (use app default)");
   const runtimeDropdownOptions: PersonaDropdownOption[] = [
     ...(!isCreateMode
       ? [

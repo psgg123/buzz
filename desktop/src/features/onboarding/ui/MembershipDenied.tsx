@@ -68,7 +68,7 @@ export function MembershipDenied({
   const handleImportKey = React.useCallback(async () => {
     if (!previewNpub) {
       setImportError(
-        "That doesn't look like a valid nsec. Paste an nsec1 key.",
+        uiT("That doesn't look like a valid nsec. Paste an nsec1 key."),
       );
       return;
     }
@@ -80,7 +80,7 @@ export function MembershipDenied({
       await onImportKey(trimmedNsec);
     } catch (error) {
       setImportError(
-        error instanceof Error ? error.message : "Failed to import key.",
+        error instanceof Error ? error.message : uiT("Failed to import key."),
       );
     } finally {
       setIsImportingKey(false);
@@ -234,7 +234,7 @@ export function MembershipDenied({
                     className="h-4 w-4 border-2"
                   />
                 ) : (
-                  "Import key"
+                  uiT("Import key")
                 )}
               </Button>
               <Button

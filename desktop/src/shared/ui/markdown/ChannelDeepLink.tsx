@@ -1,5 +1,5 @@
+import { uiT, useUiLanguage } from "@/shared/i18n/uiTranslation";
 // Buzz source localisation: authored UI strings only; user values stay unchanged.
-import { useUiLanguage } from "@/shared/i18n/uiTranslation";
 import type * as React from "react";
 
 import {
@@ -130,7 +130,11 @@ function ChannelPermalinkChipContents({
         href={href}
         icon="channel"
         title={href}
-        aria-label={openable ? `Open channel ${label}` : `Channel ${label}`}
+        aria-label={
+          openable
+            ? uiT("Open channel {0}", { p0: label })
+            : uiT("Channel {0}", { p0: label })
+        }
         interactive={openable && interactive}
         onOpenLink={() => {
           if (openable) onOpenChannel(channelId);
@@ -429,7 +433,9 @@ function ChannelReferenceChip({
         href={channel ? buildChannelLink(channel.id) : undefined}
         icon="channel"
         aria-label={
-          channel ? `Open channel ${channelName}` : `Channel ${channelName}`
+          channel
+            ? uiT("Open channel {0}", { p0: channelName })
+            : uiT("Channel {0}", { p0: channelName })
         }
         interactive={Boolean(channel) && interactive}
         onOpenLink={() => {

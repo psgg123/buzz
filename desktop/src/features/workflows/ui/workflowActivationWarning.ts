@@ -33,7 +33,10 @@ function frequentIntervalDescription(interval: string): string | null {
   ) {
     return null;
   }
-  return `It is scheduled to run every ${formatDurationSecondsVerbose(seconds)}. Review the schedule before turning it on.`;
+  return uiT(
+    "It is scheduled to run every {0}. Review the schedule before turning it on.",
+    { p0: formatDurationSecondsVerbose(seconds) },
+  );
 }
 
 function normalizedCronFields(cron: string): string[] | null {
@@ -106,21 +109,32 @@ function frequentCronDescription(cron: string): string | null {
   if (!matchesEveryHour(hour)) return null;
 
   if (secondRuns > 1) {
-    return "It is scheduled to run multiple times a minute. Review the schedule before turning it on.";
+    return uiT(
+      "It is scheduled to run multiple times a minute. Review the schedule before turning it on.",
+    );
   }
   if (minute === "*") {
-    return "It is scheduled to run every minute. Review the schedule before turning it on.";
+    return uiT(
+      "It is scheduled to run every minute. Review the schedule before turning it on.",
+    );
   }
   const steppedMinute = /^\*\/(\d+)$/.exec(minute);
   if (steppedMinute) {
     const minutes = Number(steppedMinute[1]);
-    return `It is scheduled to run every ${minutes} minute${minutes === 1 ? "" : "s"}. Review the schedule before turning it on.`;
+    return uiT(
+      "It is scheduled to run every {0} minute{1}. Review the schedule before turning it on.",
+      { p0: minutes, p1: minutes === 1 ? "" : "s" },
+    );
   }
   if (minuteRuns === 1) {
-    return "It is scheduled to run every hour. Review the schedule before turning it on.";
+    return uiT(
+      "It is scheduled to run every hour. Review the schedule before turning it on.",
+    );
   }
   if (minuteRuns > 1) {
-    return "It is scheduled to run multiple times an hour. Review the schedule before turning it on.";
+    return uiT(
+      "It is scheduled to run multiple times an hour. Review the schedule before turning it on.",
+    );
   }
   return null;
 }

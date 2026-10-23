@@ -352,7 +352,7 @@ export function RepoSyncActionButton({
         disabled={controls.pullDisabled}
         onClick={controls.onPull}
         size="sm"
-        title={controls.pullTitle ?? "Pull remote commits"}
+        title={controls.pullTitle ?? uiT("Pull remote commits")}
         variant="ghost"
       >
         {uiMessage("{0} Pull{1}", {
@@ -374,7 +374,7 @@ export function RepoSyncActionButton({
         disabled={controls.pushDisabled}
         onClick={controls.onPush}
         size="sm"
-        title={controls.pushTitle ?? "Push local commits"}
+        title={controls.pushTitle ?? uiT("Push local commits")}
         variant="ghost"
       >
         {uiMessage("{0} Push", {
@@ -395,7 +395,7 @@ export function RepoSyncActionButton({
       disabled={controls.fetchPending}
       onClick={controls.onFetch}
       size="sm"
-      title={controls.fetchTitle ?? "Check for remote changes"}
+      title={controls.fetchTitle ?? uiT("Check for remote changes")}
       variant="ghost"
     >
       {uiMessage("{0} Fetch", {

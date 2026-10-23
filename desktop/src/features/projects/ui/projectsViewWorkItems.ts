@@ -54,7 +54,9 @@ export function useDeleteProjectHandler(
         toast.success(uiT("Project deleted"));
       } catch (error) {
         toast.error(
-          error instanceof Error ? error.message : "Failed to delete project",
+          error instanceof Error
+            ? error.message
+            : uiT("Failed to delete project"),
         );
       }
     },

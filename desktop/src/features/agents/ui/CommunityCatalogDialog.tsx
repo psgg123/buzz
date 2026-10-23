@@ -504,8 +504,12 @@ export function CommunityCatalogDialog({
                       <Button
                         aria-label={
                           selectedPersonaIsActive
-                            ? `${selectedPersona.displayName} is already in My Agents`
-                            : `Add ${selectedPersona.displayName} from Community Catalog`
+                            ? uiT("{0} is already in My Agents", {
+                                p0: selectedPersona.displayName,
+                              })
+                            : uiT("Add {0} from Community Catalog", {
+                                p0: selectedPersona.displayName,
+                              })
                         }
                         className="pointer-events-auto"
                         data-testid={`community-catalog-use-agent-${selectedPersona.id}`}
@@ -522,8 +526,12 @@ export function CommunityCatalogDialog({
                       <Button
                         aria-label={
                           selectedTeamIsAdded
-                            ? `${selectedTeam.name} is already in your teams`
-                            : `Add ${selectedTeam.name} from Community Catalog`
+                            ? uiT("{0} is already in your teams", {
+                                p0: selectedTeam.name,
+                              })
+                            : uiT("Add {0} from Community Catalog", {
+                                p0: selectedTeam.name,
+                              })
                         }
                         className="pointer-events-auto"
                         data-testid="community-catalog-add-team"
@@ -887,7 +895,7 @@ function TeamCatalogMemberRow({ member }: TeamCatalogMemberRowProps) {
         <div className="min-w-0 flex-1">
           <p className="truncate text-sm font-medium">{member.displayName}</p>
           <p className="truncate text-xs text-muted-foreground">
-            {member.model ?? "Use app default"}
+            {member.model ?? uiT("Use app default")}
           </p>
         </div>
         <ChevronDown

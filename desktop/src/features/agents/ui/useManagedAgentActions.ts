@@ -189,7 +189,7 @@ export function useManagedAgentActions() {
     } catch (error) {
       if (isRelayRemovedError(error)) return;
       setActionErrorMessage(
-        error instanceof Error ? error.message : "Failed to start agent.",
+        error instanceof Error ? error.message : uiT("Failed to start agent."),
       );
     }
   }
@@ -214,7 +214,9 @@ export function useManagedAgentActions() {
     } catch (error) {
       if (isRelayRemovedError(error)) return;
       setActionErrorMessage(
-        error instanceof Error ? error.message : "Failed to restart agent.",
+        error instanceof Error
+          ? error.message
+          : uiT("Failed to restart agent."),
       );
     } finally {
       setRestartingAgentPubkey(null);
@@ -267,7 +269,7 @@ export function useManagedAgentActions() {
     } catch (error) {
       if (isRelayRemovedError(error)) return;
       setActionErrorMessage(
-        error instanceof Error ? error.message : "Failed to start agent.",
+        error instanceof Error ? error.message : uiT("Failed to start agent."),
       );
     } finally {
       setPersonaStartPending(persona.id, false);
@@ -303,7 +305,7 @@ export function useManagedAgentActions() {
       }
     } catch (error) {
       setActionErrorMessage(
-        error instanceof Error ? error.message : "Failed to stop agent.",
+        error instanceof Error ? error.message : uiT("Failed to stop agent."),
       );
     }
   }
@@ -347,7 +349,7 @@ export function useManagedAgentActions() {
       }
     } catch (error) {
       setActionErrorMessage(
-        error instanceof Error ? error.message : "Failed to delete agent.",
+        error instanceof Error ? error.message : uiT("Failed to delete agent."),
       );
     }
   }
@@ -371,7 +373,7 @@ export function useManagedAgentActions() {
       setActionErrorMessage(
         error instanceof Error
           ? error.message
-          : "Failed to update startup preference.",
+          : uiT("Failed to update startup preference."),
       );
     }
   }
@@ -410,7 +412,12 @@ export function useManagedAgentActions() {
     const failures = results.filter((r) => r.status === "rejected");
     if (failures.length > 0) {
       setActionErrorMessage(
-        `${failures.length} of ${targets.length} ${failureNoun}${failures.length === 1 ? "" : "s"} failed.`,
+        uiT("{0} of {1} {2}{3} failed.", {
+          p0: failures.length,
+          p1: targets.length,
+          p2: failureNoun,
+          p3: failures.length === 1 ? "" : "s",
+        }),
       );
     }
     return true;

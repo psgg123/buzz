@@ -112,7 +112,7 @@ export function MergePullRequestButton({
         setConfirmOpen(false);
       }
       toast.error(
-        error instanceof Error ? error.message : "Failed to merge review.",
+        error instanceof Error ? error.message : uiT("Failed to merge review."),
       );
     }
   }, [mergeMutation, pullRequest]);
@@ -148,7 +148,7 @@ export function MergePullRequestButton({
       toast.error(
         error instanceof Error
           ? error.message
-          : "Failed to prepare merge recovery.",
+          : uiT("Failed to prepare merge recovery."),
       );
     } finally {
       setIsPreparingRecovery(false);
@@ -174,7 +174,7 @@ export function MergePullRequestButton({
       toast.error(
         error instanceof Error
           ? error.message
-          : "Failed to publish merged review status.",
+          : uiT("Failed to publish merged review status."),
       );
     }
   }, [publishMergedMutation, unpublishedStatusEvent]);

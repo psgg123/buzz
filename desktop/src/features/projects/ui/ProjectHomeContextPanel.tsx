@@ -212,7 +212,7 @@ export function ProjectHomeContextPanel({
   const firstRepository = project.repositories[0] ?? null;
   const addRepositoryTitle = firstRepository
     ? undefined
-    : "Add a repository to this project";
+    : uiT("Add a repository to this project");
   const openWorkspace = (tab: EntityLinkTab) => {
     if (firstRepository) {
       onOpenWorkspace(firstRepository.id, tab);

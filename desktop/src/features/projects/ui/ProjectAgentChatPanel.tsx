@@ -234,7 +234,9 @@ export function ProjectAgentChatPanel({
         }
       } catch (error) {
         toast.error(
-          error instanceof Error ? error.message : "Failed to reach the agent",
+          error instanceof Error
+            ? error.message
+            : uiT("Failed to reach the agent"),
         );
       } finally {
         setIsSending(false);
@@ -335,7 +337,7 @@ export function ProjectAgentChatPanel({
               <AgentContextPayloadPreview
                 iconOnly
                 payload={contextPayload}
-                triggerLabel="Preview message context"
+                triggerLabel={uiT("Preview message context")}
               />
               {conversation ? (
                 <Button

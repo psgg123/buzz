@@ -249,8 +249,8 @@ export function NostrBindConsentDialog() {
     enteredVerificationCode.length === VERIFICATION_CODE_LENGTH;
   const isVerificationCodeValid =
     payload !== null && enteredVerificationCode === payload.verificationCode;
-  const copyButtonLabel = isSigning ? "Signing…" : "Continue";
-  const finishCopyButtonLabel = isCopied ? "Copied" : "Copy response";
+  const copyButtonLabel = isSigning ? uiT("Signing…") : uiT("Continue");
+  const finishCopyButtonLabel = isCopied ? uiT("Copied") : uiT("Copy response");
 
   const clearCopiedState = React.useCallback(() => {
     if (copiedTimerRef.current) {
@@ -302,7 +302,7 @@ export function NostrBindConsentDialog() {
         .catch((error) => {
           console.warn("get_identity for nostr bind failed:", error);
           setIdentity(null);
-          setError("Could not load the current Buzz identity.");
+          setError(uiT("Could not load the current Buzz identity."));
         });
     });
 
@@ -567,7 +567,7 @@ export function NostrBindConsentDialog() {
       }
     } catch (error) {
       if (activeSignAttemptRef.current === attempt) {
-        setError(formatError(error) || "Failed to sign binding response.");
+        setError(formatError(error) || uiT("Failed to sign binding response."));
       }
     } finally {
       if (activeSignAttemptRef.current === attempt) {
@@ -781,7 +781,10 @@ export function NostrBindConsentDialog() {
                             key={VERIFICATION_CODE_DIGIT_KEYS[index]}
                           >
                             <input
-                              aria-label={`Verification code digit ${index + 1} of ${VERIFICATION_CODE_LENGTH}`}
+                              aria-label={uiT(
+                                "Verification code digit {0} of {1}",
+                                { p0: index + 1, p1: VERIFICATION_CODE_LENGTH },
+                              )}
                               autoComplete={
                                 index === 0 ? "one-time-code" : "off"
                               }

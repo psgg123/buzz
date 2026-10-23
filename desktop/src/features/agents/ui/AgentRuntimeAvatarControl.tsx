@@ -1,5 +1,5 @@
+import { uiT, useUiLanguage } from "@/shared/i18n/uiTranslation";
 // Buzz source localisation: authored UI strings only; user values stay unchanged.
-import { useUiLanguage } from "@/shared/i18n/uiTranslation";
 import { CircleAlert } from "lucide-react";
 import { useReducedMotion } from "motion/react";
 
@@ -156,17 +156,17 @@ export function AgentRuntimeAvatarControl({
   const trimmedAvatarUrl = avatarUrl?.trim() || null;
   const isRestartAction = requiresRestart || isRestarting;
   const actionLabel = isRestarting
-    ? "Restarting Agent"
+    ? uiT("Restarting Agent")
     : isStarting
-      ? "Starting Agent"
+      ? uiT("Starting Agent")
       : isRestartAction
-        ? "Restart Agent"
-        : "Start Agent";
+        ? uiT("Restart Agent")
+        : uiT("Start Agent");
   const actionText = isRestartAction ? "Restart" : "Start";
   const isPending = isStarting || isRestarting;
   const availabilityLabel = availability
     ? getPresenceLabel(availability)
-    : "Availability unknown";
+    : uiT("Availability unknown");
   const startBlockReason = agentPresenceStartBlockReason(
     isActive,
     availability,
@@ -176,7 +176,10 @@ export function AgentRuntimeAvatarControl({
   const showStatusDot =
     Boolean(startBlockReason) || (isActive && !isRestartAction);
   const hasError = !isActive && !isPending && Boolean(errorLabel);
-  const errorActionLabel = `${label} has a runtime error. Open runtime details.`;
+  const errorActionLabel = uiT(
+    "{0} has a runtime error. Open runtime details.",
+    { p0: label },
+  );
   const transition = shouldReduceMotion ? { duration: 0 } : MASK_TRANSITION;
   const actionBadge = isRestartAction
     ? RESTART_ACTION_BADGE

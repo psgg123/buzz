@@ -249,7 +249,7 @@ export function ConversationDisplaySettings() {
         </div>
         <SegmentedControl
           size="wide"
-          legend="Font size"
+          legend={uiT("Font size")}
           onPreviewChange={previewFontSize}
           onValueChange={setFontSize}
           optionTestIdPrefix="font-size"
@@ -270,7 +270,7 @@ export function ConversationDisplaySettings() {
         </div>
         <SegmentedControl
           size="wide"
-          legend="Conversation density"
+          legend={uiT("Conversation density")}
           onPreviewChange={previewConversationDensity}
           onValueChange={setConversationDensity}
           optionTestIdPrefix="conversation-density"
@@ -402,7 +402,7 @@ export function LinkPreviewStyleSetting() {
         </div>
         <SegmentedControl
           size="compact"
-          legend="Link previews"
+          legend={uiT("Link previews")}
           onPreviewChange={setPreviewStyle}
           onValueChange={setLinkPreviewStyle}
           optionTestIdPrefix="link-preview-style"
@@ -480,7 +480,7 @@ export function GlassBackgroundSetting() {
           min={GLASS_OPACITY_MIN}
           onChange={setGlassOpacity}
           onReset={() => setGlassOpacity(DEFAULT_GLASS_OPACITY)}
-          resetLabel="Reset glass opacity"
+          resetLabel={uiT("Reset glass opacity")}
           resetTestId="glass-opacity-reset"
           resetValue={DEFAULT_GLASS_OPACITY}
           testId="glass-opacity-slider"
@@ -694,7 +694,7 @@ export function ThreadLayoutSetting() {
         </div>
         <SegmentedControl
           size="compact"
-          legend="Thread layout"
+          legend={uiT("Thread layout")}
           onPreviewChange={setPreviewMode}
           onValueChange={setThreadViewMode}
           optionTestIdPrefix="thread-layout"
@@ -748,7 +748,7 @@ export function AccentPickerContent({
 
             return (
               <button
-                aria-label={`Use ${color.name} accent`}
+                aria-label={uiT("Use {0} accent", { p0: color.name })}
                 aria-pressed={isSelected}
                 className="relative h-9 w-9 shrink-0 rounded-full border border-border transition-transform duration-200 ease-out hover:scale-[1.15] focus-visible:scale-[1.15] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring motion-reduce:transform-none motion-reduce:transition-none"
                 data-testid={`accent-color-${color.name.toLowerCase()}`}

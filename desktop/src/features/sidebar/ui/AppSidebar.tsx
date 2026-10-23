@@ -707,7 +707,7 @@ export function AppSidebar({
                       }
                       actionsTestId="section-actions-channels"
                       listTestId="stream-list"
-                      quickCreateLabel="Browse channels"
+                      quickCreateLabel={uiT("Browse channels")}
                       onQuickCreateClick={() => onBrowseChannels?.()}
                       showQuickCreate
                       onMarkAllRead={onMarkAllChannelsRead}
@@ -735,7 +735,7 @@ export function AppSidebar({
                   </SidebarDndContext>
                   <FeatureGate feature="forum">
                     <ChannelGroupSection
-                      createLabel="New forum"
+                      createLabel={uiT("New forum")}
                       hasUnread={unreadChannelIds.size > 0}
                       isCollapsed={collapsedGroups.forums}
                       isActiveChannel={selectedView === "channel"}
@@ -771,7 +771,7 @@ export function AppSidebar({
                           testId="section-actions-dms-quick-create"
                         />
                         <SectionActionsMenu
-                          sectionLabel="direct messages"
+                          sectionLabel={uiT("direct messages")}
                           testId="section-actions-dms"
                           onOpenChange={setDmActionsMenuOpen}
                           onNewMessage={onNewMessage}

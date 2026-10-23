@@ -61,7 +61,7 @@ export function validateLinkedAgentRuntimeEdit({
     return null;
   }
 
-  const runtimeLabel = runtime?.label ?? "This provider";
+  const runtimeLabel = runtime?.label ?? uiT("This provider");
   return `${runtimeLabel} is not available. Install it before saving this linked agent.`;
 }
 
@@ -142,7 +142,7 @@ export async function submitProfilePersonaDialog({
     onDone();
   } catch (error) {
     toast.error(
-      error instanceof Error ? error.message : "Failed to save agent.",
+      error instanceof Error ? error.message : uiT("Failed to save agent."),
     );
   }
 }

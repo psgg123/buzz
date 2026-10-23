@@ -22,7 +22,9 @@ export function CreateIssueDialog({
 }) {
   return (
     <CreateProjectWorkItemDialog
-      bodyPlaceholder="Add context, expected behavior, or reproduction steps"
+      bodyPlaceholder={uiT(
+        "Add context, expected behavior, or reproduction steps",
+      )}
       description={uiT("Create a task in {0}", { p0: projectName })}
       isCreating={isCreating}
       itemName="issue"
@@ -30,7 +32,7 @@ export function CreateIssueDialog({
       onOpenChange={onOpenChange}
       open={open}
       title={uiT("Create a task")}
-      titlePlaceholder="Describe the task"
+      titlePlaceholder={uiT("Describe the task")}
     />
   );
 }

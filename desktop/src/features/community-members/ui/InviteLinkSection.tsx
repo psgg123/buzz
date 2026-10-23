@@ -119,19 +119,20 @@ export function InviteLinkSection({
   );
   const shouldReduceMotion = useReducedMotion();
   const ttlLabel =
-    TTL_OPTIONS.find((option) => option.value === ttlSecs)?.label ?? "3 days";
+    TTL_OPTIONS.find((option) => option.value === ttlSecs)?.label ??
+    uiT("3 days");
   const maxUsesLabel =
     MAX_USE_OPTIONS.find((option) => option.value === maxUses)?.label ??
-    "No limit";
+    uiT("No limit");
   const isGenerating = generationStatus === "generating";
   const hasGenerationFailed = generationStatus === "failed";
   const inviteSettingsKey = `${ttlSecs}:${maxUses ?? "no-limit"}`;
   const isWorking = isGenerating || copyStatus === "copying";
   const copyLabel = hasGenerationFailed
-    ? "Retry"
+    ? uiT("Retry")
     : copyStatus === "copied"
-      ? "Copied"
-      : "Copy link";
+      ? uiT("Copied")
+      : uiT("Copy link");
   const copyButtonWidth = isWorking
     ? "6.25rem"
     : copyStatus === "copied"

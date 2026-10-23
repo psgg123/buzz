@@ -76,7 +76,7 @@ export function VoiceSettingsCard() {
           setError(
             loadError instanceof Error
               ? loadError.message
-              : "Voice settings could not be loaded.",
+              : uiT("Voice settings could not be loaded."),
           );
         }
       });
@@ -110,7 +110,7 @@ export function VoiceSettingsCard() {
       setError(
         saveError instanceof Error
           ? saveError.message
-          : "Voice settings could not be saved.",
+          : uiT("Voice settings could not be saved."),
       );
     } finally {
       setBusy(false);
@@ -129,7 +129,7 @@ export function VoiceSettingsCard() {
       setError(
         saveError instanceof Error
           ? saveError.message
-          : "Voice settings could not be saved.",
+          : uiT("Voice settings could not be saved."),
       );
     } finally {
       setBusy(false);
@@ -151,7 +151,7 @@ export function VoiceSettingsCard() {
       setError(
         importError instanceof Error
           ? importError.message
-          : "Voice could not be imported.",
+          : uiT("Voice could not be imported."),
       );
     } finally {
       setBusy(false);
@@ -173,7 +173,7 @@ export function VoiceSettingsCard() {
       setError(
         deleteError instanceof Error
           ? deleteError.message
-          : "Voice could not be deleted.",
+          : uiT("Voice could not be deleted."),
       );
     } finally {
       setBusy(false);
@@ -250,7 +250,9 @@ export function VoiceSettingsCard() {
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button
-                      aria-label={`Pocket TTS voice: ${selectedVoice?.displayName ?? "Mary"}`}
+                      aria-label={uiT("Pocket TTS voice: {0}", {
+                        p0: selectedVoice?.displayName ?? "Mary",
+                      })}
                       className="min-w-32 justify-between"
                       data-testid="pocket-voice-selector"
                       disabled={controlsDisabled}
@@ -284,7 +286,9 @@ export function VoiceSettingsCard() {
                   </DropdownMenuContent>
                 </DropdownMenu>
                 <Button
-                  aria-label={`Preview ${selectedVoice?.displayName ?? "Mary"}`}
+                  aria-label={uiT("Preview {0}", {
+                    p0: selectedVoice?.displayName ?? "Mary",
+                  })}
                   data-testid="pocket-voice-preview"
                   disabled={controlsDisabled || previewing || !selectedVoice}
                   onClick={() => {
@@ -298,7 +302,7 @@ export function VoiceSettingsCard() {
                         setError(
                           previewError instanceof Error
                             ? previewError.message
-                            : "Voice preview could not be played.",
+                            : uiT("Voice preview could not be played."),
                         );
                       })
                       .finally(() => setPreviewing(false));
@@ -370,7 +374,7 @@ export function VoiceSettingsCard() {
                     "This imported voice and its local audio file will be removed.",
                   )}
               {selectedVoice?.key === deleteCandidate?.key &&
-                " Mary will be selected instead."}
+                uiT(" Mary will be selected instead.")}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>

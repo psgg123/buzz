@@ -377,7 +377,7 @@ export function DefaultConfigStep({
       setSaveError(
         cause instanceof Error
           ? cause.message
-          : "Couldn’t save model settings.",
+          : uiT("Couldn’t save model settings."),
       );
     } finally {
       setIsSaving(false);

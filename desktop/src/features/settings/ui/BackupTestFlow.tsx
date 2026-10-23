@@ -190,12 +190,12 @@ export function BackupTestFlow({
       try {
         text = (await file.text()).trim();
       } catch {
-        if (mountedRef.current) setError("Could not read that file.");
+        if (mountedRef.current) setError(uiT("Could not read that file."));
         return;
       }
       if (!mountedRef.current) return;
       if (!text.toLowerCase().startsWith("ncryptsec1")) {
-        setError("That doesn't look like a key backup file.");
+        setError(uiT("That doesn't look like a key backup file."));
         return;
       }
       setError(null);
@@ -231,7 +231,9 @@ export function BackupTestFlow({
     } catch (err) {
       if (mountedRef.current && requestId === requestRef.current)
         setError(
-          err instanceof Error ? err.message : "Could not verify this backup.",
+          err instanceof Error
+            ? err.message
+            : uiT("Could not verify this backup."),
         );
     } finally {
       if (mountedRef.current && requestId === requestRef.current)
@@ -445,7 +447,7 @@ export function BackupTestFlow({
                   {uiT("Checking…")}
                 </>
               ) : (
-                "Verify backup"
+                uiT("Verify backup")
               )}
             </Button>
             <Button

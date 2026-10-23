@@ -43,7 +43,7 @@ export function getUserProfilePanelHeaderContent({
   const headerLeftContent = (
     <AuxiliaryPanelHeaderGroup
       align={shouldShowLogDetails ? "start" : "center"}
-      backButtonAriaLabel="Back to profile"
+      backButtonAriaLabel={uiT("Back to profile")}
       backButtonTestId="user-profile-panel-back"
       onBack={view !== "summary" ? onBack : undefined}
     >

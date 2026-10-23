@@ -85,7 +85,7 @@ function AvatarPreview({
     <div className="flex h-48 w-48 items-center justify-center">
       {emojiAvatar ? (
         <div
-          aria-label={`${previewName} avatar`}
+          aria-label={uiT("{0} avatar", { p0: previewName })}
           className="relative flex h-full w-full shrink-0 items-center justify-center overflow-hidden rounded-full shadow-xs transition-colors duration-[250ms] ease-out"
           data-testid="onboarding-avatar-preview"
           role="img"
@@ -239,7 +239,7 @@ function AvatarStepActions({
                   className="h-4 w-4 border-2"
                 />
               ) : (
-                "Next"
+                uiT("Next")
               )}
             </Button>
           </motion.div>

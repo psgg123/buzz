@@ -277,11 +277,14 @@ function MessageComposerImpl({
     });
   }, []);
   const computedPlaceholder = editTarget
-    ? "Edit your message"
+    ? uiT("Edit your message")
     : (placeholder ??
       (replyTarget
-        ? `Reply to ${replyTarget.author} in #${channelName}`
-        : `Message #${channelName}`));
+        ? uiT("Reply to {0} in #{1}", {
+            p0: replyTarget.author,
+            p1: channelName,
+          })
+        : uiT("Message #{0}", { p0: channelName })));
   const richText = useRichTextEditor({
     placeholder: computedPlaceholder,
     editable: !composerDisabled,

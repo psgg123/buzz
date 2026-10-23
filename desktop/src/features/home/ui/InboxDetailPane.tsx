@@ -513,7 +513,7 @@ function InboxMessageDetailPane({
       ? uiT("Thread with {0}", { p0: item.senderLabel })
       : channelContextName
         ? uiT("Thread in #{0}", { p0: channelContextName })
-        : "Thread"
+        : uiT("Thread")
     : isDirectMessage
       ? uiT("DM with {0}", { p0: item.senderLabel })
       : channelContextName
@@ -888,7 +888,7 @@ function InboxMessageDetailPane({
                         })
                       : uiT("Reply to the channel thread")
                   : (disabledReplyReason ??
-                    "Replies are not available for this item.")
+                    uiT("Replies are not available for this item."))
               }
               replyTarget={composerReplyTarget}
             />

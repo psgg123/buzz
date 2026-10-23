@@ -60,7 +60,7 @@ function reviewerSearchLabel(user: UserSearchResult) {
 
 /** Reviewer status avatars and the reviewer request picker for a pull request. */
 export function PullRequestReviewersRow({
-  actionLabel = "Add Reviewer",
+  actionLabel = uiT("Add Reviewer"),
   canRequest,
   contextActions = false,
   profiles,
@@ -194,7 +194,9 @@ export function PullRequestReviewersRow({
         toast.success(uiT("Review requested."));
       } catch (error) {
         toast.error(
-          error instanceof Error ? error.message : "Failed to request review.",
+          error instanceof Error
+            ? error.message
+            : uiT("Failed to request review."),
         );
       } finally {
         requestInFlightRef.current = false;
@@ -317,12 +319,12 @@ export function PullRequestReviewersRow({
                   ? History
                   : null;
             const decisionLabel = hasApproved
-              ? `Approved by ${label}`
+              ? uiT("Approved by {0}", { p0: label })
               : hasRequestedChanges
-                ? `Changes requested by ${label}`
+                ? uiT("Changes requested by {0}", { p0: label })
                 : needsRereview
-                  ? `Re-review needed from ${label}`
-                  : `Awaiting review from ${label}`;
+                  ? uiT("Re-review needed from {0}", { p0: label })
+                  : uiT("Awaiting review from {0}", { p0: label });
             return (
               <React.Fragment key={pubkey}>
                 {index > 0 ? (

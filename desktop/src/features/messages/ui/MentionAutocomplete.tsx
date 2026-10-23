@@ -297,7 +297,9 @@ export const MentionAutocomplete = React.memo(function MentionAutocomplete({
                 key={suggestionKey}
               >
                 <button
-                  aria-label={`Mention ${suggestion.displayName}`}
+                  aria-label={uiT("Mention {0}", {
+                    p0: suggestion.displayName,
+                  })}
                   className={cn(
                     "flex min-w-0 flex-1 items-center gap-2 rounded-lg px-3 py-1.5 text-left",
                     canAlwaysAddress && "pr-11",
@@ -345,7 +347,8 @@ export const MentionAutocomplete = React.memo(function MentionAutocomplete({
                         {suggestion.kind === "team" ? (
                           <span className="inline-flex shrink-0 items-center gap-1">
                             <Users aria-hidden="true" className="h-3.5 w-3.5" />
-                            team · {suggestion.teamMembers?.length ?? 0}{" "}
+                            {uiT("team · ")}
+                            {suggestion.teamMembers?.length ?? 0}{" "}
                             {uiT(" agents")}
                           </span>
                         ) : suggestion.isAgent ? (

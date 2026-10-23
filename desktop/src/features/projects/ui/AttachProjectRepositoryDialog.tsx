@@ -38,7 +38,9 @@ export function AttachProjectRepositoryDialog({
       onOpenChange(false);
     } catch (error) {
       setErrorMessage(
-        error instanceof Error ? error.message : "Failed to attach repository.",
+        error instanceof Error
+          ? error.message
+          : uiT("Failed to attach repository."),
       );
     }
   }

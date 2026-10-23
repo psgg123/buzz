@@ -90,9 +90,15 @@ export function InboxFilterMenu({
   );
   const statusLabel =
     dueReminderCount > 0
-      ? `${dueReminderCount} due reminder${dueReminderCount === 1 ? "" : "s"}`
+      ? uiT("{0} due reminder{1}", {
+          p0: dueReminderCount,
+          p1: dueReminderCount === 1 ? "" : "s",
+        })
       : activeDraftCount > 0
-        ? `${activeDraftCount} active draft${activeDraftCount === 1 ? "" : "s"}`
+        ? uiT("{0} active draft{1}", {
+            p0: activeDraftCount,
+            p1: activeDraftCount === 1 ? "" : "s",
+          })
         : null;
 
   return (
@@ -107,7 +113,7 @@ export function InboxFilterMenu({
           data-testid="inbox-filter-trigger"
           type="button"
         >
-          <span>{activeFilter?.label ?? "All"}</span>
+          <span>{activeFilter?.label ?? uiT("All")}</span>
           <ChevronDown className="text-muted-foreground" />
         </button>
       </DropdownMenuTrigger>

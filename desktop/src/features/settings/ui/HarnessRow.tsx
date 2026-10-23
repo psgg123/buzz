@@ -113,7 +113,7 @@ function RuntimeOverflowMenu({
     <DropdownMenu modal={false}>
       <DropdownMenuTrigger asChild>
         <button
-          aria-label={`Open actions for ${runtime.label}`}
+          aria-label={uiT("Open actions for {0}", { p0: runtime.label })}
           className="flex h-7 w-7 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
           data-testid={`doctor-runtime-menu-${runtime.id}`}
           type="button"
@@ -235,7 +235,7 @@ function RuntimeActions({
         // Rows needing multi-step setup render no action here — setup lives in
         // the Add-runtimes catalog. Custom rows keep their ••• menu instead.
         <Button
-          aria-label={`Install ${runtime.label}`}
+          aria-label={uiT("Install {0}", { p0: runtime.label })}
           className="h-7 px-3 text-xs"
           data-testid={`doctor-runtime-install-${runtime.id}`}
           onClick={onInstall}

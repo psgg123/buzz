@@ -320,7 +320,9 @@ function AddSubscriptionForm({
       toast.success(uiT("Archive subscription created."));
     } catch (err) {
       toast.error(
-        err instanceof Error ? err.message : "Failed to create subscription.",
+        err instanceof Error
+          ? err.message
+          : uiT("Failed to create subscription."),
       );
     } finally {
       setIsAdding(false);
@@ -450,7 +452,9 @@ export function LocalArchiveSettingsCard() {
         toast.success(uiT("Archive subscription removed."));
       } catch (err) {
         toast.error(
-          err instanceof Error ? err.message : "Failed to remove subscription.",
+          err instanceof Error
+            ? err.message
+            : uiT("Failed to remove subscription."),
         );
       } finally {
         setDeletingKey(null);
@@ -481,15 +485,15 @@ export function LocalArchiveSettingsCard() {
         setExplicitObserverArchiveChoice(pubkey, checked);
         toast.success(
           checked
-            ? "Observer feed archive enabled."
-            : "Observer feed archive disabled.",
+            ? uiT("Observer feed archive enabled.")
+            : uiT("Observer feed archive disabled."),
         );
         await reload();
       } catch (err) {
         toast.error(
           err instanceof Error
             ? err.message
-            : "Failed to update observer archive.",
+            : uiT("Failed to update observer archive."),
         );
       } finally {
         setObserverToggling(false);
@@ -511,15 +515,15 @@ export function LocalArchiveSettingsCard() {
         setExplicitAgentMetricArchiveChoice(pubkey, checked);
         toast.success(
           checked
-            ? "Agent turn metric archive enabled."
-            : "Agent turn metric archive disabled.",
+            ? uiT("Agent turn metric archive enabled.")
+            : uiT("Agent turn metric archive disabled."),
         );
         await reload();
       } catch (err) {
         toast.error(
           err instanceof Error
             ? err.message
-            : "Failed to update agent metric archive.",
+            : uiT("Failed to update agent metric archive."),
         );
       } finally {
         setMetricToggling(false);
@@ -601,7 +605,9 @@ export function LocalArchiveSettingsCard() {
                       </p>
                     </div>
                     <Button
-                      aria-label={`Remove archive subscription for ${scopeLabel(sub, channelNameById)}`}
+                      aria-label={uiT("Remove archive subscription for {0}", {
+                        p0: scopeLabel(sub, channelNameById),
+                      })}
                       disabled={deletingKey === key}
                       onClick={() =>
                         void handleDelete(sub.scopeType, sub.scopeValue)

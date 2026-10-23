@@ -199,7 +199,7 @@ export function ProjectConversationPanel({
   const layoutProps = {
     canResetWidth,
     enterMotion: !canShowThread,
-    headerTitle: channelLabel ? `#${channelLabel}` : "Thread",
+    headerTitle: channelLabel ? `#${channelLabel}` : uiT("Thread"),
     headerTitleAriaLabel: channelLabel ? `Open #${channelLabel}` : undefined,
     isFocusMode: false,
     isSinglePanelView: !isOverlay,

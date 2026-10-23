@@ -182,7 +182,7 @@ export function SectionActionsMenu({
     <DropdownMenu onOpenChange={onOpenChange}>
       <DropdownMenuTrigger asChild>
         <button
-          aria-label={`More actions for ${sectionLabel}`}
+          aria-label={uiT("More actions for {0}", { p0: sectionLabel })}
           className={cn(SECTION_ICON_BUTTON_CLASS, visibilityClassName)}
           data-testid={testId}
           onClick={(event) => event.stopPropagation()}
@@ -209,13 +209,13 @@ export function SectionActionsMenu({
         {onNewMessage ? (
           <DropdownMenuItem onSelect={() => deferMenuAction(onNewMessage)}>
             <Plus className="h-4 w-4" />
-            <span>{newMessageLabel ?? "New message"}</span>
+            <span>{newMessageLabel ?? uiT("New message")}</span>
           </DropdownMenuItem>
         ) : null}
         {onBrowse ? (
           <DropdownMenuItem onSelect={() => deferMenuAction(onBrowse)}>
             <HashSearch className="h-4 w-4" />
-            <span>{browseLabel ?? "Browse channels"}</span>
+            <span>{browseLabel ?? uiT("Browse channels")}</span>
             <DropdownMenuShortcut>
               {getPlatformKeysById("browse-channels")}
             </DropdownMenuShortcut>
@@ -224,7 +224,7 @@ export function SectionActionsMenu({
         {onCreate ? (
           <DropdownMenuItem onSelect={() => deferMenuAction(onCreate)}>
             <Plus className="h-4 w-4" />
-            <span>{createLabel ?? "Create channel"}</span>
+            <span>{createLabel ?? uiT("Create channel")}</span>
           </DropdownMenuItem>
         ) : null}
         {showSectionManagement ? (
@@ -516,7 +516,7 @@ export function ChannelGroupSection({
           <>
             {showQuickCreate && (onQuickCreateClick ?? onCreateClick) ? (
               <SectionQuickAction
-                label={quickCreateLabel ?? createLabel ?? "Create channel"}
+                label={quickCreateLabel ?? createLabel ?? uiT("Create channel")}
                 onClick={(onQuickCreateClick ?? onCreateClick) as () => void}
                 testId={
                   actionsTestId ? `${actionsTestId}-quick-create` : undefined

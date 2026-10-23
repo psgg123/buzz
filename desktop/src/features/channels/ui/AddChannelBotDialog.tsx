@@ -200,11 +200,11 @@ export function AddChannelBotDialog({
     !createBotsMutation.isPending;
   const addButtonLabel = createBotsMutation.isPending
     ? selectedPersonas.length > 1
-      ? `Adding ${selectedPersonas.length}…`
-      : "Adding…"
+      ? uiT("Adding {0}…", { p0: selectedPersonas.length })
+      : uiT("Adding…")
     : selectedPersonas.length > 1
-      ? `Add ${selectedPersonas.length} agents`
-      : "Add agent";
+      ? uiT("Add {0} agents", { p0: selectedPersonas.length })
+      : uiT("Add agent");
 
   return (
     <Dialog onOpenChange={handleOpenChange} open={open}>

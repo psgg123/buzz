@@ -199,7 +199,7 @@ export function CommunitiesTab({
           {moreStatus?.busy ? (
             <LoaderCircle className="h-3.5 w-3.5 animate-spin" />
           ) : (
-            "Load more"
+            uiT("Load more")
           )}
         </Button>
       )}

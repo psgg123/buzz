@@ -311,7 +311,7 @@ export function RichLinkPreviewAttachment({
         <a
           aria-label={uiT("Open {0} {1}: {2}", {
             p0: preview.provider,
-            p1: preview.typeLabel,
+            p1: uiT(preview.typeLabel),
             p2: preview.title,
           })}
           className="mt-0.5 block text-sm font-semibold leading-5 text-foreground hover:underline"

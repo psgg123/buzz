@@ -52,7 +52,7 @@ export function CommunityInviteDialog({
           <DirectAddMemberForm
             isOwner={isOwner}
             showLabel={false}
-            submitLabel="Invite"
+            submitLabel={uiT("Invite")}
           />
         </section>
 

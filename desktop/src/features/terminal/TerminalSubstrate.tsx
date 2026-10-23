@@ -616,7 +616,7 @@ export function TerminalSubstrate({
               role="presentation"
             >
               <button
-                aria-label={`Close ${session.title}`}
+                aria-label={uiT("Close {0}", { p0: session.title })}
                 className="buzz-terminal-close"
                 disabled={session.closing}
                 onClick={() => runTabAction(() => onCloseSession(session.id))}
@@ -625,7 +625,14 @@ export function TerminalSubstrate({
                 <X />
               </button>
               <button
-                aria-label={`Terminal ${index + 1}${session.closing ? ", closing" : session.title !== "SHELL" ? `, ${session.title}` : ""}`}
+                aria-label={uiT("Terminal {0}{1}", {
+                  p0: index + 1,
+                  p1: session.closing
+                    ? ", closing"
+                    : session.title !== "SHELL"
+                      ? `, ${session.title}`
+                      : "",
+                })}
                 aria-selected={session.active}
                 className="buzz-terminal-tab-select"
                 disabled={session.closing}

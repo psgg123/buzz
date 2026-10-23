@@ -80,7 +80,7 @@ export function CustomEmojiSettingsCard() {
       toast.error(
         error instanceof Error
           ? error.message
-          : "Failed to upload emoji image.",
+          : uiT("Failed to upload emoji image."),
       );
     } finally {
       setIsUploading(false);
@@ -99,7 +99,7 @@ export function CustomEmojiSettingsCard() {
       toast.success(uiT("Added :{0}:", { p0: stored }));
     } catch (error) {
       toast.error(
-        error instanceof Error ? error.message : "Failed to add emoji.",
+        error instanceof Error ? error.message : uiT("Failed to add emoji."),
       );
     }
   }, [normalized, pendingUpload, setEmoji]);
@@ -116,7 +116,9 @@ export function CustomEmojiSettingsCard() {
         toast.success(uiT("Removed :{0}:", { p0: shortcode }));
       } catch (error) {
         toast.error(
-          error instanceof Error ? error.message : "Failed to remove emoji.",
+          error instanceof Error
+            ? error.message
+            : uiT("Failed to remove emoji."),
         );
       }
     },
@@ -313,7 +315,7 @@ export function CustomEmojiSettingsCard() {
                     :{e.shortcode}:
                   </span>
                   <Button
-                    aria-label={`Remove :${e.shortcode}:`}
+                    aria-label={uiT("Remove :{0}:", { p0: e.shortcode })}
                     size="icon"
                     variant="ghost"
                     onClick={() => void handleRemove(e.shortcode)}

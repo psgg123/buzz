@@ -32,7 +32,9 @@ export function ArchiveConfirmDialog({
   isBot: boolean;
   isPending: boolean;
 }) {
-  const title = isBot ? "Archive this agent?" : "Archive this identity?";
+  const title = isBot
+    ? uiT("Archive this agent?")
+    : uiT("Archive this identity?");
   const subject = isBot ? "this agent" : "this person";
 
   return (

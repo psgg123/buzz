@@ -70,7 +70,7 @@ export function ProjectEntityFacepile({
               index > 0 && "-ml-1.5",
             )}
             triggerElement="span"
-            triggerAriaLabel={`View ${label}'s profile`}
+            triggerAriaLabel={uiT("View {0}'s profile", { p0: label })}
           >
             <span className="relative z-10" title={label}>
               {avatar}
@@ -90,7 +90,7 @@ export function ProjectEntityFacepile({
 export function ProjectEntitySelectControl({
   checked,
   indeterminate = false,
-  label = "Select",
+  label = uiT("Select"),
   onToggle,
   testId = "projects-row-select",
 }: {

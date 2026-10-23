@@ -365,19 +365,20 @@ function sameKindKey(item: TranscriptItem): string | null {
 }
 
 function sameKindLabel(item: TranscriptItem, count: number): string {
-  if (item.type !== "tool") return `${count} items`;
+  if (item.type !== "tool") return uiT("{0} items", { p0: count });
   const descriptor = item.descriptor ?? classifyToolItem(item);
   const renderClass = getRenderClass(item);
   const label = descriptor.label;
   if (renderClass === "file-edit") {
-    return `Edited ${count} file${count === 1 ? "" : "s"}`;
+    return uiT("Edited {0} file{1}", { p0: count, p1: count === 1 ? "" : "s" });
   }
-  if (renderClass === "file-read") return `Read ${count} files`;
+  if (renderClass === "file-read") return uiT("Read {0} files", { p0: count });
   if (renderClass === "skill-read") {
-    return `Read ${count} skill${count === 1 ? "" : "s"}`;
+    return uiT("Read {0} skill{1}", { p0: count, p1: count === 1 ? "" : "s" });
   }
-  if (renderClass === "shell") return `Ran ${count} commands`;
-  if (renderClass === "relay-op") return `Ran ${count} Buzz relay ops`;
+  if (renderClass === "shell") return uiT("Ran {0} commands", { p0: count });
+  if (renderClass === "relay-op")
+    return uiT("Ran {0} Buzz relay ops", { p0: count });
   return `${label} ×${count}`;
 }
 

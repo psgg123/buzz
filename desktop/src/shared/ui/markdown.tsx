@@ -45,7 +45,7 @@ import {
   markdownPropsAreEqual,
 } from "./markdownUtils";
 import { ImageMosaic } from "./markdown/ImageMosaic";
-import { copyImageToClipboard, downloadImage } from "./markdown/imageActions";
+import * as imageActions from "./markdown/imageActions";
 import { ImageGalleryStatus } from "./markdown/ImageGalleryStatus";
 import { ImageLightboxZoomControls } from "./markdown/ImageLightboxZoomControls";
 import {
@@ -683,7 +683,7 @@ function ImageZoomOverlay({
     : isFading
       ? IMAGE_LIGHTBOX_FADE_EXIT_MS
       : IMAGE_LIGHTBOX_FADE_ENTER_MS;
-  const label = currentItem.alt?.trim() || "Image preview";
+  const label = currentItem.alt?.trim() || uiT("Image preview");
   const handleImageClick = React.useCallback(
     (event: React.MouseEvent<HTMLImageElement>) => {
       event.preventDefault();
@@ -717,12 +717,12 @@ function ImageZoomOverlay({
   const handleMenuCopy = React.useCallback(() => {
     setMenu(null);
     markControlGesture();
-    copyImageToClipboard(currentItem.src);
+    imageActions.copyImageToClipboard(currentItem.src);
   }, [currentItem.src, markControlGesture]);
   const handleMenuDownload = React.useCallback(() => {
     setMenu(null);
     markControlGesture();
-    downloadImage(currentItem.src);
+    imageActions.downloadImage(currentItem.src);
   }, [currentItem.src, markControlGesture]);
 
   return createPortal(
@@ -936,7 +936,7 @@ function ImageZoomOverlay({
             type="button"
             onClick={(event) => {
               event.stopPropagation();
-              downloadImage(currentItem.src);
+              imageActions.downloadImage(currentItem.src);
             }}
           >
             <Download className="h-4 w-4" />
@@ -1151,13 +1151,13 @@ function ImageBlock({ alt, dim, resolvedSrc, src, thumbSrc }: ImageBlockProps) {
 
   const handleCopyImage = React.useCallback((copySrc: string | undefined) => {
     setMenu(null);
-    copyImageToClipboard(copySrc);
+    imageActions.copyImageToClipboard(copySrc);
   }, []);
 
   const handleDownload = React.useCallback(
     (downloadSrc: string | undefined) => {
       setMenu(null);
-      downloadImage(downloadSrc);
+      imageActions.downloadImage(downloadSrc);
     },
     [],
   );
@@ -1166,7 +1166,7 @@ function ImageBlock({ alt, dim, resolvedSrc, src, thumbSrc }: ImageBlockProps) {
     <>
       <button
         aria-hidden={isHiddenInSpoiler ? true : undefined}
-        aria-label={alt?.trim() ? `Zoom image: ${alt}` : uiT("Zoom image")}
+        aria-label={imageActions.imageZoomLabel(alt)}
         className={cn(
           "mt-1 inline-block min-w-0 max-w-full cursor-zoom-in overflow-hidden rounded-2xl border-0 bg-transparent p-0 text-left align-top focus:outline-hidden focus-visible:ring-2 focus-visible:ring-ring/50",
           lightboxState && "opacity-0",
@@ -1503,8 +1503,9 @@ export function createMarkdownComponents(
       const entry = src ? imetaByUrl?.get(src) : undefined;
       const isVideo = src ? isVideoMedia(src, entry?.m) : false;
       if (!interactive) {
-        const fallbackLabel = isVideo ? "Video attachment" : "Image attachment";
-        return <span>{alt?.trim() || fallbackLabel}</span>;
+        return (
+          <span>{alt?.trim() || imageActions.mediaFallbackLabel(isVideo)}</span>
+        );
       }
 
       const resolvedSrc = src ? rewriteRelayUrl(src) : src;

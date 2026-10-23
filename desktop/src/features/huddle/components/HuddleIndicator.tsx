@@ -357,7 +357,10 @@ export function HuddleIndicator({
     <Tooltip>
       <TooltipTrigger asChild>
         <Button
-          aria-label={`Join active huddle (${participantCount} participant${participantCount !== 1 ? "s" : ""})`}
+          aria-label={uiT("Join active huddle ({0} participant{1})", {
+            p0: participantCount,
+            p1: participantCount !== 1 ? "s" : "",
+          })}
           className={cn("relative", className)}
           disabled={isJoining || isStarting}
           onClick={() => void doJoin()}

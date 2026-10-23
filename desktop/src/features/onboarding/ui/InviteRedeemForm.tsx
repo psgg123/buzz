@@ -178,14 +178,16 @@ export function InviteRedeemForm({
           }
 
           if (policy.ageAttestationRequired && !ageConfirmed) {
-            setPolicyError("Confirm that you are at least 18 years old.");
+            setPolicyError(uiT("Confirm that you are at least 18 years old."));
             return;
           }
           if (
             (policy.termsMarkdown || policy.privacyMarkdown) &&
             !agreementConfirmed
           ) {
-            setPolicyError("Agree to the Terms of Service and Privacy Policy.");
+            setPolicyError(
+              uiT("Agree to the Terms of Service and Privacy Policy."),
+            );
             return;
           }
 
@@ -227,14 +229,16 @@ export function InviteRedeemForm({
         }
 
         if (policy.ageAttestationRequired && !ageConfirmed) {
-          setPolicyError("Confirm that you are at least 18 years old.");
+          setPolicyError(uiT("Confirm that you are at least 18 years old."));
           return;
         }
         if (
           (policy.termsMarkdown || policy.privacyMarkdown) &&
           !agreementConfirmed
         ) {
-          setPolicyError("Agree to the Terms of Service and Privacy Policy.");
+          setPolicyError(
+            uiT("Agree to the Terms of Service and Privacy Policy."),
+          );
           return;
         }
 
@@ -318,17 +322,17 @@ export function InviteRedeemForm({
           className="h-4 w-4 border-2"
         />
       ) : isOnboardingSpotlight ? (
-        "Next"
+        uiT("Next")
       ) : isAddCommunity ? (
         joinPolicy ? (
-          "Accept and join"
+          uiT("Accept and join")
         ) : (
-          "Join community"
+          uiT("Join community")
         )
       ) : joinPolicy ? (
-        "Accept and redeem invite"
+        uiT("Accept and redeem invite")
       ) : (
-        "Redeem invite"
+        uiT("Redeem invite")
       )}
     </Button>
   );

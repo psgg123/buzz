@@ -69,7 +69,7 @@ export function ProjectHomeCommitsPanel({
               )
         }
         error={failed.length > 0}
-        title={failure?.title ?? "No commits yet"}
+        title={failure?.title ?? uiT("No commits yet")}
       />
     );
   }

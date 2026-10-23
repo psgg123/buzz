@@ -121,10 +121,10 @@ export function MicControls({
   const [leftBarHeight, centerBarHeight, rightBarHeight] = barHeights;
 
   const micButtonLabel = micUnavailable
-    ? "Microphone unavailable"
+    ? uiT("Microphone unavailable")
     : isEffectivelyMuted
-      ? "Unmute microphone"
-      : "Mute microphone";
+      ? uiT("Unmute microphone")
+      : uiT("Mute microphone");
   const micTooltip = micUnavailable
     ? "Microphone unavailable. Check app permissions or input device."
     : micButtonLabel;

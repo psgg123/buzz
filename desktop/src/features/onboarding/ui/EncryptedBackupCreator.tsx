@@ -252,7 +252,9 @@ function PassphraseGeneratorPopover({
     } catch (err) {
       if (!mountedRef.current) return;
       setError(
-        err instanceof Error ? err.message : "Failed to generate a password.",
+        err instanceof Error
+          ? err.message
+          : uiT("Failed to generate a password."),
       );
     }
   }, []);
@@ -442,7 +444,7 @@ export function EncryptedBackupCreator({
             message:
               err instanceof Error
                 ? err.message
-                : "Failed to encrypt your key.",
+                : uiT("Failed to encrypt your key."),
           }),
         );
     };
@@ -486,7 +488,9 @@ export function EncryptedBackupCreator({
         rollBack();
         if (mountedRef.current)
           setSaveError(
-            err instanceof Error ? err.message : "Failed to save your key.",
+            err instanceof Error
+              ? err.message
+              : uiT("Failed to save your key."),
           );
       })
       .finally(() => {
@@ -514,7 +518,7 @@ export function EncryptedBackupCreator({
     } catch (err) {
       if (mountedRef.current)
         setSaveError(
-          err instanceof Error ? err.message : "Failed to save your key.",
+          err instanceof Error ? err.message : uiT("Failed to save your key."),
         );
     } finally {
       if (mountedRef.current) setIsSaving(false);
@@ -785,9 +789,9 @@ export function EncryptedBackupCreator({
                   data-testid="encrypted-backup-encrypting"
                 />
               ) : state.savedPassword ? (
-                "Download backup again"
+                uiT("Download backup again")
               ) : (
-                "Save backup"
+                uiT("Save backup")
               )}
             </Button>
           </div>

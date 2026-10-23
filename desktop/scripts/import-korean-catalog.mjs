@@ -54,7 +54,9 @@ for (const [english, korean] of [
     throw new Error("Catalogue key collision");
   keys[source] = key;
   en[key] = source.replace(/\{(\d+)\}/g, (_, n) => `{{p${n}}}`);
-  ko[key] = korean.replace(/\{(\d+)\}/g, (_, n) => `{{p${n}}}`);
+  ko[key] = korean
+    .replaceAll("인박스", "받은 편지함")
+    .replace(/\{(\d+)\}/g, (_, n) => `{{p${n}}}`);
 }
 const root = path.resolve(import.meta.dirname, "../src/locales");
 fs.mkdirSync(root, { recursive: true });
@@ -67,7 +69,9 @@ for (const [english, korean] of Object.entries(additional)) {
     "m" + crypto.createHash("sha256").update(source).digest("hex").slice(0, 16);
   keys[source] = key;
   en[key] = source.replace(/\{(\d+)\}/g, (_, n) => `{{p${n}}}`);
-  ko[key] = korean.replace(/\{(\d+)\}/g, (_, n) => `{{p${n}}}`);
+  ko[key] = korean
+    .replaceAll("인박스", "받은 편지함")
+    .replace(/\{(\d+)\}/g, (_, n) => `{{p${n}}}`);
 }
 for (const [name, data] of [
   ["ui-keys", keys],
@@ -82,6 +86,8 @@ const base = JSON.parse(fs.readFileSync(path.join(root, "en.json"), "utf8"));
 base.settings.language.unsaved =
   "Applied for this session. The language preference could not be saved.";
 base.settings.language.error = "The language could not be changed. Try again.";
+base.settings.language.nativeError =
+  "The app language changed, but the native menus could not be updated. Choose the language again to retry.";
 fs.writeFileSync(
   path.join(root, "en.json"),
   JSON.stringify(base, null, 2) + "\n",
@@ -91,6 +97,7 @@ for (const locale of ["zh-Hans", "zh-Hant"]) {
   const data = JSON.parse(fs.readFileSync(p, "utf8"));
   data.settings.language.unsaved = base.settings.language.unsaved;
   data.settings.language.error = base.settings.language.error;
+  data.settings.language.nativeError = base.settings.language.nativeError;
   fs.writeFileSync(p, JSON.stringify(data, null, 2) + "\n");
 }
 const manual = {
@@ -106,6 +113,8 @@ manual[base.settings.language.unsaved] =
   "현재 실행 중에는 적용되지만 언어 설정을 저장하지 못했습니다.";
 manual[base.settings.language.error] =
   "언어를 변경하지 못했습니다. 다시 시도하세요.";
+manual[base.settings.language.nativeError] =
+  "앱 언어는 변경됐지만 macOS 메뉴를 갱신하지 못했습니다. 언어를 다시 선택해 재시도하세요.";
 const missing = [];
 function translate(x) {
   if (typeof x === "string") {

@@ -95,7 +95,7 @@ export function SelectedRecipientChip({
             <button
               aria-expanded={inspectionOpen}
               aria-haspopup="dialog"
-              aria-label={`Verify ${label} public key`}
+              aria-label={uiT("Verify {0} public key", { p0: label })}
               className="min-w-0 cursor-pointer truncate rounded font-medium hover:underline focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-ring"
               data-testid={testIds?.name}
               onClick={(event) => {

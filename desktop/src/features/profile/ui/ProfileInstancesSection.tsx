@@ -65,7 +65,10 @@ export function ProfileInstancesSection({
   const [expanded, setExpanded] = React.useState(false);
   const totalCount = instances.length + archivedInstances.length;
   if (totalCount === 0) return null;
-  const instanceCountLabel = `${totalCount} instance${totalCount === 1 ? "" : "s"}`;
+  const instanceCountLabel = uiT("{0} instance{1}", {
+    p0: totalCount,
+    p1: totalCount === 1 ? "" : "s",
+  });
 
   return (
     <ProfileSectionGroup

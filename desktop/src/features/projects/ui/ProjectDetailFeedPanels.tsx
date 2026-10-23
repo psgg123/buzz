@@ -83,7 +83,7 @@ export function ContributorsPanel({
     const matchedProfile = signedProfile ?? heuristicProfile?.profile;
     const label = matchedProfile
       ? resolveUserLabel({ pubkey: matchedPubkey ?? "", profiles })
-      : contributor.name || contributor.email || "Unknown contributor";
+      : contributor.name || contributor.email || uiT("Unknown contributor");
     const signedCounts = matchedPubkey
       ? activityCounts[matchedPubkey]
       : undefined;
@@ -346,7 +346,7 @@ export function ActivityPanel({
               })
             : item.commit.authorName ||
               item.commit.authorEmail ||
-              "Unknown author";
+              uiT("Unknown author");
           const matchingContributor = (item.repoContributors ?? []).find(
             (contributor) =>
               contributor.name.trim().toLowerCase() ===
@@ -360,7 +360,9 @@ export function ActivityPanel({
               eventId={item.commit.hash}
               identifier={item.commit.shortHash}
               identifierClassName="font-mono"
-              identifierTitle={`View commit ${item.commit.shortHash}`}
+              identifierTitle={uiT("View commit {0}", {
+                p0: item.commit.shortHash,
+              })}
               key={`${item.project.repoAddress}:${item.commit.hash}`}
               metadata={
                 showRepositoryName || item.branch ? (

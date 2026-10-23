@@ -107,7 +107,7 @@ export function CompactMessageSummary({
       <div className="flex max-w-full flex-row items-start justify-start">
         {openProfilePanel && !isCompactPreview ? (
           <button
-            aria-label={`Open ${displayName} profile`}
+            aria-label={uiT("Open {0} profile", { p0: displayName })}
             className={cn(
               avatarClassName,
               "pointer-events-auto rounded-[30%] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",

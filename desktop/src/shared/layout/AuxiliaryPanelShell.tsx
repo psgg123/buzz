@@ -64,7 +64,7 @@ export function AuxiliaryPanel({
   onClose,
   onResetWidth,
   onResizeStart,
-  resizeHandleAriaLabel = "Resize panel",
+  resizeHandleAriaLabel = uiT("Resize panel"),
   resizeHandleTestId,
   siblings,
   splitPaneClamp = true,

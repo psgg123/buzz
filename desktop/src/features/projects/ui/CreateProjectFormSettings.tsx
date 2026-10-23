@@ -53,8 +53,9 @@ export function CreateProjectFormSettings({
   const selectedTemplate = templates.find(
     (template) => template.id === templateId,
   );
-  const listingLabel = projectVisibility === "unlisted" ? "Unlisted" : "Listed";
-  const agentLabel = selectedPersona?.displayName ?? "None";
+  const listingLabel =
+    projectVisibility === "unlisted" ? uiT("Unlisted") : uiT("Listed");
+  const agentLabel = selectedPersona?.displayName ?? uiT("None");
   const agentDisabled = disabled || (!runtimesAvailable && personas.length > 0);
   const teamDisabled = disabled || (!runtimesAvailable && teams.length > 0);
 
@@ -77,7 +78,9 @@ export function CreateProjectFormSettings({
         <DropdownMenu modal={false}>
           <DropdownMenuTrigger asChild>
             <Button
-              aria-label={`Template: ${selectedTemplate?.name ?? "None"}`}
+              aria-label={uiT("Template: {0}", {
+                p0: selectedTemplate?.name ?? "None",
+              })}
               className="-mr-2.5 ml-auto h-9 min-w-0 max-w-[60%] justify-end px-2.5 text-right text-sm font-medium text-foreground hover:bg-muted/50"
               data-testid="create-project-template"
               disabled={disabled}
@@ -85,7 +88,7 @@ export function CreateProjectFormSettings({
               variant="ghost"
             >
               <span className="truncate text-right">
-                {selectedTemplate?.name ?? "None"}
+                {selectedTemplate?.name ?? uiT("None")}
               </span>
               <ChevronDown className="size-4 shrink-0 text-muted-foreground/70" />
             </Button>
@@ -131,7 +134,9 @@ export function CreateProjectFormSettings({
         <DropdownMenu modal={false}>
           <DropdownMenuTrigger asChild>
             <Button
-              aria-label={`Team: ${selectedTeam?.name ?? "None"}`}
+              aria-label={uiT("Team: {0}", {
+                p0: selectedTeam?.name ?? "None",
+              })}
               className="-mr-2.5 ml-auto h-9 min-w-0 max-w-[60%] justify-end px-2.5 text-right text-sm font-medium text-foreground hover:bg-muted/50"
               data-testid="create-project-team"
               disabled={teamDisabled}
@@ -139,7 +144,7 @@ export function CreateProjectFormSettings({
               variant="ghost"
             >
               <span className="truncate text-right">
-                {selectedTeam?.name ?? "None"}
+                {selectedTeam?.name ?? uiT("None")}
               </span>
               <ChevronDown className="size-4 shrink-0 text-muted-foreground/70" />
             </Button>
@@ -171,7 +176,7 @@ export function CreateProjectFormSettings({
         <DropdownMenu modal={false}>
           <DropdownMenuTrigger asChild>
             <Button
-              aria-label={`Project list: ${listingLabel}`}
+              aria-label={uiT("Project list: {0}", { p0: listingLabel })}
               className="-mr-2.5 ml-auto h-9 w-fit justify-end px-2.5 text-right text-sm font-medium text-foreground hover:bg-muted/50"
               data-testid="create-project-listing"
               disabled={disabled}
@@ -221,7 +226,7 @@ export function CreateProjectFormSettings({
         <DropdownMenu modal={false}>
           <DropdownMenuTrigger asChild>
             <Button
-              aria-label={`Coding agent: ${agentLabel}`}
+              aria-label={uiT("Coding agent: {0}", { p0: agentLabel })}
               className="-mr-2.5 ml-auto h-9 min-w-0 max-w-[60%] justify-end px-2.5 text-right text-sm font-medium text-foreground hover:bg-muted/50"
               data-testid="create-project-agent"
               disabled={agentDisabled}

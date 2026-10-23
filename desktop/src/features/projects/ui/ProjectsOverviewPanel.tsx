@@ -185,7 +185,7 @@ export function ProjectsActivityIntro({
           <span key={highlight}>
             {index > 0
               ? index === digest.highlights.length - 1
-                ? ", and "
+                ? uiT(", and ")
                 : ", "
               : null}
             <strong className="font-medium text-foreground/90">

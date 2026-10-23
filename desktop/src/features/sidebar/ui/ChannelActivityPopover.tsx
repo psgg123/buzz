@@ -98,7 +98,7 @@ function ThreadPreviewRow({
       data-testid={`channel-activity-item-${item.conversationId}`}
     >
       <button
-        aria-label={`Open thread from ${item.senderLabel}`}
+        aria-label={uiT("Open thread from {0}", { p0: item.senderLabel })}
         className="absolute inset-0 z-0 w-full text-left"
         onClick={onOpen}
         type="button"

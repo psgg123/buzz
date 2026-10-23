@@ -113,10 +113,10 @@ export function EffortSelectField({
   useCustomSelect?: boolean;
 }) {
   const inheritLabel = inheritedEffort
-    ? `Inherit (${inheritedEffort})`
+    ? uiT("Inherit ({0})", { p0: inheritedEffort })
     : effortDefault === null
-      ? "Inherit (default)"
-      : (inheritFallbackLabel ?? "Inherit");
+      ? uiT("Inherit (default)")
+      : (inheritFallbackLabel ?? uiT("Inherit"));
   // Build the option set as the union of the runtime's valid values and the
   // buzz-agent master list. This ensures runtime-native values like Goose's
   // "off" appear as options even though they are not in the buzz-agent list.
@@ -369,7 +369,7 @@ export function BuzzAgentModelTuningFields({
             effortValid={effortValid}
             htmlFor="ba-thinking-effort"
             inheritedEffort={inheritedEnvVars[BUZZ_AGENT_THINKING_EFFORT]}
-            inheritFallbackLabel="Inherit (agent default)"
+            inheritFallbackLabel={uiT("Inherit (agent default)")}
             label={uiT("Thinking / Effort")}
             onChange={(value) =>
               onEnvVarChange(BUZZ_AGENT_THINKING_EFFORT, value)

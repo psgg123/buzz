@@ -43,15 +43,15 @@ export function ProjectsWorkItemsLoadNotice({
         ? "task"
         : subject;
   const title = error
-    ? `Could not load ${displaySubject}.`
-    : `Some ${detailSubject} details could not be loaded.`;
+    ? uiT("Could not load {0}.", { p0: displaySubject })
+    : uiT("Some {0} details could not be loaded.", { p0: detailSubject });
   const description = error
     ? error instanceof Error
       ? error.message
-      : "The relay request failed."
-    : `Missing ${failedSections
-        .map((section) => SECTION_LABELS[section])
-        .join(", ")}. The available results are shown below.`;
+      : uiT("The relay request failed.")
+    : uiT("Missing {0}. The available results are shown below.", {
+        p0: failedSections.map((section) => SECTION_LABELS[section]).join(", "),
+      });
 
   return (
     <div

@@ -1,5 +1,5 @@
 // Buzz source localisation: authored UI strings only; user values stay unchanged.
-import { uiT, useUiLanguage } from "@/shared/i18n/uiTranslation";
+import { uiMessage, uiT, useUiLanguage } from "@/shared/i18n/uiTranslation";
 import emojiData from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
 import { Link2, UploadCloud } from "lucide-react";
@@ -699,17 +699,20 @@ export function ProfileAvatarEditor({
                       )}
                     >
                       {isUploading ? (
-                        "Uploading..."
+                        uiT("Uploading...")
                       ) : isImageDropActive ? (
-                        "Drop image here"
+                        uiT("Drop image here")
                       ) : isOnboardingModal ? (
-                        "Drag or browse"
+                        uiT("Drag or browse")
                       ) : (
                         <>
-                          Drop or{" "}
-                          <span className="underline underline-offset-2">
-                            browse
-                          </span>
+                          {uiMessage("Drop or {0}", {
+                            p0: (
+                              <span className="underline underline-offset-2">
+                                {uiT("browse")}
+                              </span>
+                            ),
+                          })}
                         </>
                       )}
                     </span>
@@ -911,7 +914,7 @@ export function ProfileAvatarEditor({
                                   : uiT(
                                       "Choose an emoji before custom avatar color",
                                     )
-                                : `Use ${swatch} background`
+                                : uiT("Use {0} background", { p0: swatch })
                             }
                             aria-pressed={isSelected}
                             className={cn(

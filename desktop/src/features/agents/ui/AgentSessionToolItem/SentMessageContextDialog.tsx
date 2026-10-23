@@ -118,7 +118,7 @@ function buildSentMessageContextSections({
   }
   if (hasResult) {
     sections.push({
-      title: isError ? "Error" : "Result",
+      title: isError ? uiT("Error") : uiT("Result"),
       body: formatCodeValue(result),
     });
   }

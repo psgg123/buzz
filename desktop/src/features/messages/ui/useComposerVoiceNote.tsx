@@ -121,8 +121,8 @@ export function useComposerVoiceNote({
     if (statusRef.current !== "idle" || hasVoiceNoteAttachment) {
       toast.error(
         statusRef.current === "idle"
-          ? "A voice note must be the only attachment."
-          : "Finish or discard the voice note before attaching a file.",
+          ? uiT("A voice note must be the only attachment.")
+          : uiT("Finish or discard the voice note before attaching a file."),
       );
       return false;
     }

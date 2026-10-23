@@ -80,7 +80,7 @@ export function AgentAiDefaultsNotice({
           <>
             <dt className="text-muted-foreground">{uiT("Harness")}</dt>
             <dd className="truncate text-foreground">
-              {harness || "Not configured"}
+              {harness || uiT("Not configured")}
             </dd>
           </>
         ) : null}
@@ -90,7 +90,7 @@ export function AgentAiDefaultsNotice({
         </dd>
         <dt className="text-muted-foreground">{uiT("Model")}</dt>
         <dd className="truncate text-foreground">
-          {model || "Not configured"}
+          {model || uiT("Not configured")}
         </dd>
       </dl>
       <Button

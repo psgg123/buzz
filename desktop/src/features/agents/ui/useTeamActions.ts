@@ -203,7 +203,9 @@ export function useTeamActions(
       get description() {
         return uiT("Group agents together for quick deployment to channels.");
       },
-      submitLabel: "Create team",
+      get submitLabel() {
+        return uiT("Create team");
+      },
       initialValues: {
         name: "",
         description: "",
@@ -220,7 +222,9 @@ export function useTeamActions(
       get description() {
         return uiT("Create a new team by copying this one.");
       },
-      submitLabel: "Create team",
+      get submitLabel() {
+        return uiT("Create team");
+      },
       initialValues: {
         name: `${team.name} copy`,
         description: team.description ?? "",
@@ -251,7 +255,9 @@ export function useTeamActions(
         return uiT("Edit team");
       },
       description: "",
-      submitLabel: "Save changes",
+      get submitLabel() {
+        return uiT("Save changes");
+      },
       initialValues: {
         id: team.id,
         name: team.name,
@@ -411,7 +417,9 @@ export function useTeamActions(
       }
     } catch (err) {
       setTeamSnapshotImportConfirmError(
-        err instanceof Error ? err.message : "Failed to import team snapshot.",
+        err instanceof Error
+          ? err.message
+          : uiT("Failed to import team snapshot."),
       );
     }
   }

@@ -9,7 +9,7 @@ type PersonaAddedByProps = {
 
 export function PersonaAddedBy({
   className,
-  label = "You",
+  label = uiT("You"),
 }: PersonaAddedByProps) {
   return (
     <p className={cn("truncate text-xs leading-tight", className)}>

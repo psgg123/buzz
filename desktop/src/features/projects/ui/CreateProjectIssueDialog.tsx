@@ -67,7 +67,9 @@ export function CreateProjectIssueDialog({
 
   return (
     <CreateProjectWorkItemDialog
-      bodyPlaceholder="Add context, expected behavior, or reproduction steps"
+      bodyPlaceholder={uiT(
+        "Add context, expected behavior, or reproduction steps",
+      )}
       description={
         repository
           ? uiT("Create a task in {0}", { p0: repository.name })
@@ -80,7 +82,7 @@ export function CreateProjectIssueDialog({
       open={open}
       submitDisabled={!repository}
       title={uiT("Create a task")}
-      titlePlaceholder="Describe the task"
+      titlePlaceholder={uiT("Describe the task")}
     >
       <label className="block space-y-1.5 text-sm font-medium">
         <span>{uiT("Repository")}</span>

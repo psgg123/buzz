@@ -79,7 +79,7 @@ export function ConfirmRemoveDialog({
                   toast.error(
                     error instanceof Error
                       ? error.message
-                      : "Failed to remove member",
+                      : uiT("Failed to remove member"),
                   );
                 },
               });

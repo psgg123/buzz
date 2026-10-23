@@ -76,7 +76,9 @@ export function parsePromptText(text: string): {
     return {
       sections: [],
       userText: text.trim(),
-      userTitle: "Prompt",
+      get userTitle() {
+        return uiT("Prompt");
+      },
       userPubkey: null,
       userEventId: null,
     };
@@ -98,7 +100,7 @@ export function parsePromptText(text: string): {
   return {
     sections,
     userText: eventContent,
-    userTitle: eventKind ? titleCase(eventKind) : "Buzz event",
+    userTitle: eventKind ? titleCase(eventKind) : uiT("Buzz event"),
     userPubkey: eventAuthorPubkey,
     userEventId: eventId,
   };
@@ -551,7 +553,9 @@ function semanticTurnTitle(
     case "thread-context":
     case "conversation-context": {
       const label =
-        tag === "thread-context" ? "Thread Context" : "Conversation Context";
+        tag === "thread-context"
+          ? uiT("Thread Context")
+          : uiT("Conversation Context");
       const truncated = attributes.truncated === "true" ? ", truncated" : "";
       return `${label} (${attributes.included} of ${attributes.total} messages${truncated})`;
     }
@@ -764,7 +768,7 @@ export function extractToolIdentity(update: Record<string, unknown>): {
     (candidate) => !isGenericToolTitle(candidate),
   );
   const title =
-    asString(update.title) ?? knownName ?? firstSpecific ?? "Tool call";
+    asString(update.title) ?? knownName ?? firstSpecific ?? uiT("Tool call");
   return {
     title,
     toolName: knownName ?? normalizeToolName(firstSpecific ?? title),

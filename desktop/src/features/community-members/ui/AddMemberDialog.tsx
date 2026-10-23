@@ -58,7 +58,7 @@ export function DirectAddMemberForm({
   isOwner,
   onAdded,
   showLabel = true,
-  submitLabel = "Add member",
+  submitLabel = uiT("Add member"),
 }: {
   isOwner: boolean;
   onAdded?: () => void;
@@ -134,7 +134,7 @@ export function DirectAddMemberForm({
     [isOwner, __buzzLanguage],
   );
   const selectedRoleLabel =
-    roleOptions.find((option) => option.value === role)?.label ?? "Member";
+    roleOptions.find((option) => option.value === role)?.label ?? uiT("Member");
   const actionTransition = shouldReduceMotion
     ? { duration: 0 }
     : { duration: 0.18, ease: [0.23, 1, 0.32, 1] as const };
@@ -182,11 +182,11 @@ export function DirectAddMemberForm({
       toast.success(
         selectedUsers.length === 1
           ? role === "admin"
-            ? "Admin added"
-            : "Member added"
+            ? uiT("Admin added")
+            : uiT("Member added")
           : role === "admin"
-            ? "Admins added"
-            : "Members added",
+            ? uiT("Admins added")
+            : uiT("Members added"),
       );
       reset();
       onAdded?.();

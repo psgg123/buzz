@@ -583,7 +583,7 @@ function PlaybackSpeedControl({
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <button
-          aria-label={`Playback speed: ${label}`}
+          aria-label={uiT("Playback speed: {0}", { p0: label })}
           className={cn(
             "flex shrink-0 items-center justify-center font-semibold tabular-nums text-white transition-colors hover:bg-white/15 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-white/60",
             triggerSizeClass,
@@ -1501,7 +1501,9 @@ function VideoReviewDialog({
           current.filter((comment) => comment.id !== optimisticComment.id),
         );
         setErrorMessage(
-          error instanceof Error ? error.message : "Failed to post comment.",
+          error instanceof Error
+            ? error.message
+            : uiT("Failed to post comment."),
         );
         // Rethrow so the composer restores the draft it cleared on submit.
         throw error;
@@ -1768,7 +1770,9 @@ function VideoReviewDialog({
                           <Tooltip key={item.comment.id}>
                             <TooltipTrigger asChild>
                               <button
-                                aria-label={`Seek to ${item.timecode}`}
+                                aria-label={uiT("Seek to {0}", {
+                                  p0: item.timecode,
+                                })}
                                 className="absolute top-1/2 z-20 flex h-5 w-5 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white/40 bg-black/60 shadow-md transition-transform hover:scale-110 outline-hidden focus-visible:ring-2 focus-visible:ring-white/60"
                                 data-video-review-marker=""
                                 style={{ left }}
@@ -1826,7 +1830,10 @@ function VideoReviewDialog({
                   <GlassSurface />
                   {QUICK_REACTIONS.map((emoji, index) => (
                     <button
-                      aria-label={`React ${emoji} at ${formatTimecode(currentTime)}`}
+                      aria-label={uiT("React {0} at {1}", {
+                        p0: emoji,
+                        p1: formatTimecode(currentTime),
+                      })}
                       className="flex h-8 w-8 items-center justify-center rounded-full text-lg transition-colors hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-35"
                       data-testid={`video-review-reaction-${index}`}
                       disabled={!canPost}
@@ -1850,7 +1857,7 @@ function VideoReviewDialog({
                             isEmojiPickerOpen && "bg-white/15 text-white",
                           )}
                           disabled={!canPost}
-                          title={postDisabledReason ?? "More reactions"}
+                          title={postDisabledReason ?? uiT("More reactions")}
                           type="button"
                           onClick={() => setIsEmojiPickerOpen((open) => !open)}
                         >
@@ -2138,7 +2145,7 @@ function VideoReviewCommentBody({
         <div className="mt-2 flex flex-wrap gap-1.5">
           {reactions.map((reaction) => (
             <button
-              aria-label={`Toggle ${reaction.emoji} reaction`}
+              aria-label={uiT("Toggle {0} reaction", { p0: reaction.emoji })}
               aria-pressed={reaction.reactedByCurrentUser}
               className={cn(
                 "flex h-7 items-center gap-1 rounded-full border px-2 text-xs transition-colors",

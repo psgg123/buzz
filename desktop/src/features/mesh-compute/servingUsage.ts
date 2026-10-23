@@ -63,8 +63,11 @@ export function deriveServingIndicator(
   if (hasRemoteConsumers) {
     const remote = usage.remoteAttempts + usage.endpointAttempts;
     const label = active
-      ? `In use now by another member · ${usage.inflight} live`
-      : `Used by another member · ${remote} ${plural(remote, "request")}`;
+      ? uiT("In use now by another member · {0} live", { p0: usage.inflight })
+      : uiT("Used by another member · {0} {1}", {
+          p0: remote,
+          p1: plural(remote, "request"),
+        });
     const detail =
       usage.peers > 0
         ? `${usage.peers} ${plural(usage.peers, "peer")} on the mesh · ${Math.round(usage.tokensPerSecond)} tok/s`

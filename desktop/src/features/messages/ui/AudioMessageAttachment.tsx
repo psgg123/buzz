@@ -512,7 +512,10 @@ export function AudioMessageAttachment({
         {!composer ? (
           <button
             ref={playbackRateRef}
-            aria-label={`Playback speed ${playbackRateLabel(playbackRate)}; next ${playbackRateLabel(nextPlaybackRate)}`}
+            aria-label={uiT("Playback speed {0}; next {1}", {
+              p0: playbackRateLabel(playbackRate),
+              p1: playbackRateLabel(nextPlaybackRate),
+            })}
             className="col-start-1 row-start-1 grid rounded-full bg-primary px-2.5 py-0.5 text-2xs font-semibold tabular-nums text-primary-foreground opacity-0 transition-[opacity,transform] duration-150 ease-out active:scale-95 group-hover/attachment:opacity-100 group-focus-within/attachment:opacity-100 focus-visible:opacity-100 motion-reduce:transition-none motion-reduce:active:scale-100"
             data-testid="voice-note-playback-rate"
             onClick={() => {
@@ -543,14 +546,16 @@ export function AudioMessageAttachment({
       {!composer && downloadUrl ? (
         <AttachmentActions>
           <AttachmentAction
-            aria-label={`Download ${filename}`}
+            aria-label={uiT("Download {0}", { p0: filename })}
             onClick={() => {
               invokeTauri("download_file", {
                 filename,
                 url: downloadUrl,
               }).catch((error: unknown) => {
                 toast.error(
-                  error instanceof Error ? error.message : "Download failed",
+                  error instanceof Error
+                    ? error.message
+                    : uiT("Download failed"),
                 );
               });
             }}

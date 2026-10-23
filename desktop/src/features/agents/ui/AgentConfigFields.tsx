@@ -818,7 +818,13 @@ export function AgentConfigFields({
             allowDefaultModel={fallbackModel !== null}
             defaultModelLabel={
               fallbackModel
-                ? `Default model (${resolveModelLabel(fallbackModel, undefined, effectiveProvider || undefined)})`
+                ? uiT("Default model ({0})", {
+                    p0: resolveModelLabel(
+                      fallbackModel,
+                      undefined,
+                      effectiveProvider || undefined,
+                    ),
+                  })
                 : undefined
             }
             disableSelectDuringDiscovery={disableModelSelectDuringDiscovery}
@@ -874,7 +880,7 @@ export function AgentConfigFields({
               // placeholder. Full disclosure lets EffortSelectField compute
               // its own label ("Default (medium)", "Inherit (high)", …).
               disclosure === "onboarding-essential"
-                ? "Select effort level"
+                ? uiT("Select effort level")
                 : undefined
             }
             effortDefault={effortDefaultForRenderer}
@@ -883,7 +889,7 @@ export function AgentConfigFields({
             htmlFor="global-agent-thinking-effort"
             inheritFallbackLabel={
               effortDefaultForRenderer !== null
-                ? `Default (${effortDefaultForRenderer})`
+                ? uiT("Default ({0})", { p0: effortDefaultForRenderer })
                 : undefined
             }
             inheritedEffort={bakedEffort ?? undefined}
@@ -920,13 +926,13 @@ export function AgentConfigFields({
             envVarName={showApiKeyEnvVarName ? apiKeyEnvVar : undefined}
             inheritedLabel={
               apiKeyFileSatisfied
-                ? "Set in runtime config"
-                : "Provided by this build"
+                ? uiT("Set in runtime config")
+                : uiT("Provided by this build")
             }
             isInherited={apiKeyInherited}
             isRequired={!apiKeyInherited && apiKeyValue.length === 0}
             isValidating={apiKeyValidationPending}
-            label={getProviderApiKeyLabel(effectiveProvider) ?? "API Key"}
+            label={getProviderApiKeyLabel(effectiveProvider) ?? uiT("API Key")}
             onValueChange={(value) =>
               onConfigChange({
                 ...config,
@@ -935,7 +941,9 @@ export function AgentConfigFields({
             }
             validationMessage={
               apiKeyValidationFailed
-                ? "We couldn’t validate this API key. Check the key or your connection and try again."
+                ? uiT(
+                    "We couldn’t validate this API key. Check the key or your connection and try again.",
+                  )
                 : null
             }
             value={apiKeyValue}

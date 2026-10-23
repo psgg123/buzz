@@ -43,7 +43,7 @@ export function ProfileAvatarModeTabs({
       className="w-full bg-muted"
       disabled={disabled}
       indicatorTestId="onboarding-avatar-mode-indicator"
-      legend="Avatar type"
+      legend={uiT("Avatar type")}
       onValueChange={onModeChange}
       optionTestIdPrefix="onboarding-avatar-mode"
       options={MODE_SEGMENT_OPTIONS}

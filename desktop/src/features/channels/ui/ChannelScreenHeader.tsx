@@ -162,7 +162,9 @@ export function ChannelScreenHeader({
             <UserProfilePopover
               pubkey={activeDmParticipant.pubkey}
               role={activeDmParticipant.isAgent ? "bot" : undefined}
-              triggerAriaLabel={`Open profile for ${activeChannelTitle}`}
+              triggerAriaLabel={uiT("Open profile for {0}", {
+                p0: activeChannelTitle,
+              })}
               triggerElement="span"
             >
               <ProfileAvatarWithStatus
@@ -248,7 +250,9 @@ function DmHeaderParticipantStack({
         <UserProfilePopover
           key={participant.pubkey}
           pubkey={participant.pubkey}
-          triggerAriaLabel={`Open profile for ${participant.displayName}`}
+          triggerAriaLabel={uiT("Open profile for {0}", {
+            p0: participant.displayName,
+          })}
           triggerElement="span"
           role={participant.isAgent ? "bot" : undefined}
         >

@@ -289,7 +289,7 @@ function PullRequestRow({
     <ProjectWorkItemRow
       eventId={pullRequest.id}
       identifier={`#${pullRequest.id.slice(0, 8)}`}
-      identifierTitle="View review"
+      identifierTitle={uiT("View review")}
       metadata={
         pullRequest.branchName ? (
           <span className="inline-flex min-w-0 items-center gap-1">
@@ -318,7 +318,9 @@ function PullRequestRow({
             <button
               aria-label={
                 pullRequest.comments.length > 0
-                  ? `View ${pullRequest.comments.length} comments`
+                  ? uiT("View {0} comments", {
+                      p0: pullRequest.comments.length,
+                    })
                   : uiT("View comments")
               }
               className={`flex items-center gap-1 rounded-md text-xs hover:text-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring ${
@@ -464,12 +466,14 @@ export function ProjectPullRequestDetail({
         });
         toast.success(
           decision === "request-changes"
-            ? "Changes requested."
-            : "Comment posted.",
+            ? uiT("Changes requested.")
+            : uiT("Comment posted."),
         );
       } catch (error) {
         toast.error(
-          error instanceof Error ? error.message : "Failed to post comment.",
+          error instanceof Error
+            ? error.message
+            : uiT("Failed to post comment."),
         );
         throw error;
       }
@@ -613,7 +617,7 @@ export function ProjectPullRequestDetail({
               createdAt={update.createdAt}
               hash={update.commit}
               key={update.id}
-              message={update.content.trim() || "Updated review branch"}
+              message={update.content.trim() || uiT("Updated review branch")}
               onOpenCommit={onOpenCommit}
               profiles={profiles}
             />
@@ -628,7 +632,7 @@ export function ProjectPullRequestDetail({
       <ProjectDetailSection defaultOpen title={uiT("Activity")}>
         <div className="space-y-3">
           <DiscussedInChannels
-            entityLabel="this review"
+            entityLabel={uiT("this review")}
             originChannelId={pullRequest.channelId}
             originCreatedAt={pullRequest.createdAt}
             originPubkey={pullRequest.author}
@@ -783,7 +787,7 @@ export function ProjectPullRequestDetail({
                                       "requested changes on an earlier commit",
                                     )
                                   : uiT("requested changes")
-                                : trimmedContent || "requested a review"}
+                                : trimmedContent || uiT("requested a review")}
                           </>
                         ) : null}
                       </span>
@@ -803,7 +807,14 @@ export function ProjectPullRequestDetail({
                     ) : null}
                     {item.anchor ? (
                       <button
-                        aria-label={`Open ${item.anchor.path} ${item.anchor.side} line ${item.anchor.line} in Files changed`}
+                        aria-label={uiT(
+                          "Open {0} {1} line {2} in Files changed",
+                          {
+                            p0: item.anchor.path,
+                            p1: item.anchor.side,
+                            p2: item.anchor.line,
+                          },
+                        )}
                         className="mt-1 inline-flex min-w-0 items-center gap-1 rounded-md bg-muted/65 px-1.5 py-0.5 font-mono text-2xs text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
                         onClick={() => {
                           if (item.anchor) onOpenInlineComment?.(item.anchor);
@@ -852,7 +863,7 @@ export function ProjectPullRequestDetail({
           onSubmit={handleCommentSubmit}
           placeholder={uiT("Add a comment…")}
           profiles={profiles}
-          secondarySubmitLabel="Request changes"
+          secondarySubmitLabel={uiT("Request changes")}
         />
       </div>
     </div>

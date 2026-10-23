@@ -119,17 +119,93 @@ test("interpolation preserves user values, counts, fallback and literal unknown 
 });
 
 test("failed storage applies the language and reports that it was not saved", async () => {
+  await setAppLanguage("en");
   const prototype = Object.getPrototypeOf(localStorage);
   const original = prototype.setItem;
   prototype.setItem = () => {
     throw new Error("storage denied");
   };
   try {
-    const result = await setAppLanguage("ko");
-    assert.equal(result.saved, false);
+    const screen = render(React.createElement(LanguageSetting));
+    await act(async () =>
+      fireEvent.change(screen.getByTestId("app-language"), {
+        target: { value: "ko" },
+      }),
+    );
+    assert.ok(screen.getByRole("status").textContent.includes("저장"));
     assert.equal(uiT("Settings"), "설정");
     assert.equal(document.documentElement.lang, "ko");
+    assert.equal(readStoredLanguagePreference(), "en");
+    screen.unmount();
+    const reopened = render(React.createElement(LanguageSetting));
+    assert.equal(reopened.getByTestId("app-language").value, "ko");
+    assert.ok(reopened.getByRole("status").textContent.includes("저장"));
   } finally {
     prototype.setItem = original;
   }
+});
+
+test("date and notification helpers follow the selected language without changing user content", async () => {
+  const { formatDayGroupLabel, formatItemTimestamp } = await import(
+    "../lib/datetime.ts"
+  );
+  const { formatMessageNotification } = await import(
+    "../../features/notifications/lib/notificationFormat.ts"
+  );
+  const now = new Date(2026, 9, 23, 14, 30).getTime() / 1000;
+  const content = "Settings 한글.txt {{p0}} $t(sample)";
+  await setAppLanguage("ko");
+  assert.equal(formatDayGroupLabel(now, now), "오늘");
+  assert.match(
+    formatItemTimestamp(now - 86400, { nowSeconds: now, withTime: true }),
+    /어제.*(?:오후|PM)/,
+  );
+  assert.equal(
+    formatMessageNotification({ source: "dm", senderName: "Settings", content })
+      .body,
+    content,
+  );
+  assert.equal(
+    formatMessageNotification({ source: "dm", content: "" }).title,
+    "다이렉트 메시지",
+  );
+  assert.equal(
+    formatMessageNotification({ source: "dm", content: "" }).body,
+    "새 메시지",
+  );
+  await setAppLanguage("en");
+  assert.equal(formatDayGroupLabel(now, now), "Today");
+  assert.match(
+    formatItemTimestamp(now - 86400, { nowSeconds: now, withTime: true }),
+    /Yesterday at .*PM/,
+  );
+});
+
+test("Korean workflow conditions preserve quoted content and separate generated author attribution", async () => {
+  const { workflowTriggerDescription, splitWorkflowAuthorDescription } =
+    await import("../../features/workflows/ui/workflowTriggerDescription.ts");
+  const { agentCommunityAvailability, managedAgentPairAction } = await import(
+    "../../features/agents/managedAgentRuntimeStatus.ts"
+  );
+  await setAppLanguage("ko");
+  const description = workflowTriggerDescription(
+    {
+      on: "message_posted",
+      filter: `str_contains(trigger_text, "Carl") && trigger_author == "${"a".repeat(64)}"`,
+    },
+    { authorLabel: "Carl" },
+  );
+  assert.ok(description.includes("“Carl”"));
+  assert.ok(!description.includes(" by "));
+  assert.deepEqual(splitWorkflowAuthorDescription(description, "Carl"), {
+    prefix: "",
+    suffix: "이(가) 메시지에 “Carl” 포함",
+  });
+  const runtime = { localSetup: true, lifecycle: "ready" };
+  assert.equal(
+    agentCommunityAvailability(runtime),
+    "Here",
+    "state discriminators stay stable in Korean",
+  );
+  assert.equal(managedAgentPairAction(runtime), "stop");
 });

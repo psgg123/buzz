@@ -179,7 +179,7 @@ function IssueRow({
     <ProjectWorkItemRow
       eventId={issue.id}
       identifier={`#${issue.id.slice(0, 8)}`}
-      identifierTitle="View task"
+      identifierTitle={uiT("View task")}
       onOpen={onOpen}
       selection={{
         item: issueSelectionItem(project, issue),
@@ -243,7 +243,7 @@ function IssueRow({
             <button
               aria-label={
                 issue.comments.length > 0
-                  ? `View ${issue.comments.length} comments`
+                  ? uiT("View {0} comments", { p0: issue.comments.length })
                   : uiT("View comments")
               }
               className={`flex items-center gap-1 rounded-md text-xs hover:text-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring ${
@@ -305,7 +305,9 @@ export function ProjectIssueDetail({
         toast.success(uiT("Comment posted."));
       } catch (error) {
         toast.error(
-          error instanceof Error ? error.message : "Failed to post comment.",
+          error instanceof Error
+            ? error.message
+            : uiT("Failed to post comment."),
         );
         throw error;
       }
@@ -391,7 +393,7 @@ export function ProjectIssueDetail({
       <ProjectDetailSection defaultOpen title={uiT("Activity")}>
         <div className="space-y-3">
           <DiscussedInChannels
-            entityLabel="this task"
+            entityLabel={uiT("this task")}
             originChannelId={issue.channelId}
             originCreatedAt={issue.createdAt}
             originPubkey={issue.author}

@@ -304,8 +304,9 @@ function MemoryGraphView({
           )}
           data-testid="agent-memory-no-core"
         >
-          No <code className="font-mono text-2xs">core</code>{" "}
-          {uiT(" memory yet — agent identity is unrooted.")}
+          {uiMessage("No {0} memory yet — agent identity is unrooted.", {
+            p0: <code className="font-mono text-2xs">core</code>,
+          })}
         </p>
       ) : null}
 

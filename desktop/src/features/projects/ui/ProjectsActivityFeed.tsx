@@ -377,7 +377,7 @@ function ActivityCard({
     : undefined;
   const actorLabel = item.actorPubkey
     ? resolveUserLabel({ profiles, pubkey: item.actorPubkey })
-    : item.actorName || "Someone";
+    : item.actorName || uiT("Someone");
   return (
     <div
       className={cn(
@@ -387,7 +387,10 @@ function ActivityCard({
       data-testid="projects-activity-card"
     >
       <button
-        aria-label={`Open ${item.title} in ${item.target.project.name}`}
+        aria-label={uiT("Open {0} in {1}", {
+          p0: item.title,
+          p1: item.target.project.name,
+        })}
         className="absolute inset-0 rounded-xl focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring"
         onClick={onOpen}
         type="button"
@@ -424,7 +427,7 @@ function ActivityCard({
           {item.actorPubkey ? (
             <UserProfilePopover pubkey={item.actorPubkey} triggerElement="span">
               <button
-                aria-label={`View ${actorLabel}'s profile`}
+                aria-label={uiT("View {0}'s profile", { p0: actorLabel })}
                 className={cn(
                   "pointer-events-auto relative z-10 shrink-0 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring",
                   profile?.isAgent ? "rounded-[30%]" : "rounded-full",

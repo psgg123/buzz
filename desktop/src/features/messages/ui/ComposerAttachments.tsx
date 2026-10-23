@@ -145,7 +145,7 @@ function ComposerSnapshotCard({
     attachment.filename?.toLowerCase().endsWith(".agent.png");
   const showThumb = isAgentPng && !thumbError;
   const SnapshotIcon = snapshotKind === "team" ? Users : Bot;
-  const fallbackLabel = snapshotKind === "team" ? "Team" : "Agent";
+  const fallbackLabel = snapshotKind === "team" ? uiT("Team") : uiT("Agent");
   const displayName =
     attachment.displayLabel?.trim() ||
     attachment.filename?.replace(/\.(?:agent|team)\.(?:png|json)$/i, "") ||
@@ -282,9 +282,9 @@ const MediaAttachmentItem = React.forwardRef<
     attachment.displayLabel?.trim() ||
     (attachment.sha256
       ? isVideo
-        ? `Video attachment ${hash}`
-        : `Attachment ${hash}`
-      : attachment.filename?.trim() || `Attachment ${hash}`);
+        ? uiT("Video attachment {0}", { p0: hash })
+        : uiT("Attachment {0}", { p0: hash })
+      : attachment.filename?.trim() || uiT("Attachment {0}", { p0: hash }));
   const thumbUrl = attachment.thumb
     ? rewriteRelayUrl(attachment.thumb)
     : rewriteRelayUrl(attachment.url);
@@ -674,7 +674,7 @@ export const ComposerAttachments = React.memo(function ComposerAttachments({
             }
 
             if (isAudio) {
-              const label = attachment.filename || "Voice note";
+              const label = attachment.filename || uiT("Voice note");
               return (
                 <motion.div
                   animate={{ opacity: 1, scale: 1 }}
@@ -715,7 +715,7 @@ export const ComposerAttachments = React.memo(function ComposerAttachments({
               const label =
                 attachment.filename ||
                 attachment.url.split("/").pop() ||
-                `file ${hash}`;
+                uiT("file {0}", { p0: hash });
               return (
                 <motion.div
                   key={attachment.url}
@@ -827,7 +827,7 @@ export const ComposerAttachments = React.memo(function ComposerAttachments({
                     <div className="h-full w-full overflow-hidden rounded-2xl border border-border/70 bg-muted">
                       {preview.posterUrl ? (
                         <img
-                          alt={preview.filename ?? "Queued attachment"}
+                          alt={preview.filename ?? uiT("Queued attachment")}
                           className="h-full w-full object-cover"
                           src={preview.posterUrl}
                         />
@@ -847,7 +847,7 @@ export const ComposerAttachments = React.memo(function ComposerAttachments({
                   <div className="flex h-5 max-w-40 items-center gap-1 rounded border border-border/70 bg-muted px-1.5">
                     <FileText className="h-4 w-4 shrink-0 text-muted-foreground" />
                     <span className="truncate text-2xs text-muted-foreground">
-                      {preview.filename ?? "Attachment"}
+                      {preview.filename ?? uiT("Attachment")}
                     </span>
                   </div>
                 )}
@@ -913,7 +913,9 @@ export const ComposerAttachments = React.memo(function ComposerAttachments({
                     {preview.posterUrl ? (
                       <img
                         src={preview.posterUrl}
-                        alt={`Uploading ${preview.filename ?? "video"}`}
+                        alt={uiT("Uploading {0}", {
+                          p0: preview.filename ?? "video",
+                        })}
                         className="h-full w-full object-cover"
                       />
                     ) : (
@@ -921,7 +923,9 @@ export const ComposerAttachments = React.memo(function ComposerAttachments({
                     )}
                     <div className="absolute inset-0 flex items-end rounded-2xl bg-background/25 px-2 pb-1.5">
                       <Progress
-                        aria-label={`Uploading ${preview.filename ?? "attachment"}`}
+                        aria-label={uiT("Uploading {0}", {
+                          p0: preview.filename ?? "attachment",
+                        })}
                         className={cn(
                           "h-1",
                           preview.posterUrl

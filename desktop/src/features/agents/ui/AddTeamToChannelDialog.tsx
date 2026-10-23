@@ -174,7 +174,7 @@ export function AddTeamToChannelDialog({
             <DialogTitle>{uiT("Deploy team to channel")}</DialogTitle>
             <DialogDescription>
               {uiT("Create and attach one agent per member of")}{" "}
-              <strong>{team?.name ?? "this team"}</strong>{" "}
+              <strong>{team?.name ?? uiT("this team")}</strong>{" "}
               {uiT(" to the selected channel.")}
             </DialogDescription>
           </DialogHeader>

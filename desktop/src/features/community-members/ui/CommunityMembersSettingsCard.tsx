@@ -129,7 +129,7 @@ function RelayMemberRow({
       toast.error(
         error instanceof Error
           ? error.message
-          : "Couldn’t update this community member.",
+          : uiT("Couldn’t update this community member."),
       );
     }
   }
@@ -141,7 +141,7 @@ function RelayMemberRow({
     >
       <UserProfilePopover
         pubkey={member.pubkey}
-        triggerAriaLabel={`Open profile for ${displayName}`}
+        triggerAriaLabel={uiT("Open profile for {0}", { p0: displayName })}
         triggerElement="span"
       >
         <ProfileAvatar
@@ -190,7 +190,7 @@ function RelayMemberRow({
         <DropdownMenu modal={false}>
           <DropdownMenuTrigger asChild>
             <Button
-              aria-label={`Actions for ${displayName}`}
+              aria-label={uiT("Actions for {0}", { p0: displayName })}
               data-testid={`relay-member-actions-${member.pubkey}`}
               disabled={isBusy}
               size="icon"

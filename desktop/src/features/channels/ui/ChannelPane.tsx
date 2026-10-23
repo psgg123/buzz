@@ -542,7 +542,7 @@ export const ChannelPane = React.memo(function ChannelPane({
       <FocusThreadDrawer
         channelName={activeChannel?.name ?? "channel"}
         key="idle-auxiliary-surface"
-        label={idleAuxiliaryTitle || "Panel"}
+        label={idleAuxiliaryTitle || uiT("Panel")}
         onClose={onCloseIdleAuxiliaryPanel}
         restoreFocusTarget={threadSurface.restoreFocusTarget}
       >
@@ -655,15 +655,19 @@ export const ChannelPane = React.memo(function ChannelPane({
               unfollowThreadById={unfollowThreadById}
               emptyDescription={
                 activeChannel?.channelType === "forum"
-                  ? "Select a stream or DM to load real message history in this first integration pass."
-                  : "Messages and sub-replies will appear here once the relay has history for this channel."
+                  ? uiT(
+                      "Select a stream or DM to load real message history in this first integration pass.",
+                    )
+                  : uiT(
+                      "Messages and sub-replies will appear here once the relay has history for this channel.",
+                    )
               }
               emptyTitle={
                 activeChannel
                   ? activeChannel.channelType === "forum"
-                    ? "Forum channels are next"
-                    : "No messages yet"
-                  : "No channel selected"
+                    ? uiT("Forum channels are next")
+                    : uiT("No messages yet")
+                  : uiT("No channel selected")
               }
               isError={isTimelineError}
               isLoading={isHuddleTranscript ? false : isTimelineLoading}
@@ -793,7 +797,9 @@ export const ChannelPane = React.memo(function ChannelPane({
                                   ? uiT("Message {0}", {
                                       p0: directMessageIntro.displayName,
                                     })
-                                  : `Message #${activeChannel.name}`
+                                  : uiT("Message #{0}", {
+                                      p0: activeChannel.name,
+                                    })
                                 : uiT("Select a channel")
                     }
                     showTopBorder={false}

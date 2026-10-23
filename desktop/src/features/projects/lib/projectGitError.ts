@@ -50,8 +50,12 @@ export function projectCloneErrorPresentation(
         return uiT("Repository access required");
       },
       description: github
-        ? "This repository requires GitHub authentication. Buzz currently clones public GitHub repositories without credentials."
-        : "Buzz could not authenticate with this repository. Check your access and try again.",
+        ? uiT(
+            "This repository requires GitHub authentication. Buzz currently clones public GitHub repositories without credentials.",
+          )
+        : uiT(
+            "Buzz could not authenticate with this repository. Check your access and try again.",
+          ),
     };
   }
   if (/\b404\b|repository not found|repository does not exist/.test(message)) {
@@ -101,7 +105,9 @@ export function projectCloneErrorPresentation(
       return uiT("Couldn’t clone repository");
     },
     description: github
-      ? "Try again, or open the repository on GitHub for more information."
-      : "Try again. If the problem continues, contact the repository owner.",
+      ? uiT("Try again, or open the repository on GitHub for more information.")
+      : uiT(
+          "Try again. If the problem continues, contact the repository owner.",
+        ),
   };
 }

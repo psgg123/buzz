@@ -181,12 +181,12 @@ export function AgentSnapshotCard({
         ) : null}
       </AttachmentContent>
       <AttachmentActions
-        aria-label={`Actions for ${displayName}`}
+        aria-label={uiT("Actions for {0}", { p0: displayName })}
         className="ml-4 gap-2"
         role="group"
       >
         <AttachmentAction
-          aria-label={`Download ${displayName}`}
+          aria-label={uiT("Download {0}", { p0: displayName })}
           data-testid="agent-snapshot-card-download"
           onClick={handleDownload}
           size="icon"

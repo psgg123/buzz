@@ -53,7 +53,7 @@ export function ProjectsCategoryCreateDialogs({
         channelKind={channelOpen ? "stream" : null}
         description={
           channelProject
-            ? `Add another stream to ${channelProject.name}.`
+            ? uiT("Add another stream to {0}.", { p0: channelProject.name })
             : uiT("Choose a project for this channel.")
         }
         isCreating={createChannelMutation.isPending}

@@ -585,7 +585,7 @@ export function AgentDefinitionDialog({
   runtimeDropdownOptions.push(ADD_CUSTOM_HARNESS_OPTION);
   const runtimeSummaryLabel = selectedRuntime
     ? formatRuntimeOptionLabel(selectedRuntime)
-    : runtime.trim() || "Not configured";
+    : runtime.trim() || uiT("Not configured");
   const providerDropdownOptions: PersonaDropdownOption[] = [
     ...providerOptions
       .filter((option) => option.id.trim().length > 0)
@@ -621,7 +621,7 @@ export function AgentDefinitionDialog({
             }
           : option,
       );
-  const previewLabel = displayName.trim() || "Agent name";
+  const previewLabel = displayName.trim() || uiT("Agent name");
   const previewAvatarUrl = avatarUrl.trim() || null;
   const runtimeWarningText = selectedRuntime
     ? runtimeAvailabilityWarning(selectedRuntime)
@@ -901,7 +901,9 @@ export function AgentDefinitionDialog({
               isInherited={apiKeyIsInherited}
               inheritedLabel={apiKeyInheritedLabel}
               isRequired={apiKeyIsRequired}
-              label={getProviderApiKeyLabel(effectiveProvider) ?? "API key"}
+              label={
+                getProviderApiKeyLabel(effectiveProvider) ?? uiT("API key")
+              }
               onValueChange={(next) => {
                 setEnvVars((prev) => ({
                   ...prev,

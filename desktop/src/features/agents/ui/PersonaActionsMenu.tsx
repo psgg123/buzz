@@ -49,7 +49,7 @@ export function PersonaActionsMenu({
     <DropdownMenu modal={false}>
       <DropdownMenuTrigger asChild>
         <button
-          aria-label={`Open actions for ${persona.displayName}`}
+          aria-label={uiT("Open actions for {0}", { p0: persona.displayName })}
           className="flex h-7 w-7 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
           type="button"
         >

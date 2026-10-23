@@ -92,7 +92,7 @@ export function UserNameIndicators({
               />
             </span>
           </TooltipTrigger>
-          <TooltipContent>{status.text || "Status set"}</TooltipContent>
+          <TooltipContent>{status.text || uiT("Status set")}</TooltipContent>
         </Tooltip>
       ) : null}
     </span>

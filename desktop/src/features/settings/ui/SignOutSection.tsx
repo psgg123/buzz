@@ -93,7 +93,7 @@ export function SignOutSection() {
         setNsecError(
           err instanceof Error
             ? err.message
-            : "Failed to retrieve private key.",
+            : uiT("Failed to retrieve private key."),
         );
     } finally {
       if (!fetchCancelledRef.current) setIsNsecLoading(false);
@@ -120,7 +120,9 @@ export function SignOutSection() {
         setIsPending(false);
         setIsOpen(false);
         resetDialogState();
-        toast.error(err instanceof Error ? err.message : "Sign out failed.");
+        toast.error(
+          err instanceof Error ? err.message : uiT("Sign out failed."),
+        );
       });
   }
 

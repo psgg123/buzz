@@ -243,7 +243,7 @@ export function ProjectRepositoryManagement({
                       toast.error(
                         error instanceof Error
                           ? error.message
-                          : "Failed to update repository access.",
+                          : uiT("Failed to update repository access."),
                       );
                     });
                 }}

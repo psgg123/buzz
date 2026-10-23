@@ -447,7 +447,7 @@ function CatalogListItem({
       </span>
       {isReady ? (
         <span
-          aria-label={`${entry.label} is ready`}
+          aria-label={uiT("{0} is ready", { p0: entry.label })}
           className="h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-500"
           role="img"
         />
@@ -479,7 +479,7 @@ function CatalogDetail({ entry }: { entry: AcpRuntimeCatalogEntry }) {
       },
       onError: (error) => {
         setInstallError(
-          error instanceof Error ? error.message : "Install failed.",
+          error instanceof Error ? error.message : uiT("Install failed."),
         );
       },
     });

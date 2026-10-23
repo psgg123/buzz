@@ -108,7 +108,7 @@ export function TeamsSection({
                   <DropdownMenu modal={false}>
                     <DropdownMenuTrigger asChild>
                       <button
-                        aria-label={`${team.name} team actions`}
+                        aria-label={uiT("{0} team actions", { p0: team.name })}
                         className="flex h-7 w-7 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
                         type="button"
                       >

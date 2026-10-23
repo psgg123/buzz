@@ -60,7 +60,7 @@ type NostrKeyImportFormProps = {
  * existing key). The caller owns what happens after `onImport` resolves.
  */
 export function NostrKeyImportForm({
-  backLabel = "Back",
+  backLabel = uiT("Back"),
   disabled = false,
   errorMessage: externalErrorMessage = null,
   onBack,
@@ -180,7 +180,9 @@ export function NostrKeyImportForm({
 
     if (file.size > NOSTR_KEY_FILE_MAX_BYTES) {
       setImportError(
-        "That file is too large to be a key backup or private key. Choose another file.",
+        uiT(
+          "That file is too large to be a key backup or private key. Choose another file.",
+        ),
       );
       return;
     }
@@ -193,7 +195,9 @@ export function NostrKeyImportForm({
       setImportError(null);
     } catch (error) {
       setImportError(
-        error instanceof Error ? error.message : "Couldn't read that file.",
+        error instanceof Error
+          ? error.message
+          : uiT("Couldn't read that file."),
       );
     }
   }, []);
@@ -211,10 +215,10 @@ export function NostrKeyImportForm({
     if (!isValid) {
       setImportError(
         isPasswordStage
-          ? "Enter the password for this key backup."
+          ? uiT("Enter the password for this key backup.")
           : isEncryptedInput
-            ? "That doesn't look like a complete ncryptsec backup."
-            : "That doesn't look like a valid nsec. Paste an nsec1 key.",
+            ? uiT("That doesn't look like a complete ncryptsec backup.")
+            : uiT("That doesn't look like a valid nsec. Paste an nsec1 key."),
       );
       return;
     }
@@ -228,7 +232,9 @@ export function NostrKeyImportForm({
       await onImport(trimmedInput, isPasswordStage ? passphrase : undefined);
     } catch (error) {
       setImportError(
-        error instanceof Error ? error.message : "Couldn't import this key.",
+        error instanceof Error
+          ? error.message
+          : uiT("Couldn't import this key."),
       );
     } finally {
       importInFlightRef.current = false;
@@ -687,9 +693,9 @@ export function NostrKeyImportForm({
                 className="h-4 w-4 border-2"
               />
             ) : variant === "spotlight" ? (
-              "Next"
+              uiT("Next")
             ) : (
-              "Continue with this key"
+              uiT("Continue with this key")
             )}
           </Button>
         ) : null}

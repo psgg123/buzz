@@ -162,7 +162,7 @@ export function MachineOnboardingFlow({
       setPage("backup");
     } catch (cause) {
       setError(
-        cause instanceof Error ? cause.message : "Failed to load identity",
+        cause instanceof Error ? cause.message : uiT("Failed to load identity"),
       );
     } finally {
       setIsPending(false);
@@ -183,7 +183,7 @@ export function MachineOnboardingFlow({
       setPage("setup");
     } catch (cause) {
       setError(
-        cause instanceof Error ? cause.message : "Failed to load identity",
+        cause instanceof Error ? cause.message : uiT("Failed to load identity"),
       );
     } finally {
       setIsPending(false);
@@ -210,7 +210,7 @@ export function MachineOnboardingFlow({
       setPage("backup");
     } catch (cause) {
       setError(
-        cause instanceof Error ? cause.message : "Failed to save identity",
+        cause instanceof Error ? cause.message : uiT("Failed to save identity"),
       );
     } finally {
       setIsPending(false);
@@ -510,7 +510,7 @@ export function MachineOnboardingFlow({
                 </h1>
                 <div className="mt-2 w-full text-base leading-6 text-foreground/80">
                   {keyImportStage === "backup-password" ? (
-                    "Enter your backup password to restore your identity."
+                    uiT("Enter your backup password to restore your identity.")
                   ) : (
                     <p>
                       {uiT(
@@ -528,7 +528,7 @@ export function MachineOnboardingFlow({
                       >
                         {uiT("backup file")}
                       </button>
-                      , or{" "}
+                      {uiT(", or")}{" "}
                       <button
                         className="rounded-sm font-medium underline decoration-foreground/40 underline-offset-4 transition-colors hover:decoration-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-60"
                         data-testid="nostr-import-phone-link"

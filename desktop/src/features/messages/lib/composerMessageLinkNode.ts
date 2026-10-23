@@ -374,7 +374,7 @@ function composerLinkPresentation(
       channelName ||
       channel.value.channelId.slice(0, 8);
     return {
-      ariaLabel: `Open channel ${resolvedChannelName}`,
+      ariaLabel: uiT("Open channel {0}", { p0: resolvedChannelName }),
       channelName: resolvedChannelName,
       dataAttributes: { "data-channel-deep-link": "" },
       icon: "channel",

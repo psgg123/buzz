@@ -107,7 +107,9 @@ function AccessRestrictedDescription({
     <>
       {uiT("Repository access is granted through")}{" "}
       <button
-        aria-label={`Open repository access channel #${channel.name}`}
+        aria-label={uiT("Open repository access channel #{0}", {
+          p0: channel.name,
+        })}
         className="font-medium text-foreground underline-offset-2 hover:underline"
         onClick={() => void goChannel(channel.id)}
         type="button"

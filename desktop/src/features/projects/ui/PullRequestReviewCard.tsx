@@ -97,16 +97,18 @@ export function PullRequestReviewCard({
         });
         toast.success(
           status === "draft"
-            ? "Converted to draft."
+            ? uiT("Converted to draft.")
             : status === "closed"
-              ? "Review closed."
+              ? uiT("Review closed.")
               : pullRequest.status === "Closed"
-                ? "Review reopened."
-                : "Marked as ready for review.",
+                ? uiT("Review reopened.")
+                : uiT("Marked as ready for review."),
         );
       } catch (error) {
         toast.error(
-          error instanceof Error ? error.message : "Failed to update status.",
+          error instanceof Error
+            ? error.message
+            : uiT("Failed to update status."),
         );
       }
     },

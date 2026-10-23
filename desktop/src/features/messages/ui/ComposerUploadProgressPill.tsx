@@ -1,5 +1,5 @@
+import { uiT, useUiLanguage } from "@/shared/i18n/uiTranslation";
 // Buzz source localisation: authored UI strings only; user values stay unchanged.
-import { useUiLanguage } from "@/shared/i18n/uiTranslation";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 
 import {
@@ -10,7 +10,7 @@ import { cn } from "@/shared/lib/cn";
 import { Spinner } from "@/shared/ui/spinner";
 
 export function ComposerUploadProgressPill({
-  actionLabel = "Cancel",
+  actionLabel = uiT("Cancel"),
   canCancel,
   isUploading,
   onCancel,

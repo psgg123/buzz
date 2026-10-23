@@ -44,7 +44,8 @@ export function ChannelPermissionsSettings({
   visibility: ChannelVisibility;
   variant?: "dropdown" | "segmented";
 }) {
-  const visibilityLabel = visibility === "private" ? "Private" : "Public";
+  const visibilityLabel =
+    visibility === "private" ? uiT("Private") : uiT("Public");
 
   return (
     <div
@@ -65,7 +66,7 @@ export function ChannelPermissionsSettings({
       {variant === "segmented" ? (
         <SegmentedControl
           disabled={disabled}
-          legend="Visibility"
+          legend={uiT("Visibility")}
           onValueChange={onVisibilityChange}
           optionTestIdPrefix={`${testIdPrefix}-permissions-option`}
           options={VISIBILITY_OPTIONS}
@@ -76,7 +77,7 @@ export function ChannelPermissionsSettings({
         <DropdownMenu modal={false}>
           <DropdownMenuTrigger asChild>
             <Button
-              aria-label={`Visibility: ${visibilityLabel}`}
+              aria-label={uiT("Visibility: {0}", { p0: visibilityLabel })}
               className="-mr-2.5 ml-auto h-9 w-fit justify-end px-2.5 text-right text-sm font-medium text-foreground hover:bg-muted/50"
               data-testid={`${testIdPrefix}-permissions`}
               disabled={disabled}

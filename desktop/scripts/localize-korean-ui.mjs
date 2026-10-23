@@ -22,7 +22,123 @@ const visible = new Set([
   "emptyMessage",
   "subcopy",
   "alt",
+  "legend",
+  "message",
+  "browseLabel",
+  "createLabel",
+  "chooseFromCatalog",
+  "createNew",
+  "import",
+  "emptyTitle",
+  "emptyDescription",
+  "emptyImportHint",
+  "dialogTitle",
+  "dialogDescription",
+  "emptyCatalogDescription",
+  "emptyCatalogTitle",
+  "detailsAction",
+  "selectAction",
+  "deselectAction",
+  "selectedState",
+  "availableState",
+  "detailSelectedTitle",
+  "detailSelectedDescription",
+  "detailAvailableTitle",
+  "detailAvailableDescription",
+  "useAction",
+  "addedAction",
+  "teamEmptyState",
 ]);
+function visibleName(name) {
+  if (["typeLabel", "kindLabel"].includes(name)) return false;
+  return (
+    visible.has(name) ||
+    /(?:Title|Description|Label|Action|Hint|Placeholder|Message|Caption|Tooltip|Subcopy)$/.test(
+      name,
+    )
+  );
+}
+// Only these modules return display copy. Protocol/error classification stays literal.
+const copyModules = new Set([
+  "features/agents/lib/agentCardModelLabel.ts",
+  "features/agents/ui/personaLibraryCopy.ts",
+  "features/agents/ui/teamLibraryCopy.ts",
+  "features/agents/ui/agentUi.ts",
+  "features/agents/ui/agentSessionToolSummary.ts",
+  "features/notifications/lib/notificationFormat.ts",
+  "features/presence/lib/presence.ts",
+  "features/sidebar/lib/channelLabels.ts",
+  "features/messages/lib/systemEventCopy.ts",
+  "features/messages/lib/dateFormatters.ts",
+  "features/messages/lib/composerMentionCopy.ts",
+  "features/messages/lib/messageLinkLabel.ts",
+  "features/workflows/ui/workflowTriggerDescription.ts",
+  "features/workflows/ui/workflowStepDescription.ts",
+  "features/workflows/ui/workflowActivationWarning.ts",
+  "features/settings/lib/appearanceScopeCopy.ts",
+  "features/settings/ui/harnessCatalogCopy.ts",
+  "features/projects/lib/projectLabels.ts",
+]);
+const copyFunctions = {
+  "features/agents/lib/formatAgentModelLabel.ts": ["formatAgentModelLabel"],
+  "features/agents/lib/managedAgentControlActions.ts": [
+    "getManagedAgentPrimaryActionLabel",
+  ],
+  "features/agents/ui/agentSessionTranscriptGrouping.ts": ["sameKindLabel"],
+  "features/agents/ui/bakedEnvHelpers.ts": [
+    "getAdvancedInheritedSummary",
+    "getBakedModelInheritLabel",
+    "getBakedProviderInheritLabel",
+  ],
+  "features/agents/ui/catalogOwnerLabel.ts": ["resolveCatalogOwnerLabel"],
+  "features/agents/ui/personaModelDiscoveryStatus.ts": ["providerObjectLabel"],
+  "features/agents/ui/usePersonaModelDiscovery.ts": ["claudeCodeModelLabel"],
+  "features/channels/lib/channelDescription.ts": ["getChannelDescription"],
+  "features/channels/lib/channelLifecycle.ts": ["channelLifecycleLabel"],
+  "features/community-members/lib/joinAlerts.ts": ["joinAlertSummaryBody"],
+  "features/home/lib/inbox.ts": [
+    "categoryLabelFor",
+    "formatInboxTypeLabel",
+    "projectTypeLabel",
+  ],
+  "features/local-archive/ui/localArchiveKinds.ts": ["kindLabel"],
+  "features/messages/lib/backgroundMediaUploadPhase.ts": [
+    "backgroundMediaUploadPhaseLabel",
+  ],
+  "features/onboarding/ui/harnessConnectionOptions.ts": [
+    "runtimeUnavailableDescription",
+  ],
+  "features/profile/lib/identity.ts": ["formatOwnerLabel", "resolveUserLabel"],
+  "features/projects/lib/projectsViewHelpers.ts": [
+    "getActivityLabel",
+    "getClonePathLabel",
+  ],
+  "features/projects/projectTaskCategories.ts": ["projectTaskCategoryLabel"],
+  "features/projects/ui/useOpenProjectTerminal.ts": ["projectTerminalLabel"],
+  "features/settings/ui/harnessCatalogLogic.ts": [
+    "entryStatusLabel",
+    "installLinkLabel",
+  ],
+  "features/sidebar/lib/useSidebarUnreadOverflow.ts": [
+    "sidebarOverflowUnreadLabel",
+  ],
+  "features/workflows/ui/workflowStepDescription.ts": [
+    "workflowStepDescription",
+  ],
+  "features/workflows/ui/workflowDefinition.ts": [
+    "getActionCardClause",
+    "getScheduleCardClause",
+    "getTriggerCardClause",
+    "getWorkflowCardLabel",
+  ],
+};
+function copyReturnContext(context, file) {
+  if (!context || !ts.isReturnStatement(context)) return false;
+  if (copyModules.has(file)) return true;
+  let fn = context.parent;
+  while (fn && !ts.isFunctionDeclaration(fn)) fn = fn.parent;
+  return Boolean(fn && copyFunctions[file]?.includes(fn.name?.getText()));
+}
 const report = { files: [], untranslated: [], total: 0 };
 function all(dir) {
   return fs
@@ -36,7 +152,7 @@ function normalize(s) {
 }
 function displayExpression(n) {
   if (!ts.isJsxExpression(n)) return false;
-  return !ts.isJsxAttribute(n.parent) || visible.has(n.parent.name.getText());
+  return !ts.isJsxAttribute(n.parent) || visibleName(n.parent.name.getText());
 }
 function jsxText(s) {
   s = s.replace(
@@ -128,6 +244,28 @@ function containsJsx(n) {
   }
   visit(n);
   return found;
+}
+function displayInitializer(context) {
+  if (
+    !context ||
+    !(
+      ts.isVariableDeclaration(context) ||
+      ts.isBindingElement(context) ||
+      ts.isParameter(context)
+    )
+  )
+    return false;
+  const name = context.name.getText();
+  if (
+    !/^(?:label|title|description|placeholder|hint)$|(?:Label|Title|Description|Placeholder|Hint|Caption|ErrorMessage)$/.test(
+      name,
+    ) ||
+    ["typeLabel", "kindLabel"].includes(name)
+  )
+    return false;
+  let owner = context.parent;
+  while (owner && !ts.isFunctionLike(owner)) owner = owner.parent;
+  return Boolean(owner);
 }
 for (const filename of all(root)) {
   const rel = path.relative(root, filename);
@@ -266,22 +404,28 @@ for (const filename of all(root)) {
     }
     if (ts.isStringLiteralLike(n)) {
       const p = n.parent;
-      const attr = ts.isJsxAttribute(p) && visible.has(p.name.getText(ast));
+      const attr = ts.isJsxAttribute(p) && visibleName(p.name.getText(ast));
       const prop =
         ts.isPropertyAssignment(p) &&
-        visible.has(
+        visibleName(
           p.name.getText(ast).replaceAll('"', "").replaceAll("'", ""),
         ) &&
         p.initializer === n;
       const expr = displayExpression(p);
       const branch =
-        ts.isConditionalExpression(p) &&
-        (p.whenTrue === n || p.whenFalse === n) &&
+        (ts.isConditionalExpression(p) || ts.isBinaryExpression(p)) &&
         (() => {
           let q = p;
           while (
             q &&
-            (ts.isParenthesizedExpression(q) || ts.isConditionalExpression(q))
+            (ts.isParenthesizedExpression(q) ||
+              ts.isConditionalExpression(q) ||
+              (ts.isBinaryExpression(q) &&
+                [
+                  ts.SyntaxKind.QuestionQuestionToken,
+                  ts.SyntaxKind.BarBarToken,
+                  ts.SyntaxKind.AmpersandAmpersandToken,
+                ].includes(q.operatorToken.kind)))
           )
             q = q.parent;
           return q && displayExpression(q);
@@ -290,7 +434,52 @@ for (const filename of all(root)) {
         ts.isCallExpression(p) &&
         p.arguments[0] === n &&
         /^toast(?:\.|\()/.test(p.expression.getText(ast));
-      if ((attr || prop || expr || branch || toast) && !skipJsx(n)) {
+      let context = p;
+      while (
+        context &&
+        (ts.isConditionalExpression(context) ||
+          ts.isParenthesizedExpression(context) ||
+          (ts.isBinaryExpression(context) &&
+            [
+              ts.SyntaxKind.QuestionQuestionToken,
+              ts.SyntaxKind.BarBarToken,
+            ].includes(context.operatorToken.kind)))
+      )
+        context = context.parent;
+      const copyReturn = copyReturnContext(context, rel);
+      const errorCopy =
+        context &&
+        ts.isCallExpression(context) &&
+        /^set(?:\w*Error(?:Message)?|StatusMessage)$/.test(
+          context.expression.getText(ast),
+        ) &&
+        context.arguments[0] &&
+        context.arguments[0].pos <= n.pos;
+      const toastFallback =
+        context &&
+        ts.isCallExpression(context) &&
+        /^toast\./.test(context.expression.getText(ast)) &&
+        context.arguments[0]?.pos <= n.pos &&
+        context.arguments[0]?.end >= n.end;
+      const copyProperty =
+        context &&
+        ts.isPropertyAssignment(context) &&
+        context.initializer.pos <= n.pos &&
+        visibleName(context.name.getText(ast));
+      if (
+        (attr ||
+          prop ||
+          expr ||
+          branch ||
+          toast ||
+          copyReturn ||
+          errorCopy ||
+          toastFallback ||
+          displayExpression(context) ||
+          displayInitializer(context) ||
+          copyProperty) &&
+        !skipJsx(n)
+      ) {
         if (known(n.text)) {
           const translated = call(n.text);
           if (attr) replace(n, `{${translated}}`);
@@ -320,20 +509,47 @@ for (const filename of all(root)) {
       // Only visible render values / toast arguments. Never translate paths, prompts, or protocol values.
       const p = n.parent;
       const visibleProp =
-        ts.isPropertyAssignment(p) && visible.has(p.name.getText(ast));
+        ts.isPropertyAssignment(p) && visibleName(p.name.getText(ast));
       let context = p;
       while (
         context &&
         (ts.isConditionalExpression(context) ||
-          ts.isParenthesizedExpression(context))
+          ts.isParenthesizedExpression(context) ||
+          (ts.isBinaryExpression(context) &&
+            [
+              ts.SyntaxKind.QuestionQuestionToken,
+              ts.SyntaxKind.BarBarToken,
+            ].includes(context.operatorToken.kind)))
       )
         context = context.parent;
       const render = displayExpression(context) || visibleProp;
+      const copyReturn = copyReturnContext(context, rel);
+      const errorCopy =
+        context &&
+        ts.isCallExpression(context) &&
+        /^set(?:\w*Error(?:Message)?|StatusMessage)$/.test(
+          context.expression.getText(ast),
+        );
       const toast =
         ts.isCallExpression(p) &&
         p.arguments[0] === n &&
         p.expression.getText(ast).startsWith("toast");
-      if ((render || toast) && known(source)) replace(n, call(source, values));
+      if (
+        render ||
+        toast ||
+        copyReturn ||
+        errorCopy ||
+        displayInitializer(context)
+      ) {
+        if (known(source)) replace(n, call(source, values));
+        else if (/[A-Za-z]{2}/.test(source))
+          report.untranslated.push({
+            file: rel,
+            line: ast.getLineAndCharacterOfPosition(n.getStart(ast)).line + 1,
+            source,
+            kind: "template",
+          });
+      }
       return;
     }
     ts.forEachChild(n, visit);

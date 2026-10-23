@@ -151,7 +151,9 @@ function PassphraseGeneratorPopover({
     } catch (err) {
       if (!mountedRef.current) return;
       setError(
-        err instanceof Error ? err.message : "Failed to generate a password.",
+        err instanceof Error
+          ? err.message
+          : uiT("Failed to generate a password."),
       );
     }
   }, []);

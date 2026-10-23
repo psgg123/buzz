@@ -72,7 +72,7 @@ export function TeamIdentityCard({
             <Tooltip>
               <TooltipTrigger asChild>
                 <button
-                  aria-label={`${teamName} description`}
+                  aria-label={uiT("{0} description", { p0: teamName })}
                   className="flex h-6 w-6 items-center justify-center rounded-full border border-border/65 bg-background/90 text-muted-foreground shadow-xs"
                   type="button"
                 >
@@ -139,7 +139,7 @@ function TeamAvatarRow({
   return (
     <div className="absolute inset-x-0 top-0 bottom-12 flex items-center justify-center">
       <div
-        aria-label={`${teamName} member avatars`}
+        aria-label={uiT("{0} member avatars", { p0: teamName })}
         className="flex max-w-full items-center justify-center px-4"
         role="img"
       >

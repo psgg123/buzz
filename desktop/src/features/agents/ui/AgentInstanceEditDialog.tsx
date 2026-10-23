@@ -817,7 +817,10 @@ export function AgentInstanceEditDialog({
                 onError: (error) =>
                   isRelayRemovedError(error) ||
                   toast.error(
-                    `${startedName} failed to start${error instanceof Error ? `: ${error.message}` : "."}`,
+                    uiT("{0} failed to start{1}", {
+                      p0: startedName,
+                      p1: error instanceof Error ? `: ${error.message}` : ".",
+                    }),
                   ),
               });
             },
@@ -924,7 +927,7 @@ export function AgentInstanceEditDialog({
     },
   ];
 
-  const previewLabel = name.trim() || "Agent name";
+  const previewLabel = name.trim() || uiT("Agent name");
   const previewAvatarUrl = avatarUrl.trim() || null;
   const advancedFieldsTransition = shouldReduceMotion
     ? { duration: 0 }

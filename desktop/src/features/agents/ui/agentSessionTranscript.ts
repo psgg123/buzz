@@ -179,7 +179,7 @@ function describePermissionRequest(payload: Record<string, unknown>) {
     asString(params.title) ??
     asString(params.message) ??
     asString(params.reason) ??
-    "Permission requested";
+    uiT("Permission requested");
   const toolCallId =
     asString(params.toolCallId) ?? asString(params.tool_call_id);
   const options = Array.isArray(params.options)
@@ -781,7 +781,9 @@ export function processTranscriptEvent(
     const error = asString(payload.error) ?? "Unknown error";
     const displayError = friendlyTurnErrorCopy(error, payload.code);
     const title =
-      event.kind === "agent_panic" ? "Agent error (crash)" : "Turn error";
+      event.kind === "agent_panic"
+        ? uiT("Agent error (crash)")
+        : uiT("Turn error");
     upsertTextItem(
       d,
       `${event.kind}:${ch}:${event.turnId ?? event.seq}`,

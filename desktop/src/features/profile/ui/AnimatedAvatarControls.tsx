@@ -86,7 +86,7 @@ type AvatarFramingSliderProps = {
 
 export function AvatarFramingSlider({
   ariaDescribedBy,
-  ariaLabel = "Avatar size",
+  ariaLabel = uiT("Avatar size"),
   ariaValueText,
   compact = false,
   disabled = false,
@@ -98,7 +98,7 @@ export function AvatarFramingSlider({
   onChange,
   onReset,
   resetValue,
-  resetLabel = "Reset avatar size",
+  resetLabel = uiT("Reset avatar size"),
   resetTestId,
   testId,
   tipText = null,

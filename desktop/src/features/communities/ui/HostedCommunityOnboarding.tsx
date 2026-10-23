@@ -665,7 +665,7 @@ export function HostedCommunityOnboarding({
                             <p className="truncate text-sm">
                               {community.name ??
                                 community.slug ??
-                                "Hosted community"}
+                                uiT("Hosted community")}
                             </p>
                             <p className="mt-1 truncate text-sm text-foreground/55">
                               {community.normalized_host}
@@ -755,7 +755,7 @@ export function HostedCommunityOnboarding({
                   }`}
                   id="hosted-community-feedback"
                 >
-                  {creationFeedback ?? "Community address status"}
+                  {creationFeedback ?? uiT("Community address status")}
                 </p>
               </>
             ) : (
@@ -772,7 +772,7 @@ export function HostedCommunityOnboarding({
                   }`}
                   id="hosted-community-feedback"
                 >
-                  {creationFeedback ?? "Community address status"}
+                  {creationFeedback ?? uiT("Community address status")}
                 </p>
               </>
             )}
@@ -801,7 +801,7 @@ export function HostedCommunityOnboarding({
             type="submit"
           >
             {busy ? <LoaderCircle className="h-4 w-4 animate-spin" /> : null}
-            {action ?? "Next"}
+            {action ?? uiT("Next")}
           </Button>
           <Button
             className={PAGE_BACK_CLASS}

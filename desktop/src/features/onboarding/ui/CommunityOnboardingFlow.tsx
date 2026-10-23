@@ -541,8 +541,8 @@ export function CommunityOnboardingFlow({
                 <p className="mt-3 text-sm text-foreground/80">
                   {transaction.error ??
                     (transaction.stage === "claiming"
-                      ? "Accepting your invite…"
-                      : "Connecting securely…")}
+                      ? uiT("Accepting your invite…")
+                      : uiT("Connecting securely…"))}
                 </p>
                 <div className="mt-6 flex justify-center gap-3">
                   {transaction.error ? (
@@ -681,7 +681,8 @@ export function CommunityOnboardingFlow({
                                       avatarUrl={localAvatarPreviewUrl}
                                       className="h-full w-full rounded-full text-5xl"
                                       label={
-                                        displayName.trim() || "Your profile"
+                                        displayName.trim() ||
+                                        uiT("Your profile")
                                       }
                                       testId="community-avatar-live-preview"
                                     />
@@ -691,7 +692,9 @@ export function CommunityOnboardingFlow({
                                   parseEmojiAvatarDataUrl(avatarUrl);
                                 return emojiAvatar ? (
                                   <div
-                                    aria-label={`${displayName.trim() || "Your profile"} avatar`}
+                                    aria-label={uiT("{0} avatar", {
+                                      p0: displayName.trim() || "Your profile",
+                                    })}
                                     className="flex h-full w-full items-center justify-center overflow-hidden rounded-full text-6xl shadow-xs"
                                     data-testid="community-avatar-live-preview"
                                     role="img"
@@ -716,7 +719,9 @@ export function CommunityOnboardingFlow({
                                       localAvatarPreviewUrl || avatarUrl || null
                                     }
                                     className="h-full w-full rounded-full text-5xl"
-                                    label={displayName.trim() || "Your profile"}
+                                    label={
+                                      displayName.trim() || uiT("Your profile")
+                                    }
                                     testId="community-avatar-live-preview"
                                   />
                                 );
@@ -777,7 +782,9 @@ export function CommunityOnboardingFlow({
                           >
                             {animationUrl ? (
                               <img
-                                alt={`${persona.displayName} animated character`}
+                                alt={uiT("{0} animated character", {
+                                  p0: persona.displayName,
+                                })}
                                 className="size-24 object-contain"
                                 data-testid={`starter-persona-${persona.displayName.toLowerCase()}`}
                                 src={animationUrl}
@@ -816,7 +823,7 @@ export function CommunityOnboardingFlow({
                     {isPending || transaction.stage === "entering" ? (
                       <LoadingDots label={uiT("Preparing Welcome")} />
                     ) : (
-                      "Take me to Buzz"
+                      uiT("Take me to Buzz")
                     )}
                   </Button>
                   {starterChannelFailureCount >= 2 ? (

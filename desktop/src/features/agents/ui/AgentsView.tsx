@@ -494,7 +494,7 @@ export function AgentsView() {
                     ? "error"
                     : "ready"
               }
-              submitLabel="Add agent"
+              submitLabel={uiT("Add agent")}
             />
           )}
           // Persona side

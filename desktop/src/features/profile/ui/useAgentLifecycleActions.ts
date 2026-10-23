@@ -67,7 +67,7 @@ export function useAgentLifecycleActions({
       );
     } catch (error) {
       toast.error(
-        error instanceof Error ? error.message : "Agent action failed.",
+        error instanceof Error ? error.message : uiT("Agent action failed."),
       );
     }
   }, [
@@ -99,7 +99,7 @@ export function useAgentLifecycleActions({
     } catch (error) {
       if (isRelayRemovedError(error)) return;
       toast.error(
-        error instanceof Error ? error.message : "Agent restart failed.",
+        error instanceof Error ? error.message : uiT("Agent restart failed."),
       );
     }
   }, [

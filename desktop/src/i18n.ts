@@ -65,6 +65,26 @@ export function readStoredLanguagePreference(): AppLanguagePreference {
   );
 }
 
+let preferenceState = {
+  preference: readStoredLanguagePreference(),
+  saved: true,
+  nativeSynced: true,
+};
+const preferenceListeners = new Set<() => void>();
+
+/** Current session preference, including a choice that storage could not save. */
+export function getLanguagePreferenceState() {
+  return preferenceState;
+}
+
+/** Observe preference persistence separately from rendered language changes. */
+export function subscribeLanguagePreference(listener: () => void) {
+  preferenceListeners.add(listener);
+  return () => {
+    preferenceListeners.delete(listener);
+  };
+}
+
 export function createAppI18n(
   resources: Resource,
   language: AppLanguage,
@@ -92,10 +112,7 @@ export const i18n = createAppI18n(
     "zh-Hant": { translation: zhHant },
     "zh-Hans": { translation: zhHans },
   },
-  resolveAppLanguage(
-    readStoredLanguagePreference(),
-    getSystemLanguageCandidates(),
-  ),
+  resolveAppLanguage(preferenceState.preference, getSystemLanguageCandidates()),
 );
 
 function applyDocumentLanguage(language: AppLanguage) {
@@ -106,27 +123,33 @@ function applyDocumentLanguage(language: AppLanguage) {
 
 applyDocumentLanguage(resolveAppLanguage(i18n.resolvedLanguage));
 
-async function syncNativeLanguage(language: AppLanguage): Promise<void> {
+async function syncNativeLanguage(language: AppLanguage): Promise<boolean> {
   if (typeof window !== "undefined" && isTauri()) {
     try {
       await invoke("set_desktop_language", { language });
+      return true;
     } catch (error) {
       console.warn("Buzz could not update its native menu language", error);
+      return false;
     }
   }
+  return true;
 }
 
 void syncNativeLanguage(resolveAppLanguage(i18n.resolvedLanguage));
 
 export async function setAppLanguage(
   preference: AppLanguagePreference,
-): Promise<{ saved: boolean }> {
+): Promise<{ saved: boolean; nativeSynced: boolean }> {
   const language = resolveAppLanguage(
     preference,
     getSystemLanguageCandidates(),
   );
   await i18n.changeLanguage(language);
   applyDocumentLanguage(language);
-  await syncNativeLanguage(language);
-  return { saved: writeLanguagePreference(getLanguageStorage(), preference) };
+  const nativeSynced = await syncNativeLanguage(language);
+  const saved = writeLanguagePreference(getLanguageStorage(), preference);
+  preferenceState = { preference, saved, nativeSynced };
+  for (const listener of preferenceListeners) listener();
+  return { saved, nativeSynced };
 }

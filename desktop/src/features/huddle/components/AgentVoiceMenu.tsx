@@ -77,7 +77,7 @@ export function AgentVoiceMenu({
         setError(
           updateError instanceof Error
             ? updateError.message
-            : "Agent voice could not be updated.",
+            : uiT("Agent voice could not be updated."),
         );
       } finally {
         setBusy(false);
@@ -91,7 +91,7 @@ export function AgentVoiceMenu({
       <PopoverTrigger asChild>
         {trigger ?? (
           <Button
-            aria-label={`Voice settings for ${displayName}`}
+            aria-label={uiT("Voice settings for {0}", { p0: displayName })}
             className="absolute right-1.5 top-1.5 z-20 h-7 w-7 rounded-md bg-transparent text-muted-foreground shadow-none hover:bg-muted/70 hover:text-foreground"
             data-testid="huddle-agent-voice-menu-trigger"
             size="icon"
@@ -172,7 +172,7 @@ export function AgentVoiceMenu({
           <>
             <Separator />
             <Button
-              aria-label={`Remove ${displayName} from huddle`}
+              aria-label={uiT("Remove {0} from huddle", { p0: displayName })}
               className="w-full justify-start text-destructive hover:bg-destructive/10 hover:text-destructive"
               onClick={onRemoveAgent}
               type="button"

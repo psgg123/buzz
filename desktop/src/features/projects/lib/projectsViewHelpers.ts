@@ -367,7 +367,7 @@ export function normalizeRepositoryUrl(url: string) {
 
 export function getClonePathLabel(project: Project) {
   const cloneUrl = selectProjectRepository(project, null)?.cloneUrls[0];
-  if (!cloneUrl) return "Clone path pending";
+  if (!cloneUrl) return uiT("Clone path pending");
 
   try {
     const parsed = new URL(cloneUrl);
@@ -393,7 +393,7 @@ export function uniqueRepositories(projects: Project[]) {
 
 export function getActivityLabel(summary: ProjectActivitySummary | undefined) {
   if (!summary || summary.activityCount === 0) {
-    return "No activity yet";
+    return uiT("No activity yet");
   }
 
   return [

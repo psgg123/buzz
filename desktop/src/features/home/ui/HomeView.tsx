@@ -109,7 +109,7 @@ export function HomeView({
   onOpenContext,
   onRefresh,
 }: HomeViewProps) {
-  useUiLanguage();
+  const __buzzLanguage = useUiLanguage();
 
   const relaySelfPubkey = useRelaySelfQuery().data;
   const [homeInboxRef, homeInboxWidthPx] = useElementWidth<HTMLDivElement>();
@@ -374,6 +374,7 @@ export function HomeView({
     return pubkeys;
   }, [feedProfiles, communityAgentPubkeys]);
   // biome-ignore lint/correctness/useExhaustiveDependencies: readStateVersion invalidates the stable getChannelReadAt callback
+  // biome-ignore lint/correctness/useExhaustiveDependencies: Display copy and dates depend on the selected UI language.
   const inboxItems = React.useMemo(() => {
     const items = buildInboxItems({
       channels,
@@ -394,6 +395,7 @@ export function HomeView({
     getMessageReadAt,
     getThreadReadAt,
     readStateVersion,
+    __buzzLanguage,
   ]);
   const { effectiveDoneSet, markItemRead, markItemUnread } =
     useHomeInboxReadState({
@@ -608,7 +610,7 @@ export function HomeView({
               {uiT("Home feed unavailable")}
             </p>
             <p className="mt-2 text-sm text-muted-foreground">
-              {errorMessage ?? "The relay did not return a feed response."}
+              {errorMessage ?? uiT("The relay did not return a feed response.")}
             </p>
             <Button className="mt-5" onClick={onRefresh} type="button">
               <RefreshCcw className="h-4 w-4" />
@@ -876,7 +878,7 @@ export function HomeView({
                           profiles: feedProfiles,
                           pubkey: authorPubkey,
                         })
-                      : "You",
+                      : uiT("You"),
                     authorPubkey,
                     avatarUrl:
                       currentPubkey && feedProfiles

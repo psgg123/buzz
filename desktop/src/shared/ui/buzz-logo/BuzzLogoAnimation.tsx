@@ -1,5 +1,5 @@
+import { uiT, useUiLanguage } from "@/shared/i18n/uiTranslation";
 // Buzz source localisation: authored UI strings only; user values stay unchanged.
-import { useUiLanguage } from "@/shared/i18n/uiTranslation";
 import { useId, useLayoutEffect, useRef } from "react";
 import type { CSSProperties } from "react";
 import "./buzz-logo-animation.css";
@@ -624,7 +624,7 @@ function RestWindowFade({
 }
 
 export default function BuzzLogoAnimation({
-  ariaLabel = "Buzz logo animation",
+  ariaLabel = uiT("Buzz logo animation"),
   className = "",
   fullScreen = true,
   loop = false,

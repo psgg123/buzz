@@ -136,7 +136,7 @@ export function EditAgentProviderModelFields({
           isInherited={apiKeyIsInherited}
           inheritedLabel={apiKeyInheritedLabel}
           isRequired={apiKeyIsRequired}
-          label={getProviderApiKeyLabel(effectiveProvider) ?? "API Key"}
+          label={getProviderApiKeyLabel(effectiveProvider) ?? uiT("API Key")}
           onValueChange={onApiKeyChange}
           value={apiKeyValue}
         />

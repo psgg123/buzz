@@ -326,7 +326,7 @@ export function HostedCommunityCreateFlow({
             {action === "Signing in…" ? (
               <LoaderCircle className="h-4 w-4 animate-spin" />
             ) : null}
-            {action ?? "Continue to Builderlab"}
+            {action ?? uiT("Continue to Builderlab")}
             {action ? null : <ExternalLink className="h-4 w-4" />}
           </Button>
         </div>
@@ -358,7 +358,7 @@ export function HostedCommunityCreateFlow({
             type="button"
           >
             {action ? <LoaderCircle className="h-4 w-4 animate-spin" /> : null}
-            {action ?? "Connect and continue"}
+            {action ?? uiT("Connect and continue")}
           </Button>
         </div>
       </div>
@@ -399,7 +399,7 @@ export function HostedCommunityCreateFlow({
             type="button"
           >
             {action ? <LoaderCircle className="h-4 w-4 animate-spin" /> : null}
-            {action ?? "Use this device"}
+            {action ?? uiT("Use this device")}
           </Button>
         </div>
       </div>
@@ -484,7 +484,7 @@ export function HostedCommunityCreateFlow({
           type="submit"
         >
           {action ? <LoaderCircle className="h-4 w-4 animate-spin" /> : null}
-          {action ?? "Create community"}
+          {action ?? uiT("Create community")}
         </Button>
       </div>
     </form>

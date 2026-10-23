@@ -324,7 +324,9 @@ function WorkflowNode({
           <DropdownMenuTrigger asChild>
             <Button
               aria-label={
-                title === "Trigger" ? uiT("Add step") : `Add after ${title}`
+                title === "Trigger"
+                  ? uiT("Add step")
+                  : uiT("Add after {0}", { p0: title })
               }
               className={cn(
                 "relative z-10 h-7 w-7 rounded-full bg-background shadow-sm",

@@ -71,10 +71,10 @@ function RepositoryHostIcon({
   const host = projectRepoHostForRepository(repository, useRelayOrigin());
   const label =
     host.kind === "buzz"
-      ? "Buzz-hosted repository"
+      ? uiT("Buzz-hosted repository")
       : host.kind === "external"
-        ? `Git data hosted on ${host.host}`
-        : "Repository host";
+        ? uiT("Git data hosted on {0}", { p0: host.host })
+        : uiT("Repository host");
   const mark =
     host.kind === "buzz" ? (
       <BuzzMark className={compact ? "h-3.5 w-4" : "h-4.5 w-5"} />
@@ -252,7 +252,7 @@ export const RepositoryGridCard = React.memo(function RepositoryGridCard(
           )}
           data-testid="projects-grid-card-body"
         >
-          {repository.description || "A repository in this project."}
+          {repository.description || uiT("A repository in this project.")}
         </p>
         <div className="pointer-events-auto mt-auto">
           <ProjectPeopleStack

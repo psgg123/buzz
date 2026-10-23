@@ -152,12 +152,12 @@ export function AvatarUpload({
           )}
           <span className="text-xs text-muted-foreground">
             {isUploading ? (
-              "Uploading..."
+              uiT("Uploading...")
             ) : (
               <>
                 {uiT("Drop an image or")}{" "}
                 <span className="font-medium text-foreground underline underline-offset-2">
-                  browse
+                  {uiT("browse")}
                 </span>
               </>
             )}

@@ -1,5 +1,5 @@
 // Buzz source localisation: authored UI strings only; user values stay unchanged.
-import { uiT } from "@/shared/i18n/uiTranslation";
+import { uiMessage, uiT } from "@/shared/i18n/uiTranslation";
 import type { ManagedAgent } from "@/shared/api/types";
 
 type AddChannelBotReuseGuardProps = {
@@ -17,8 +17,8 @@ export function AddChannelBotReuseGuard({
 }: AddChannelBotReuseGuardProps) {
   const statusLabel =
     reusableAgent.status === "running" || reusableAgent.status === "deployed"
-      ? "running"
-      : "stopped";
+      ? uiT("running")
+      : uiT("stopped");
 
   return (
     <div className="space-y-2" data-testid="agent-instance-mode">
@@ -36,11 +36,17 @@ export function AddChannelBotReuseGuard({
         <option value="new">{uiT("Create new instance")}</option>
       </select>
       <p className="text-xs text-muted-foreground">
-        <span className="font-medium text-foreground">
-          {reusableAgent.name}
-        </span>{" "}
-        is already {statusLabel}. Reusing adds it to this channel without
-        creating a duplicate keypair.
+        {uiMessage(
+          "{0} is already {1}. Reusing adds it to this channel without creating a duplicate keypair.",
+          {
+            p0: (
+              <span className="font-medium text-foreground">
+                {reusableAgent.name}
+              </span>
+            ),
+            p1: statusLabel,
+          },
+        )}
       </p>
     </div>
   );

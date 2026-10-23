@@ -740,7 +740,7 @@ function ChannelManagementPanelContent({
         transparent={transparentChrome}
       >
         <AuxiliaryPanelHeaderGroup
-          backButtonAriaLabel="Back to channel"
+          backButtonAriaLabel={uiT("Back to channel")}
           backButtonTestId="channel-management-back"
           mode={mode}
           onBack={
@@ -850,7 +850,10 @@ function ChannelManagementPanelContent({
                     description={
                       workflowsQuery.isLoading
                         ? undefined
-                        : `${workflowsQuery.data?.length ?? 0} workflow${workflowsQuery.data?.length === 1 ? "" : "s"}`
+                        : uiT("{0} workflow{1}", {
+                            p0: workflowsQuery.data?.length ?? 0,
+                            p1: workflowsQuery.data?.length === 1 ? "" : "s",
+                          })
                     }
                     icon={WorkflowIcon}
                     label={uiT("Workflows")}
@@ -867,7 +870,10 @@ function ChannelManagementPanelContent({
                 description={
                   workflowsQuery.isLoading
                     ? undefined
-                    : `${workflowsQuery.data?.length ?? 0} workflow${workflowsQuery.data?.length === 1 ? "" : "s"}`
+                    : uiT("{0} workflow{1}", {
+                        p0: workflowsQuery.data?.length ?? 0,
+                        p1: workflowsQuery.data?.length === 1 ? "" : "s",
+                      })
                 }
                 icon={WorkflowIcon}
                 label={uiT("Workflows")}

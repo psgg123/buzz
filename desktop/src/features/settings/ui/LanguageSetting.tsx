@@ -1,19 +1,25 @@
-import { useState } from "react";
+import { useState, useSyncExternalStore } from "react";
 import { useTranslation } from "react-i18next";
 
 import {
   isAppLanguagePreference,
-  readStoredLanguagePreference,
+  getLanguagePreferenceState,
   setAppLanguage,
+  subscribeLanguagePreference,
 } from "@/i18n";
 import { SettingsOptionGroup, SettingsOptionRow } from "./SettingsOptionGroup";
 
 export function LanguageSetting() {
   const { t } = useTranslation();
-  const [languagePreference, setLanguagePreference] = useState(
-    readStoredLanguagePreference,
+  const {
+    preference: languagePreference,
+    saved,
+    nativeSynced,
+  } = useSyncExternalStore(
+    subscribeLanguagePreference,
+    getLanguagePreferenceState,
+    getLanguagePreferenceState,
   );
-  const [saved, setSaved] = useState(true);
   const [error, setError] = useState(false);
   const [pending, setPending] = useState(false);
 
@@ -31,6 +37,9 @@ export function LanguageSetting() {
             <p role="status">{t("settings.language.unsaved")}</p>
           ) : null}
           {error ? <p role="alert">{t("settings.language.error")}</p> : null}
+          {!nativeSynced ? (
+            <p role="alert">{t("settings.language.nativeError")}</p>
+          ) : null}
         </div>
         <select
           className="h-8 min-w-36 rounded-full border border-border/50 bg-muted/45 px-3 text-xs font-medium text-foreground outline-none focus-visible:ring-2 focus-visible:ring-ring"
@@ -40,17 +49,13 @@ export function LanguageSetting() {
           onChange={(event) => {
             const nextPreference = event.currentTarget.value;
             if (isAppLanguagePreference(nextPreference)) {
-              const previousPreference = languagePreference;
-              setLanguagePreference(nextPreference);
               setError(false);
               setPending(true);
               void setAppLanguage(nextPreference).then(
-                (result) => {
-                  setSaved(result.saved);
+                () => {
                   setPending(false);
                 },
                 () => {
-                  setLanguagePreference(previousPreference);
                   setError(true);
                   setPending(false);
                 },

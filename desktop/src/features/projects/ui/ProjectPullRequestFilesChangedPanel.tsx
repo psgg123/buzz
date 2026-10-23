@@ -556,7 +556,11 @@ function DiffPreview({
               <span className="flex select-none items-center justify-center">
                 {anchor && inlineComments ? (
                   <button
-                    aria-label={`Comment on ${anchor.path} ${anchor.side} line ${anchor.line}`}
+                    aria-label={uiT("Comment on {0} {1} line {2}", {
+                      p0: anchor.path,
+                      p1: anchor.side,
+                      p2: anchor.line,
+                    })}
                     className={cn(
                       "flex h-5 w-5 items-center justify-center rounded text-muted-foreground opacity-0 hover:bg-primary hover:text-primary-foreground focus-visible:opacity-100 focus-visible:outline-hidden group-hover:opacity-100",
                       (comments.length > 0 || isActive) && "opacity-100",
@@ -712,14 +716,14 @@ export function ProjectPullRequestFilesChangedPanel({
         setActiveAnchor(null);
         toast.success(
           decision === "request-changes"
-            ? "Changes requested."
-            : "Line comment posted.",
+            ? uiT("Changes requested.")
+            : uiT("Line comment posted."),
         );
       } catch (error) {
         toast.error(
           error instanceof Error
             ? error.message
-            : "Failed to post line comment.",
+            : uiT("Failed to post line comment."),
         );
         throw error;
       }
@@ -757,7 +761,7 @@ export function ProjectPullRequestFilesChangedPanel({
           : undefined
       }
       isLoading={isLoading}
-      subjectLabel="review"
+      subjectLabel={uiT("review")}
     />
   );
 }

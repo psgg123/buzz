@@ -102,7 +102,7 @@ export function EncryptedBackupProvider({
             message:
               err instanceof Error
                 ? err.message
-                : "Failed to encrypt your key.",
+                : uiT("Failed to encrypt your key."),
           });
         });
     };

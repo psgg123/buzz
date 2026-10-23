@@ -1,5 +1,5 @@
 // Buzz source localisation: authored UI strings only; user values stay unchanged.
-import { uiT, useUiLanguage } from "@/shared/i18n/uiTranslation";
+import { uiMessage, uiT, useUiLanguage } from "@/shared/i18n/uiTranslation";
 import * as React from "react";
 import {
   AlertCircle,
@@ -118,7 +118,7 @@ type PendingMemoryShare = {
   recipientNames?: string[];
 };
 
-function buildSnapshotShareLevels(itemLabel: "Agent" | "Team") {
+function buildSnapshotShareLevels(itemLabel: string) {
   return [
     { value: "none" as const, label: uiT("{0} only", { p0: itemLabel }) },
     {
@@ -154,7 +154,9 @@ function MemoryShareConfirmation({
 }) {
   const isLinkShare = pendingShare?.action === "copy";
   const memoryLabel =
-    pendingShare?.memoryLevel === "core" ? "core memory" : "all memories";
+    pendingShare?.memoryLevel === "core"
+      ? uiT("core memory")
+      : uiT("all memories");
   const recipientAudience = formatRecipientAudience(
     pendingShare?.recipientNames ?? [],
   );
@@ -170,12 +172,10 @@ function MemoryShareConfirmation({
         <AlertDialogHeader>
           <AlertDialogTitle>{uiT("Share memories?")}</AlertDialogTitle>
           <AlertDialogDescription>
-            This {itemLabel} includes{" "}
-            <strong>
-              {uiT("plaintext")}
-              {memoryLabel}
-            </strong>
-            .{" "}
+            {uiMessage("This {0} includes plaintext {1}.", {
+              p0: itemLabel,
+              p1: <strong>{memoryLabel}</strong>,
+            })}{" "}
             {isLinkShare
               ? uiT("Anyone with the link can view it.")
               : uiT("{0}—and anyone with the file link—can view it.", {
@@ -271,10 +271,10 @@ export function SnapshotShareDialog({
   const isCopying = copyStatus === "copying";
   const copyStatusLabel =
     copyStatus === "copying"
-      ? "Copying…"
+      ? uiT("Copying…")
       : copyStatus === "copied"
-        ? "Copied"
-        : "Copy link";
+        ? uiT("Copied")
+        : uiT("Copy link");
   const isActionPending = isPending || isCopying || isSending;
   const isInterfacePending = isPending || isSending;
   const hasSelectedRecipients = selectedRecipients.length > 0;
@@ -298,8 +298,8 @@ export function SnapshotShareDialog({
         : [],
     [snapshotSendController.relaySelfPubkey],
   );
-  const itemLabel = snapshotKind === "team" ? "team" : "agent";
-  const itemLabelTitle = snapshotKind === "team" ? "Team" : "Agent";
+  const itemLabel = snapshotKind === "team" ? uiT("team") : uiT("agent");
+  const itemLabelTitle = snapshotKind === "team" ? uiT("Team") : uiT("Agent");
   // biome-ignore lint/correctness/useExhaustiveDependencies: This UI projection reads locale-dependent labels.
   const shareLevels = React.useMemo(
     () => buildSnapshotShareLevels(itemLabelTitle),

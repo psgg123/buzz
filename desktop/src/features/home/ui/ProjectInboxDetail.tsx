@@ -83,10 +83,10 @@ export function ProjectInboxDetail({
       <ProjectInboxStatus
         message={
           error
-            ? "Could not load this project item."
+            ? uiT("Could not load this project item.")
             : isLoading
-              ? "Loading project item…"
-              : "This project item could not be found."
+              ? uiT("Loading project item…")
+              : uiT("This project item could not be found.")
         }
         onBack={onBack}
         onRetry={
@@ -108,7 +108,9 @@ export function ProjectInboxDetail({
   if (failedSections && failedSections.length > 0) {
     return (
       <ProjectInboxStatus
-        message="Some project activity could not be loaded. Actions are unavailable until the item is current."
+        message={uiT(
+          "Some project activity could not be loaded. Actions are unavailable until the item is current.",
+        )}
         onBack={onBack}
         onRetry={() => void projectsWorkItemsQuery.refetch()}
       />

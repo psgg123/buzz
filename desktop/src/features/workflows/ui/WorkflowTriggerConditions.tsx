@@ -416,7 +416,7 @@ export function WorkflowTriggerConditions({
                       field.value === "trigger_emoji" ? (
                         <WorkflowEmojiField
                           ariaLabel={uiT("Choose trigger emoji")}
-                          clearAriaLabel="Clear trigger emoji"
+                          clearAriaLabel={uiT("Clear trigger emoji")}
                           disabled={disabled}
                           id="wf-trigger-emoji"
                           onChange={(emoji) =>

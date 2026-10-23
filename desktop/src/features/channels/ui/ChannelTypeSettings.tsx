@@ -136,7 +136,7 @@ export function ChannelTypeDetailRow({
 export function ChannelTypeSettings({
   channelId,
   disabled,
-  label = "Channel type",
+  label = uiT("Channel type"),
   onOpenChange,
   onTemporaryChange,
   onTtlSecondsChange,
@@ -199,7 +199,7 @@ export function ChannelTypeSettings({
         {variant === "segmented" ? (
           <SegmentedControl
             disabled={disabled}
-            legend="Channel type"
+            legend={uiT("Channel type")}
             onValueChange={(value) => onTemporaryChange(value === "temporary")}
             optionTestIdPrefix={`${testIdPrefix}-channel-type-option`}
             options={CHANNEL_TYPE_OPTIONS}
@@ -258,7 +258,9 @@ export function ChannelTypeSettings({
                   >
                     <span className="text-right">
                       {selectedTimeoutOption?.label ??
-                        `Current (${formatTtlDuration(ttlSeconds)})`}
+                        uiT("Current ({0})", {
+                          p0: formatTtlDuration(ttlSeconds),
+                        })}
                     </span>
                     <ChevronDown className="size-4 shrink-0 text-muted-foreground/70" />
                   </Button>

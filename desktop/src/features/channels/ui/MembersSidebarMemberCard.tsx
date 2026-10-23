@@ -250,7 +250,7 @@ export function MembersSidebarMemberCard({
               }
             >
               {managedAgentRuntime
-                ? agentCommunityAvailability(managedAgentRuntime)
+                ? uiT(agentCommunityAvailability(managedAgentRuntime))
                 : managedAgent && isManagedAgentActive(managedAgent)
                   ? uiT("Running")
                   : uiT("Stopped")}
@@ -280,7 +280,7 @@ export function MembersSidebarMemberCard({
     >
       {onOpenProfile ? (
         <button
-          aria-label={`Open profile for ${memberLabel}`}
+          aria-label={uiT("Open profile for {0}", { p0: memberLabel })}
           className="absolute inset-0 z-0 cursor-pointer focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-ring"
           data-testid={`sidebar-member-open-profile-${member.pubkey}`}
           onClick={() => onOpenProfile(member.pubkey)}

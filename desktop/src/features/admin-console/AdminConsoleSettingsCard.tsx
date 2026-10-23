@@ -134,7 +134,7 @@ function ProbeStatusBadge({ uiState }: { uiState: ProbeUiState }) {
     );
   }
   if (uiState.kind === "authorized") {
-    const roleLabel = uiState.role ?? "operator";
+    const roleLabel = uiState.role ?? uiT("operator");
     return (
       <span className="flex items-center gap-1.5 text-xs text-emerald-600 dark:text-emerald-400">
         <CheckCircle2 className="h-3.5 w-3.5" />
@@ -555,7 +555,7 @@ function AdminConsoleSettingsSession({ pubkeyHex }: { pubkeyHex: string }) {
                 {isSaving ? (
                   <LoaderCircle className="h-3.5 w-3.5 animate-spin" />
                 ) : (
-                  "Save"
+                  uiT("Save")
                 )}
               </Button>
               {savedOrigin && (

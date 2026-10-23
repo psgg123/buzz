@@ -28,7 +28,7 @@ export function ChannelHero({
 }) {
   const channelDescription = channel.description.trim();
   const description =
-    channelDescription || (onEdit ? "Add a description" : null);
+    channelDescription || (onEdit ? uiT("Add a description") : null);
 
   return (
     <div
@@ -180,7 +180,11 @@ export function CopyFieldRow({
 
   return (
     <button
-      aria-label={copied ? `${label} copied` : uiT("Copy {0}", { p0: label })}
+      aria-label={
+        copied
+          ? uiT("{0} copied", { p0: label })
+          : uiT("Copy {0}", { p0: label })
+      }
       className="group flex min-h-16 w-full items-center gap-3 px-4 py-3 text-left transition-colors hover:bg-muted/40"
       data-testid={testId}
       onClick={() => {
@@ -464,7 +468,7 @@ export function IngressRow({
               <Tooltip>
                 <TooltipTrigger asChild>
                   <button
-                    aria-label={`About ${label.toLowerCase()}`}
+                    aria-label={uiT("About {0}", { p0: label.toLowerCase() })}
                     className="pointer-events-auto flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-muted/70 hover:text-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring"
                     data-testid={`${testId}-info`}
                     onClick={(event) => event.stopPropagation()}

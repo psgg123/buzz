@@ -108,7 +108,7 @@ export function ProjectPullRequestInlineCommentThread({
           onSubmit={onSubmit}
           placeholder={uiT("Leave a comment on this line…")}
           profiles={profiles}
-          secondarySubmitLabel="Request changes"
+          secondarySubmitLabel={uiT("Request changes")}
         />
       ) : null}
     </div>

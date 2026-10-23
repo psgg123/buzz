@@ -370,7 +370,7 @@ function QuickReactionButton({
     <Tooltip>
       <TooltipTrigger asChild>
         <button
-          aria-label={`React with ${displayName}`}
+          aria-label={uiT("React with {0}", { p0: displayName })}
           className="flex h-8 w-8 items-center justify-center rounded-full text-base leading-none text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-ring"
           onClick={() => onSelect(emoji)}
           title={displayName}

@@ -146,7 +146,7 @@ export function CreatePullRequestDialog({
   const description =
     repository && sourceBranch && targetBranch
       ? `${repository.name}: ${sourceBranch} → ${targetBranch}${sourceCommit ? ` at ${sourceCommit.slice(0, 7)}` : ""}`
-      : "Choose a repository and branches to compare.";
+      : uiT("Choose a repository and branches to compare.");
 
   async function handleCreate(input: CreatePullRequestDialogInput) {
     if (!project || !repository || !sourceCommit || selectionError) {
@@ -166,7 +166,7 @@ export function CreatePullRequestDialog({
 
   return (
     <CreateProjectWorkItemDialog
-      bodyPlaceholder="Add context for reviewers"
+      bodyPlaceholder={uiT("Add context for reviewers")}
       description={description}
       isCreating={createMutation.isPending}
       itemName="pull-request"
@@ -178,7 +178,7 @@ export function CreatePullRequestDialog({
       open={open}
       submitDisabled={Boolean(selectionError)}
       title={uiT("Open a review")}
-      titlePlaceholder="Describe the change"
+      titlePlaceholder={uiT("Describe the change")}
     >
       <div className="grid gap-3 rounded-xl border border-border/60 bg-muted/25 p-3 sm:grid-cols-2">
         <label className="space-y-1.5 text-sm font-medium sm:col-span-2">

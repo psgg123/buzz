@@ -235,14 +235,14 @@ export function projectSelectionPresentation(
   if (kind === "commit") {
     actions.push({
       id: "create-review",
-      label: items.length === 1 ? "Create review" : "Create reviews",
+      label: items.length === 1 ? uiT("Create review") : uiT("Create reviews"),
       testId: "projects-selection-create-review",
     });
   }
   if (projectSelectionShareLinks(items).length > 0) {
     actions.push({
       id: "copy",
-      label: items.length === 1 ? "Copy link" : "Copy links",
+      label: items.length === 1 ? uiT("Copy link") : uiT("Copy links"),
       testId: "projects-selection-copy",
     });
   }

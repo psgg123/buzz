@@ -161,15 +161,15 @@ export function ChannelBrowserDialog({
   const isForumMode = channelTypeFilter === "forum";
   const canCreate = Boolean(onCreateChannel);
   const createKind = isForumMode ? "forum" : "stream";
-  const browseTitle = isForumMode ? "Add a forum" : "Browse channels";
+  const browseTitle = isForumMode ? uiT("Add a forum") : uiT("Browse channels");
   const searchPlaceholder = canCreate
     ? isForumMode
-      ? "Search or create a forum"
-      : "Search or create a channel"
+      ? uiT("Search or create a forum")
+      : uiT("Search or create a channel")
     : isForumMode
-      ? "Search forums by name or description"
-      : "Search channels by name or description";
-  const entityLabel = isForumMode ? "forum" : "channel";
+      ? uiT("Search forums by name or description")
+      : uiT("Search channels by name or description");
+  const entityLabel = isForumMode ? uiT("forum") : uiT("channel");
 
   const noopCreate = React.useCallback(async () => {}, []);
   const createForm = useCreateChannelForm({
@@ -257,9 +257,9 @@ export function ChannelBrowserDialog({
 
   const selectedSortLabel =
     CHANNEL_SORT_OPTIONS.find((option) => option.value === sort)?.label ??
-    "Alphabetical";
+    uiT("Alphabetical");
 
-  const allTabLabel = isForumMode ? "All forums" : "All channels";
+  const allTabLabel = isForumMode ? uiT("All forums") : uiT("All channels");
 
   // Whether an exact name match already exists — if so we don't offer to
   // create a duplicate, mirroring how you'd never make two "#general"s.
@@ -413,22 +413,32 @@ export function ChannelBrowserDialog({
       : undefined;
   const emptyTitle =
     deferredQuery.length > 0
-      ? `No ${entityLabel}s match your search`
+      ? uiT("No {0}s match your search", { p0: entityLabel })
       : activeTab === "archived"
-        ? `No archived ${entityLabel}s`
+        ? uiT("No archived {0}s", { p0: entityLabel })
         : activeTab === "joined"
-          ? `No joined ${entityLabel}s`
-          : `No ${entityLabel}s to browse`;
+          ? uiT("No joined {0}s", { p0: entityLabel })
+          : uiT("No {0}s to browse", { p0: entityLabel });
   const emptyDescription =
     deferredQuery.length > 0
       ? canCreate
-        ? `No ${entityLabel} by that name yet — create it to get started.`
-        : "Try a different name or keyword."
+        ? uiT("No {0} by that name yet — create it to get started.", {
+            p0: entityLabel,
+          })
+        : uiT("Try a different name or keyword.")
       : activeTab === "archived"
-        ? `Archived ${entityLabel}s you have joined will appear here.`
+        ? uiT("Archived {0}s you have joined will appear here.", {
+            p0: entityLabel,
+          })
         : activeTab === "joined"
-          ? `${entityLabel[0].toUpperCase()}${entityLabel.slice(1)}s you join will appear here.`
-          : `All open ${entityLabel}s are available in the sidebar. Create a new ${entityLabel} to get started.`;
+          ? uiT("{0}{1}s you join will appear here.", {
+              p0: entityLabel[0].toUpperCase(),
+              p1: entityLabel.slice(1),
+            })
+          : uiT(
+              "All open {0}s are available in the sidebar. Create a new {1} to get started.",
+              { p0: entityLabel, p1: entityLabel },
+            );
 
   return (
     <Dialog onOpenChange={onOpenChange} open={open}>
@@ -536,7 +546,10 @@ export function ChannelBrowserDialog({
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button
-                      aria-label={`Sort ${entityLabel}s: ${selectedSortLabel}`}
+                      aria-label={uiT("Sort {0}s: {1}", {
+                        p0: entityLabel,
+                        p1: selectedSortLabel,
+                      })}
                       data-testid="channel-browser-sort"
                       size="icon-xs"
                       type="button"

@@ -377,7 +377,7 @@ function DraftRow({
       data-testid={`home-draft-item-${entry.key}`}
     >
       <button
-        aria-label={`View draft in ${channelLabel}`}
+        aria-label={uiT("View draft in {0}", { p0: channelLabel })}
         className="block w-full min-w-0 px-3 py-3 text-left disabled:cursor-default"
         onClick={onSelect}
         type="button"

@@ -133,7 +133,7 @@ export function ProjectCommitDetailPanel({
         ) : null}
         <DiscussedInChannels
           className="mx-6 mb-4"
-          entityLabel="this commit"
+          entityLabel={uiT("this commit")}
           query={commitDiscussionQuery({
             hash: commit?.hash ?? commitHash,
             shortHash: commit?.shortHash,
@@ -160,7 +160,7 @@ export function ProjectCommitDetailPanel({
             error={diffError}
             headerLabel={`${commit?.subject ?? "Commit"} · ${shortHash}`}
             isLoading={diffLoading}
-            subjectLabel="commit"
+            subjectLabel={uiT("commit")}
           />
         </div>
       </ProjectDetailSection>

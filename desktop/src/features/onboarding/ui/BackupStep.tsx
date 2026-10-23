@@ -128,7 +128,7 @@ export function BackupStep({
         setCopyError(
           err instanceof Error
             ? err.message
-            : "Failed to retrieve private key.",
+            : uiT("Failed to retrieve private key."),
         );
       });
   }, []);
@@ -151,23 +151,31 @@ export function BackupStep({
       if (cancelledRef.current) return;
       setCopyState("idle");
       setCopyError(
-        err instanceof Error ? err.message : "Failed to retrieve private key.",
+        err instanceof Error
+          ? err.message
+          : uiT("Failed to retrieve private key."),
       );
     }
   }, [nsec]);
 
   const storageDescription =
     identityStorage === "system-keyring"
-      ? "Buzz keeps your identity key in your system keychain. Your computer may ask for your password when Buzz needs to read the key."
+      ? uiT(
+          "Buzz keeps your identity key in your system keychain. Your computer may ask for your password when Buzz needs to read the key.",
+        )
       : identityStorage === "local-file"
-        ? "Your system keychain wasn’t available, so Buzz keeps your identity key in a private file on this device."
-        : "Buzz keeps your identity key protected on this device. Make a separate backup in case you lose access.";
+        ? uiT(
+            "Your system keychain wasn’t available, so Buzz keeps your identity key in a private file on this device.",
+          )
+        : uiT(
+            "Buzz keeps your identity key protected on this device. Make a separate backup in case you lose access.",
+          );
   const storageTitle =
     identityStorage === "system-keyring"
-      ? "Protected by your system keychain"
+      ? uiT("Protected by your system keychain")
       : identityStorage === "local-file"
-        ? "Stored in private device storage"
-        : "Protected in private device storage";
+        ? uiT("Stored in private device storage")
+        : uiT("Protected in private device storage");
   if (optionsExpanded) {
     return (
       <OnboardingSlideTransition

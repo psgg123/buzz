@@ -492,7 +492,7 @@ export function HuddleBar({
           "Failed to send huddle reaction.",
         );
       })().catch((error) => {
-        setReactionError("Reaction failed");
+        setReactionError(uiT("Reaction failed"));
         console.error("[huddle] Failed to send reaction:", error);
       });
     },
@@ -553,7 +553,7 @@ export function HuddleBar({
       setState(s);
     } catch (e) {
       const message = e instanceof Error ? e.message : String(e);
-      setTranscriptError(`Transcript failed: ${message}`);
+      setTranscriptError(uiT("Transcript failed: {0}", { p0: message }));
       console.error("Failed to toggle huddle transcript:", e);
     }
   }
@@ -619,8 +619,8 @@ export function HuddleBar({
                       p1: modelStatus.tts,
                     })
                   : transcriptionEnabled && modelStatus.stt !== "ready"
-                    ? `STT model: ${modelStatus.stt}`
-                    : `TTS model: ${modelStatus.tts}`}
+                    ? uiT("STT model: {0}", { p0: modelStatus.stt })
+                    : uiT("TTS model: {0}", { p0: modelStatus.tts })}
               </span>
             </output>
           )}
@@ -667,7 +667,7 @@ export function HuddleBar({
               return result;
             } catch (e: unknown) {
               const msg = e instanceof Error ? e.message : String(e);
-              setAgentAddError(`Failed to add agent: ${msg}`);
+              setAgentAddError(uiT("Failed to add agent: {0}", { p0: msg }));
               throw e; // Re-throw so AddAgentDialog shows its inline error.
             }
           }}

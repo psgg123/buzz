@@ -323,7 +323,7 @@ export function SetStatusDialog({
       expiresAt !== undefined &&
       expiresAt <= Math.floor(Date.now() / 1_000)
     ) {
-      setSaveError("Choose a duration in the future.");
+      setSaveError(uiT("Choose a duration in the future."));
       return;
     }
     onSave({
@@ -530,7 +530,7 @@ export function SetStatusDialog({
           ) : null}
           {saveError || (!expirationIsFuture && isDirty) ? (
             <p className="px-3 py-2 text-xs text-destructive" role="alert">
-              {saveError || "Choose a duration in the future."}
+              {saveError || uiT("Choose a duration in the future.")}
             </p>
           ) : null}
         </StatusSection>

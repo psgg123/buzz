@@ -105,7 +105,7 @@ const IssueGridCard = React.memo(function IssueGridCard({
           className={cn(PROJECT_GRID_CARD_BODY_CLASS, "text-muted-foreground")}
           data-testid="projects-grid-card-body"
         >
-          {issue.content || "No description provided."}
+          {issue.content || uiT("No description provided.")}
         </p>
         <div
           className="mt-auto flex items-center gap-1.5 text-xs font-medium text-muted-foreground"

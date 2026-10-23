@@ -1,5 +1,5 @@
+import { uiT, useUiLanguage } from "@/shared/i18n/uiTranslation";
 // Buzz source localisation: authored UI strings only; user values stay unchanged.
-import { useUiLanguage } from "@/shared/i18n/uiTranslation";
 import * as React from "react";
 import { createPortal } from "react-dom";
 import { ChevronLeft } from "lucide-react";
@@ -69,7 +69,7 @@ export function OnboardingFooterProvider({
           <div className="flex min-w-0 flex-1 justify-start">
             {backAction ? (
               <Button
-                aria-label={backAction.label ?? "Back"}
+                aria-label={backAction.label ?? uiT("Back")}
                 className={cn(
                   "size-[3.25rem] rounded-full p-0 [&_svg]:size-6",
                   ONBOARDING_CARD_SECONDARY_CTA_CLASS,
@@ -117,7 +117,7 @@ export function OnboardingFooterProvider({
             type="button"
             variant="ghost"
           >
-            {backAction.label ?? "Back"}
+            {backAction.label ?? uiT("Back")}
           </Button>
         </div>
       ) : null}

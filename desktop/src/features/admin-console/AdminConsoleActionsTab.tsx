@@ -268,7 +268,7 @@ export function DirectActionsProvider({
         if (result.state === "pending") {
           setPending(true);
         } else {
-          toast.success(`${ACTION_LABELS[intent.action]}: done`);
+          toast.success(uiT("{0}: done", { p0: ACTION_LABELS[intent.action] }));
           setFrozen(null);
           setDraft(emptyDraft(intent.communityHost));
         }
@@ -288,7 +288,11 @@ export function DirectActionsProvider({
         setError(message);
         if (shownHost.current !== intent.communityHost) {
           toast.error(
-            `${ACTION_LABELS[intent.action]} in ${intent.communityHost} failed: ${message}`,
+            uiT("{0} in {1} failed: {2}", {
+              p0: ACTION_LABELS[intent.action],
+              p1: intent.communityHost,
+              p2: message,
+            }),
           );
         }
       }
@@ -551,7 +555,8 @@ function ConfirmStep({ readOnly = false }: { readOnly?: boolean }) {
       data-testid="direct-confirm"
     >
       <p className="flex flex-wrap items-center gap-1.5">
-        In <CommunityBadge {...community} />
+        {uiT("In ")}
+        <CommunityBadge {...community} />
         <NotConnectedWarning host={intent.communityHost} />
       </p>
       <p>
@@ -568,7 +573,10 @@ function ConfirmStep({ readOnly = false }: { readOnly?: boolean }) {
             </code>
           </span>
         )}
-        {intent.expirationSecs ? ` for ${intent.expirationSecs}s` : ""}?
+        {intent.expirationSecs
+          ? uiT(" for {0}s", { p0: intent.expirationSecs })
+          : ""}
+        ?
       </p>
       {intent.action !== "delete" && (
         <PubKey
@@ -581,7 +589,7 @@ function ConfirmStep({ readOnly = false }: { readOnly?: boolean }) {
       {preview && <EventPreview event={preview} />}
       <p data-testid="direct-confirm-reason">
         {uiT("Reason: ")}
-        {intent.reason ?? "(none)"}
+        {intent.reason ?? uiT("(none)")}
       </p>
       {c.pending && (
         <p className="text-muted-foreground" data-testid="direct-pending">

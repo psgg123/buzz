@@ -72,7 +72,9 @@ export function CreateProjectFormContent({
       onCreated();
     } catch (error) {
       setErrorMessage(
-        error instanceof Error ? error.message : "Failed to create project.",
+        error instanceof Error
+          ? error.message
+          : uiT("Failed to create project."),
       );
     }
   }

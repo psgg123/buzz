@@ -163,5 +163,90 @@
     "source": "This team references {0} agent{1} that {2} no longer in My Agents. Save to remove them, or add them back to My Agents first.",
     "omitted": ["p1", "p2"],
     "reason": "English grammatical or fixed noun slot expressed directly in Korean; counts and names are retained."
+  },
+  "m4e8b086b07d0e62e": {
+    "source": "Saved. {0} agent{1} couldn't restart — check the Agents page.",
+    "omitted": ["p1"],
+    "reason": "English plural suffix only; all counts, names and user values are retained."
+  },
+  "mcf364b3090b79072": {
+    "source": "{0} workflow{1}",
+    "omitted": ["p1"],
+    "reason": "English plural suffix only; all counts, names and user values are retained."
+  },
+  "m3b10c25d6eecb5fa": {
+    "source": "Join active huddle ({0} participant{1})",
+    "omitted": ["p1"],
+    "reason": "English plural suffix only; all counts, names and user values are retained."
+  },
+  "mde1969b1f34a5ca0": {
+    "source": "{0} channel member{1}",
+    "omitted": ["p1"],
+    "reason": "English plural suffix only; all counts, names and user values are retained."
+  },
+  "md81918ae3bde5f05": {
+    "source": "Imported {0} with {1} member{2}.",
+    "omitted": ["p2"],
+    "reason": "English plural suffix only; all counts, names and user values are retained."
+  },
+  "m8ee8f973cb836b69": {
+    "source": "{0} {1}{2} ago",
+    "omitted": ["p2"],
+    "reason": "English plural suffix only; all counts, names and user values are retained."
+  },
+  "mc682103a1a03723d": {
+    "source": "It is scheduled to run every {0} minute{1}. Review the schedule before turning it on.",
+    "omitted": ["p1"],
+    "reason": "English plural suffix only; all counts, names and user values are retained."
+  },
+  "m70e0f889c54db6d9": {
+    "source": "{0} active draft{1}",
+    "omitted": ["p1"],
+    "reason": "English plural suffix only; all counts and user values are retained."
+  },
+  "mabd3c2ad4a21410d": {
+    "source": "{0} global env var{1}",
+    "omitted": ["p1"],
+    "reason": "English plural suffix only; all counts and user values are retained."
+  },
+  "md20067fe62f5f433": {
+    "source": "{0} due reminder{1}",
+    "omitted": ["p1"],
+    "reason": "English plural suffix only; all counts and user values are retained."
+  },
+  "m55827a51719b820a": {
+    "source": "{0} instance{1}",
+    "omitted": ["p1"],
+    "reason": "English plural suffix only; all counts and user values are retained."
+  },
+  "me566769421ee2188": {
+    "source": "{0} — {1} mention{2}",
+    "omitted": ["p2"],
+    "reason": "English plural suffix only; all counts and user values are retained."
+  },
+  "m9b1ca8e2cd2f5ed2": {
+    "source": "{0} of {1} {2}{3} failed.",
+    "omitted": ["p3"],
+    "reason": "English plural suffix only; all counts, categories and user values are retained."
+  },
+  "m0ccf2a7519a6b210": {
+    "source": "{0} imported, but {1} memory entr{2} failed to restore.",
+    "omitted": ["p2"],
+    "reason": "English plural suffix only; all counts, categories and user values are retained."
+  },
+  "m2f169622c11f61f2": {
+    "source": "Edited {0} file{1}",
+    "omitted": ["p1"],
+    "reason": "English grammatical suffix or fixed step noun only; all counts and user values are retained."
+  },
+  "m9f01fad60900451e": {
+    "source": "Read {0} skill{1}",
+    "omitted": ["p1"],
+    "reason": "English grammatical suffix or fixed step noun only; all counts and user values are retained."
+  },
+  "md8ac9c1cefe90c7f": {
+    "source": "{0}, {1}, then {2} more {3}",
+    "omitted": ["p3"],
+    "reason": "English grammatical suffix or fixed step noun only; all counts and user values are retained."
   }
 }

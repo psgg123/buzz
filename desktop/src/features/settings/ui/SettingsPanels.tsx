@@ -735,7 +735,7 @@ function ThemeSettingsCard() {
             </div>
             <SegmentedControl
               indicatorTestId="appearance-color-mode-indicator"
-              legend="Color mode"
+              legend={uiT("Color mode")}
               onValueChange={handleModeSelect}
               optionTestIdPrefix="appearance-mode"
               options={APPEARANCE_MODE_OPTIONS.map(({ mode, label, Icon }) => ({
@@ -759,7 +759,7 @@ function ThemeSettingsCard() {
               </p>
             </div>
             <button
-              aria-label={`Theme style, ${selectedThemeLabel}`}
+              aria-label={uiT("Theme style, {0}", { p0: selectedThemeLabel })}
               aria-controls="theme-style-options"
               aria-expanded={themeStyleExpanded}
               className="flex h-auto min-w-0 items-center gap-2 rounded-md bg-transparent p-0 text-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring"

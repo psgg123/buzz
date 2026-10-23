@@ -1,5 +1,5 @@
 // Buzz source localisation: authored UI strings only; user values stay unchanged.
-import { uiT, useUiLanguage } from "@/shared/i18n/uiTranslation";
+import { uiMessage, uiT, useUiLanguage } from "@/shared/i18n/uiTranslation";
 import { AlertTriangle } from "lucide-react";
 import * as React from "react";
 
@@ -121,12 +121,16 @@ export function WhereToRunSection({
           <div className="flex gap-3 rounded-2xl border border-warning/30 bg-warning-bg px-4 py-3">
             <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-warning" />
             <p className="text-sm text-warning">
-              {uiT("This provider at")}{" "}
-              <span className="font-mono font-medium">
-                {selectedBackendProvider.binaryPath}
-              </span>{" "}
-              will receive your agent&apos;s private key. Only use providers
-              from trusted sources.
+              {uiMessage(
+                "This provider at {0} will receive your agent's private key. Only use providers from trusted sources.",
+                {
+                  p0: (
+                    <span className="font-mono font-medium">
+                      {selectedBackendProvider.binaryPath}
+                    </span>
+                  ),
+                },
+              )}
             </p>
           </div>
           {probeError ? (

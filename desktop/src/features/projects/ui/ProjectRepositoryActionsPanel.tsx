@@ -394,7 +394,7 @@ export function ProjectRepositoryActionsPanel({
                       ) : null}
                       <RepositoryActionButton
                         onClick={onOpenTerminal}
-                        title={terminalTitle ?? "Open terminal"}
+                        title={terminalTitle ?? uiT("Open terminal")}
                       >
                         <SquareTerminal className="h-3.5 w-3.5" />
                         {uiT("Terminal")}

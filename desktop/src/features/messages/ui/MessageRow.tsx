@@ -858,7 +858,8 @@ export const MessageRow = React.memo(
             {onCollapseDescendants ? (
               <button
                 aria-label={
-                  collapseDescendantsLabel ?? "Collapse replies to this message"
+                  collapseDescendantsLabel ??
+                  uiT("Collapse replies to this message")
                 }
                 className="absolute bottom-0 z-20 w-5 -translate-x-1/2 cursor-pointer rounded-full p-0 focus-visible:outline-hidden"
                 data-thread-head-id={message.id}

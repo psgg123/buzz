@@ -127,7 +127,7 @@ export function useProjectChannelRequests() {
   async function approve() {
     if (!request || !sourceAgentPubkey || !project) {
       setError(
-        "The project home could not be resolved. Refresh and try again.",
+        uiT("The project home could not be resolved. Refresh and try again."),
       );
       return;
     }
@@ -135,12 +135,14 @@ export function useProjectChannelRequests() {
     const owner = normalizePubkey(project.owner);
     const agent = normalizePubkey(sourceAgentPubkey);
     if ((!identity || normalizePubkey(identity) !== owner) && agent !== owner) {
-      setError("Only the project owner can approve this channel.");
+      setError(uiT("Only the project owner can approve this channel."));
       return;
     }
     if (request.request.templateName && !template) {
       setError(
-        `Channel template "${request.request.templateName}" is not available on this device.`,
+        uiT('Channel template "{0}" is not available on this device.', {
+          p0: request.request.templateName,
+        }),
       );
       return;
     }
@@ -164,7 +166,7 @@ export function useProjectChannelRequests() {
       setError(
         nextError instanceof Error
           ? nextError.message
-          : "Failed to create the project channel.",
+          : uiT("Failed to create the project channel."),
       );
     }
   }

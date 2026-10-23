@@ -451,7 +451,7 @@ function ReactionPill({
   if (reaction.users.length === 0) {
     return (
       <button
-        aria-label={`Toggle ${reaction.emoji} reaction`}
+        aria-label={uiT("Toggle {0} reaction", { p0: reaction.emoji })}
         aria-pressed={reaction.reactedByCurrentUser}
         title={displayName}
         className={pillClasses}
@@ -492,7 +492,7 @@ function ReactionPill({
           onBlur={scheduleClose}
         >
           <button
-            aria-label={`Toggle ${reaction.emoji} reaction`}
+            aria-label={uiT("Toggle {0} reaction", { p0: reaction.emoji })}
             aria-pressed={reaction.reactedByCurrentUser}
             title={displayName}
             className={pillClasses}

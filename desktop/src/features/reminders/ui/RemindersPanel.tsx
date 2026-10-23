@@ -208,7 +208,7 @@ function ReminderRow({
             <span className="truncate font-medium text-foreground">
               {source.authorLabel}
             </span>
-            <span className="shrink-0">in</span>
+            <span className="shrink-0">{uiT("in")}</span>
             <span className="truncate">
               {formatReminderSourceLocation(source)}
             </span>
@@ -217,7 +217,7 @@ function ReminderRow({
         <p className="max-w-full truncate text-sm font-medium">
           {reminder.content.target?.preview ||
             reminder.content.note ||
-            "Reminder"}
+            uiT("Reminder")}
         </p>
         {reminder.content.target && reminder.content.note ? (
           <p className="max-w-full truncate text-xs text-muted-foreground">
@@ -465,7 +465,7 @@ export function ReminderDetailPane({
               <span className="font-medium text-foreground">
                 {source.authorLabel}
               </span>
-              <span>in</span>
+              <span>{uiT("in")}</span>
               <span>{formatReminderSourceLocation(source)}</span>
             </div>
           ) : null}

@@ -300,8 +300,8 @@ export function ConfigNudgeCard({
         <AttachmentTrigger
           aria-label={
             opensDoctor
-              ? `Open Agent runtimes for ${nudge.agent_name}`
-              : `Open Edit Agent for ${nudge.agent_name}`
+              ? uiT("Open Agent runtimes for {0}", { p0: nudge.agent_name })
+              : uiT("Open Edit Agent for {0}", { p0: nudge.agent_name })
           }
           onClick={handleOpen}
         />

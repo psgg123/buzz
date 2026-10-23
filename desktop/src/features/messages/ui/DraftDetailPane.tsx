@@ -73,7 +73,7 @@ export function DraftDetailPane({
     ? isDm
       ? source.label
       : `#${source.label}`
-    : "Unknown channel";
+    : uiT("Unknown channel");
   const openEnabled = canOpenDraft(entry.draft, source) && !isOrphaned;
   const sendEnabled = canSendDraft(entry.draft, source, rootStatus);
   const content = entry.draft.content.trim();

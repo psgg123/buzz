@@ -237,7 +237,7 @@ export function AgentDefaultsEditor({
       }
     } catch (err) {
       setSaveState("error");
-      setSaveError(typeof err === "string" ? err : "Couldn't save.");
+      setSaveError(typeof err === "string" ? err : uiT("Couldn't save."));
     } finally {
       onSavingChange?.(false);
     }
@@ -345,7 +345,13 @@ export function AgentDefaultsEditor({
                         : "",
                   })
                 : failedRestartCount > 0
-                  ? `Saved. ${failedRestartCount} agent${failedRestartCount === 1 ? "" : "s"} couldn't restart — check the Agents page.`
+                  ? uiT(
+                      "Saved. {0} agent{1} couldn't restart — check the Agents page.",
+                      {
+                        p0: failedRestartCount,
+                        p1: failedRestartCount === 1 ? "" : "s",
+                      },
+                    )
                   : uiT("Saved.")}
             </span>
           )}

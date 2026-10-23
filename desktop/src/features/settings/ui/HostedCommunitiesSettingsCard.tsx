@@ -493,7 +493,7 @@ export function HostedCommunitiesSettingsCard() {
             ) : (
               <ExternalLink className="h-4 w-4" />
             )}
-            {action ?? "Sign in with Builderlab"}
+            {action ?? uiT("Sign in with Builderlab")}
           </Button>
         </div>
       ) : (
@@ -501,7 +501,7 @@ export function HostedCommunitiesSettingsCard() {
           <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-border/70 p-4">
             <div>
               <p className="text-sm font-medium">
-                {auth.name || auth.email || "Builderlab account"}
+                {auth.name || auth.email || uiT("Builderlab account")}
               </p>
               {auth.name && auth.email ? (
                 <p className="text-xs text-muted-foreground">{auth.email}</p>
@@ -538,7 +538,7 @@ export function HostedCommunitiesSettingsCard() {
                 {action ? (
                   <LoaderCircle className="h-4 w-4 animate-spin" />
                 ) : null}
-                {action ?? "Connect Buzz identity"}
+                {action ?? uiT("Connect Buzz identity")}
               </Button>
             </div>
           ) : identityMismatch ? (
@@ -587,7 +587,7 @@ export function HostedCommunitiesSettingsCard() {
                 {action ? (
                   <LoaderCircle className="h-4 w-4 animate-spin" />
                 ) : null}
-                {action ?? "Switch to this device's identity"}
+                {action ?? uiT("Switch to this device's identity")}
               </Button>
             </div>
           ) : (
@@ -612,7 +612,9 @@ export function HostedCommunitiesSettingsCard() {
                 {uiT("Your communities")}
                 <span className="ml-2 text-xs font-normal text-muted-foreground">
                   {quotaUsed ?? communities.length}
-                  {quotaLimit === null ? " used" : ` of ${quotaLimit} used`}
+                  {quotaLimit === null
+                    ? uiT(" used")
+                    : uiT(" of {0} used", { p0: quotaLimit })}
                 </span>
               </h3>
               <Button
@@ -747,7 +749,7 @@ export function HostedCommunitiesSettingsCard() {
               {action ? (
                 <LoaderCircle className="h-4 w-4 animate-spin" />
               ) : null}
-              {action ?? "Create and connect"}
+              {action ?? uiT("Create and connect")}
             </Button>
           </form>
         </>
@@ -986,10 +988,10 @@ function TransferOwnershipDialog({
         <DialogHeader>
           <DialogTitle>{uiT("Transfer ownership")}</DialogTitle>
           <DialogDescription>
-            {uiT("Transfer ")}
-            {communityName} to another person. You become a regular member. The
-            recipient needs a connected Buzz identity first, and this can&apos;t
-            be undone.
+            {uiT(
+              "Transfer {0} to another person. You become a regular member. The recipient needs a connected Buzz identity first, and this can't be undone.",
+              { p0: communityName },
+            )}
           </DialogDescription>
         </DialogHeader>
         <div className="space-y-2">

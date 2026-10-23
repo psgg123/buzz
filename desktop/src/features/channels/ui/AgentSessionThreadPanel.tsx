@@ -145,7 +145,9 @@ export function AgentSessionThreadPanel({
   const lastUpdatedTitle =
     latestActivityAt === null
       ? undefined
-      : `Last updated ${new Date(latestActivityAt).toLocaleString()}`;
+      : uiT("Last updated {0}", {
+          p0: new Date(latestActivityAt).toLocaleString(),
+        });
 
   const { fetchOlderArchived, hasOlderArchived } =
     useLoadArchivedObserverEvents(
@@ -236,8 +238,8 @@ export function AgentSessionThreadPanel({
   const scopeLabel = sessionChannelId
     ? scopeChannelName
       ? `#${scopeChannelName}`
-      : "1 channel"
-    : "All channels";
+      : uiT("1 channel")
+    : uiT("All channels");
   const agentProfile = profiles?.[normalizePubkey(agent.pubkey)] ?? null;
   const agentLabel = resolveUserLabel({
     pubkey: agent.pubkey,
@@ -245,7 +247,7 @@ export function AgentSessionThreadPanel({
     profiles,
     preferResolvedSelfLabel: true,
   });
-  const viewLabel = showRawFeed ? "Raw ACP activity" : "Activity";
+  const viewLabel = showRawFeed ? uiT("Raw ACP activity") : uiT("Activity");
   const headerScopeLabel = `${viewLabel} · ${scopeLabel}`;
   const animateActivity = useTranscriptAnimationEnabled();
   const showTimestamps = useTranscriptTimestampsEnabled();
@@ -471,7 +473,7 @@ export function AgentSessionThreadPanel({
     <>
       <AuxiliaryPanelHeaderGroup
         align="start"
-        backButtonAriaLabel="Back from activity"
+        backButtonAriaLabel={uiT("Back from activity")}
         backButtonTestId="agent-session-back"
         onBack={onBack}
       >
@@ -546,8 +548,12 @@ export function AgentSessionThreadPanel({
             className="border-0 bg-transparent px-0 py-2 shadow-none"
             emptyDescription={
               sessionChannelId
-                ? `Mention ${agent.name} in the channel to see its work here.`
-                : `Mention ${agent.name} in any channel to see its work here.`
+                ? uiT("Mention {0} in the channel to see its work here.", {
+                    p0: agent.name,
+                  })
+                : uiT("Mention {0} in any channel to see its work here.", {
+                    p0: agent.name,
+                  })
             }
             profiles={profiles}
             rawLayout="exclusive"

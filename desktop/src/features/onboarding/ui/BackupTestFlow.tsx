@@ -307,20 +307,24 @@ export function BackupTestFlow({
       try {
         text = (await file.text()).trim();
       } catch {
-        if (mountedRef.current) setError("Could not read that file.");
+        if (mountedRef.current) setError(uiT("Could not read that file."));
         return;
       }
       if (!mountedRef.current) return;
       if (!text.toLowerCase().startsWith("ncryptsec1")) {
         setError(
           expectedNcryptsec
-            ? "That doesn't look like your key backup. Choose the file you just downloaded."
-            : "That doesn't look like a key backup file.",
+            ? uiT(
+                "That doesn't look like your key backup. Choose the file you just downloaded.",
+              )
+            : uiT("That doesn't look like a key backup file."),
         );
         return;
       }
       if (expectedNcryptsec && text !== expectedNcryptsec.trim()) {
-        setError("That's a key backup, but not the one you just downloaded.");
+        setError(
+          uiT("That's a key backup, but not the one you just downloaded."),
+        );
         return;
       }
       setError(null);
@@ -357,7 +361,9 @@ export function BackupTestFlow({
     } catch (err) {
       if (mountedRef.current && requestId === requestRef.current)
         setError(
-          err instanceof Error ? err.message : "Could not verify this backup.",
+          err instanceof Error
+            ? err.message
+            : uiT("Could not verify this backup."),
         );
     } finally {
       if (mountedRef.current && requestId === requestRef.current)
@@ -384,7 +390,9 @@ export function BackupTestFlow({
     } catch (err) {
       if (!mountedRef.current) return;
       setSuccessNsecError(
-        err instanceof Error ? err.message : "Could not retrieve your key.",
+        err instanceof Error
+          ? err.message
+          : uiT("Could not retrieve your key."),
       );
     } finally {
       if (mountedRef.current) setIsLoadingSuccessNsec(false);
@@ -817,7 +825,7 @@ export function BackupTestFlow({
                     {uiT("Checking…")}
                   </>
                 ) : (
-                  "Verify backup"
+                  uiT("Verify backup")
                 )}
               </Button>
             );

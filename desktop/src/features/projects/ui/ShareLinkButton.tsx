@@ -14,7 +14,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "@/shared/ui/tooltip";
  */
 export function ShareLinkButton({
   className,
-  label = "Copy link",
+  label = uiT("Copy link"),
   link,
   testId,
 }: {

@@ -53,11 +53,11 @@ type ChannelComboboxProps = {
 
 export function ChannelCombobox({
   allowEmpty = false,
-  ariaLabel = "Channel",
+  ariaLabel = uiT("Channel"),
   channels,
   defaultOpen = false,
   disabled,
-  emptyLabel = "Choose a channel",
+  emptyLabel = uiT("Choose a channel"),
   id,
   isChannelDisabled,
   onAutoOpen,
@@ -183,7 +183,7 @@ export function ChannelCombobox({
   const selectedLabel = selected
     ? (channelLabels.get(selected.id) ?? selected.name)
     : value
-      ? "Unavailable channel"
+      ? uiT("Unavailable channel")
       : emptyLabel;
 
   if (readOnly) {
@@ -192,7 +192,10 @@ export function ChannelCombobox({
         <TooltipTrigger asChild>
           <button
             aria-disabled="true"
-            aria-label={`${ariaLabel}: ${selectedLabel}. Read only.`}
+            aria-label={uiT("{0}: {1}. Read only.", {
+              p0: ariaLabel,
+              p1: selectedLabel,
+            })}
             className={cn(
               "flex w-full cursor-default items-center rounded-lg px-3 py-2 text-foreground focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-ring",
               variant === "header" &&
@@ -263,7 +266,7 @@ export function ChannelCombobox({
             aria-autocomplete="list"
             aria-controls={listboxId}
             aria-expanded={open}
-            aria-label={`Search ${ariaLabel.toLowerCase()}s`}
+            aria-label={uiT("Search {0}s", { p0: ariaLabel.toLowerCase() })}
             autoCapitalize="none"
             autoComplete="off"
             autoCorrect="off"
@@ -281,7 +284,7 @@ export function ChannelCombobox({
           />
         </div>
         <PortalledScrollArea
-          aria-label={`${ariaLabel} options`}
+          aria-label={uiT("{0} options", { p0: ariaLabel })}
           className="max-h-60 overflow-y-auto p-1"
           data-testid="channel-combobox-list"
           id={listboxId}

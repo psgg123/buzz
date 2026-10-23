@@ -353,7 +353,9 @@ export function AnimatedAvatarCapture({
             setSelectedCameraSource(null);
             setSelectedCameraId(null);
             setErrorMessage(
-              "Could not find an iPhone camera. Make sure Continuity Camera is available, then try again.",
+              uiT(
+                "Could not find an iPhone camera. Make sure Continuity Camera is available, then try again.",
+              ),
             );
             setPhase("idle");
             return;
@@ -384,7 +386,9 @@ export function AnimatedAvatarCapture({
       } catch {
         releaseCamera();
         setErrorMessage(
-          "Could not access the camera. Check Buzz's camera permission and try again.",
+          uiT(
+            "Could not access the camera. Check Buzz's camera permission and try again.",
+          ),
         );
         setPhase("idle");
       }
@@ -473,7 +477,9 @@ export function AnimatedAvatarCapture({
         return;
       }
       setErrorMessage(
-        error instanceof Error ? error.message : "Recording failed. Try again.",
+        error instanceof Error
+          ? error.message
+          : uiT("Recording failed. Try again."),
       );
       releaseCamera();
       setPhase("idle");
@@ -522,7 +528,7 @@ export function AnimatedAvatarCapture({
         !animationUpload.type.startsWith("image/") ||
         !posterUpload.type.startsWith("image/")
       ) {
-        setErrorMessage("The relay rejected the recording. Try again.");
+        setErrorMessage(uiT("The relay rejected the recording. Try again."));
         return false;
       }
       onApply(
@@ -533,7 +539,7 @@ export function AnimatedAvatarCapture({
       setErrorMessage(
         error instanceof Error
           ? error.message
-          : "Could not upload the animated avatar.",
+          : uiT("Could not upload the animated avatar."),
       );
       return false;
     } finally {
@@ -600,7 +606,7 @@ export function AnimatedAvatarCapture({
     usePortal && (phase === "live" || phase === "recording")
       ? captureHelpText
       : usePortal && phase === "review"
-        ? "Hover to play"
+        ? uiT("Hover to play")
         : null;
   const inlineCaptureHelpText =
     usePortal && (phase === "live" || phase === "recording")
@@ -975,7 +981,7 @@ export function AnimatedAvatarCapture({
               className="h-4 w-4 border-2"
             />
           ) : (
-            "Use as avatar"
+            uiT("Use as avatar")
           )}
         </Button>
       ) : null}

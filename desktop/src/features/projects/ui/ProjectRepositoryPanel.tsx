@@ -933,7 +933,10 @@ export function RepositoryFilesPanel({
 
               return (
                 <tr
-                  aria-label={`Open ${entry.type} ${entry.name}`}
+                  aria-label={uiT("Open {0} {1}", {
+                    p0: entry.type,
+                    p1: entry.name,
+                  })}
                   className="group/repository-entry cursor-pointer text-xs focus-visible:outline-hidden"
                   data-testid="project-repository-entry-row"
                   key={`${entry.type}:${entry.path}`}
@@ -985,7 +988,11 @@ export function RepositoryFilesPanel({
             })}
           </span>
           <button
-            aria-label={`Show next ${nextEntryCount} entries, ${nextVisibleEntryCount} of ${entries.length} total`}
+            aria-label={uiT("Show next {0} entries, {1} of {2} total", {
+              p0: nextEntryCount,
+              p1: nextVisibleEntryCount,
+              p2: entries.length,
+            })}
             className="shrink-0 font-medium text-foreground hover:underline"
             onClick={() =>
               setVisibleEntryCount((current) =>

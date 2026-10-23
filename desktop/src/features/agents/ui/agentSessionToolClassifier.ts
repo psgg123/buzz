@@ -86,7 +86,9 @@ const BUZZ_CLI_READ_VERBS = new Set([
 ]);
 
 const TOOL_CLASS_LABELS: Record<AgentActivityRenderClass, string> = {
-  message: "Message",
+  get message() {
+    return uiT("Message");
+  },
   "relay-op": "Buzz relay op",
   "file-edit": "File edit",
   "file-read": "File read",
@@ -159,7 +161,7 @@ function classifyLoadSkillTool(
 
   return {
     renderClass: "skill-read",
-    label: isSupportingFile ? "Read skill file" : "Read skill",
+    label: isSupportingFile ? uiT("Read skill file") : uiT("Read skill"),
     preview: skillRef,
     action: { verb: "Read", object },
     source: "harness",

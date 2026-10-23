@@ -214,8 +214,8 @@ export function EnvVarsEditor({
   value,
   onChange,
   inheritedFrom,
-  inheritedLabel = "inherited",
-  label = "Environment variables",
+  inheritedLabel = uiT("inherited"),
+  label = uiT("Environment variables"),
   helperText,
   disabled = false,
   requiredKeys = [],
@@ -388,7 +388,7 @@ export function EnvVarsEditor({
                   )}
                 >
                   <Input
-                    aria-label={`Value for ${key}`}
+                    aria-label={uiT("Value for {0}", { p0: key })}
                     className={cn(
                       "h-8 px-0 py-0 font-mono leading-6",
                       PERSONA_FIELD_CONTROL_CLASS,

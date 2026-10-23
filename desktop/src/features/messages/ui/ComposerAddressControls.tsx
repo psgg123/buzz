@@ -85,7 +85,10 @@ function AddressedAgentAvatar({
 function RemainingAgentCount({ count }: { count: number }) {
   return count > 0 ? (
     <span
-      aria-label={`${count} more addressed ${count === 1 ? "agent" : "agents"}`}
+      aria-label={uiT("{0} more addressed {1}", {
+        p0: count,
+        p1: count === 1 ? "agent" : "agents",
+      })}
       className="flex h-5 min-w-5 items-center justify-center rounded-full bg-muted px-1 text-3xs font-semibold text-muted-foreground ring-1 ring-border/70"
       role="img"
     >
@@ -237,7 +240,10 @@ export function ComposerMentionButton({
                     <Tooltip disableHoverableContent key={agent.pubkey}>
                       <TooltipTrigger asChild>
                         <motion.button
-                          aria-label={`Don't automatically mention ${agent.displayName} in this thread`}
+                          aria-label={uiT(
+                            "Don't automatically mention {0} in this thread",
+                            { p0: agent.displayName },
+                          )}
                           animate={{ opacity: 1, scale: 1 }}
                           className="group/address relative rounded-full focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-ring"
                           data-testid={`composer-address-lock-remove-${agent.pubkey}`}

@@ -341,9 +341,9 @@ export function ProfileStep({
               className="h-4 w-4 border-2"
             />
           ) : usesExistingIdentity ? (
-            "Continue"
+            uiT("Continue")
           ) : (
-            "Create an identity key"
+            uiT("Create an identity key")
           )}
         </Button>
 

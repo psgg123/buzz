@@ -1,5 +1,5 @@
 // Buzz source localisation: authored UI strings only; user values stay unchanged.
-import { uiT, useUiLanguage } from "@/shared/i18n/uiTranslation";
+import { uiMessage, uiT, useUiLanguage } from "@/shared/i18n/uiTranslation";
 import { Search } from "lucide-react";
 import * as React from "react";
 import { resolveUserLabel } from "@/features/profile/lib/identity";
@@ -912,15 +912,11 @@ export function TopbarSearch({
           currentChannelSearchAction ? "pb-5" : "py-5",
         )}
       >
-        No {scopeChannel ? uiT("messages") : uiT("matches")} for{" "}
-        <span className="font-semibold">{trimmedQuery}</span>
-        {scopeLabel ? (
-          <>
-            {" "}
-            in <span className="font-semibold">{scopeLabel}</span>
-          </>
-        ) : null}
-        .
+        {uiMessage(scopeLabel ? "No {0} for {1} in {2}." : "No {0} for {1}.", {
+          p0: scopeChannel ? uiT("messages") : uiT("matches"),
+          p1: <span className="font-semibold">{trimmedQuery}</span>,
+          p2: <span className="font-semibold">{scopeLabel}</span>,
+        })}
       </p>
     </div>
   ) : (

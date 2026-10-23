@@ -55,10 +55,10 @@ export function CommunityChangeOverlay({
           // If requiresReinit, the tree remounts — overlay unmounts naturally.
           break;
         case "duplicate-relay":
-          setError("Another community already uses this relay URL.");
+          setError(uiT("Another community already uses this relay URL."));
           break;
         case "not-found":
-          setError("Community not found.");
+          setError(uiT("Community not found."));
           break;
       }
     },
@@ -91,7 +91,7 @@ export function CommunityChangeOverlay({
             initialRelayUrl={activeCommunity.relayUrl}
             onCancel={onClose}
             onSubmit={handleSubmit}
-            submitLabel="Save changes"
+            submitLabel={uiT("Save changes")}
           />
         </div>
         {error ? (

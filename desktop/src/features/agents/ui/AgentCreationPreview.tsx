@@ -47,7 +47,7 @@ import {
   isAvatarFileDrag,
 } from "./AgentCreationPreview.utils";
 export function AgentCreationPreview({
-  assetLabel = "avatar",
+  assetLabel = uiT("avatar"),
   avatarUrl,
   disabled = false,
   hideEditControl = false,
@@ -121,7 +121,7 @@ export function AgentCreationPreview({
     uploadFile: uploadAvatarFile,
     handleFileChange: handleAvatarUploadFileChange,
   } = useAvatarUpload({
-    fallbackErrorMessage: `Could not use that ${assetLabel}.`,
+    fallbackErrorMessage: uiT("Could not use that {0}.", { p0: assetLabel }),
     onUploadSuccess: (url) => {
       onSelectAvatar(url);
       onCommitAvatar?.(url);
@@ -430,7 +430,7 @@ export function AgentCreationPreview({
     >
       {/* Single drop zone covering the entire popover */}
       <fieldset
-        aria-label={`${assetLabelTitle} picker`}
+        aria-label={uiT("{0} picker", { p0: assetLabelTitle })}
         className={cn(
           "relative m-0 rounded-lg border-2 border-transparent p-0 transition-[border-color,background-color] duration-150",
           isPopoverDragOver && "border-dashed border-primary bg-primary/5",
@@ -624,7 +624,7 @@ export function AgentCreationPreview({
                         ? selectedEmoji
                           ? uiT("Choose custom color")
                           : uiT("Choose an emoji first")
-                        : `Use ${swatch} background`
+                        : uiT("Use {0} background", { p0: swatch })
                     }
                     aria-pressed={isSelected}
                     className={cn(
@@ -813,7 +813,9 @@ export function AgentCreationPreview({
                       >
                         {isUploading ? (
                           <Spinner
-                            aria-label={`Uploading ${assetLabel}`}
+                            aria-label={uiT("Uploading {0}", {
+                              p0: assetLabel,
+                            })}
                             className={cn(
                               "border-2",
                               isCompact ? "h-3 w-3" : "h-4 w-4",
@@ -902,7 +904,9 @@ export function AgentCreationPreview({
                       >
                         {isUploading ? (
                           <Spinner
-                            aria-label={`Uploading ${assetLabel}`}
+                            aria-label={uiT("Uploading {0}", {
+                              p0: assetLabel,
+                            })}
                             className={cn(
                               "border-2",
                               isCompact ? "h-3 w-3" : "h-4 w-4",
@@ -1016,7 +1020,7 @@ export function AgentCreationPreview({
                     )}
                     {isUploading ? (
                       <Spinner
-                        aria-label={`Uploading ${assetLabel}`}
+                        aria-label={uiT("Uploading {0}", { p0: assetLabel })}
                         className="relative z-10 h-4 w-4 border-2"
                       />
                     ) : (

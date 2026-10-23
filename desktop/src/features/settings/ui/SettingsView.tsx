@@ -306,7 +306,9 @@ export function SettingsView({
             <SidebarGroup key={group.label}>
               <SidebarGroupLabel>{group.label}</SidebarGroupLabel>
               <SidebarGroupContent>
-                <SidebarMenu aria-label={`${group.label} settings sections`}>
+                <SidebarMenu
+                  aria-label={uiT("{0} settings sections", { p0: group.label })}
+                >
                   {group.sections.map((entry) => (
                     <SettingsSectionButton
                       active={entry.value === section}

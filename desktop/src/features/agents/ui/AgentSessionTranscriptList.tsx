@@ -824,13 +824,15 @@ function TurnSetupFooter({
     >
       {showContext ? (
         <Toggle
-          aria-label={`${contextOpen ? "Hide" : "Show"} prompt context`}
+          aria-label={uiT("{0} prompt context", {
+            p0: contextOpen ? "Hide" : "Show",
+          })}
           className="data-[state=on]:bg-primary/10 data-[state=on]:text-primary dark:data-[state=on]:bg-primary/15"
           data-testid="transcript-prompt-context-toggle"
           onPressedChange={onContextOpenChange}
           pressed={contextOpen}
           size="xs"
-          title={tooltipText || "Show prompt context"}
+          title={tooltipText || uiT("Show prompt context")}
           variant="ghost"
         >
           <CheckCheck aria-hidden="true" />
@@ -964,10 +966,10 @@ function SessionBoundaryDivider({
 }) {
   const label =
     labelState === "current"
-      ? "Latest live-observed session"
+      ? uiT("Latest live-observed session")
       : labelState === "most-recent"
-        ? "Most recent observed session"
-        : "Earlier observed session";
+        ? uiT("Most recent observed session")
+        : uiT("Earlier observed session");
   const formattedDate = new Date(sessionStartTimestamp).toLocaleString();
   return (
     <div

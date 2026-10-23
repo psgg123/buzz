@@ -1,5 +1,5 @@
+import { uiT, useUiLanguage } from "@/shared/i18n/uiTranslation";
 // Buzz source localisation: authored UI strings only; user values stay unchanged.
-import { useUiLanguage } from "@/shared/i18n/uiTranslation";
 import { useIsManagedAgent } from "@/features/agent-memory/hooks";
 import type {
   ProjectIssue,
@@ -64,7 +64,7 @@ export function ProjectWorkItemContextActions({
     return (
       <div data-testid="project-context-reviewers">
         <PullRequestReviewersRow
-          actionLabel="Add Reviewer"
+          actionLabel={uiT("Add Reviewer")}
           canRequest={canRequestReview}
           contextActions
           profiles={profiles}

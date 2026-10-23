@@ -29,7 +29,7 @@ export type CommunityEditFormProps = {
 };
 
 export function CommunityEditForm({
-  cancelLabel = "Cancel",
+  cancelLabel = uiT("Cancel"),
   initialName,
   initialRelayUrl,
   isSubmitting = false,
@@ -98,12 +98,12 @@ export function CommunityEditForm({
       event.preventDefault();
       const trimmedName = name.trim();
       if (!trimmedName) {
-        setError("Please enter a community name.");
+        setError(uiT("Please enter a community name."));
         return;
       }
       const normalizedUrl = normalizeRelayUrl(relayUrl);
       if (!normalizedUrl) {
-        setError("Enter a valid ws:// or wss:// relay URL.");
+        setError(uiT("Enter a valid ws:// or wss:// relay URL."));
         return;
       }
 
@@ -126,14 +126,14 @@ export function CommunityEditForm({
             return;
           }
           if (policy.ageAttestationRequired && !ageConfirmed) {
-            setError("Confirm that you are at least 18 years old.");
+            setError(uiT("Confirm that you are at least 18 years old."));
             return;
           }
           if (
             (policy.termsMarkdown || policy.privacyMarkdown) &&
             !agreementConfirmed
           ) {
-            setError("Agree to the Terms of Service and Privacy Policy.");
+            setError(uiT("Agree to the Terms of Service and Privacy Policy."));
             return;
           }
         } catch (policyError) {

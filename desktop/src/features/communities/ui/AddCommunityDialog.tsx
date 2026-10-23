@@ -73,7 +73,9 @@ export function AddCommunityDialog({
       });
       if (!started) {
         setJoinError(
-          "Finish connecting the community already in progress, then try again.",
+          uiT(
+            "Finish connecting the community already in progress, then try again.",
+          ),
         );
         return;
       }
@@ -84,17 +86,17 @@ export function AddCommunityDialog({
 
   const title =
     mode === "create"
-      ? "Create a new community"
+      ? uiT("Create a new community")
       : mode === "join"
-        ? "Join an existing community"
-        : "Add community";
+        ? uiT("Join an existing community")
+        : uiT("Add community");
 
   const description =
     mode === "create"
-      ? "Opens Builderlab in your browser."
+      ? uiT("Opens Builderlab in your browser.")
       : mode === "join"
-        ? "Use the community URL or invite link you received."
-        : "Create a new community or join one you already have.";
+        ? uiT("Use the community URL or invite link you received.")
+        : uiT("Create a new community or join one you already have.");
 
   return (
     <Dialog

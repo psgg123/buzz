@@ -47,7 +47,7 @@ export function projectTaskCategoryFromLabels(
 export function projectTaskCategoryLabel(category: ProjectTaskCategory) {
   return (
     PROJECT_TASK_CATEGORIES.find((option) => option.value === category)
-      ?.label ?? "Issue"
+      ?.label ?? uiT("Issue")
   );
 }
 

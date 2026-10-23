@@ -432,7 +432,7 @@ function ProfileLiveActivityEmbed({
     selectedTurn?.anchorAt ??
     null;
   const emptyState = feedScope.isLive ? "loading" : "idle";
-  const emptyDescription = "Live activity will appear here.";
+  const emptyDescription = uiT("Live activity will appear here.");
   const openSelectedActivity = React.useCallback(() => {
     onOpenActivity(activeChannelId);
   }, [activeChannelId, onOpenActivity]);
@@ -451,12 +451,16 @@ function ProfileLiveActivityEmbed({
   if (slides.length === 0) {
     return (
       <section
-        aria-label={`Open activity feed. Last live ${formatLastLiveLabel(lastLiveAt, Date.now())}.`}
+        aria-label={uiT("Open activity feed. Last live {0}.", {
+          p0: formatLastLiveLabel(lastLiveAt, Date.now()),
+        })}
         className="relative flex h-56 cursor-pointer flex-col overflow-hidden rounded-2xl border bg-background text-left shadow-none transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         data-testid={`user-profile-live-activity-${activityAgent.pubkey}`}
       >
         <button
-          aria-label={`Open activity feed. Last live ${formatLastLiveLabel(lastLiveAt, Date.now())}.`}
+          aria-label={uiT("Open activity feed. Last live {0}.", {
+            p0: formatLastLiveLabel(lastLiveAt, Date.now()),
+          })}
           className="absolute inset-0 z-10 rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           onClick={openSelectedActivity}
           type="button"
@@ -496,12 +500,16 @@ function ProfileLiveActivityEmbed({
   return (
     <div>
       <section
-        aria-label={`Open activity feed. Last live ${formatLastLiveLabel(lastLiveAt, Date.now())}.`}
+        aria-label={uiT("Open activity feed. Last live {0}.", {
+          p0: formatLastLiveLabel(lastLiveAt, Date.now()),
+        })}
         className="relative flex h-56 cursor-pointer flex-col overflow-hidden rounded-2xl border bg-background text-left shadow-none transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         data-testid={`user-profile-live-activity-${activityAgent.pubkey}`}
       >
         <button
-          aria-label={`Open activity feed. Last live ${formatLastLiveLabel(lastLiveAt, Date.now())}.`}
+          aria-label={uiT("Open activity feed. Last live {0}.", {
+            p0: formatLastLiveLabel(lastLiveAt, Date.now()),
+          })}
           className="absolute inset-0 z-10 rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           onClick={openSelectedActivity}
           type="button"
@@ -611,7 +619,7 @@ function ActivityCarouselDots({
 
         return (
           <button
-            aria-label={`Show #${channelName} activity`}
+            aria-label={uiT("Show #{0} activity", { p0: channelName })}
             aria-selected={isSelected}
             className="group relative flex items-center justify-center before:absolute before:-inset-2 before:content-['']"
             data-testid={`user-profile-activity-dot-${channelId}`}
@@ -655,7 +663,7 @@ function LiveActivityOpenButton({
 
   return (
     <Button
-      aria-label={`Open full activity. Last live ${label}.`}
+      aria-label={uiT("Open full activity. Last live {0}.", { p0: label })}
       className="absolute right-3 top-3 z-40 rounded-full bg-primary px-2.5 text-xs font-semibold text-primary-foreground hover:bg-primary/90"
       onClick={(event) => {
         event.stopPropagation();

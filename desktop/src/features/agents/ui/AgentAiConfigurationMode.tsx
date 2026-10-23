@@ -22,11 +22,11 @@ export function HarnessModelDefaultNotice({
     >
       <dt className="text-muted-foreground">{uiT("Harness")}</dt>
       <dd className="truncate text-foreground">
-        {harness || "Not configured"}
+        {harness || uiT("Not configured")}
       </dd>
       <dt className="text-muted-foreground">{uiT("Model")}</dt>
       <dd className="truncate text-foreground">
-        {model?.trim() || "Harness default"}
+        {model?.trim() || uiT("Harness default")}
       </dd>
     </dl>
   );

@@ -103,7 +103,7 @@ export function PrivateKeyBackupRow() {
           setLoadError(
             err instanceof Error
               ? err.message
-              : "Failed to retrieve private key.",
+              : uiT("Failed to retrieve private key."),
           );
       } finally {
         if (!fetchCancelledRef.current) setIsLoading(false);

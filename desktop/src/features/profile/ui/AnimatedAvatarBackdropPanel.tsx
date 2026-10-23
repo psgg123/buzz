@@ -49,7 +49,7 @@ export function AnimatedAvatarBackdropPanel({
             aria-label={
               isCustomSwatch
                 ? uiT("Choose custom backdrop color")
-                : `Use ${swatch} backdrop`
+                : uiT("Use {0} backdrop", { p0: swatch })
             }
             aria-pressed={isSelected}
             className={cn(

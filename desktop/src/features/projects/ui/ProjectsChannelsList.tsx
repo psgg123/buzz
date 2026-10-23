@@ -188,10 +188,12 @@ export function ProjectsChannelsList({
               );
               const repositoryLabel =
                 row.repositoryNames.length === 0
-                  ? "Project channel"
+                  ? uiT("Project channel")
                   : row.repositoryNames.length === 1
                     ? row.repositoryNames[0]
-                    : `${row.repositoryNames.length} repositories`;
+                    : uiT("{0} repositories", {
+                        p0: row.repositoryNames.length,
+                      });
               const people =
                 channel?.participantPubkeys ?? channel?.participants ?? [];
               const selectionItem = selectionItemsByRowKey.get(rowKey);

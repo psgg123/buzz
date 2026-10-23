@@ -193,7 +193,7 @@ export function WorkflowsView({
         description:
           error instanceof Error
             ? error.message
-            : "The workflow was not changed. Try again.",
+            : uiT("The workflow was not changed. Try again."),
       });
     },
     onSuccess: (_data, workflow) => {
@@ -366,11 +366,13 @@ export function WorkflowsView({
         <AlertDialogContent data-testid="workflow-activation-confirmation">
           <AlertDialogHeader>
             <AlertDialogTitle>
-              {activationWarning?.title ?? "Turn on this workflow?"}
+              {activationWarning?.title ?? uiT("Turn on this workflow?")}
             </AlertDialogTitle>
             <AlertDialogDescription>
               {activationWarning?.description ??
-                "Turn it on to let it run immediately, or keep it off until you’re ready."}
+                uiT(
+                  "Turn it on to let it run immediately, or keep it off until you’re ready.",
+                )}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>

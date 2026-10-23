@@ -1,5 +1,5 @@
+import { uiT, useUiLanguage } from "@/shared/i18n/uiTranslation";
 // Buzz source localisation: authored UI strings only; user values stay unchanged.
-import { useUiLanguage } from "@/shared/i18n/uiTranslation";
 import * as React from "react";
 import type { ReactNode } from "react";
 import { X } from "lucide-react";
@@ -198,7 +198,7 @@ export function SidebarCompactActionCard({
   className,
   description,
   dismissClassName,
-  dismissLabel = "Dismiss notification",
+  dismissLabel = uiT("Dismiss notification"),
   icon,
   iconKey,
   onAction,

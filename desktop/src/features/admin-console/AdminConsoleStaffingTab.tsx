@@ -1,5 +1,5 @@
 // Buzz source localisation: authored UI strings only; user values stay unchanged.
-import { uiT, useUiLanguage } from "@/shared/i18n/uiTranslation";
+import { uiMessage, uiT, useUiLanguage } from "@/shared/i18n/uiTranslation";
 /**
  * Staffing tab — Operator-only UI for managing relay_operators rows.
  *
@@ -311,16 +311,19 @@ export function RestrictionsSection({
                 : uiT("Clear timeout?")}
             </AlertDialogTitle>
             <AlertDialogDescription>
-              {uiT("This will")}{" "}
-              {pendingLift?.kind === "ban"
-                ? uiT("remove the active ban")
-                : uiT("clear the active timeout")}{" "}
-              for{" "}
-              <span className="font-mono">
-                {pendingLift ? truncatePubkey(pendingLift.pubkey) : ""}
-              </span>{" "}
-              in <code>{pendingLift?.communityHost}</code>
-              {uiT(". They will be able to post again.")}
+              {uiMessage(
+                pendingLift?.kind === "ban"
+                  ? "Remove the active ban for {0} in {1}. They will be able to post again."
+                  : "Clear the active timeout for {0} in {1}. They will be able to post again.",
+                {
+                  p0: (
+                    <span className="font-mono">
+                      {pendingLift ? truncatePubkey(pendingLift.pubkey) : ""}
+                    </span>
+                  ),
+                  p1: <code>{pendingLift?.communityHost}</code>,
+                },
+              )}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
@@ -399,7 +402,7 @@ export function RestrictionsSection({
                     {isWorking ? (
                       <LoaderCircle className="h-3.5 w-3.5 animate-spin" />
                     ) : (
-                      "Lift ban"
+                      uiT("Lift ban")
                     )}
                   </Button>
                 )}
@@ -415,7 +418,7 @@ export function RestrictionsSection({
                     {isWorking ? (
                       <LoaderCircle className="h-3.5 w-3.5 animate-spin" />
                     ) : (
-                      "Clear timeout"
+                      uiT("Clear timeout")
                     )}
                   </Button>
                 )}
@@ -437,7 +440,7 @@ export function RestrictionsSection({
           {moreStatus?.busy ? (
             <LoaderCircle className="h-3.5 w-3.5 animate-spin" />
           ) : (
-            "Load more"
+            uiT("Load more")
           )}
         </Button>
       )}
@@ -507,7 +510,10 @@ export function StaffingTab({
     const existing = listState.data.find((op) => op.pubkey === trimmed);
     if (existing) {
       setAddError(
-        `Already an operator: ${existing.effectiveRole}. Change role with the edit control on their row.`,
+        uiT(
+          "Already an operator: {0}. Change role with the edit control on their row.",
+          { p0: existing.effectiveRole },
+        ),
       );
       return;
     }
@@ -662,7 +668,7 @@ export function StaffingTab({
             {isAdding ? (
               <LoaderCircle className="h-3.5 w-3.5 animate-spin" />
             ) : (
-              "Add"
+              uiT("Add")
             )}
           </Button>
         </div>
@@ -711,7 +717,7 @@ export function StaffingTab({
                 {/* In-place role selector — hidden for config-backed rows */}
                 {!isConfigBacked && (
                   <select
-                    aria-label={`Change role for ${displayName}`}
+                    aria-label={uiT("Change role for {0}", { p0: displayName })}
                     className="rounded-md border border-border/60 bg-background px-1.5 py-0.5 text-xs"
                     data-testid={`staffing-role-select-${op.pubkey}`}
                     disabled={isWorking}

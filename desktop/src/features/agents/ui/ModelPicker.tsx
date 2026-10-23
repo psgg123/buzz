@@ -110,10 +110,10 @@ export function ModelPicker({
   const displayLabel = agent.model
     ? rowLabel(agent.model)
     : modelsData?.agentDefaultModel
-      ? `${rowLabel(modelsData.agentDefaultModel)} (default)`
+      ? uiT("{0} (default)", { p0: rowLabel(modelsData.agentDefaultModel) })
       : hasRequestedModels && loading
-        ? "Loading..."
-        : "Auto";
+        ? uiT("Loading...")
+        : uiT("Auto");
 
   // Provenance label shown only for post-spawn agents where the model origin
   // is known from the config surface and the source is not a user-explicit
@@ -307,7 +307,7 @@ export function ModelPicker({
                   </p>
                 </>
               ) : (
-                "This agent uses the runtime's default model."
+                uiT("This agent uses the runtime's default model.")
               )}
             </div>
           ) : (

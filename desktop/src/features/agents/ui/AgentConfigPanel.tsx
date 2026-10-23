@@ -328,10 +328,10 @@ export function AgentConfigPanel({
 
   const { data, isLoading, error } = useAgentConfigSurface(pubkey);
   const flatStateTitle = sections.includes("model")
-    ? "Model settings"
+    ? uiT("Model settings")
     : sections.includes("mcp")
-      ? "MCP servers"
-      : "Advanced";
+      ? uiT("MCP servers")
+      : uiT("Advanced");
 
   if (isLoading) {
     const loading = (

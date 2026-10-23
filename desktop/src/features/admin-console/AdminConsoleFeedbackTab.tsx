@@ -596,7 +596,7 @@ function AttachmentError({ code }: { code: AdminAttachmentErrorCode }) {
   return (
     <div className="flex items-center gap-1.5 text-xs text-destructive">
       <AlertCircle className="h-3.5 w-3.5" />
-      {FRIENDLY_ATTACHMENT_ERROR[code] ?? `Error: ${code}`}
+      {FRIENDLY_ATTACHMENT_ERROR[code] ?? uiT("Error: {0}", { p0: code })}
     </div>
   );
 }

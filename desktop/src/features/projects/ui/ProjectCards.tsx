@@ -86,7 +86,7 @@ export function ProjectPeopleStack({
           >
             <UserProfilePopover pubkey={pubkey} triggerElement="span">
               <button
-                aria-label={`View ${label}'s profile`}
+                aria-label={uiT("View {0}'s profile", { p0: label })}
                 className={cn(
                   "inline-flex focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring",
                   profile?.isAgent ? "rounded-[30%]" : "rounded-full",
@@ -326,7 +326,7 @@ function RepositoryUnavailableIndicator({
     <Tooltip>
       <TooltipTrigger asChild>
         <span
-          aria-label={`Repository ${label.toLowerCase()}`}
+          aria-label={uiT("Repository {0}", { p0: label.toLowerCase() })}
           className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-md text-amber-600 hover:bg-amber-500/10 dark:text-amber-300"
           role="img"
         >
@@ -581,7 +581,7 @@ export const ProjectGridCard = React.memo(function ProjectGridCard({
           )}
           data-testid="projects-grid-card-body"
         >
-          {project.description || "A shared space for internal git work."}
+          {project.description || uiT("A shared space for internal git work.")}
         </p>
 
         <div className="relative z-10 flex items-center px-4 pb-1">

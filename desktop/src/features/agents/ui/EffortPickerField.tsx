@@ -76,9 +76,9 @@ export function EffortPickerField({
       />
       <p className="text-xs text-muted-foreground">
         {note === "unknownModel"
-          ? `Support for ${selectValue} isn't known yet. `
+          ? uiT("Support for {0} isn't known yet. ", { p0: selectValue })
           : note === "unlisted"
-            ? `This model may not support ${selectValue}. `
+            ? uiT("This model may not support {0}. ", { p0: selectValue })
             : null}
         {uiT("Applied at the next session start.")}
       </p>

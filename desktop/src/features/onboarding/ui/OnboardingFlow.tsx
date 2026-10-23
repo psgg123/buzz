@@ -275,7 +275,9 @@ export function OnboardingFlow({
         if (membershipStatus === "error") {
           setMembershipError({
             kind: "error",
-            message: "Server error — try again",
+            get message() {
+              return uiT("Server error — try again");
+            },
           });
           return;
         }
@@ -433,7 +435,7 @@ export function OnboardingFlow({
       setPersistError(
         error instanceof Error
           ? error.message
-          : "Failed to create a new identity. Please try again.",
+          : uiT("Failed to create a new identity. Please try again."),
       );
     }
   }, [queryClient]);
@@ -464,10 +466,10 @@ export function OnboardingFlow({
         ? {
             label:
               keyImportStage === "backup-password"
-                ? "Back"
+                ? uiT("Back")
                 : identityLost
-                  ? "Start new identity"
-                  : "Back",
+                  ? uiT("Start new identity")
+                  : uiT("Back"),
             disabled: isKeyImporting,
             onClick: handleKeyImportBack,
           }
@@ -539,7 +541,7 @@ export function OnboardingFlow({
               ) : (
                 <>
                   <p className="font-medium text-destructive">
-                    {membershipError.message ?? "Something went wrong"}
+                    {membershipError.message ?? uiT("Something went wrong")}
                   </p>
                   <p className="mt-1 text-muted-foreground">
                     {uiT("The relay returned an error. Try again.")}

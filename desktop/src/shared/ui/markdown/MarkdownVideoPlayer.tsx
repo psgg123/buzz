@@ -1,5 +1,5 @@
+import { uiT, useUiLanguage } from "@/shared/i18n/uiTranslation";
 // Buzz source localisation: authored UI strings only; user values stay unchanged.
-import { useUiLanguage } from "@/shared/i18n/uiTranslation";
 import * as React from "react";
 
 import { rewriteRelayUrl } from "@/shared/lib/mediaUrl";
@@ -58,7 +58,10 @@ export function MarkdownVideoPlayer({
         ? {
             ...videoReviewContext,
             title:
-              videoReviewContext.title ?? entry?.filename ?? alt ?? "Video",
+              videoReviewContext.title ??
+              entry?.filename ??
+              alt ??
+              uiT("Video"),
           }
         : undefined,
     [alt, entry?.filename, videoReviewContext, __buzzLanguage],

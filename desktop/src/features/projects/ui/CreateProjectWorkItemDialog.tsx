@@ -58,7 +58,7 @@ export function CreateProjectWorkItemDialog({
   const titleInputRef = React.useRef<HTMLInputElement>(null);
   const submitInFlightRef = React.useRef(false);
   const testIdPrefix = `create-${itemName}`;
-  const itemLabel = itemName === "issue" ? "task" : "review";
+  const itemLabel = itemName === "issue" ? uiT("task") : uiT("review");
 
   React.useEffect(() => {
     if (!open) return;
@@ -91,7 +91,7 @@ export function CreateProjectWorkItemDialog({
       setErrorMessage(
         error instanceof Error
           ? error.message
-          : `Failed to create ${itemLabel}.`,
+          : uiT("Failed to create {0}.", { p0: itemLabel }),
       );
     } finally {
       submitInFlightRef.current = false;

@@ -244,7 +244,9 @@ function SidebarProjectsSectionContent() {
         }
       } catch (error) {
         toast.error(
-          error instanceof Error ? error.message : "Failed to delete project",
+          error instanceof Error
+            ? error.message
+            : uiT("Failed to delete project"),
         );
       } finally {
         setProjectToDelete(null);
@@ -524,7 +526,7 @@ function SidebarProjectsHeaderActions({
           <DropdownMenuSub>
             <DropdownMenuSubTrigger>
               <Folders className="h-4 w-4" />
-              <span>Show</span>
+              <span>{uiT("Show")}</span>
             </DropdownMenuSubTrigger>
             <DropdownMenuSubContent>
               <DropdownMenuRadioGroup
@@ -625,8 +627,8 @@ function SidebarProjectRow({
               aria-expanded={isExpanded}
               aria-label={
                 isExpanded
-                  ? `Hide channels in ${project.name}`
-                  : `Show channels in ${project.name}`
+                  ? uiT("Hide channels in {0}", { p0: project.name })
+                  : uiT("Show channels in {0}", { p0: project.name })
               }
               data-testid={`sidebar-project-expand-${project.dtag}`}
               onClick={(event) => {

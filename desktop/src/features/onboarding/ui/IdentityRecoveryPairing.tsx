@@ -71,7 +71,9 @@ export function IdentityRecoveryPairing({
       setStep("qr");
     } catch (cause) {
       setError(
-        cause instanceof Error ? cause.message : "Could not start recovery.",
+        cause instanceof Error
+          ? cause.message
+          : uiT("Could not start recovery."),
       );
       setStep("error");
     }
@@ -104,7 +106,7 @@ export function IdentityRecoveryPairing({
     listen<{ reason: string }>("pairing-aborted", ({ payload }) => {
       if (!disposed && active.current) {
         active.current = false;
-        setError(`Recovery stopped: ${payload.reason}`);
+        setError(uiT("Recovery stopped: {0}", { p0: payload.reason }));
         setStep("error");
       }
     }).then((unlisten) => (disposed ? unlisten() : unlisteners.push(unlisten)));
@@ -131,14 +133,14 @@ export function IdentityRecoveryPairing({
       if (copyTimer.current !== null) window.clearTimeout(copyTimer.current);
       copyTimer.current = window.setTimeout(() => setCopied(false), 2_000);
     } catch {
-      setError("Could not copy the pairing code. Try again.");
+      setError(uiT("Could not copy the pairing code. Try again."));
     }
   }
 
   async function deny() {
     active.current = false;
     await cancelPairing().catch(() => {});
-    setError("The codes didn't match. Pairing was canceled.");
+    setError(uiT("The codes didn't match. Pairing was canceled."));
     setStep("error");
   }
 

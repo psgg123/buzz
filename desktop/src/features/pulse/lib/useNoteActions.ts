@@ -100,7 +100,9 @@ export function usePulseNoteActions({
 
         queryClient.setQueryData(reactionQueryKey, previousReactions);
         toast.error(
-          error instanceof Error ? error.message : "Failed to update reaction",
+          error instanceof Error
+            ? error.message
+            : uiT("Failed to update reaction"),
         );
       } finally {
         setPendingUpvoteNoteIds((current) =>
@@ -137,7 +139,7 @@ export function usePulseNoteActions({
         });
       } catch (error) {
         toast.error(
-          error instanceof Error ? error.message : "Failed to post reply",
+          error instanceof Error ? error.message : uiT("Failed to post reply"),
         );
         throw error;
       }
@@ -166,7 +168,7 @@ export function usePulseNoteActions({
         });
       } catch (error) {
         toast.error(
-          error instanceof Error ? error.message : "Failed to open DM",
+          error instanceof Error ? error.message : uiT("Failed to open DM"),
         );
       }
     },

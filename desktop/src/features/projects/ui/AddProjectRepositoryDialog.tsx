@@ -83,7 +83,9 @@ export function AddProjectRepositoryDialog({
       onOpenChange(false);
     } catch (error) {
       setErrorMessage(
-        error instanceof Error ? error.message : "Failed to add repository.",
+        error instanceof Error
+          ? error.message
+          : uiT("Failed to add repository."),
       );
     }
   }
@@ -102,7 +104,9 @@ export function AddProjectRepositoryDialog({
         data-testid="add-project-repository-dialog"
         description={
           selectedProject
-            ? `Add another repository to ${selectedProject.name}.`
+            ? uiT("Add another repository to {0}.", {
+                p0: selectedProject.name,
+              })
             : uiT("Choose a project for this repository.")
         }
         footer={

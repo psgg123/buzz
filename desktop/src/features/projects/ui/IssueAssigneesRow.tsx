@@ -174,7 +174,9 @@ export function IssueAssigneesRow({
         toast.success(uiT("Task assigned."));
       } catch (error) {
         toast.error(
-          error instanceof Error ? error.message : "Failed to assign task.",
+          error instanceof Error
+            ? error.message
+            : uiT("Failed to assign task."),
         );
       } finally {
         assignmentOperationInFlightRef.current = false;
@@ -199,7 +201,9 @@ export function IssueAssigneesRow({
         toast.success(uiT("Task unassigned."));
       } catch (error) {
         toast.error(
-          error instanceof Error ? error.message : "Failed to unassign task.",
+          error instanceof Error
+            ? error.message
+            : uiT("Failed to unassign task."),
         );
       } finally {
         assignmentOperationInFlightRef.current = false;

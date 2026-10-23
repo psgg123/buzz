@@ -55,7 +55,7 @@ export function KeyringLockedScreen() {
 
         {showImport ? (
           <NostrKeyImportForm
-            backLabel="Cancel"
+            backLabel={uiT("Cancel")}
             onBack={() => setShowImport(false)}
             onImport={handleImport}
           />

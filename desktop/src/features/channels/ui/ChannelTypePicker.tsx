@@ -36,7 +36,7 @@ export function ChannelTypePicker({
   onLifecycleChange,
   onOpenChange,
   open,
-  temporaryOptionAriaLabel = "Temporary channel",
+  temporaryOptionAriaLabel = uiT("Temporary channel"),
   testId,
 }: {
   align?: React.ComponentProps<typeof DropdownMenuContent>["align"];
@@ -75,7 +75,7 @@ export function ChannelTypePicker({
     <DropdownMenu modal={false} onOpenChange={setPickerOpen} open={pickerOpen}>
       <DropdownMenuTrigger asChild>
         <Button
-          aria-label={ariaLabel ?? `Channel type: ${label}`}
+          aria-label={ariaLabel ?? uiT("Channel type: {0}", { p0: label })}
           className={cn(
             "h-9 w-fit px-2.5 text-sm font-medium text-foreground hover:bg-muted/50",
             className,

@@ -86,7 +86,10 @@ export function CreateProjectBranchDialog({
             <DialogDescription>
               {uiT("Create a remote branch from")}{" "}
               <span className="font-mono text-foreground">{sourceBranch}</span>
-              {sourceCommit ? ` at ${sourceCommit.slice(0, 7)}` : ""}.
+              {sourceCommit
+                ? uiT(" at {0}", { p0: sourceCommit.slice(0, 7) })
+                : ""}
+              .
             </DialogDescription>
           </DialogHeader>
           <label

@@ -111,13 +111,13 @@ function ReplyParentContext({
                 {parentDisplayName}
               </button>
             </UserProfilePopover>
-            : {parentSnippet || "No text"}
+            : {parentSnippet || uiT("No text")}
           </span>
         </div>
       ) : parentNoteQuery.isLoading ? (
-        "Loading reply context…"
+        uiT("Loading reply context…")
       ) : (
-        "Replying to an unavailable note"
+        uiT("Replying to an unavailable note")
       )}
     </div>
   );

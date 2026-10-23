@@ -9,7 +9,9 @@ import { projectCloneErrorPresentation } from "@/features/projects/lib/projectGi
 import { openProjectTerminal } from "@/shared/api/projectGit";
 
 export function projectTerminalLabel(hasLocalCheckout: boolean) {
-  return hasLocalCheckout ? "Open in Terminal" : "Clone & open in Terminal";
+  return hasLocalCheckout
+    ? uiT("Open in Terminal")
+    : uiT("Clone & open in Terminal");
 }
 
 /**

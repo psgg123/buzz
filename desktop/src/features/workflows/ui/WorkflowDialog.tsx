@@ -199,7 +199,9 @@ function WorkflowNameEditor({
   return (
     <div className="inline-flex h-6 max-w-full min-w-0 items-center gap-1.5 font-mono text-sm text-muted-foreground">
       <span className="min-w-0 truncate">
-        {generating ? uiT("Generating name…") : name || "Untitled workflow"}
+        {generating
+          ? uiT("Generating name…")
+          : name || uiT("Untitled workflow")}
       </span>
       <Button
         aria-label={uiT("Edit workflow name")}
@@ -825,11 +827,13 @@ export function WorkflowDialog({
         <AlertDialogContent data-testid="workflow-activation-confirmation">
           <AlertDialogHeader>
             <AlertDialogTitle>
-              {activationWarning?.title ?? "Turn on this workflow?"}
+              {activationWarning?.title ?? uiT("Turn on this workflow?")}
             </AlertDialogTitle>
             <AlertDialogDescription>
               {activationWarning?.description ??
-                "Turn it on to let it run immediately, or keep it off until you’re ready."}
+                uiT(
+                  "Turn it on to let it run immediately, or keep it off until you’re ready.",
+                )}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>

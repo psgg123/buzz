@@ -60,7 +60,7 @@ export function AddAgentDialog({
       .catch((e: unknown) => {
         if (cancelled) return;
         console.error("Failed to load agents:", e);
-        setError("Could not load agents.");
+        setError(uiT("Could not load agents."));
       })
       .finally(() => {
         if (!cancelled) setLoading(false);
@@ -128,7 +128,7 @@ export function AddAgentDialog({
         }
       }
       const msg = e instanceof Error ? e.message : String(e);
-      setError(`Failed to add agent: ${msg}`);
+      setError(uiT("Failed to add agent: {0}", { p0: msg }));
       console.error("Failed to add agent to huddle:", e);
     } finally {
       setAdding(null);
@@ -192,7 +192,7 @@ export function AddAgentDialog({
                     </span>
                     {isAdding ? (
                       <LoaderCircle
-                        aria-label={`Adding ${agent.name}`}
+                        aria-label={uiT("Adding {0}", { p0: agent.name })}
                         className="h-4 w-4 shrink-0 animate-spin text-muted-foreground"
                       />
                     ) : null}

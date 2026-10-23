@@ -292,7 +292,7 @@ function EnforcementStateBlock({
           {isWorking ? (
             <LoaderCircle className="h-3.5 w-3.5 animate-spin" />
           ) : (
-            "Cancel & reopen"
+            uiT("Cancel & reopen")
           )}
         </Button>
       )}
@@ -525,7 +525,7 @@ function ResolveReportForm({
           className="flex flex-wrap items-center gap-1.5 text-xs text-muted-foreground"
           data-testid="resolve-community"
         >
-          In{" "}
+          {uiT("In")}{" "}
           <CommunityBadge host={report.communityHost} id={report.communityId} />
           {report.communityHost && (
             <NotConnectedWarning host={report.communityHost} />
@@ -549,7 +549,10 @@ function ResolveReportForm({
           {isSubmitting ? (
             <LoaderCircle className="h-3.5 w-3.5 animate-spin" />
           ) : (
-            `Confirm: ${actionLabel(frozenRef.current?.action ?? selectedAction)} in ${report.communityHost}`
+            uiT("Confirm: {0} in {1}", {
+              p0: actionLabel(frozenRef.current?.action ?? selectedAction),
+              p1: report.communityHost,
+            })
           )}
         </Button>
       )}
@@ -657,7 +660,7 @@ function ReopenReportForm({
         {isSubmitting ? (
           <LoaderCircle className="h-3.5 w-3.5 animate-spin" />
         ) : (
-          "Reopen report"
+          uiT("Reopen report")
         )}
       </Button>
     </div>

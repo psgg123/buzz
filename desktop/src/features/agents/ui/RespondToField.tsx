@@ -1,5 +1,5 @@
 // Buzz source localisation: authored UI strings only; user values stay unchanged.
-import { uiT, useUiLanguage } from "@/shared/i18n/uiTranslation";
+import { uiMessage, uiT, useUiLanguage } from "@/shared/i18n/uiTranslation";
 import * as React from "react";
 import { AlertTriangle, ChevronDown, Search, X } from "lucide-react";
 import {
@@ -369,9 +369,10 @@ function AllowlistPicker({
       ) : null}
       {!isPersona && ownerPubkey ? (
         <p className="text-xs text-muted-foreground">
-          You (
-          <PubKey pubkey={ownerPubkey} />) can always use this agent. You
-          don&apos;t need to add yourself.
+          {uiMessage(
+            "You ({0}) can always use this agent. You don't need to add yourself.",
+            { p0: <PubKey pubkey={ownerPubkey} /> },
+          )}
         </p>
       ) : !isPersona ? (
         <p className="text-xs text-muted-foreground">

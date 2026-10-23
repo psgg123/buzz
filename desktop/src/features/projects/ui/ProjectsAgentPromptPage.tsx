@@ -505,7 +505,7 @@ export function ProjectsAgentPromptPage({
     onUpdate: ({ text }) => setPrompt(text),
     placeholder: conversation
       ? `Reply to ${conversation.agent.name}…`
-      : "Are we safe to release this week?",
+      : uiT("Are we safe to release this week?"),
   });
   const linkEditor = useLinkEditor(richText);
   onEditLinkRef.current = linkEditor.openFromClick;
@@ -606,7 +606,9 @@ export function ProjectsAgentPromptPage({
       richText.clearContent();
     } catch (error) {
       toast.error(
-        error instanceof Error ? error.message : "Failed to reach the agent",
+        error instanceof Error
+          ? error.message
+          : uiT("Failed to reach the agent"),
       );
     } finally {
       setIsSending(false);
@@ -697,7 +699,7 @@ export function ProjectsAgentPromptPage({
                       />
                     ) : null}
                     <span className="min-w-0 truncate">
-                      {selectedAgent?.name ?? "No agents available"}
+                      {selectedAgent?.name ?? uiT("No agents available")}
                     </span>
                     {candidates.length > 0 && conversation === null ? (
                       <ChevronDown className="h-3 w-3 shrink-0 text-muted-foreground" />
@@ -763,7 +765,7 @@ export function ProjectsAgentPromptPage({
           <div className="flex justify-end pt-1">
             <AgentContextPayloadPreview
               payload={repoContextPayload}
-              triggerLabel="Context appended to your first message"
+              triggerLabel={uiT("Context appended to your first message")}
             />
           </div>
         )}

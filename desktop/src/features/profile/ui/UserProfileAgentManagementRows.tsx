@@ -165,11 +165,11 @@ function ProfileArchiveAgentRow({
   const Icon = isArchived ? ArchiveRestore : Archive;
   const label = archiveActions.isPending
     ? isArchived
-      ? "Unarchiving…"
-      : "Archiving…"
+      ? uiT("Unarchiving…")
+      : uiT("Archiving…")
     : isArchived
-      ? "Unarchive agent"
-      : "Archive agent";
+      ? uiT("Unarchive agent")
+      : uiT("Archive agent");
 
   return (
     <>

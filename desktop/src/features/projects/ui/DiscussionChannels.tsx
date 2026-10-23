@@ -138,7 +138,7 @@ function useChannelNameLookup(channelIds: readonly string[]) {
  */
 export function DiscussedInChannels({
   className,
-  entityLabel = "this",
+  entityLabel = uiT("this"),
   originChannelId,
   originCreatedAt,
   originPubkey,
@@ -233,14 +233,14 @@ export function DiscussedInChannels({
               <button
                 aria-label={
                   latestHit
-                    ? `Open conversation in #${name}`
-                    : `Open channel #${name}`
+                    ? uiT("Open conversation in #{0}", { p0: name })
+                    : uiT("Open channel #{0}", { p0: name })
                 }
                 className="absolute inset-0"
                 onClick={openConversation}
                 title={
                   latestHit
-                    ? `Open the latest conversation in #${name}`
+                    ? uiT("Open the latest conversation in #{0}", { p0: name })
                     : uiT("Open #{0}", { p0: name })
                 }
                 type="button"

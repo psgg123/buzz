@@ -83,7 +83,7 @@ export function ChannelTemplatesSettingsCard() {
       },
       onError: (error) => {
         toast.error(
-          error instanceof Error ? error.message : "Failed to duplicate",
+          error instanceof Error ? error.message : uiT("Failed to duplicate"),
         );
       },
     });
@@ -98,7 +98,7 @@ export function ChannelTemplatesSettingsCard() {
       },
       onError: (error) => {
         toast.error(
-          error instanceof Error ? error.message : "Failed to delete",
+          error instanceof Error ? error.message : uiT("Failed to delete"),
         );
       },
     });
@@ -399,7 +399,7 @@ export function TemplateFormDialog({
         },
         onError: (error) => {
           toast.error(
-            error instanceof Error ? error.message : "Failed to update",
+            error instanceof Error ? error.message : uiT("Failed to update"),
           );
         },
       });
@@ -419,7 +419,7 @@ export function TemplateFormDialog({
         },
         onError: (error) => {
           toast.error(
-            error instanceof Error ? error.message : "Failed to create",
+            error instanceof Error ? error.message : uiT("Failed to create"),
           );
         },
       });
@@ -555,8 +555,10 @@ export function TemplateFormDialog({
               className="text-xs text-muted-foreground/70"
               data-settings-subcopy
             >
-              Use {"{channel.name}"} {uiT(" and ")}
-              {"{template.name}"} as placeholders.
+              {uiT("Use {0} and {1} as placeholders.", {
+                p0: "{channel.name}",
+                p1: "{template.name}",
+              })}
             </p>
           </div>
 

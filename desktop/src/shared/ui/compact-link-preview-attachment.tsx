@@ -108,7 +108,7 @@ export function CompactLinkPreviewAttachment({
           >
             {showImage ? (
               <img
-                alt={`Preview from ${preview.imageDomain}`}
+                alt={uiT("Preview from {0}", { p0: preview.imageDomain })}
                 className="h-full w-full object-cover"
                 onError={() => setFailedImageSrc(imageSrc)}
                 src={imageSrc ?? undefined}
@@ -171,7 +171,7 @@ export function CompactLinkPreviewAttachment({
           <AttachmentTrigger
             aria-label={uiT("Open {0} {1}: {2}", {
               p0: preview.provider,
-              p1: preview.typeLabel,
+              p1: uiT(preview.typeLabel),
               p2: preview.title,
             })}
             className={reserveImage ? undefined : "rounded-none"}
@@ -180,7 +180,7 @@ export function CompactLinkPreviewAttachment({
             <span className="sr-only">
               {uiT("Open {0} {1}: {2}", {
                 p0: preview.provider,
-                p1: preview.typeLabel,
+                p1: uiT(preview.typeLabel),
                 p2: preview.title,
               })}
             </span>
@@ -193,7 +193,7 @@ export function CompactLinkPreviewAttachment({
             <a
               aria-label={uiT("Open {0} {1}: {2}", {
                 p0: preview.provider,
-                p1: preview.typeLabel,
+                p1: uiT(preview.typeLabel),
                 p2: preview.title,
               })}
               href={preview.href}
@@ -203,7 +203,7 @@ export function CompactLinkPreviewAttachment({
               <span className="sr-only">
                 {uiT("Open {0} {1}: {2}", {
                   p0: preview.provider,
-                  p1: preview.typeLabel,
+                  p1: uiT(preview.typeLabel),
                   p2: preview.title,
                 })}
               </span>

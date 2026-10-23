@@ -158,8 +158,8 @@ export function getBuzzToolInfo(title: string): BuzzToolInfo | null {
     return {
       icon: Workflow,
       label: isRead
-        ? "Reads workflow state from Buzz."
-        : "Updates workflow state in Buzz.",
+        ? uiT("Reads workflow state from Buzz.")
+        : uiT("Updates workflow state in Buzz."),
       tone: isWrite ? "write" : "read",
     };
   }
@@ -171,8 +171,8 @@ export function getBuzzToolInfo(title: string): BuzzToolInfo | null {
     return {
       icon: Hash,
       label: isRead
-        ? "Reads channel context from the Buzz relay."
-        : "Changes channel state in the Buzz relay.",
+        ? uiT("Reads channel context from the Buzz relay.")
+        : uiT("Changes channel state in the Buzz relay."),
       tone: isWrite ? "write" : "read",
     };
   }
@@ -184,8 +184,8 @@ export function getBuzzToolInfo(title: string): BuzzToolInfo | null {
     return {
       icon: Users,
       label: isRead
-        ? "Reads Buzz identity or presence data."
-        : "Updates Buzz identity or membership data.",
+        ? uiT("Reads Buzz identity or presence data.")
+        : uiT("Updates Buzz identity or membership data."),
       tone: isWrite ? "write" : "admin",
     };
   }
@@ -214,7 +214,7 @@ export function getBuzzToolInfo(title: string): BuzzToolInfo | null {
 
   return {
     icon: MessageSquare,
-    label: isRead ? "Reads from Buzz." : "Writes to Buzz.",
+    label: isRead ? uiT("Reads from Buzz.") : uiT("Writes to Buzz."),
     tone: isWrite ? "write" : "read",
   };
 }

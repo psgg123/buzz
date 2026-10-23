@@ -196,7 +196,7 @@ export function CreateSectionDialog({
         "Sections let you group related channels in the sidebar.",
       )}
       initialValue=""
-      confirmLabel="Create"
+      confirmLabel={uiT("Create")}
       isConfirmDisabled={(trimmed) => trimmed.length === 0}
       onConfirm={onConfirm}
     />
@@ -226,7 +226,7 @@ export function RenameSectionDialog({
       description={uiT("Enter a new name for this section.")}
       initialValue={sectionName}
       initialIcon={sectionIcon}
-      confirmLabel="Save"
+      confirmLabel={uiT("Save")}
       isConfirmDisabled={(trimmed, icon) =>
         trimmed.length === 0 ||
         (trimmed === sectionName && icon === (sectionIcon ?? ""))
@@ -252,11 +252,16 @@ export function DeleteSectionAlertDialog({
   onConfirm,
 }: DeleteSectionAlertDialogProps) {
   const channelLabel =
-    channelCount === 1 ? "1 channel" : `${channelCount} channels`;
+    channelCount === 1
+      ? uiT("1 channel")
+      : uiT("{0} channels", { p0: channelCount });
   const description =
     channelCount === 0
-      ? `Delete section "${sectionName}"? It has no channels.`
-      : `Delete section "${sectionName}"? Its ${channelLabel} will move back to the default Channels group.`;
+      ? uiT('Delete section "{0}"? It has no channels.', { p0: sectionName })
+      : uiT(
+          'Delete section "{0}"? Its {1} will move back to the default Channels group.',
+          { p0: sectionName, p1: channelLabel },
+        );
 
   return (
     <AlertDialog open={open} onOpenChange={onOpenChange}>

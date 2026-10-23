@@ -68,7 +68,11 @@ function ProjectHomeHeaderToggle({
     <Tooltip disableHoverableContent>
       <TooltipTrigger asChild>
         <Button
-          aria-label={open ? `Hide ${label}` : uiT("Show {0}", { p0: label })}
+          aria-label={
+            open
+              ? uiT("Hide {0}", { p0: label })
+              : uiT("Show {0}", { p0: label })
+          }
           aria-pressed={open}
           className="h-7 w-7 text-sidebar-foreground hover:bg-sidebar-accent"
           data-testid={testId}
@@ -231,8 +235,10 @@ export function ProjectChannelHome({
     workspaceSheetTab,
   ]);
   const expandLabel = workspaceSheetTab
-    ? `Open ${projectHomeWorkspaceSheetTitle(workspaceSheetTab)} in repository`
-    : "Open in repository";
+    ? uiT("Open {0} in repository", {
+        p0: projectHomeWorkspaceSheetTitle(workspaceSheetTab),
+      })
+    : uiT("Open in repository");
   const workspaceSheet =
     workspaceSheetOpen && workspaceSheetTab && workspaceRepository ? (
       <ProjectHomeWorkspaceSheet

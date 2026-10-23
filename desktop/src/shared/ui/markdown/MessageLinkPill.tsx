@@ -1,5 +1,5 @@
+import { uiT, useUiLanguage } from "@/shared/i18n/uiTranslation";
 // Buzz source localisation: authored UI strings only; user values stay unchanged.
-import { useUiLanguage } from "@/shared/i18n/uiTranslation";
 import * as React from "react";
 
 import {
@@ -204,12 +204,17 @@ function MessageLinkPillContents({
         icon="message"
         aria-label={
           !openable
-            ? `Message in channel ${channelLabel}`
+            ? uiT("Message in channel {0}", { p0: channelLabel })
             : isDeleted
               ? link.threadRootId
-                ? `Open thread in channel ${channelLabel}; linked message was deleted`
-                : `Open channel ${channelLabel}; linked message was deleted`
-              : `Open message in channel ${channelLabel}`
+                ? uiT(
+                    "Open thread in channel {0}; linked message was deleted",
+                    { p0: channelLabel },
+                  )
+                : uiT("Open channel {0}; linked message was deleted", {
+                    p0: channelLabel,
+                  })
+              : uiT("Open message in channel {0}", { p0: channelLabel })
         }
         className={cn(
           metadata.state.kind === "unavailable" && "buzz-link-unavailable",
@@ -259,7 +264,7 @@ function MessageLinkPillContents({
       type="button"
       data-message-link=""
       data-hovered={isHovered ? "" : undefined}
-      aria-label={`Open thread in ${channelLabel}`}
+      aria-label={uiT("Open thread in {0}", { p0: channelLabel })}
       title={label}
       className={cn(
         "max-w-80 cursor-pointer truncate",

@@ -49,13 +49,14 @@ export function ProjectInboxDetailPane({
     profiles?.[normalizePubkey(authorPubkey)]?.avatarUrl ?? null;
   const authorIsAgent =
     profiles?.[normalizePubkey(authorPubkey)]?.isAgent === true;
-  const inboxTitle = `${authorLabel} sent you ${
-    workItem.type === "pull-request" ? "a review" : "a task"
-  }`;
+  const inboxTitle = uiT("{0} sent you {1}", {
+    p0: authorLabel,
+    p1: workItem.type === "pull-request" ? "a review" : "a task",
+  });
   // The action deep-links to this specific work item in the project view,
   // so the label names the entity, not the project.
   const openLabel =
-    workItem.type === "pull-request" ? "Open review" : "Open task";
+    workItem.type === "pull-request" ? uiT("Open review") : uiT("Open task");
   const handleOpenMergeRecoveryTerminal = React.useCallback(
     async (input: {
       expectedCommit: string;

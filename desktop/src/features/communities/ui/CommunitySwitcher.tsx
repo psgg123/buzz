@@ -206,7 +206,10 @@ export function CommunitySwitcher({
           ? error.message
           : "Couldn't leave the community. Try again.";
       setLeaveError(
-        `${message} If the community no longer exists, use Remove from this device.`,
+        uiT(
+          "{0} If the community no longer exists, use Remove from this device.",
+          { p0: message },
+        ),
       );
       setDropdownOpen(true);
     } finally {
@@ -224,7 +227,7 @@ export function CommunitySwitcher({
       toast.error(
         error instanceof Error
           ? error.message
-          : "Couldn't remove the community from this device. Try again.",
+          : uiT("Couldn't remove the community from this device. Try again."),
       );
     }
   }, [onRemoveCommunityFromDevice, removingCommunity]);
@@ -268,7 +271,7 @@ export function CommunitySwitcher({
             : "min-w-0 flex-1 truncate font-medium"
         }
       >
-        {activeCommunity?.name ?? "No community"}
+        {activeCommunity?.name ?? uiT("No community")}
       </span>
       {variant === "profile-menu" ? (
         <ChevronRight className="h-4 w-4 shrink-0 text-muted-foreground" />
@@ -527,7 +530,10 @@ export function CommunitySwitcher({
               {uiT("Remove from this device")}
             </AlertDialogTitle>
             <AlertDialogDescription>
-              {`Remove "${removingCommunity?.name ?? ""}" from this device? Buzz won't contact the relay, so your membership isn't revoked. You can add the community again later.`}
+              {uiT(
+                "Remove \"{0}\" from this device? Buzz won't contact the relay, so your membership isn't revoked. You can add the community again later.",
+                { p0: removingCommunity?.name ?? "" },
+              )}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>

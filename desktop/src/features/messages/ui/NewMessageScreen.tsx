@@ -219,7 +219,7 @@ export function NewMessageScreen() {
         setSubmitErrorMessage(
           error instanceof Error
             ? error.message
-            : "Failed to open direct message.",
+            : uiT("Failed to open direct message."),
         );
         return null;
       }
@@ -302,10 +302,10 @@ export function NewMessageScreen() {
 
   const composerPlaceholder =
     selectedUsers.length === 0
-      ? "Choose a recipient to start a message"
+      ? uiT("Choose a recipient to start a message")
       : selectedUsers.length === 1
-        ? `Message ${formatRecipientName(selectedUsers[0])}`
-        : `Message ${selectedUsers.length} people`;
+        ? uiT("Message {0}", { p0: formatRecipientName(selectedUsers[0]) })
+        : uiT("Message {0} people", { p0: selectedUsers.length });
 
   return (
     <div

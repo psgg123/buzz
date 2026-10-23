@@ -357,7 +357,7 @@ export function EditAgentAdvancedFields({
         focusKey={focusKey}
         helperText="Per-agent env vars. Override the template's vars on collision."
         inheritedFrom={inheritedEnvVars}
-        inheritedLabel="template / global defaults"
+        inheritedLabel={uiT("template / global defaults")}
         keyAnnotations={CARD_MINT_KEY_ANNOTATIONS}
         onChange={onEnvVarsChange}
         requiredKeys={requiredEnvKeys}

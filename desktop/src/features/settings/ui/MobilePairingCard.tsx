@@ -370,7 +370,7 @@ export function MobilePairingCard({
     listen<{ reason: string }>("pairing-aborted", (event) => {
       if (!cancelled && pairingActiveRef.current) {
         pairingActiveRef.current = false;
-        setError(`Pairing stopped: ${event.payload.reason}`);
+        setError(uiT("Pairing stopped: {0}", { p0: event.payload.reason }));
         setStep("error");
       }
     }).then((fn) => {
@@ -422,7 +422,7 @@ export function MobilePairingCard({
       setError(
         err instanceof Error
           ? err.message
-          : "We couldn't send your identity. Try again.",
+          : uiT("We couldn't send your identity. Try again."),
       );
       pairingActiveRef.current = false;
       setStep("error");
@@ -432,7 +432,7 @@ export function MobilePairingCard({
   function handleDenySas() {
     pairingActiveRef.current = false;
     cancelPairing().catch(() => {});
-    setError("Pairing was canceled.");
+    setError(uiT("Pairing was canceled."));
     setStep("error");
   }
 
@@ -462,7 +462,13 @@ export function MobilePairingCard({
             and is visually hidden, so it changes nothing on screen. */}
         <p aria-live="polite" className="sr-only" data-testid="pairing-status">
           {step === "sas" && sasCode
-            ? `Verification code ${sasCode.slice(0, 3)} ${sasCode.slice(3, 6)} ready. ${codeEntry ? "Enter this code in the Buzz app on your phone." : "Check that it matches on your mobile device, then confirm the codes match."}`
+            ? uiT("Verification code {0} {1} ready. {2}", {
+                p0: sasCode.slice(0, 3),
+                p1: sasCode.slice(3, 6),
+                p2: codeEntry
+                  ? "Enter this code in the Buzz app on your phone."
+                  : "Check that it matches on your mobile device, then confirm the codes match.",
+              })
             : step === "transferring"
               ? uiT("Codes confirmed. Pairing your mobile device.")
               : step === "done"
@@ -536,7 +542,7 @@ export function MobilePairingCard({
                 <div className="flex max-w-52 flex-col items-center gap-3 text-center">
                   <TriangleAlert className="h-6 w-6 text-destructive" />
                   <p className="text-sm text-destructive">
-                    {error ?? "Pairing session ended."}
+                    {error ?? uiT("Pairing session ended.")}
                   </p>
                   <Button
                     data-testid="retry-pairing-button"

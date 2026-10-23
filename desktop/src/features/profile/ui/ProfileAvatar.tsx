@@ -126,7 +126,7 @@ export function ProfileAvatar({
     >
       {src !== undefined ? (
         <AvatarImage
-          alt={`${label} avatar`}
+          alt={uiT("{0} avatar", { p0: label })}
           className={cn(
             "object-cover",
             presentation?.state === "pending" && "brightness-75",

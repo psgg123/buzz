@@ -120,10 +120,17 @@ export function MessageThreadSummaryRow({
   const surfaceInsetStart = `calc(${contentPaddingStart} - ${threadReplyLength(
     THREAD_SUMMARY_SURFACE_AVATAR_INSET_REM,
   )})`;
-  const replyLabel = summary.replyCount === 1 ? "reply" : "replies";
+  const replyLabel = summary.replyCount === 1 ? uiT("reply") : uiT("replies");
   const summaryAriaLabel = summary.lastReplyAt
-    ? `View thread with ${summary.replyCount} ${replyLabel}, last reply ${formatThreadSummaryLastReplyTime(summary.lastReplyAt)}`
-    : `View thread with ${summary.replyCount} ${replyLabel}`;
+    ? uiT("View thread with {0} {1}, last reply {2}", {
+        p0: summary.replyCount,
+        p1: replyLabel,
+        p2: formatThreadSummaryLastReplyTime(summary.lastReplyAt),
+      })
+    : uiT("View thread with {0} {1}", {
+        p0: summary.replyCount,
+        p1: replyLabel,
+      });
   const guideDepths = depthGuideDepths
     ? [...depthGuideDepths]
     : Array.from({ length: Math.max(0, depth - 1) }, (_, index) => index + 1);
