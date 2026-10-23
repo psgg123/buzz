@@ -1448,5 +1448,7 @@
   "private channel": "비공개 채널",
   "ephemeral channel": "임시 채널",
   "regular channel": "일반 채널",
-  "Just now": "방금"
+  "Just now": "방금",
+  "Start": "시작",
+  "Restart": "재시작"
 }

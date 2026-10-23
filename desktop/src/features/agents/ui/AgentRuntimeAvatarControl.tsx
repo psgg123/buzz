@@ -162,7 +162,7 @@ export function AgentRuntimeAvatarControl({
       : isRestartAction
         ? uiT("Restart Agent")
         : uiT("Start Agent");
-  const actionText = isRestartAction ? "Restart" : "Start";
+  const actionText = isRestartAction ? uiT("Restart") : uiT("Start");
   const isPending = isStarting || isRestarting;
   const availabilityLabel = availability
     ? getPresenceLabel(availability)
