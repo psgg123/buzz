@@ -1,3 +1,5 @@
+// Buzz source localisation: authored UI strings only; user values stay unchanged.
+import { uiT, useUiLanguage } from "@/shared/i18n/uiTranslation";
 import {
   Asterisk,
   Check,
@@ -66,6 +68,8 @@ export function ChannelCombobox({
   variant = "header",
   value,
 }: ChannelComboboxProps) {
+  useUiLanguage();
+
   const [open, setOpen] = React.useState(false);
   const [query, setQuery] = React.useState("");
   const [highlightedIndex, setHighlightedIndex] = React.useState(0);
@@ -270,7 +274,7 @@ export function ChannelCombobox({
               setHighlightedIndex(0);
             }}
             onKeyDown={handleKeyDown}
-            placeholder="Search channels..."
+            placeholder={uiT("Search channels...")}
             role="combobox"
             spellCheck={false}
             value={query}
@@ -306,7 +310,7 @@ export function ChannelCombobox({
           ) : null}
           {filtered.length === 0 ? (
             <p className="px-3 py-4 text-center text-xs text-muted-foreground">
-              No channels found.
+              {uiT("No channels found.")}
             </p>
           ) : (
             filtered.map((channel) => {
@@ -332,7 +336,10 @@ export function ChannelCombobox({
                   <span className="truncate">
                     {channelLabels.get(channel.id) ?? channel.name}
                     {channel.channelType === "dm" ? (
-                      <span className="text-muted-foreground"> · dm</span>
+                      <span className="text-muted-foreground">
+                        {" "}
+                        {uiT(" · dm")}
+                      </span>
                     ) : null}
                   </span>
                   <Check

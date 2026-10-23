@@ -1,3 +1,5 @@
+// Buzz source localisation: authored UI strings only; user values stay unchanged.
+import { uiMessage, useUiLanguage } from "@/shared/i18n/uiTranslation";
 import { Bot, ChevronDown, ChevronRight } from "lucide-react";
 import * as React from "react";
 
@@ -50,6 +52,8 @@ export function AgentActivityCard({
   profile,
   agentStatus,
 }: AgentActivityCardProps) {
+  useUiLanguage();
+
   const [expanded, setExpanded] = React.useState(false);
   const displayName = profile?.displayName ?? truncateNpub(group.pubkey);
   const avatarUrl = profile?.avatarUrl ?? null;
@@ -99,12 +103,14 @@ export function AgentActivityCard({
             onClick={() => setExpanded(!expanded)}
             type="button"
           >
-            {expanded ? (
-              <ChevronDown className="h-4 w-4" />
-            ) : (
-              <ChevronRight className="h-4 w-4" />
-            )}
-            {group.notes.length} updates
+            {uiMessage("{0}{1} updates", {
+              p0: expanded ? (
+                <ChevronDown className="h-4 w-4" />
+              ) : (
+                <ChevronRight className="h-4 w-4" />
+              ),
+              p1: group.notes.length,
+            })}
           </button>
         ) : null}
       </div>

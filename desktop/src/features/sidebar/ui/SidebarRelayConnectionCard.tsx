@@ -1,3 +1,5 @@
+// Buzz source localisation: authored UI strings only; user values stay unchanged.
+import { uiT } from "@/shared/i18n/uiTranslation";
 import { Check, CloudOff } from "lucide-react";
 
 import {
@@ -77,7 +79,7 @@ export function SidebarRelayConnectionCompactCard({
           ? undefined
           : isReconnectPending
             ? reconnectDescription
-            : "Click to connect"
+            : uiT("Click to connect")
       }
       dismissClassName={dismissClassName}
       dismissLabel="Dismiss relay notification"
@@ -101,10 +103,10 @@ export function SidebarRelayConnectionCompactCard({
       testId={testId}
       title={
         isConnected
-          ? "Connected"
+          ? uiT("Connected")
           : isReconnectPending
             ? reconnectTitle
-            : "Can't reach the relay"
+            : uiT("Can't reach the relay")
       }
       tone={isConnected ? "success" : "neutral"}
     />

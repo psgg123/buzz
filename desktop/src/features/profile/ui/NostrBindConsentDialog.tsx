@@ -1,3 +1,5 @@
+// Buzz source localisation: authored UI strings only; user values stay unchanged.
+import { uiT, useUiLanguage } from "@/shared/i18n/uiTranslation";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { openUrl } from "@tauri-apps/plugin-opener";
 import { ChevronDown } from "lucide-react";
@@ -192,7 +194,7 @@ function SignedResponseControls({
                 : "-translate-y-0.5 opacity-0",
             )}
           >
-            Copy response
+            {uiT("Copy response")}
           </span>
           <span
             className={cn(
@@ -202,7 +204,7 @@ function SignedResponseControls({
                 : "translate-y-0.5 opacity-0",
             )}
           >
-            Copied
+            {uiT("Copied")}
           </span>
         </span>
       </Button>
@@ -211,6 +213,8 @@ function SignedResponseControls({
 }
 
 export function NostrBindConsentDialog() {
+  useUiLanguage();
+
   const isPreview = isNostrBindPreviewEnabled();
   const [payload, setPayload] = React.useState<NostrBindDeepLinkPayload | null>(
     isPreview ? NOSTR_BIND_PREVIEW_PAYLOAD : null,
@@ -667,16 +671,18 @@ export function NostrBindConsentDialog() {
                 >
                   <DialogPrimitive.Title className="mt-6 text-3xl font-semibold tracking-tight">
                     {payload.returnMode === "browser_fragment_v1"
-                      ? "Continue in your browser"
-                      : "Finish on the Buzz website"}
+                      ? uiT("Continue in your browser")
+                      : uiT("Finish on the Buzz website")}
                   </DialogPrimitive.Title>
                   <DialogPrimitive.Description
                     className="mt-3 max-w-[440px] text-sm leading-6 text-muted-foreground"
                     id="nostr-bind-description"
                   >
                     {payload.returnMode === "browser_fragment_v1"
-                      ? "Buzz opened your browser to finish verification."
-                      : "Copy the response below, then paste it into the Buzz website to finish verification."}
+                      ? uiT("Buzz opened your browser to finish verification.")
+                      : uiT(
+                          "Copy the response below, then paste it into the Buzz website to finish verification.",
+                        )}
                   </DialogPrimitive.Description>
 
                   {error ? (
@@ -695,12 +701,16 @@ export function NostrBindConsentDialog() {
                       open={isManualFallbackOpen}
                     >
                       <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-4 py-3 text-sm font-medium transition-colors hover:bg-muted/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring [&::-webkit-details-marker]:hidden">
-                        <span>Pairing didn’t finish automatically?</span>
+                        <span>
+                          {uiT("Pairing didn’t finish automatically?")}
+                        </span>
                         <ChevronDown className="h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-150 group-open:rotate-180" />
                       </summary>
                       <div className="space-y-4 border-t border-border/55 p-4">
                         <p className="text-sm leading-6 text-muted-foreground">
-                          Copy this response and paste it into the pairing page.
+                          {uiT(
+                            "Copy this response and paste it into the pairing page.",
+                          )}
                         </p>
                         <SignedResponseControls
                           copyFailed={copyFailed}
@@ -728,7 +738,7 @@ export function NostrBindConsentDialog() {
                       type="button"
                       variant="ghost"
                     >
-                      Continue
+                      {uiT("Continue")}
                     </Button>
                   </div>
                 </OnboardingSlideTransition>
@@ -740,13 +750,13 @@ export function NostrBindConsentDialog() {
                   transitionKey="nostr-bind-code"
                 >
                   <DialogPrimitive.Title className="mt-6 text-3xl font-semibold tracking-tight">
-                    Enter verification code
+                    {uiT("Enter verification code")}
                   </DialogPrimitive.Title>
                   <DialogPrimitive.Description
                     className="mt-3 max-w-[440px] text-sm leading-6 text-muted-foreground"
                     id="nostr-bind-description"
                   >
-                    Enter the six-digit code shown in your browser
+                    {uiT("Enter the six-digit code shown in your browser")}
                   </DialogPrimitive.Description>
 
                   <div className="mt-10 w-full space-y-4 text-sm">
@@ -757,7 +767,9 @@ export function NostrBindConsentDialog() {
                       aria-invalid={hasCodeMismatch}
                       className="w-full min-w-0 text-center"
                     >
-                      <legend className="sr-only">Verification code</legend>
+                      <legend className="sr-only">
+                        {uiT("Verification code")}
+                      </legend>
                       <div
                         className="flex justify-center gap-2"
                         data-testid="nostr-bind-verification-code"
@@ -898,7 +910,7 @@ export function NostrBindConsentDialog() {
                               : "-translate-y-0.5 opacity-0",
                           )}
                         >
-                          Continue
+                          {uiT("Continue")}
                         </span>
                         <span
                           className={cn(
@@ -908,7 +920,7 @@ export function NostrBindConsentDialog() {
                               : "translate-y-0.5 opacity-0",
                           )}
                         >
-                          Signing…
+                          {uiT("Signing…")}
                         </span>
                       </span>
                     </Button>
@@ -919,7 +931,7 @@ export function NostrBindConsentDialog() {
                       type="button"
                       variant="ghost"
                     >
-                      Cancel
+                      {uiT("Cancel")}
                     </Button>
                   </div>
                 </OnboardingSlideTransition>

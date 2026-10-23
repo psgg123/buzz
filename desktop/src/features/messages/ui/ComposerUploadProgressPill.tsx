@@ -1,3 +1,5 @@
+// Buzz source localisation: authored UI strings only; user values stay unchanged.
+import { useUiLanguage } from "@/shared/i18n/uiTranslation";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 
 import {
@@ -24,6 +26,8 @@ export function ComposerUploadProgressPill({
   phaseLabel?: string;
   percentage: number;
 }) {
+  useUiLanguage();
+
   const reducedMotion = useReducedMotion();
   const phaseLabel =
     phaseLabelOverride ?? backgroundMediaUploadPhaseLabel(phase);

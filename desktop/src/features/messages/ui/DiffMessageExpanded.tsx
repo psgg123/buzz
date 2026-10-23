@@ -1,3 +1,5 @@
+// Buzz source localisation: authored UI strings only; user values stay unchanged.
+import { uiT, useUiLanguage } from "@/shared/i18n/uiTranslation";
 import { Rows3, SplitSquareVertical } from "lucide-react";
 import { useMemo, useState } from "react";
 
@@ -22,6 +24,8 @@ export default function DiffMessageExpanded({
   filePath,
   onClose,
 }: DiffMessageExpandedProps) {
+  useUiLanguage();
+
   const [viewType, setViewType] = useState<"split" | "unified">("unified");
 
   const titleBadge = useMemo(
@@ -58,7 +62,7 @@ export default function DiffMessageExpanded({
                 variant={viewType === "unified" ? "secondary" : "ghost"}
               >
                 <Rows3 className="h-4 w-4" />
-                Unified
+                {uiT("Unified")}
               </Button>
               <Button
                 className="h-7 px-2"
@@ -70,7 +74,7 @@ export default function DiffMessageExpanded({
                 variant={viewType === "split" ? "secondary" : "ghost"}
               >
                 <SplitSquareVertical className="h-4 w-4" />
-                Split
+                {uiT("Split")}
               </Button>
             </div>
           </div>

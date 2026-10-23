@@ -1,3 +1,5 @@
+// Buzz source localisation: authored UI strings only; user values stay unchanged.
+import { uiT, useUiLanguage } from "@/shared/i18n/uiTranslation";
 import * as React from "react";
 import { RefreshCcw } from "lucide-react";
 
@@ -107,6 +109,8 @@ export function HomeView({
   onOpenContext,
   onRefresh,
 }: HomeViewProps) {
+  useUiLanguage();
+
   const relaySelfPubkey = useRelaySelfQuery().data;
   const [homeInboxRef, homeInboxWidthPx] = useElementWidth<HTMLDivElement>();
   const isNarrowHomeViewport =
@@ -601,14 +605,14 @@ export function HomeView({
         <div className="flex w-full max-w-3xl flex-col gap-4">
           <div className="rounded-md border border-destructive/30 bg-destructive/5 px-4 py-5">
             <p className="text-base font-semibold tracking-tight">
-              Home feed unavailable
+              {uiT("Home feed unavailable")}
             </p>
             <p className="mt-2 text-sm text-muted-foreground">
               {errorMessage ?? "The relay did not return a feed response."}
             </p>
             <Button className="mt-5" onClick={onRefresh} type="button">
               <RefreshCcw className="h-4 w-4" />
-              Try again
+              {uiT("Try again")}
             </Button>
           </div>
         </div>
@@ -768,7 +772,7 @@ export function HomeView({
           ) : null}
 
           <button
-            aria-label="Resize inbox list"
+            aria-label={uiT("Resize inbox list")}
             className={cn(
               "group absolute bottom-0 z-40 w-3 -translate-x-1/2 cursor-col-resize",
               topChromeInset.top,
@@ -782,8 +786,8 @@ export function HomeView({
             style={{ left: `${effectiveInboxListWidthPx}px` }}
             title={
               canResetInboxListWidth
-                ? "Drag to resize. Double-click to reset width."
-                : "Drag to resize."
+                ? uiT("Drag to resize. Double-click to reset width.")
+                : uiT("Drag to resize.")
             }
             type="button"
           >

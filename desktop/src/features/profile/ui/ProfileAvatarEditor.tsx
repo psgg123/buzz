@@ -1,3 +1,5 @@
+// Buzz source localisation: authored UI strings only; user values stay unchanged.
+import { uiT, useUiLanguage } from "@/shared/i18n/uiTranslation";
 import emojiData from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
 import { Link2, UploadCloud } from "lucide-react";
@@ -89,6 +91,8 @@ export function ProfileAvatarEditor({
   compactCustomColorPicker = false,
   stackAnimatedCameraOptions = false,
 }: ProfileAvatarEditorProps) {
+  useUiLanguage();
+
   const { burstEmoji } = useEmojiBurst();
   const shouldReduceMotion = useReducedMotion();
   const initialEmojiAvatar = React.useMemo(
@@ -584,7 +588,7 @@ export function ProfileAvatarEditor({
         void handleFiles(event.dataTransfer.files);
       }}
     >
-      <legend className="sr-only">Avatar image picker</legend>
+      <legend className="sr-only">{uiT("Avatar image picker")}</legend>
       <div
         className="relative"
         style={
@@ -755,8 +759,8 @@ export function ProfileAvatarEditor({
                       }}
                       placeholder={
                         isOnboardingModal
-                          ? "Paste a URL"
-                          : "Paste a URL (Slack profile, etc.)"
+                          ? uiT("Paste a URL")
+                          : uiT("Paste a URL (Slack profile, etc.)")
                       }
                       spellCheck={false}
                       type="url"
@@ -903,8 +907,10 @@ export function ProfileAvatarEditor({
                             aria-label={
                               isCustomSwatch
                                 ? selectedEmoji
-                                  ? "Choose custom avatar color"
-                                  : "Choose an emoji before custom avatar color"
+                                  ? uiT("Choose custom avatar color")
+                                  : uiT(
+                                      "Choose an emoji before custom avatar color",
+                                    )
                                 : `Use ${swatch} background`
                             }
                             aria-pressed={isSelected}
@@ -1026,10 +1032,10 @@ export function ProfileAvatarEditor({
                           transition={DONE_BUTTON_CONTENT_TRANSITION}
                         >
                           <Spinner
-                            aria-label="Saving avatar"
+                            aria-label={uiT("Saving avatar")}
                             className="h-4 w-4 border-2"
                           />
-                          <span>Saving</span>
+                          <span>{uiT("Saving")}</span>
                         </motion.span>
                       ) : (
                         <motion.span
@@ -1048,7 +1054,7 @@ export function ProfileAvatarEditor({
                           key="ready"
                           transition={DONE_BUTTON_CONTENT_TRANSITION}
                         >
-                          {isOnboardingModal ? "Save" : "Done"}
+                          {isOnboardingModal ? uiT("Save") : uiT("Done")}
                         </motion.span>
                       )}
                     </AnimatePresence>

@@ -1,3 +1,5 @@
+// Buzz source localisation: authored UI strings only; user values stay unchanged.
+import { uiT } from "@/shared/i18n/uiTranslation";
 import type {
   AgentActivityDescriptor,
   AgentActivityRenderClass,
@@ -216,7 +218,9 @@ function describePermissionRequest(payload: Record<string, unknown>) {
     optionNames,
     descriptor: {
       renderClass: "permission" as const,
-      label: "Permission requested",
+      get label() {
+        return uiT("Permission requested");
+      },
       preview: title,
       action: { verb: "Requested", object: title },
       tone: "admin" as const,
@@ -513,7 +517,9 @@ function upsertPlan(
         id: updateMarkerId ?? `${id}:update:${timestamp}`,
         type: "plan",
         renderClass: "plan",
-        title: "Plan updated",
+        get title() {
+          return uiT("Plan updated");
+        },
         text: summarizePlanUpdate(text),
         timestamp,
         isUpdate: true,

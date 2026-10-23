@@ -1,3 +1,5 @@
+// Buzz source localisation: authored UI strings only; user values stay unchanged.
+import { uiT, useUiLanguage } from "@/shared/i18n/uiTranslation";
 import * as React from "react";
 import { CheckCheck } from "lucide-react";
 
@@ -46,6 +48,8 @@ export function CompactMessageSummary({
   result: string;
   timestamp: string;
 }) {
+  useUiLanguage();
+
   const [detailsOpen, setDetailsOpen] = React.useState(false);
   const resolvedContent = useSentMessageBody(messageLink, preview);
   const variant = useAgentSessionTranscriptVariant();
@@ -185,14 +189,14 @@ export function CompactMessageSummary({
               timestamp={timestamp}
             />
             <button
-              aria-label="Show sent message context"
+              aria-label={uiT("Show sent message context")}
               className={cn(
                 "inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-sm transition-colors hover:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring",
                 mutedTone,
               )}
               data-testid="transcript-sent-message-context-button"
               onClick={() => setDetailsOpen(true)}
-              title="Show sent message context"
+              title={uiT("Show sent message context")}
               type="button"
             >
               <CheckCheck className="h-3.5 w-3.5" />

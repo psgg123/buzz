@@ -1,3 +1,5 @@
+// Buzz source localisation: authored UI strings only; user values stay unchanged.
+import { uiT, useUiLanguage } from "@/shared/i18n/uiTranslation";
 import { ArrowLeft, ExternalLink } from "lucide-react";
 import * as React from "react";
 
@@ -32,6 +34,8 @@ export function ProjectInboxDetailPane({
   profiles,
   workItem,
 }: ProjectInboxDetailPaneProps) {
+  useUiLanguage();
+
   const { activeCommunity } = useCommunities();
   const [detailContentRef, detailContentWidth] =
     useElementWidth<HTMLDivElement>();
@@ -87,7 +91,7 @@ export function ProjectInboxDetailPane({
             <div className="flex min-w-0 items-center gap-1">
               {isSinglePanelView && onBack ? (
                 <Button
-                  aria-label="Back to Inbox"
+                  aria-label={uiT("Back to Inbox")}
                   onClick={onBack}
                   size="icon"
                   type="button"

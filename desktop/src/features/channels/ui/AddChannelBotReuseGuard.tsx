@@ -1,3 +1,5 @@
+// Buzz source localisation: authored UI strings only; user values stay unchanged.
+import { uiT } from "@/shared/i18n/uiTranslation";
 import type { ManagedAgent } from "@/shared/api/types";
 
 type AddChannelBotReuseGuardProps = {
@@ -21,7 +23,7 @@ export function AddChannelBotReuseGuard({
   return (
     <div className="space-y-2" data-testid="agent-instance-mode">
       <label className="text-sm font-medium" htmlFor="agent-instance-mode">
-        Agent instance
+        {uiT("Agent instance")}
       </label>
       <select
         className="flex h-9 w-full rounded-md border border-input bg-background px-3 py-2 text-sm shadow-xs"
@@ -30,8 +32,8 @@ export function AddChannelBotReuseGuard({
         onChange={(e) => onForceNewChange(e.target.value === "new")}
         value={forceNew ? "new" : "reuse"}
       >
-        <option value="reuse">Reuse existing agent</option>
-        <option value="new">Create new instance</option>
+        <option value="reuse">{uiT("Reuse existing agent")}</option>
+        <option value="new">{uiT("Create new instance")}</option>
       </select>
       <p className="text-xs text-muted-foreground">
         <span className="font-medium text-foreground">

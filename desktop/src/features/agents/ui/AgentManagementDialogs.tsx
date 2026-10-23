@@ -1,3 +1,5 @@
+// Buzz source localisation: authored UI strings only; user values stay unchanged.
+import { uiT, useUiLanguage } from "@/shared/i18n/uiTranslation";
 import { useAgentManagement } from "@/features/agents/useAgentManagement";
 import { ProjectChannelRequestDialog } from "@/features/projects/ui/ProjectChannelRequestDialog";
 import { AgentCardDialogs } from "./AgentCardViewerDialog";
@@ -5,6 +7,8 @@ import { AgentDialog } from "./AgentDialog";
 
 /** Global review surfaces opened by owned agents through the Buzz harness. */
 export function AgentManagementDialogs() {
+  useUiLanguage();
+
   const management = useAgentManagement();
 
   return (
@@ -40,7 +44,7 @@ export function AgentManagementDialogs() {
           runtimes={management.runtimes}
           runtimeCatalogStatus={management.runtimeCatalogStatus}
           submitLabel="Save changes"
-          title="Edit agent"
+          title={uiT("Edit agent")}
         />
       ) : null}
       <ProjectChannelRequestDialog />

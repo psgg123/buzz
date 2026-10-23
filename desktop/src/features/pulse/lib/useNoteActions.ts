@@ -1,3 +1,5 @@
+// Buzz source localisation: authored UI strings only; user values stay unchanged.
+import { uiT } from "@/shared/i18n/uiTranslation";
 import * as React from "react";
 import { useNavigate } from "@tanstack/react-router";
 import { useQueryClient } from "@tanstack/react-query";
@@ -146,9 +148,9 @@ export function usePulseNoteActions({
   const share = React.useCallback(async (note: UserNote) => {
     try {
       await writeTextToClipboard(buildNoteShareUri(note));
-      toast.success("Copied note link");
+      toast.success(uiT("Copied note link"));
     } catch {
-      toast.error("Failed to copy note link");
+      toast.error(uiT("Failed to copy note link"));
     }
   }, []);
 

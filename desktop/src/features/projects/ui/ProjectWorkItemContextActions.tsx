@@ -1,3 +1,5 @@
+// Buzz source localisation: authored UI strings only; user values stay unchanged.
+import { useUiLanguage } from "@/shared/i18n/uiTranslation";
 import { useIsManagedAgent } from "@/features/agent-memory/hooks";
 import type {
   ProjectIssue,
@@ -21,6 +23,8 @@ export function ProjectWorkItemContextActions({
   pullRequest?: ProjectPullRequest | null;
   repository: Repository;
 }) {
+  useUiLanguage();
+
   const identityQuery = useIdentityQuery();
   const viewerPubkey = identityQuery.data?.pubkey;
   const viewer = viewerPubkey ? normalizePubkey(viewerPubkey) : null;

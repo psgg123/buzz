@@ -1,3 +1,5 @@
+// Buzz source localisation: authored UI strings only; user values stay unchanged.
+import { uiT, useUiLanguage } from "@/shared/i18n/uiTranslation";
 import { invoke } from "@tauri-apps/api/core";
 import { LoaderCircle } from "lucide-react";
 import * as React from "react";
@@ -34,6 +36,8 @@ export function AddAgentDialog({
   onAdd,
   currentAgentPubkeys,
 }: AddAgentDialogProps) {
+  useUiLanguage();
+
   const [agents, setAgents] = React.useState<ManagedAgentSummary[]>([]);
   const [loading, setLoading] = React.useState(true);
   const [adding, setAdding] = React.useState<string | null>(null);
@@ -143,7 +147,7 @@ export function AddAgentDialog({
         data-testid="add-huddle-agent-dialog"
         headerSubtitle="Choose an agent to join this huddle."
         scrollAreaClassName="space-y-5"
-        title="Add agents"
+        title={uiT("Add agents")}
       >
         {error ? (
           <p className="rounded-lg border border-destructive/30 bg-destructive/10 px-4 py-3 text-sm text-destructive">
@@ -159,11 +163,11 @@ export function AddAgentDialog({
 
         {loading ? (
           <p className="py-4 text-center text-sm text-muted-foreground">
-            Loading agents…
+            {uiT("Loading agents…")}
           </p>
         ) : availableAgents.length === 0 ? (
           <p className="py-4 text-center text-sm text-muted-foreground">
-            All available agents are already in this huddle.
+            {uiT("All available agents are already in this huddle.")}
           </p>
         ) : (
           <ul className="flex flex-col gap-1">

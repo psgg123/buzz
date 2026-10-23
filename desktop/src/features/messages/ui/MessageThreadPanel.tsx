@@ -1,3 +1,5 @@
+// Buzz source localisation: authored UI strings only; user values stay unchanged.
+import { uiT, useUiLanguage } from "@/shared/i18n/uiTranslation";
 import * as React from "react";
 import { ArrowDown } from "lucide-react";
 
@@ -212,6 +214,8 @@ export function MessageThreadPanel({
   autoSendDraftKey = null,
   onAutoSubmitComplete,
 }: MessageThreadPanelProps) {
+  useUiLanguage();
+
   const threadBodyRef = React.useRef<HTMLDivElement>(null);
   const threadContentRef = React.useRef<HTMLDivElement>(null);
   const threadComposerWrapperRef = React.useRef<HTMLDivElement>(null);
@@ -807,8 +811,11 @@ export function MessageThreadPanel({
           >
             <ArrowDown aria-hidden />
             {newMessageCount > 0
-              ? `${newMessageCount} new message${newMessageCount === 1 ? "" : "s"}`
-              : "Jump to latest"}
+              ? uiT("{0} new message{1}", {
+                  p0: newMessageCount,
+                  p1: newMessageCount === 1 ? "" : "s",
+                })
+              : uiT("Jump to latest")}
           </Button>
         </div>
       ) : null}
@@ -858,7 +865,7 @@ export function MessageThreadPanel({
               onSend={onSend}
               placeholder={
                 isHuddleTranscript
-                  ? "Message the huddle"
+                  ? uiT("Message the huddle")
                   : `Reply in thread to ${threadHead.author}`
               }
               profiles={profiles}

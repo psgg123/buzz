@@ -1,3 +1,5 @@
+// Buzz source localisation: authored UI strings only; user values stay unchanged.
+import { uiT, useUiLanguage } from "@/shared/i18n/uiTranslation";
 import { Trash2 } from "lucide-react";
 import * as React from "react";
 import { toast } from "sonner";
@@ -72,6 +74,8 @@ export function ProjectAgentChatPanel({
   sharedHeaderBackdrop?: boolean;
   widthPx?: number;
 }) {
+  useUiLanguage();
+
   const { activeCommunity } = useCommunities();
   const identityQuery = useIdentityQuery();
   // Repository coordinates (`kind:owner:dtag`) are not globally unique — the
@@ -292,13 +296,15 @@ export function ProjectAgentChatPanel({
             <div className="flex min-h-40 flex-1 flex-col items-center justify-center gap-2 text-center">
               <p className="text-sm font-medium text-foreground">
                 {homeChannel
-                  ? "Explain what this project should be"
-                  : "Ask about this page"}
+                  ? uiT("Explain what this project should be")
+                  : uiT("Ask about this page")}
               </p>
               <p className="max-w-72 text-xs text-muted-foreground">
                 {homeChannel
-                  ? "The project agent will build it out from this channel."
-                  : "Start a conversation with the project agent."}
+                  ? uiT(
+                      "The project agent will build it out from this channel.",
+                    )
+                  : uiT("Start a conversation with the project agent.")}
               </p>
             </div>
           )}
@@ -318,8 +324,8 @@ export function ProjectAgentChatPanel({
           onSend={handleSubmit}
           placeholder={
             selectedAgent
-              ? `Message ${selectedAgent.name}`
-              : "No agents available"
+              ? uiT("Message {0}", { p0: selectedAgent.name })
+              : uiT("No agents available")
           }
           profiles={candidateProfilesQuery.data?.profiles}
           showBackgroundUploadProgress={false}
@@ -333,11 +339,11 @@ export function ProjectAgentChatPanel({
               />
               {conversation ? (
                 <Button
-                  aria-label="Clear project agent chat"
+                  aria-label={uiT("Clear project agent chat")}
                   className="h-7 w-7"
                   onClick={handleClear}
                   size="icon"
-                  title="Clear conversation"
+                  title={uiT("Clear conversation")}
                   type="button"
                   variant="ghost"
                 >

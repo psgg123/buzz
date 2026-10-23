@@ -1,3 +1,5 @@
+// Buzz source localisation: authored UI strings only; user values stay unchanged.
+import { uiT } from "@/shared/i18n/uiTranslation";
 import * as React from "react";
 
 import { invokeTauri } from "@/shared/api/tauri";
@@ -48,7 +50,9 @@ export function useVideoContextMenu(
     const entries: MediaContextMenuItem[] = [];
     if (downloadUrl) {
       entries.push({
-        label: "Download video",
+        get label() {
+          return uiT("Download video");
+        },
         onSelect: () => {
           close();
           invokeTauri("download_file", {
@@ -61,7 +65,9 @@ export function useVideoContextMenu(
       });
     }
     entries.push({
-      label: "Copy link",
+      get label() {
+        return uiT("Copy link");
+      },
       onSelect: () => {
         close();
         copyTextToClipboard(downloadUrl ?? src, "Link copied to clipboard");

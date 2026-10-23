@@ -1,3 +1,5 @@
+// Buzz source localisation: authored UI strings only; user values stay unchanged.
+import { useUiLanguage } from "@/shared/i18n/uiTranslation";
 import * as React from "react";
 
 import {
@@ -74,6 +76,8 @@ function MessageLinkMetadataTooltip({
   footer: string;
   metadata: ReturnType<typeof useMessageLinkMetadata>;
 }) {
+  useUiLanguage();
+
   const { contentRef, onPointerMove } = useInlineTooltipPosition();
   if (
     metadata.state.kind === "deleted" ||
@@ -134,6 +138,8 @@ function MessageLinkMetadataTooltip({
 }
 
 function ResolvedMessageLinkPill(props: MessageLinkPillProps) {
+  useUiLanguage();
+
   const channel = useChannelReference(props.link.channelId);
   const openable = isChannelReferenceOpenable(channel);
   return (
@@ -162,6 +168,8 @@ function MessageLinkPillContents({
   channelLabel?: string;
   openable?: boolean;
 }) {
+  useUiLanguage();
+
   const [isHovered, setIsHovered] = React.useState(false);
   const channelLabel = resolvedChannelLabel ?? link.channelId.slice(0, 8);
   const isSentFromThread = variant === "sent-from-thread";

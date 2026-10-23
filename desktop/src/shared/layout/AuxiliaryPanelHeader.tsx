@@ -1,3 +1,5 @@
+// Buzz source localisation: authored UI strings only; user values stay unchanged.
+import { useUiLanguage } from "@/shared/i18n/uiTranslation";
 import * as React from "react";
 import { ArrowLeft, X } from "lucide-react";
 
@@ -118,6 +120,8 @@ export function AuxiliaryPanelHeader({
   transparent,
   ...props
 }: AuxiliaryPanelHeaderProps) {
+  useUiLanguage();
+
   const panelContext = React.useContext(AuxiliaryPanelContext);
   const resolvedMode = mode ?? panelContext?.mode ?? "docked";
   const resolvedTransparent =
@@ -270,6 +274,8 @@ export function AuxiliaryPanelHeaderGroup({
   onBack,
   ...props
 }: AuxiliaryPanelHeaderGroupProps) {
+  useUiLanguage();
+
   const panelContext = React.useContext(AuxiliaryPanelContext);
   const resolvedMode = mode ?? panelContext?.mode ?? "docked";
   const isOverlayLayout = resolvedMode === "panel";
@@ -329,6 +335,8 @@ export function AuxiliaryPanelHeaderActions({
 }
 
 function AuxiliaryPanelHeaderCloseAction() {
+  useUiLanguage();
+
   const panelContext = React.useContext(AuxiliaryPanelContext);
 
   if (!panelContext?.onClose) {

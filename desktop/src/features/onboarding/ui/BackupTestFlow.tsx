@@ -1,3 +1,5 @@
+// Buzz source localisation: authored UI strings only; user values stay unchanged.
+import { uiMessage, uiT, useUiLanguage } from "@/shared/i18n/uiTranslation";
 import {
   Check,
   ChevronRight,
@@ -113,6 +115,8 @@ type BurstParticle = {
  * skipped entirely under reduced motion.
  */
 function SuccessBurst() {
+  useUiLanguage();
+
   const particles = React.useMemo<BurstParticle[]>(
     () =>
       Array.from({ length: BURST_PARTICLE_COUNT }, (_, i) => {
@@ -216,6 +220,8 @@ export function BackupTestFlow({
   onProgressChange,
   onVerified,
 }: BackupTestFlowProps) {
+  useUiLanguage();
+
   const cardLayout = useOnboardingCardLayout();
   const reduceMotion = useReducedMotion() ?? false;
   const stageEntrance = reduceMotion
@@ -420,11 +426,12 @@ export function BackupTestFlow({
           {isCeremony ? (
             <div className="w-full max-w-140">
               <p className="text-lg font-medium text-foreground">
-                Your backup works!
+                {uiT("Your backup works!")}
               </p>
               <p className="mt-1.5 text-sm leading-6 text-muted-foreground">
-                File and password verified. Keep them both somewhere safe —
-                that&apos;s all you need to restore your identity.
+                {uiT(
+                  "File and password verified. Keep them both somewhere safe — that's all you need to restore your identity.",
+                )}
               </p>
               <div className="mx-auto mt-4 flex max-w-110 min-w-0 items-center gap-2 text-left">
                 <p
@@ -443,8 +450,8 @@ export function BackupTestFlow({
                 <Button
                   aria-label={
                     isSuccessNsecRevealed
-                      ? "Hide unlocked private key"
-                      : "Reveal unlocked private key"
+                      ? uiT("Hide unlocked private key")
+                      : uiT("Reveal unlocked private key")
                   }
                   className="size-9 shrink-0 text-muted-foreground hover:text-foreground"
                   data-testid="backup-success-nsec-toggle"
@@ -476,12 +483,14 @@ export function BackupTestFlow({
           ) : (
             <>
               <p className="text-lg font-medium text-foreground">
-                This backup works
+                {uiT("This backup works")}
               </p>
               <p className="mt-1.5 text-sm leading-6 text-muted-foreground">
                 {result.matchesCurrentIdentity
-                  ? "It restores your current Buzz identity."
-                  : "It restores a different identity than the one signed in here."}
+                  ? uiT("It restores your current Buzz identity.")
+                  : uiT(
+                      "It restores a different identity than the one signed in here.",
+                    )}
               </p>
               <div className="mt-3 flex justify-center">
                 <PubKey
@@ -504,7 +513,7 @@ export function BackupTestFlow({
             type="button"
             variant="ghost"
           >
-            Test another backup
+            {uiT("Test another backup")}
           </Button>
         )}
       </div>
@@ -554,7 +563,7 @@ export function BackupTestFlow({
                   <FileCheck2 aria-hidden className="!size-6" />
                 </span>
                 <span className="min-w-0 flex-1 truncate">
-                  Test your backup
+                  {uiT("Test your backup")}
                 </span>
                 <span className="ml-auto flex size-10 shrink-0 items-center justify-end">
                   <ChevronRight
@@ -576,7 +585,7 @@ export function BackupTestFlow({
                     <Download aria-hidden className="!size-6" />
                   </span>
                   <span className="min-w-0 flex-1 truncate">
-                    Download backup again
+                    {uiT("Download backup again")}
                   </span>
                   <span className="ml-auto flex size-10 shrink-0 items-center justify-end">
                     <ChevronRight
@@ -600,7 +609,7 @@ export function BackupTestFlow({
                 type="button"
               >
                 <span className="font-medium text-sm">
-                  Select your backup file
+                  {uiT("Select your backup file")}
                 </span>
               </Button>
             </div>
@@ -630,7 +639,7 @@ export function BackupTestFlow({
                 variant="textured"
               >
                 <FileUp aria-hidden="true" className="size-4" />
-                <span>Drop your backup file here</span>
+                <span>{uiT("Drop your backup file here")}</span>
               </Card>
             </div>
           ) : null}
@@ -658,8 +667,11 @@ export function BackupTestFlow({
                 type="button"
                 variant="ghost"
               >
-                {isSaving ? <Spinner className="h-4 w-4 border-2" /> : null}
-                Re-download backup
+                {uiMessage("{0} Re-download backup", {
+                  p0: isSaving ? (
+                    <Spinner className="h-4 w-4 border-2" />
+                  ) : null,
+                })}
               </Button>
             </div>
           ) : null}
@@ -698,7 +710,7 @@ export function BackupTestFlow({
             const passwordField = (
               <div className="relative w-full">
                 <Input
-                  aria-label="Backup password"
+                  aria-label={uiT("Backup password")}
                   autoComplete="off"
                   className={cn(
                     "font-mono",
@@ -715,13 +727,15 @@ export function BackupTestFlow({
                       void handleVerify();
                     }
                   }}
-                  placeholder="Your backup password"
+                  placeholder={uiT("Your backup password")}
                   ref={passwordInputRef}
                   type={isRevealed ? "text" : "password"}
                   value={attempt}
                 />
                 <Button
-                  aria-label={isRevealed ? "Hide password" : "Reveal password"}
+                  aria-label={
+                    isRevealed ? uiT("Hide password") : uiT("Reveal password")
+                  }
                   className={cn(
                     "absolute right-1 top-1/2 h-8 w-8 -translate-y-1/2 text-muted-foreground hover:text-foreground",
                     isSpotlight &&
@@ -756,7 +770,9 @@ export function BackupTestFlow({
                 <>
                   {fileRow}
                   <p className="text-center text-sm leading-6 text-muted-foreground">
-                    Enter the password to prove you can unlock this backup.
+                    {uiT(
+                      "Enter the password to prove you can unlock this backup.",
+                    )}
                   </p>
                   {passwordField}
                 </>
@@ -798,7 +814,7 @@ export function BackupTestFlow({
                 {isVerifying ? (
                   <>
                     <Spinner className="h-4 w-4 border-2" />
-                    Checking…
+                    {uiT("Checking…")}
                   </>
                 ) : (
                   "Verify backup"

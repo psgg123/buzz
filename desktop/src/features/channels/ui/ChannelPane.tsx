@@ -1,3 +1,5 @@
+// Buzz source localisation: authored UI strings only; user values stay unchanged.
+import { uiT, useUiLanguage } from "@/shared/i18n/uiTranslation";
 import * as React from "react";
 import { LogIn } from "lucide-react";
 import { AnimatePresence } from "motion/react";
@@ -186,6 +188,8 @@ export const ChannelPane = React.memo(function ChannelPane({
   threadFirstUnreadReplyId,
   typingPubkeys,
 }: ChannelPaneProps) {
+  useUiLanguage();
+
   const timelineScrollRef = React.useRef<HTMLDivElement>(null);
   const messageTimelineRef = React.useRef<MessageTimelineHandle>(null);
   const composerWrapperRef = React.useRef<HTMLDivElement>(null);
@@ -594,7 +598,7 @@ export const ChannelPane = React.memo(function ChannelPane({
       ) : null}
       {!isSinglePanelView ? (
         <section
-          aria-label="Channel messages and composer"
+          aria-label={uiT("Channel messages and composer")}
           className="relative flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden"
           inert={channelIsCovered ? true : undefined}
           data-testid="channel-drop-zone"
@@ -707,7 +711,7 @@ export const ChannelPane = React.memo(function ChannelPane({
                     />
                   ) : null}
                   <span className="truncate">
-                    Viewing{" "}
+                    {uiT("Viewing")}{" "}
                     <span className="font-medium text-foreground">
                       #{activeChannel?.name}
                     </span>
@@ -722,7 +726,7 @@ export const ChannelPane = React.memo(function ChannelPane({
                   variant="default"
                 >
                   <LogIn className="mr-1.5 h-4 w-4" />
-                  {isJoining ? "Joining..." : "Join to participate"}
+                  {isJoining ? uiT("Joining...") : uiT("Join to participate")}
                 </Button>
               </div>
             ) : (
@@ -776,19 +780,21 @@ export const ChannelPane = React.memo(function ChannelPane({
                     showBackgroundUploadProgress={false}
                     placeholder={
                       timeoutActive
-                        ? "You're timed out by community moderators."
+                        ? uiT("You're timed out by community moderators.")
                         : isModerationDmChannel
-                          ? "This channel is read-only."
+                          ? uiT("This channel is read-only.")
                           : activeChannel?.archivedAt
-                            ? "Archived channels are read-only."
+                            ? uiT("Archived channels are read-only.")
                             : activeChannel?.channelType === "forum"
-                              ? "Forum posting is not wired in this pass."
+                              ? uiT("Forum posting is not wired in this pass.")
                               : activeChannel
                                 ? activeChannel.channelType === "dm" &&
                                   directMessageIntro
-                                  ? `Message ${directMessageIntro.displayName}`
+                                  ? uiT("Message {0}", {
+                                      p0: directMessageIntro.displayName,
+                                    })
                                   : `Message #${activeChannel.name}`
-                                : "Select a channel"
+                                : uiT("Select a channel")
                     }
                     showTopBorder={false}
                   />

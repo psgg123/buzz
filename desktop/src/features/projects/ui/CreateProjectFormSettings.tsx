@@ -1,3 +1,5 @@
+// Buzz source localisation: authored UI strings only; user values stay unchanged.
+import { uiT, useUiLanguage } from "@/shared/i18n/uiTranslation";
 import { ChevronDown, Plus } from "lucide-react";
 import * as React from "react";
 
@@ -41,6 +43,8 @@ export function CreateProjectFormSettings({
   templates,
   channelVisibility,
 }: CreateProjectFormSettingsState & { disabled: boolean }) {
+  useUiLanguage();
+
   const [isCreateTemplateOpen, setIsCreateTemplateOpen] = React.useState(false);
   const selectedPersona = personas.find(
     (persona) => persona.id === agentPersonaId,
@@ -65,9 +69,9 @@ export function CreateProjectFormSettings({
 
       <div className={cn(SETTINGS_ROW_CLASS, disabled && "opacity-50")}>
         <span className="text-sm font-medium text-foreground">
-          Template
+          {uiT("Template")}
           <span className="ml-1 text-xs font-normal text-muted-foreground/50">
-            Project home by default
+            {uiT("Project home by default")}
           </span>
         </span>
         <DropdownMenu modal={false}>
@@ -94,7 +98,7 @@ export function CreateProjectFormSettings({
               value={templateId || NO_TEMPLATE_VALUE}
             >
               <DropdownMenuRadioItem value={NO_TEMPLATE_VALUE}>
-                None
+                {uiT("None")}
               </DropdownMenuRadioItem>
               {templates.map((template) => (
                 <DropdownMenuRadioItem key={template.id} value={template.id}>
@@ -105,7 +109,7 @@ export function CreateProjectFormSettings({
             <DropdownMenuSeparator />
             <DropdownMenuItem onSelect={() => setIsCreateTemplateOpen(true)}>
               <Plus className="size-4" />
-              Create new channel template…
+              {uiT("Create new channel template…")}
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
@@ -119,9 +123,9 @@ export function CreateProjectFormSettings({
 
       <div className={cn(SETTINGS_ROW_CLASS, teamDisabled && "opacity-50")}>
         <span className="text-sm font-medium text-foreground">
-          Team
+          {uiT("Team")}
           <span className="ml-1 text-xs font-normal text-muted-foreground/50">
-            Optional
+            {uiT("Optional")}
           </span>
         </span>
         <DropdownMenu modal={false}>
@@ -148,7 +152,7 @@ export function CreateProjectFormSettings({
               value={teamId || NONE_TEAM_VALUE}
             >
               <DropdownMenuRadioItem value={NONE_TEAM_VALUE}>
-                None
+                {uiT("None")}
               </DropdownMenuRadioItem>
               {teams.map((team) => (
                 <DropdownMenuRadioItem key={team.id} value={team.id}>
@@ -162,7 +166,7 @@ export function CreateProjectFormSettings({
 
       <div className={cn(SETTINGS_ROW_CLASS, disabled && "opacity-50")}>
         <span className="text-sm font-medium text-foreground">
-          Project list
+          {uiT("Project list")}
         </span>
         <DropdownMenu modal={false}>
           <DropdownMenuTrigger asChild>
@@ -197,13 +201,13 @@ export function CreateProjectFormSettings({
                 data-testid="create-project-listing-option-listed"
                 value="listed"
               >
-                Listed
+                {uiT("Listed")}
               </DropdownMenuRadioItem>
               <DropdownMenuRadioItem
                 data-testid="create-project-listing-option-unlisted"
                 value="unlisted"
               >
-                Unlisted
+                {uiT("Unlisted")}
               </DropdownMenuRadioItem>
             </DropdownMenuRadioGroup>
           </DropdownMenuContent>
@@ -212,7 +216,7 @@ export function CreateProjectFormSettings({
 
       <div className={cn(SETTINGS_ROW_CLASS, agentDisabled && "opacity-50")}>
         <span className="text-sm font-medium text-foreground">
-          Coding agent
+          {uiT("Coding agent")}
         </span>
         <DropdownMenu modal={false}>
           <DropdownMenuTrigger asChild>
@@ -245,7 +249,7 @@ export function CreateProjectFormSettings({
                 data-testid="create-project-agent-option-none"
                 value={NONE_AGENT_VALUE}
               >
-                None
+                {uiT("None")}
               </DropdownMenuRadioItem>
               {personas.map((persona) => (
                 <DropdownMenuRadioItem

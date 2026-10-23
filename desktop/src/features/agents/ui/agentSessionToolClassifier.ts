@@ -1,3 +1,5 @@
+// Buzz source localisation: authored UI strings only; user values stay unchanged.
+import { uiT } from "@/shared/i18n/uiTranslation";
 import type {
   AgentActivityAction,
   AgentActivityDescriptor,
@@ -179,7 +181,9 @@ function classifyDeveloperHarnessTool(
     }
     return {
       renderClass: "shell",
-      label: "Ran command",
+      get label() {
+        return uiT("Ran command");
+      },
       preview: command,
       action: { verb: "Ran", object: command ?? "command" },
       source: "harness",
@@ -191,7 +195,9 @@ function classifyDeveloperHarnessTool(
     const path = getToolString(input.args, ["path"]);
     return {
       renderClass: "file-read",
-      label: "Read file",
+      get label() {
+        return uiT("Read file");
+      },
       preview: path,
       action: { verb: "Read", object: path ?? "file" },
       source: "harness",
@@ -203,7 +209,9 @@ function classifyDeveloperHarnessTool(
     const source = getToolString(input.args, ["source"]);
     return {
       renderClass: "image",
-      label: "Viewed image",
+      get label() {
+        return uiT("Viewed image");
+      },
       preview: source ? basenameOrUrl(source) : null,
       action: {
         verb: "Viewed",
@@ -218,7 +226,9 @@ function classifyDeveloperHarnessTool(
     const path = getToolString(input.args, ["path"]);
     return {
       renderClass: "file-edit",
-      label: "Edited file",
+      get label() {
+        return uiT("Edited file");
+      },
       preview: path,
       action: { verb: "Edited", object: path ?? "file" },
       source: "harness",
@@ -230,7 +240,9 @@ function classifyDeveloperHarnessTool(
     const preview = getTodoPreview(input.args);
     return {
       renderClass: "plan",
-      label: "Updated todos",
+      get label() {
+        return uiT("Updated todos");
+      },
       preview,
       action: { verb: "Updated", object: preview },
       source: "harness",
@@ -241,7 +253,9 @@ function classifyDeveloperHarnessTool(
   if (kind === "stop_hook") {
     return {
       renderClass: "suppressed",
-      label: "Checked todos",
+      get label() {
+        return uiT("Checked todos");
+      },
       preview: null,
       action: { verb: "Checked", object: "todos" },
       source: "harness",
@@ -252,7 +266,9 @@ function classifyDeveloperHarnessTool(
   if (kind === "post_compact_hook") {
     return {
       renderClass: "status",
-      label: "Context compacted",
+      get label() {
+        return uiT("Context compacted");
+      },
       preview: null,
       action: { verb: "Compacted", object: "context" },
       source: "harness",
@@ -263,7 +279,9 @@ function classifyDeveloperHarnessTool(
   const preview = genericPreview(input);
   return {
     renderClass: "generic",
-    label: "Ran tool",
+    get label() {
+      return uiT("Ran tool");
+    },
     preview,
     action: { verb: "Ran", object: preview ?? "tool" },
     source: "harness",
@@ -304,7 +322,9 @@ function genericDescriptor(
   const preview = genericPreview(input);
   return {
     renderClass: "generic",
-    label: "Ran tool",
+    get label() {
+      return uiT("Ran tool");
+    },
     preview,
     action: { verb: "Ran", object: preview ?? "tool" },
     source: "fallback",

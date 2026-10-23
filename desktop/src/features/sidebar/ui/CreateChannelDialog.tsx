@@ -1,3 +1,5 @@
+// Buzz source localisation: authored UI strings only; user values stay unchanged.
+import { useUiLanguage } from "@/shared/i18n/uiTranslation";
 import type { ReactNode } from "react";
 
 import type { ChannelVisibility } from "@/shared/api/types";
@@ -44,6 +46,8 @@ export function CreateChannelDialog({
   testId = "create-channel-dialog",
   title,
 }: CreateChannelDialogProps) {
+  useUiLanguage();
+
   const open = channelKind !== null;
 
   const form = useCreateChannelForm({

@@ -1,3 +1,5 @@
+// Buzz source localisation: authored UI strings only; user values stay unchanged.
+import { uiT } from "@/shared/i18n/uiTranslation";
 import {
   CopyPlus,
   EllipsisVertical,
@@ -61,7 +63,7 @@ export function PersonaActionsMenu({
         {canEdit ? (
           <DropdownMenuItem disabled={disabled} onClick={() => onEdit(persona)}>
             <Pencil className="h-4 w-4" />
-            Edit
+            {uiT("Edit")}
           </DropdownMenuItem>
         ) : null}
         <DropdownMenuItem
@@ -69,20 +71,20 @@ export function PersonaActionsMenu({
           onClick={() => onDuplicate(persona)}
         >
           <CopyPlus className="h-4 w-4" />
-          Duplicate
+          {uiT("Duplicate")}
         </DropdownMenuItem>
         <DropdownMenuItem
           disabled={disabled}
           onClick={() => onShare(persona, linkedAgent)}
         >
           <Share2 className="h-4 w-4" />
-          Share
+          {uiT("Share")}
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         {persona.sourceTeam ? (
           <DropdownMenuItem disabled>
             <Trash2 className="h-4 w-4" />
-            Managed by team
+            {uiT("Managed by team")}
           </DropdownMenuItem>
         ) : (
           <DropdownMenuItem
@@ -98,7 +100,7 @@ export function PersonaActionsMenu({
             }}
           >
             <Trash2 className="h-4 w-4" />
-            Delete
+            {uiT("Delete")}
           </DropdownMenuItem>
         )}
       </DropdownMenuContent>

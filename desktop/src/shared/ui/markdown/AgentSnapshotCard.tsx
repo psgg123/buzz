@@ -1,3 +1,5 @@
+// Buzz source localisation: authored UI strings only; user values stay unchanged.
+import { uiT, useUiLanguage } from "@/shared/i18n/uiTranslation";
 import * as React from "react";
 import { Bot, Download, Loader2, Users } from "lucide-react";
 
@@ -67,6 +69,8 @@ export function AgentSnapshotCard({
   thumb,
   onImport,
 }: AgentSnapshotCardProps) {
+  useUiLanguage();
+
   const [importState, setImportState] = React.useState<ImportState>({
     phase: "idle",
   });
@@ -186,7 +190,7 @@ export function AgentSnapshotCard({
           data-testid="agent-snapshot-card-download"
           onClick={handleDownload}
           size="icon"
-          title="Download"
+          title={uiT("Download")}
           type="button"
           variant="ghost"
         >
@@ -203,10 +207,10 @@ export function AgentSnapshotCard({
         >
           {isFetching ? <Loader2 className="animate-spin" /> : <SnapshotIcon />}
           {isFetching
-            ? "Loading…"
+            ? uiT("Loading…")
             : snapshotKind === "team"
-              ? "Add team"
-              : "Add agent"}
+              ? uiT("Add team")
+              : uiT("Add agent")}
         </AttachmentAction>
       </AttachmentActions>
     </Attachment>

@@ -1,3 +1,5 @@
+// Buzz source localisation: authored UI strings only; user values stay unchanged.
+import { uiT } from "@/shared/i18n/uiTranslation";
 import { buildTranscriptState } from "./agentSessionTranscript";
 import type { ObserverEvent, TranscriptItem } from "./agentSessionTypes";
 import { classifyToolItem } from "./agentSessionToolClassifier";
@@ -299,7 +301,7 @@ function groupMixedToolRuns(
         kind: "summary",
         summary: {
           id: `summary:mixed:${items[0].id}`,
-          label: `Ran ${items.length} tool calls`,
+          label: uiT("Ran {0} tool calls", { p0: items.length }),
           count: items.length,
           items,
           renderClass: null,

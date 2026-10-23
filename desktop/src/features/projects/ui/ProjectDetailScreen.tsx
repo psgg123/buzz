@@ -1,3 +1,5 @@
+// Buzz source localisation: authored UI strings only; user values stay unchanged.
+import { uiT, useUiLanguage } from "@/shared/i18n/uiTranslation";
 import * as React from "react";
 import { toast } from "sonner";
 
@@ -85,6 +87,8 @@ import {
 } from "./projectDetailHelpers";
 
 export function ProjectDetailScreen(props: ProjectDetailScreenProps) {
+  useUiLanguage();
+
   const {
     commitHash,
     entityNavigationId,
@@ -342,7 +346,7 @@ export function ProjectDetailScreen(props: ProjectDetailScreenProps) {
       });
       return;
     }
-    toast.success("Remote state refreshed.");
+    toast.success(uiT("Remote state refreshed."));
   }, [
     memberChannelIds,
     repoSnapshotQuery,
@@ -586,7 +590,7 @@ export function ProjectDetailScreen(props: ProjectDetailScreenProps) {
   const handleCreateIssue = React.useCallback(
     async (input: CreateIssueDialogInput) => {
       const issueId = await createIssueMutation.mutateAsync(input);
-      toast.success("Task created.");
+      toast.success(uiT("Task created."));
       await issuesQuery.refetch();
       setSelectedIssueId(issueId);
     },

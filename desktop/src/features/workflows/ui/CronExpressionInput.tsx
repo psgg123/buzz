@@ -1,3 +1,5 @@
+// Buzz source localisation: authored UI strings only; user values stay unchanged.
+import { uiT, useUiLanguage } from "@/shared/i18n/uiTranslation";
 import * as React from "react";
 
 import { cn } from "@/shared/lib/cn";
@@ -20,6 +22,8 @@ export function CronExpressionInput({
   onChange: (value: string) => void;
   value: string;
 }) {
+  useUiLanguage();
+
   const [fields, setFields] = React.useState<CronFields>(() =>
     cronFieldsFromExpression(value),
   );
@@ -55,7 +59,7 @@ export function CronExpressionInput({
   return (
     <fieldset className="space-y-1.5">
       <legend className="text-xs font-medium text-muted-foreground">
-        Cron expression
+        {uiT("Cron expression")}
       </legend>
       <div aria-describedby={messageId} className="space-y-1">
         <div className="grid grid-cols-5 gap-px px-px">

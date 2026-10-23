@@ -1,3 +1,5 @@
+// Buzz source localisation: authored UI strings only; user values stay unchanged.
+import { useUiLanguage } from "@/shared/i18n/uiTranslation";
 import {
   cancelBackgroundMediaUploads,
   useBackgroundMediaUpload,
@@ -9,6 +11,8 @@ import {
 import { ComposerUploadProgressPill } from "@/features/messages/ui/ComposerUploadProgressPill";
 
 export function ComposerUploadProgressOverlay() {
+  useUiLanguage();
+
   const backgroundUpload = useBackgroundMediaUpload();
   const linkPreviews = useBackgroundLinkPreviewPreparation();
 

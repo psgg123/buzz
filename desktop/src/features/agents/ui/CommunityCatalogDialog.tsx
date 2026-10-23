@@ -1,3 +1,5 @@
+// Buzz source localisation: authored UI strings only; user values stay unchanged.
+import { uiT, useUiLanguage } from "@/shared/i18n/uiTranslation";
 import * as React from "react";
 import { ChevronDown, Plus, Upload } from "lucide-react";
 
@@ -118,6 +120,8 @@ export function CommunityCatalogDialog({
   preferSection,
   onOpenChange,
 }: CommunityCatalogDialogProps) {
+  useUiLanguage();
+
   const contentRef = React.useRef<HTMLDivElement | null>(null);
   const fileInputRef = React.useRef<HTMLInputElement | null>(null);
   const dragDepthRef = React.useRef(0);
@@ -291,7 +295,7 @@ export function CommunityCatalogDialog({
           className="h-[42rem] max-w-4xl"
           contentClassName="flex min-h-0 min-w-0 flex-1 p-0"
           data-testid="community-catalog-dialog"
-          description="Create, discover, and import agents and teams."
+          description={uiT("Create, discover, and import agents and teams.")}
           headerClassName="bg-sidebar pb-3 text-sidebar-foreground"
           headerTestId="community-catalog-dialog-header"
           onOpenAutoFocus={(event) => {
@@ -302,7 +306,7 @@ export function CommunityCatalogDialog({
           scrollAreaClassName="flex min-h-0 overflow-hidden px-0"
           scrollAreaTestId="community-catalog-dialog-body"
           tabIndex={-1}
-          title="Add agent"
+          title={uiT("Add agent")}
           onDragEnter={(event) => {
             if (!isImportSelected || !hasFiles(event)) return;
             event.preventDefault();
@@ -336,7 +340,7 @@ export function CommunityCatalogDialog({
                 data-testid="agent-catalog-drop-overlay"
               >
                 <p className="rounded-full bg-background/90 px-4 py-2 text-sm font-medium text-primary shadow-sm">
-                  Drop .agent.json or .agent.png to import
+                  {uiT("Drop .agent.json or .agent.png to import")}
                 </p>
               </div>
             ) : null}
@@ -351,14 +355,14 @@ export function CommunityCatalogDialog({
                   <CatalogNavigationButton
                     icon={<Plus className="h-4 w-4" />}
                     isCurrent={isCreateSelected}
-                    label="Create agent"
+                    label={uiT("Create agent")}
                     onClick={() => requestSelection("create")}
                     testId="agent-catalog-create"
                   />
                   <CatalogNavigationButton
                     icon={<Upload className="h-4 w-4" />}
                     isCurrent={isImportSelected}
-                    label="Import"
+                    label={uiT("Import")}
                     onClick={() => requestSelection("import")}
                     testId="agent-catalog-import"
                   />
@@ -371,7 +375,7 @@ export function CommunityCatalogDialog({
                 {!personasLoading && personas.length > 0 ? (
                   <div className="mb-1">
                     <p className="px-4 pb-1 pt-2 text-2xs font-semibold uppercase tracking-wider text-sidebar-foreground/60">
-                      Agents
+                      {uiT("Agents")}
                     </p>
                     <div className="space-y-1">
                       {personas.map((persona) => {
@@ -426,7 +430,7 @@ export function CommunityCatalogDialog({
                 {!teamsLoading && teams.length > 0 ? (
                   <div className="mb-1">
                     <p className="px-4 pb-1 pt-2 text-2xs font-semibold uppercase tracking-wider text-sidebar-foreground/60">
-                      Teams
+                      {uiT("Teams")}
                     </p>
                     <div className="space-y-1">
                       {teams.map((team) => {
@@ -511,8 +515,8 @@ export function CommunityCatalogDialog({
                         type="button"
                       >
                         {selectedPersonaIsActive
-                          ? "Added to My Agents"
-                          : "Add agent"}
+                          ? uiT("Added to My Agents")
+                          : uiT("Add agent")}
                       </Button>
                     ) : selectedTeam ? (
                       <Button
@@ -529,10 +533,10 @@ export function CommunityCatalogDialog({
                         type="button"
                       >
                         {selectedTeamIsAdded
-                          ? "Added to my teams"
+                          ? uiT("Added to my teams")
                           : teamsAdding
-                            ? "Adding…"
-                            : "Add team"}
+                            ? uiT("Adding…")
+                            : uiT("Add team")}
                       </Button>
                     ) : null}
                   </div>
@@ -576,16 +580,16 @@ export function CommunityCatalogDialog({
       >
         <AlertDialogContent data-testid="discard-create-agent-dialog">
           <AlertDialogHeader>
-            <AlertDialogTitle>Discard agent changes?</AlertDialogTitle>
+            <AlertDialogTitle>{uiT("Discard agent changes?")}</AlertDialogTitle>
             <AlertDialogDescription>
-              Your changes to this agent will be lost.
+              {uiT("Your changes to this agent will be lost.")}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Keep editing</AlertDialogCancel>
+            <AlertDialogCancel>{uiT("Keep editing")}</AlertDialogCancel>
             <AlertDialogAction asChild>
               <Button onClick={discardChangesAndNavigate} variant="destructive">
-                Discard changes
+                {uiT("Discard changes")}
               </Button>
             </AlertDialogAction>
           </AlertDialogFooter>
@@ -642,13 +646,16 @@ function ImportAgentPane({ onImport }: { onImport: () => void }) {
       <span className="flex h-14 w-14 items-center justify-center rounded-full bg-muted text-muted-foreground">
         <Upload className="h-6 w-6" />
       </span>
-      <span className="mt-4 text-base font-semibold">Import an agent</span>
+      <span className="mt-4 text-base font-semibold">
+        {uiT("Import an agent")}
+      </span>
       <span className="mt-2 max-w-sm text-sm text-muted-foreground">
-        Drop an .agent.json or .agent.png file anywhere in this window, or
-        choose a file.
+        {uiT(
+          "Drop an .agent.json or .agent.png file anywhere in this window, or choose a file.",
+        )}
       </span>
       <span className="mt-5 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground">
-        Choose file
+        {uiT("Choose file")}
       </span>
     </button>
   );
@@ -670,10 +677,10 @@ function CatalogEmptyState() {
         src={agentOutlineUrl}
       />
       <p className="mt-3 text-sm font-semibold text-sidebar-foreground">
-        Nothing shared yet
+        {uiT("Nothing shared yet")}
       </p>
       <p className="mt-1 text-xs text-sidebar-foreground/60">
-        Shared agents and teams will appear here.
+        {uiT("Shared agents and teams will appear here.")}
       </p>
     </div>
   );
@@ -722,6 +729,8 @@ export function AgentInstructionReview({
 }
 
 function PersonaCatalogDetail({ persona }: { persona: AgentPersona }) {
+  useUiLanguage();
+
   const description = effectiveAgentDescription(persona);
   const isCommunityEntry =
     isCatalogPersona(persona) && !persona.catalogSource.isOwn;
@@ -779,7 +788,7 @@ function PersonaCatalogDetail({ persona }: { persona: AgentPersona }) {
 
       <div className="min-w-0 max-w-full pt-3">
         <p className="text-base font-semibold text-foreground">
-          Agent instructions
+          {uiT("Agent instructions")}
         </p>
         <AgentInstructionReview instructions={persona.systemPrompt} />
       </div>
@@ -790,6 +799,8 @@ function PersonaCatalogDetail({ persona }: { persona: AgentPersona }) {
 // ── Team detail ───────────────────────────────────────────────────────────────
 
 function TeamCatalogDetail({ team }: { team: CatalogTeam }) {
+  useUiLanguage();
+
   const ownerPubkey = team.isOwn ? undefined : team.ownerPubkey;
   const ownerBatchQuery = useUsersBatchQuery(ownerPubkey ? [ownerPubkey] : [], {
     enabled: !!ownerPubkey,
@@ -825,7 +836,7 @@ function TeamCatalogDetail({ team }: { team: CatalogTeam }) {
       {hasInstructions ? (
         <div className="min-w-0 max-w-full pt-3">
           <p className="text-base font-semibold text-foreground">
-            Team instructions
+            {uiT("Team instructions")}
           </p>
           <AgentInstructionReview instructions={team.instructions ?? ""} />
         </div>
@@ -834,7 +845,7 @@ function TeamCatalogDetail({ team }: { team: CatalogTeam }) {
       <div className="min-w-0">
         <p className="text-base font-semibold text-foreground">
           {team.members.length}{" "}
-          {team.members.length === 1 ? "member" : "members"}
+          {team.members.length === 1 ? uiT("member") : uiT("members")}
         </p>
         <ul className="mt-3 space-y-2">
           {team.members.map((member) => (
@@ -851,6 +862,8 @@ type TeamCatalogMemberRowProps = {
 };
 
 function TeamCatalogMemberRow({ member }: TeamCatalogMemberRowProps) {
+  useUiLanguage();
+
   const [expanded, setExpanded] = React.useState(false);
 
   return (
@@ -895,13 +908,13 @@ function TeamCatalogMemberRow({ member }: TeamCatalogMemberRowProps) {
           />
           <div className="min-w-0 max-w-full">
             <p className="text-sm font-semibold text-foreground">
-              Agent instructions
+              {uiT("Agent instructions")}
             </p>
             {member.systemPrompt.trim().length > 0 ? (
               <AgentInstructionReview instructions={member.systemPrompt} />
             ) : (
               <p className="mt-3 text-sm italic text-muted-foreground/60">
-                No instructions
+                {uiT("No instructions")}
               </p>
             )}
           </div>

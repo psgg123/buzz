@@ -1,3 +1,5 @@
+// Buzz source localisation: authored UI strings only; user values stay unchanged.
+import { uiT } from "@/shared/i18n/uiTranslation";
 import type {
   AcpRuntimeCatalogEntry,
   GlobalAgentConfig,
@@ -141,15 +143,27 @@ const PROVIDER_CREDENTIAL_CONFIG: Partial<
 
 const DEFAULT_MODEL_OPTION: PersonaModelOption = {
   id: "",
-  label: "Default model",
+  get label() {
+    return uiT("Default model");
+  },
 };
 
 export const PERSONA_LLM_PROVIDER_OPTIONS: readonly PersonaModelOption[] = [
   { id: "anthropic", label: "Anthropic" },
   { id: "openai", label: "OpenAI" },
-  { id: "openai-compat", label: "OpenAI-compatible" },
+  {
+    id: "openai-compat",
+    get label() {
+      return uiT("OpenAI-compatible");
+    },
+  },
   { id: "openrouter", label: "OpenRouter" },
-  { id: "relay-mesh", label: "Buzz shared compute" },
+  {
+    id: "relay-mesh",
+    get label() {
+      return uiT("Buzz shared compute");
+    },
+  },
   { id: "databricks", label: "Databricks" },
   { id: "databricks_v2", label: "Databricks v2" },
 ];
@@ -414,7 +428,10 @@ export function getPersonaProviderOptions(
 
   return [
     ...options,
-    { id: trimmedProvider, label: `${trimmedProvider} (current)` },
+    {
+      id: trimmedProvider,
+      label: uiT("{0} (current)", { p0: trimmedProvider }),
+    },
   ];
 }
 
@@ -532,7 +549,7 @@ export function buildPersonaRuntimeDropdownOptions({
     !runtimeDropdownOptions.some((option) => option.value === currentRuntime)
   ) {
     runtimeDropdownOptions.push({
-      label: `${currentRuntime} (current)`,
+      label: uiT("{0} (current)", { p0: currentRuntime }),
       value: currentRuntime,
     });
   }

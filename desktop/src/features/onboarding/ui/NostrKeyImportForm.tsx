@@ -1,3 +1,5 @@
+// Buzz source localisation: authored UI strings only; user values stay unchanged.
+import { uiT, useUiLanguage } from "@/shared/i18n/uiTranslation";
 import * as React from "react";
 import { Check, Eye, EyeOff, FileKey2, KeyRound } from "lucide-react";
 
@@ -71,6 +73,8 @@ export function NostrKeyImportForm({
   footerMode = "onboarding",
   variant = "default",
 }: NostrKeyImportFormProps) {
+  useUiLanguage();
+
   const [nsecInput, setNsecInput] = React.useState("");
   const [passphrase, setPassphrase] = React.useState("");
   const [isImporting, setIsImporting] = React.useState(false);
@@ -288,7 +292,7 @@ export function NostrKeyImportForm({
             )}
             htmlFor="nostr-private-key"
           >
-            Private key
+            {uiT("Private key")}
           </label>
           {variant === "spotlight" ? (
             cardLayout ? (
@@ -303,7 +307,7 @@ export function NostrKeyImportForm({
                     setNsecInput(event.target.value);
                     setImportError(null);
                   }}
-                  placeholder="Enter your key here"
+                  placeholder={uiT("Enter your key here")}
                   ref={inputRef}
                   spellCheck={false}
                   type={isRevealed ? "text" : "password"}
@@ -314,7 +318,9 @@ export function NostrKeyImportForm({
                 <Button
                   aria-hidden={!hasInput}
                   aria-label={
-                    isRevealed ? "Hide private key" : "Reveal private key"
+                    isRevealed
+                      ? uiT("Hide private key")
+                      : uiT("Reveal private key")
                   }
                   className={cn(
                     "absolute right-2 top-1/2 h-8 w-8 -translate-y-1/2 text-muted-foreground transition-opacity duration-300 hover:bg-foreground/10 hover:text-foreground motion-reduce:transition-none",
@@ -354,7 +360,7 @@ export function NostrKeyImportForm({
                       setNsecInput(event.target.value);
                       setImportError(null);
                     }}
-                    placeholder="Enter your key here"
+                    placeholder={uiT("Enter your key here")}
                     ref={inputRef}
                     spellCheck={false}
                     type={isRevealed ? "text" : "password"}
@@ -363,7 +369,9 @@ export function NostrKeyImportForm({
                   <Button
                     aria-hidden={!hasInput}
                     aria-label={
-                      isRevealed ? "Hide private key" : "Reveal private key"
+                      isRevealed
+                        ? uiT("Hide private key")
+                        : uiT("Reveal private key")
                     }
                     className={cn(
                       "absolute right-8 top-1/2 h-10 w-10 -translate-y-1/2 text-muted-foreground transition-opacity duration-300 hover:bg-foreground/10 hover:text-foreground motion-reduce:transition-none",
@@ -446,7 +454,7 @@ export function NostrKeyImportForm({
               type="button"
             >
               <FileKey2 aria-hidden="true" className="mr-2 size-4" />
-              Choose a backup file
+              {uiT("Choose a backup file")}
             </Button>
             <BackupFileUnlockPreview />
           </div>
@@ -458,7 +466,7 @@ export function NostrKeyImportForm({
             >
               <span className="flex items-center gap-2 rounded-full bg-foreground px-4 py-2 text-sm font-semibold text-background shadow-sm ring-1 ring-background/15">
                 <KeyRound aria-hidden="true" className="size-4" />
-                <span>Drop your backup file here</span>
+                <span>{uiT("Drop your backup file here")}</span>
               </span>
             </fieldset>
           ) : null}
@@ -530,7 +538,7 @@ export function NostrKeyImportForm({
               isDragging && "text-primary",
             )}
           >
-            Drop a key here
+            {uiT("Drop a key here")}
           </span>
         </button>
       ) : null}
@@ -545,7 +553,7 @@ export function NostrKeyImportForm({
         >
           <BackupPasswordTimeline mode="restore" />
           <label className="sr-only" htmlFor="nostr-import-passphrase">
-            Backup password
+            {uiT("Backup password")}
           </label>
           <div className="relative z-10">
             <Input
@@ -558,14 +566,16 @@ export function NostrKeyImportForm({
                 setPassphrase(event.target.value);
                 setImportError(null);
               }}
-              placeholder="Backup password"
+              placeholder={uiT("Backup password")}
               ref={passphraseInputRef}
               spellCheck={false}
               type={isRevealed ? "text" : "password"}
               value={passphrase}
             />
             <Button
-              aria-label={isRevealed ? "Hide password" : "Reveal password"}
+              aria-label={
+                isRevealed ? uiT("Hide password") : uiT("Reveal password")
+              }
               className="absolute right-1 top-1/2 h-8 w-8 -translate-y-1/2 text-black/55 hover:bg-black/5 hover:text-black/80"
               data-testid="nostr-import-passphrase-reveal-toggle"
               disabled={isInteractionDisabled}
@@ -608,7 +618,7 @@ export function NostrKeyImportForm({
                   )}
                 >
                   <Check aria-hidden="true" className="h-4 w-4 shrink-0" />
-                  Nostr identity found
+                  {uiT("Nostr identity found")}
                 </p>
                 <p className="break-all font-mono text-[color:var(--buzz-onboarding-backup-ink)]">
                   {previewNpub}
@@ -622,7 +632,7 @@ export function NostrKeyImportForm({
                 <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
                 <div className="min-w-0 space-y-0.5">
                   <p className="font-medium text-foreground">
-                    This will use this Nostr identity:
+                    {uiT("This will use this Nostr identity:")}
                   </p>
                   <p className="break-all font-mono text-2xs text-muted-foreground">
                     {previewNpub}
@@ -635,8 +645,8 @@ export function NostrKeyImportForm({
           {showInvalidHint && !errorMessage ? (
             <p className="text-sm text-muted-foreground">
               {isEncryptedInput
-                ? "Waiting for a complete ncryptsec backup"
-                : "Waiting for a valid nsec1 key"}
+                ? uiT("Waiting for a complete ncryptsec backup")
+                : uiT("Waiting for a valid nsec1 key")}
             </p>
           ) : null}
 
@@ -673,7 +683,7 @@ export function NostrKeyImportForm({
           >
             {isImporting ? (
               <Spinner
-                aria-label="Importing key"
+                aria-label={uiT("Importing key")}
                 className="h-4 w-4 border-2"
               />
             ) : variant === "spotlight" ? (
@@ -696,7 +706,7 @@ export function NostrKeyImportForm({
             type="button"
             variant="ghost"
           >
-            {isPasswordStage ? "Back" : backLabel}
+            {isPasswordStage ? uiT("Back") : backLabel}
           </Button>
         ) : null}
       </Footer>

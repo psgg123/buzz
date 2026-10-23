@@ -1,3 +1,5 @@
+// Buzz source localisation: authored UI strings only; user values stay unchanged.
+import { useUiLanguage } from "@/shared/i18n/uiTranslation";
 import { useRef, useState } from "react";
 import { ChevronDown, Pause, Play } from "lucide-react";
 
@@ -62,6 +64,8 @@ export function SoundPicker({
   disabled?: boolean;
   onChange: (next: SoundName) => void;
 }) {
+  useUiLanguage();
+
   const items = sortedSounds(recommended);
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);

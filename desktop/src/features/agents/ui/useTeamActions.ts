@@ -1,3 +1,5 @@
+// Buzz source localisation: authored UI strings only; user values stay unchanged.
+import { uiT } from "@/shared/i18n/uiTranslation";
 import * as React from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
@@ -195,8 +197,12 @@ export function useTeamActions(
     actions.setActionNoticeMessage(null);
     actions.setActionErrorMessage(null);
     setTeamDialogState({
-      title: "Create team",
-      description: "Group agents together for quick deployment to channels.",
+      get title() {
+        return uiT("Create team");
+      },
+      get description() {
+        return uiT("Group agents together for quick deployment to channels.");
+      },
       submitLabel: "Create team",
       initialValues: {
         name: "",
@@ -210,8 +216,10 @@ export function useTeamActions(
     actions.setActionNoticeMessage(null);
     actions.setActionErrorMessage(null);
     setTeamDialogState({
-      title: `Duplicate ${team.name}`,
-      description: "Create a new team by copying this one.",
+      title: uiT("Duplicate {0}", { p0: team.name }),
+      get description() {
+        return uiT("Create a new team by copying this one.");
+      },
       submitLabel: "Create team",
       initialValues: {
         name: `${team.name} copy`,
@@ -239,7 +247,9 @@ export function useTeamActions(
     actions.setActionNoticeMessage(null);
     actions.setActionErrorMessage(null);
     setTeamDialogState({
-      title: "Edit team",
+      get title() {
+        return uiT("Edit team");
+      },
       description: "",
       submitLabel: "Save changes",
       initialValues: {

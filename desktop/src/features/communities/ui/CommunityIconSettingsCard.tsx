@@ -1,3 +1,5 @@
+// Buzz source localisation: authored UI strings only; user values stay unchanged.
+import { useUiLanguage } from "@/shared/i18n/uiTranslation";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import * as React from "react";
 import { toast } from "sonner";
@@ -21,6 +23,8 @@ export function CommunityIconSettingsCard({
 }: {
   compact?: boolean;
 }) {
+  useUiLanguage();
+
   const { activeCommunity } = useCommunities();
   const relayUrl = activeCommunity?.relayUrl;
   const iconQuery = useActiveCommunityIcon(relayUrl);

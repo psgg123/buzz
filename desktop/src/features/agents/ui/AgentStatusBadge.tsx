@@ -1,3 +1,5 @@
+// Buzz source localisation: authored UI strings only; user values stay unchanged.
+import { useUiLanguage } from "@/shared/i18n/uiTranslation";
 import * as React from "react";
 
 import { Badge } from "@/shared/ui/badge";
@@ -22,6 +24,8 @@ export function AgentStatusBadge({
   sentenceCase?: boolean;
   status: ManagedAgent["status"];
 }) {
+  useUiLanguage();
+
   const [inGracePeriod, setInGracePeriod] = React.useState(true);
 
   React.useEffect(() => {

@@ -1,7 +1,14 @@
+// Buzz source localisation: authored UI strings only; user values stay unchanged.
+import { uiT } from "@/shared/i18n/uiTranslation";
 export const personaLibraryCopy = {
-  title: "My agents",
-  description:
-    "The agents you have chosen for this app. Use them to create teams and launch agents.",
+  get title() {
+    return uiT("My agents");
+  },
+  get description() {
+    return uiT(
+      "The agents you have chosen for this app. Use them to create teams and launch agents.",
+    );
+  },
   chooseFromCatalog: "Choose from catalog",
   createNew: "New agent",
   import: "Import snapshot",
@@ -13,8 +20,12 @@ export const personaLibraryCopy = {
 } as const;
 
 export const personaCatalogCopy = {
-  title: "Agent Catalog",
-  description: "Browse agents shared to this relay.",
+  get title() {
+    return uiT("Agent Catalog");
+  },
+  get description() {
+    return uiT("Browse agents shared to this relay.");
+  },
   dialogTitle: "Add agent",
   dialogDescription: "Browse agents shared to this relay.",
   emptyTitle: "You're all set",

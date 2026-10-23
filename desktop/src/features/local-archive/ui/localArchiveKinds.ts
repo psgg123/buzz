@@ -1,3 +1,5 @@
+// Buzz source localisation: authored UI strings only; user values stay unchanged.
+import { uiT } from "@/shared/i18n/uiTranslation";
 import {
   CHANNEL_AUX_EVENT_KINDS,
   CHANNEL_MESSAGE_EVENT_KINDS,
@@ -25,35 +27,73 @@ export type KindGroup = {
  */
 export const KIND_GROUPS: ReadonlyArray<KindGroup> = [
   {
-    label: "Messages & posts",
+    get label() {
+      return uiT("Messages & posts");
+    },
     items: [
       ...CHANNEL_MESSAGE_EVENT_KINDS.map((k) => ({
         kind: k,
         label: kindLabel(k),
       })),
-      { kind: KIND_STREAM_MESSAGE_DIFF, label: "Message diffs (kind 40008)" },
+      {
+        kind: KIND_STREAM_MESSAGE_DIFF,
+        get label() {
+          return uiT("Message diffs (kind 40008)");
+        },
+      },
     ],
   },
   {
-    label: "Reactions, edits & deletions",
+    get label() {
+      return uiT("Reactions, edits & deletions");
+    },
     items: CHANNEL_AUX_EVENT_KINDS.map((k) => ({
       kind: k,
       label: kindLabel(k),
     })),
   },
   {
-    label: "Huddle events",
+    get label() {
+      return uiT("Huddle events");
+    },
     items: [
-      { kind: KIND_HUDDLE_STARTED, label: "Huddle started" },
-      { kind: KIND_HUDDLE_PARTICIPANT_JOINED, label: "Participant joined" },
-      { kind: KIND_HUDDLE_PARTICIPANT_LEFT, label: "Participant left" },
-      { kind: KIND_HUDDLE_ENDED, label: "Huddle ended" },
+      {
+        kind: KIND_HUDDLE_STARTED,
+        get label() {
+          return uiT("Huddle started");
+        },
+      },
+      {
+        kind: KIND_HUDDLE_PARTICIPANT_JOINED,
+        get label() {
+          return uiT("Participant joined");
+        },
+      },
+      {
+        kind: KIND_HUDDLE_PARTICIPANT_LEFT,
+        get label() {
+          return uiT("Participant left");
+        },
+      },
+      {
+        kind: KIND_HUDDLE_ENDED,
+        get label() {
+          return uiT("Huddle ended");
+        },
+      },
     ],
   },
   {
-    label: "System messages",
+    get label() {
+      return uiT("System messages");
+    },
     items: [
-      { kind: KIND_SYSTEM_MESSAGE, label: "System messages (kind 40099)" },
+      {
+        kind: KIND_SYSTEM_MESSAGE,
+        get label() {
+          return uiT("System messages (kind 40099)");
+        },
+      },
     ],
   },
 ] as const;

@@ -1,3 +1,5 @@
+// Buzz source localisation: authored UI strings only; user values stay unchanged.
+import { uiT } from "@/shared/i18n/uiTranslation";
 import { ChevronDown, Globe, Lock } from "lucide-react";
 
 import type { ChannelVisibility } from "@/shared/api/types";
@@ -13,8 +15,20 @@ import { cn } from "@/shared/lib/cn";
 import { SegmentedControl } from "@/shared/ui/segmented-control";
 
 const VISIBILITY_OPTIONS = [
-  { value: "private", label: "Private", Icon: Lock },
-  { value: "open", label: "Public", Icon: Globe },
+  {
+    value: "private",
+    get label() {
+      return uiT("Private");
+    },
+    Icon: Lock,
+  },
+  {
+    value: "open",
+    get label() {
+      return uiT("Public");
+    },
+    Icon: Globe,
+  },
 ] as const;
 
 export function ChannelPermissionsSettings({
@@ -46,7 +60,7 @@ export function ChannelPermissionsSettings({
           disabled && variant === "segmented" && "opacity-50",
         )}
       >
-        Visibility
+        {uiT("Visibility")}
       </span>
       {variant === "segmented" ? (
         <SegmentedControl
@@ -94,13 +108,13 @@ export function ChannelPermissionsSettings({
                 data-testid={`${testIdPrefix}-permissions-option-open`}
                 value="open"
               >
-                Public
+                {uiT("Public")}
               </DropdownMenuRadioItem>
               <DropdownMenuRadioItem
                 data-testid={`${testIdPrefix}-permissions-option-private`}
                 value="private"
               >
-                Private
+                {uiT("Private")}
               </DropdownMenuRadioItem>
             </DropdownMenuRadioGroup>
           </DropdownMenuContent>

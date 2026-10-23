@@ -1,3 +1,5 @@
+// Buzz source localisation: authored UI strings only; user values stay unchanged.
+import { uiT, useUiLanguage } from "@/shared/i18n/uiTranslation";
 /**
  * Tier-1 buzz-agent model-tuning UI fields.
  *
@@ -338,6 +340,8 @@ export function BuzzAgentModelTuningFields({
   /** Active LLM provider id (optional) — used for effort filtering + default labels. */
   provider?: string;
 }) {
+  useUiLanguage();
+
   const effortConfig = getProviderEffortConfig(provider ?? "", model);
   const { validValues: effortValid, defaultValue: effortDefault } =
     effortConfig;
@@ -352,7 +356,7 @@ export function BuzzAgentModelTuningFields({
   return (
     <div className="space-y-4">
       <p className="text-2xs font-semibold uppercase tracking-wide text-muted-foreground">
-        buzz-agent model tuning
+        {uiT("buzz-agent model tuning")}
       </p>
 
       <div className="grid gap-4 md:grid-cols-2">
@@ -366,7 +370,7 @@ export function BuzzAgentModelTuningFields({
             htmlFor="ba-thinking-effort"
             inheritedEffort={inheritedEnvVars[BUZZ_AGENT_THINKING_EFFORT]}
             inheritFallbackLabel="Inherit (agent default)"
-            label="Thinking / Effort"
+            label={uiT("Thinking / Effort")}
             onChange={(value) =>
               onEnvVarChange(BUZZ_AGENT_THINKING_EFFORT, value)
             }
@@ -376,8 +380,9 @@ export function BuzzAgentModelTuningFields({
             className="text-xs text-muted-foreground"
             id="help-ba-thinking-effort"
           >
-            Controls how much reasoning effort the LLM applies per turn. Leave
-            blank to inherit from the global or persona default.
+            {uiT(
+              "Controls how much reasoning effort the LLM applies per turn. Leave blank to inherit from the global or persona default.",
+            )}
           </p>
         </div>
       </div>

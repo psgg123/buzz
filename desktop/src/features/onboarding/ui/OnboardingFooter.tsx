@@ -1,3 +1,5 @@
+// Buzz source localisation: authored UI strings only; user values stay unchanged.
+import { useUiLanguage } from "@/shared/i18n/uiTranslation";
 import * as React from "react";
 import { createPortal } from "react-dom";
 import { ChevronLeft } from "lucide-react";
@@ -48,6 +50,8 @@ export function OnboardingFooterProvider({
   contentClassName?: string;
   placement?: OnboardingFooterPlacement;
 }) {
+  useUiLanguage();
+
   const [target, setTarget] = React.useState<HTMLElement | null>(null);
 
   if (placement === "card") {
@@ -139,6 +143,8 @@ export function OnboardingFooter({
   children: React.ReactNode;
   className?: string;
 }) {
+  useUiLanguage();
+
   const targetContext = React.useContext(OnboardingFooterTargetContext);
   const target = targetContext?.element ?? null;
   const placement = targetContext?.placement ?? "viewport";

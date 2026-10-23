@@ -1,3 +1,6 @@
+import { createMarkdownComponentCache } from "./markdown/componentCache";
+// Buzz source localisation: authored UI strings only; user values stay unchanged.
+import { uiT, useUiLanguage } from "@/shared/i18n/uiTranslation";
 import * as React from "react";
 import { createPortal } from "react-dom";
 import type { Components } from "react-markdown";
@@ -71,6 +74,7 @@ import {
 import { isRelayDownloadable, isVideoMedia } from "./markdown/mediaEntry";
 import {
   type ImageGalleryDirection,
+  type WebKitGestureLikeEvent,
   type ImageGalleryItem,
   type ImageLightboxBox,
   type ImageLightboxCornerRadii,
@@ -142,10 +146,6 @@ type ImageBlockProps = {
   thumbSrc?: string;
 };
 
-type WebKitGestureLikeEvent = Event & {
-  scale?: number;
-};
-
 function ImageZoomOverlay({
   alt,
   galleryIndex = 0,
@@ -167,6 +167,8 @@ function ImageZoomOverlay({
   sourceScope?: Element | null;
   src: string | undefined;
 }) {
+  useUiLanguage();
+
   const shouldReduceMotion = useReducedMotion();
   const prefersReducedMotion = shouldReduceMotion === true;
   const fallbackGalleryItems = React.useMemo<ImageGalleryItem[]>(
@@ -774,8 +776,9 @@ function ImageZoomOverlay({
       tabIndex={-1}
     >
       <p className="sr-only" id={descriptionId}>
-        Full-size image preview. Press Escape or click outside the image to
-        close. Click the image to zoom.
+        {uiT(
+          "Full-size image preview. Press Escape or click outside the image to close. Click the image to zoom.",
+        )}
       </p>
       <div
         className={cn(
@@ -874,7 +877,7 @@ function ImageZoomOverlay({
       </div>
       {hasPreviousImage ? (
         <button
-          aria-label="Previous image"
+          aria-label={uiT("Previous image")}
           className={cn(
             "absolute left-3 top-1/2 z-20 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-muted text-muted-foreground shadow-sm backdrop-blur-xl backdrop-saturate-150 transition-[background-color,color,opacity] duration-150 hover:text-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring/70 sm:left-6",
             isOpen ? "opacity-100" : "pointer-events-none opacity-0",
@@ -891,7 +894,7 @@ function ImageZoomOverlay({
       ) : null}
       {hasNextImage ? (
         <button
-          aria-label="Next image"
+          aria-label={uiT("Next image")}
           className={cn(
             "absolute right-3 top-1/2 z-20 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-muted text-muted-foreground shadow-sm backdrop-blur-xl backdrop-saturate-150 transition-[background-color,color,opacity] duration-150 hover:text-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring/70 sm:right-6",
             isOpen ? "opacity-100" : "pointer-events-none opacity-0",
@@ -917,7 +920,7 @@ function ImageZoomOverlay({
         }}
       >
         <div
-          aria-label="Image controls"
+          aria-label={uiT("Image controls")}
           className="relative isolate flex min-h-11 max-w-[calc(100vw-2rem)] items-center gap-2 rounded-xl px-2 py-1.5 text-muted-foreground"
           data-image-lightbox-controls=""
           role="toolbar"
@@ -927,7 +930,7 @@ function ImageZoomOverlay({
             className="pointer-events-none absolute inset-0 -z-10 rounded-[inherit] bg-muted shadow-sm backdrop-blur-xl backdrop-saturate-150"
           />
           <button
-            aria-label="Download image"
+            aria-label={uiT("Download image")}
             className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg transition-colors hover:bg-muted-foreground/10 hover:text-foreground outline-hidden focus-visible:ring-2 focus-visible:ring-ring/70 disabled:pointer-events-none disabled:opacity-45"
             disabled={!canActOnCurrentImage}
             type="button"
@@ -959,8 +962,18 @@ function ImageZoomOverlay({
             "data-image-lightbox-controls",
           ]}
           items={[
-            { label: "Copy image", onSelect: handleMenuCopy },
-            { label: "Download image", onSelect: handleMenuDownload },
+            {
+              get label() {
+                return uiT("Copy image");
+              },
+              onSelect: handleMenuCopy,
+            },
+            {
+              get label() {
+                return uiT("Download image");
+              },
+              onSelect: handleMenuDownload,
+            },
           ]}
           portalContainer={dialogRef.current ?? undefined}
           position={menu}
@@ -984,6 +997,8 @@ export const LinkPreviewImageLightbox =
  * React state avoids that repaint.
  */
 function ImageBlock({ alt, dim, resolvedSrc, src, thumbSrc }: ImageBlockProps) {
+  useUiLanguage();
+
   const [lightboxState, setLightboxState] = React.useState<{
     galleryIndex: number;
     galleryItems?: ImageGalleryItem[];
@@ -1151,7 +1166,7 @@ function ImageBlock({ alt, dim, resolvedSrc, src, thumbSrc }: ImageBlockProps) {
     <>
       <button
         aria-hidden={isHiddenInSpoiler ? true : undefined}
-        aria-label={alt?.trim() ? `Zoom image: ${alt}` : "Zoom image"}
+        aria-label={alt?.trim() ? `Zoom image: ${alt}` : uiT("Zoom image")}
         className={cn(
           "mt-1 inline-block min-w-0 max-w-full cursor-zoom-in overflow-hidden rounded-2xl border-0 bg-transparent p-0 text-left align-top focus:outline-hidden focus-visible:ring-2 focus-visible:ring-ring/50",
           lightboxState && "opacity-0",
@@ -1186,8 +1201,18 @@ function ImageBlock({ alt, dim, resolvedSrc, src, thumbSrc }: ImageBlockProps) {
         <MediaContextMenu
           dataAttributes={["data-image-context-menu"]}
           items={[
-            { label: "Copy image", onSelect: () => handleCopyImage(src) },
-            { label: "Download image", onSelect: () => handleDownload(src) },
+            {
+              get label() {
+                return uiT("Copy image");
+              },
+              onSelect: () => handleCopyImage(src),
+            },
+            {
+              get label() {
+                return uiT("Download image");
+              },
+              onSelect: () => handleDownload(src),
+            },
           ]}
           position={menu}
         />
@@ -1222,6 +1247,8 @@ export function createMarkdownComponents(
     href,
     ...props
   }: React.ComponentPropsWithoutRef<"a">) {
+    useUiLanguage();
+
     const {
       channels,
       imetaByUrl,
@@ -1638,40 +1665,9 @@ export function createMarkdownComponents(
   } as Components;
 }
 
-/**
- * The component map only varies by the four boolean render flags, so at most
- * sixteen instances ever exist. Module-stable maps mean cached markdown
- * element trees (see ./markdown/nodeCache.ts) never embed per-mount closures.
- */
-const MARKDOWN_COMPONENT_SCHEMA_VERSION = "8";
-const markdownComponentsByVariant = new Map<string, MarkdownComponentSet>();
-
-type MarkdownComponentSet = { components: Components; variant: string };
-
-/**
- * Returns the component map together with the `variant` token that fully
- * identifies it. The token doubles as the variant segment of the parse-cache
- * key (see nodeCache.ts), so the map partitioning and the key partitioning
- * come from one place and cannot drift apart: a new render flag added here
- * automatically partitions the cache too.
- */
-function getMarkdownComponents(
-  interactive: boolean,
-  leadingInlineContent: boolean,
-  mediaInset: boolean,
-  blockCode: boolean,
-): MarkdownComponentSet {
-  const variant = `${MARKDOWN_COMPONENT_SCHEMA_VERSION}:${interactive ? "i" : ""}${leadingInlineContent ? "l" : ""}${mediaInset ? "m" : ""}${blockCode ? "c" : ""}`;
-  let entry = markdownComponentsByVariant.get(variant);
-  if (!entry) {
-    entry = {
-      components: createMarkdownComponents(interactive, mediaInset, blockCode),
-      variant,
-    };
-    markdownComponentsByVariant.set(variant, entry);
-  }
-  return entry;
-}
+const getMarkdownComponents = createMarkdownComponentCache(
+  createMarkdownComponents,
+);
 
 function MarkdownInner({
   channelNames,
@@ -1696,6 +1692,8 @@ function MarkdownInner({
   snapshotSharedBy,
   videoReviewContext,
 }: MarkdownProps) {
+  useUiLanguage();
+
   const { channels: rawChannels } = useChannelNavigation();
   const channels = useStableArray(rawChannels);
   const { goChannel, goAgents } = useAppNavigation();

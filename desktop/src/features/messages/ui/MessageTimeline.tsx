@@ -1,3 +1,5 @@
+// Buzz source localisation: authored UI strings only; user values stay unchanged.
+import { uiT, useUiLanguage } from "@/shared/i18n/uiTranslation";
 import * as React from "react";
 
 import {
@@ -218,6 +220,8 @@ const MessageTimelineBase = React.forwardRef<
   }: MessageTimelineProps,
   ref,
 ) {
+  const __buzzLanguage = useUiLanguage();
+
   const internalScrollRef = React.useRef<HTMLDivElement>(null);
   const scrollContainerRef = externalScrollRef ?? internalScrollRef;
   const contentRef = React.useRef<HTMLDivElement>(null);
@@ -617,6 +621,7 @@ const MessageTimelineBase = React.forwardRef<
     messages: showTimelineSkeleton ? EMPTY_MESSAGES : deferredMessages,
   });
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: This UI projection reads locale-dependent labels.
   const virtualizedLeadingContent = React.useMemo(
     () =>
       activePinnedIntro ? (
@@ -635,7 +640,7 @@ const MessageTimelineBase = React.forwardRef<
             {activeDirectMessageIntro.displayName}
           </p>
           <p className="mt-1 max-w-full truncate whitespace-nowrap text-sm leading-5 text-muted-foreground">
-            This is the beginning of your direct message with{" "}
+            {uiT("This is the beginning of your direct message with")}{" "}
             <span className="font-medium text-foreground">
               {activeDirectMessageIntro.displayName}
             </span>
@@ -643,7 +648,12 @@ const MessageTimelineBase = React.forwardRef<
           </p>
         </div>
       ) : null,
-    [activeChannelIntro, activeDirectMessageIntro, activePinnedIntro],
+    [
+      activeChannelIntro,
+      activeDirectMessageIntro,
+      activePinnedIntro,
+      __buzzLanguage,
+    ],
   );
 
   const handleVirtualizerRangeChanged = React.useCallback(() => {
@@ -826,7 +836,7 @@ const MessageTimelineBase = React.forwardRef<
                       {activeDirectMessageIntro.displayName}
                     </p>
                     <p className="mt-1 max-w-full truncate whitespace-nowrap text-sm leading-5 text-muted-foreground">
-                      This is the beginning of your direct message with{" "}
+                      {uiT("This is the beginning of your direct message with")}{" "}
                       <span className="font-medium text-foreground">
                         {activeDirectMessageIntro.displayName}
                       </span>
@@ -900,7 +910,7 @@ const MessageTimelineBase = React.forwardRef<
                   ? unreadCountLabel(bufferedTimeline.pendingCount)
                   : newMessageCount > 0
                     ? unreadCountLabel(newMessageCount)
-                    : "Jump to latest"
+                    : uiT("Jump to latest")
               }
               onClick={() => {
                 setIsSemanticallyAtBottom(true);

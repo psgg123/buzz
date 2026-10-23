@@ -1,3 +1,5 @@
+// Buzz source localisation: authored UI strings only; user values stay unchanged.
+import { uiT } from "@/shared/i18n/uiTranslation";
 import { cn } from "@/shared/lib/cn";
 
 import {
@@ -46,7 +48,7 @@ export function AnimatedAvatarBackdropPanel({
           <button
             aria-label={
               isCustomSwatch
-                ? "Choose custom backdrop color"
+                ? uiT("Choose custom backdrop color")
                 : `Use ${swatch} backdrop`
             }
             aria-pressed={isSelected}

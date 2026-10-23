@@ -1,3 +1,5 @@
+// Buzz source localisation: authored UI strings only; user values stay unchanged.
+import { uiT, useUiLanguage } from "@/shared/i18n/uiTranslation";
 import { useCallback, useEffect, useRef, useState } from "react";
 import {
   Check,
@@ -62,6 +64,8 @@ function PairingStepIndicator({
   label: string;
   testId: string;
 }) {
+  useUiLanguage();
+
   const shouldReduceMotion = useReducedMotion() ?? false;
   const hiddenState = shouldReduceMotion
     ? { opacity: 0 }
@@ -127,12 +131,14 @@ function PairingSteps({
           testId="mobile-pairing-scan-step-indicator"
         />
         <div className="min-w-0 pt-0.5">
-          <p className="text-base font-medium">Scan QR code</p>
+          <p className="text-base font-medium">{uiT("Scan QR code")}</p>
           <p
             className="mt-1 text-sm text-muted-foreground/70"
             data-settings-subcopy
           >
-            Open Buzz on your mobile device and scan the code shown here.
+            {uiT(
+              "Open Buzz on your mobile device and scan the code shown here.",
+            )}
           </p>
         </div>
       </li>
@@ -145,15 +151,21 @@ function PairingSteps({
         />
         <div className="min-w-0 pt-0.5">
           <p className="text-base font-medium">
-            {codeEntry ? "Enter code on your phone" : "Confirm mobile code"}
+            {codeEntry
+              ? uiT("Enter code on your phone")
+              : uiT("Confirm mobile code")}
           </p>
           <p
             className="mt-1 text-sm text-muted-foreground/70"
             data-settings-subcopy
           >
             {codeEntry
-              ? "Type the six-digit code shown here into the Buzz mobile app."
-              : "Check that the six-digit code matches on both devices, then confirm it."}
+              ? uiT(
+                  "Type the six-digit code shown here into the Buzz mobile app.",
+                )
+              : uiT(
+                  "Check that the six-digit code matches on both devices, then confirm it.",
+                )}
           </p>
         </div>
       </li>
@@ -169,15 +181,15 @@ function PairingSteps({
         />
         <div aria-live="polite" className="min-w-0 pt-0.5">
           <p className="text-base font-medium">
-            {isPaired ? "Paired" : "Pair your mobile app"}
+            {isPaired ? uiT("Paired") : uiT("Pair your mobile app")}
           </p>
           <p
             className="mt-1 text-sm text-muted-foreground/70"
             data-settings-subcopy
           >
             {isPaired
-              ? "Your mobile app is now connected to this relay."
-              : "Finish setup on your phone to connect your mobile app."}
+              ? uiT("Your mobile app is now connected to this relay.")
+              : uiT("Finish setup on your phone to connect your mobile app.")}
           </p>
         </div>
       </li>
@@ -207,13 +219,17 @@ function PairingCodeConfirmation({
         className="self-start text-base font-medium"
         data-testid="pairing-sas-title"
       >
-        {codeEntry ? "Enter code on your phone" : "Confirm mobile code"}
+        {codeEntry
+          ? uiT("Enter code on your phone")
+          : uiT("Confirm mobile code")}
       </p>
       <fieldset
         className="flex w-full self-center justify-center gap-[6px]"
         data-testid="pairing-sas-code"
       >
-        <legend className="sr-only">Confirmation code {formattedCode}</legend>
+        <legend className="sr-only">
+          {uiT("Confirmation code {0}", { p0: formattedCode })}
+        </legend>
         {PAIRING_CODE_DIGIT_POSITIONS.map((position) => (
           <span
             aria-hidden="true"
@@ -245,7 +261,7 @@ function PairingCodeConfirmation({
             onClick={onConfirm}
           >
             <Check />
-            Codes match
+            {uiT("Codes match")}
           </Button>
         )}
         <Button
@@ -254,7 +270,7 @@ function PairingCodeConfirmation({
           onClick={onDeny}
           variant="outline"
         >
-          Cancel
+          {uiT("Cancel")}
         </Button>
       </div>
     </div>
@@ -266,6 +282,8 @@ export function MobilePairingCard({
 }: {
   currentPubkey?: string;
 }) {
+  useUiLanguage();
+
   const [step, setStep] = useState<PairingStep>("idle");
   const [qrUri, setQrUri] = useState<string | null>(null);
   const [codeEntry, setCodeEntry] = useState(true);
@@ -393,7 +411,7 @@ export function MobilePairingCard({
   async function handleCopy() {
     if (!qrUri) return;
     await writeTextToClipboard(qrUri);
-    toast.success("Copied to clipboard");
+    toast.success(uiT("Copied to clipboard"));
   }
 
   async function handleConfirmSas() {
@@ -421,12 +439,12 @@ export function MobilePairingCard({
   return (
     <section className="min-w-0" data-testid="settings-mobile">
       <SettingsSectionHeader
-        title="Mobile"
+        title={uiT("Mobile")}
         description={
           <>
-            Connect the Buzz mobile app to this relay by scanning a QR code. The
-            connection is secured with end-to-end encryption and a verification
-            code.
+            {uiT(
+              "Connect the Buzz mobile app to this relay by scanning a QR code. The connection is secured with end-to-end encryption and a verification code.",
+            )}
           </>
         }
       />
@@ -446,9 +464,9 @@ export function MobilePairingCard({
           {step === "sas" && sasCode
             ? `Verification code ${sasCode.slice(0, 3)} ${sasCode.slice(3, 6)} ready. ${codeEntry ? "Enter this code in the Buzz app on your phone." : "Check that it matches on your mobile device, then confirm the codes match."}`
             : step === "transferring"
-              ? "Codes confirmed. Pairing your mobile device."
+              ? uiT("Codes confirmed. Pairing your mobile device.")
               : step === "done"
-                ? "Your mobile app is now paired."
+                ? uiT("Your mobile app is now paired.")
                 : ""}
         </p>
         <SettingsOptionRow
@@ -486,7 +504,7 @@ export function MobilePairingCard({
                     data-testid="pairing-transfer-spinner"
                   />
                   <p className="text-sm text-muted-foreground">
-                    Pairing mobile device...
+                    {uiT("Pairing mobile device...")}
                   </p>
                 </div>
               ) : step === "qr" && qrUri ? (
@@ -495,13 +513,13 @@ export function MobilePairingCard({
                   centerImageSrc="/app-icon@2x.png"
                   data-testid="mobile-pairing-qr"
                   size={240}
-                  title="Mobile pairing QR code"
+                  title={uiT("Mobile pairing QR code")}
                   value={qrUri}
                 />
               ) : step === "expired" ? (
                 <div className="flex max-w-52 origin-center animate-in flex-col items-center gap-3 text-center fade-in-0 zoom-in-95 duration-[250ms] ease-[cubic-bezier(0.23,1,0.32,1)] motion-reduce:animate-none">
                   <p className="text-sm text-muted-foreground">
-                    Pairing code expired.
+                    {uiT("Pairing code expired.")}
                   </p>
                   <Button
                     data-testid="regenerate-pairing-button"
@@ -511,7 +529,7 @@ export function MobilePairingCard({
                     variant="outline"
                   >
                     <RefreshCw className="mr-1.5 h-4 w-4" />
-                    Generate new pairing code
+                    {uiT("Generate new pairing code")}
                   </Button>
                 </div>
               ) : step === "error" ? (
@@ -526,7 +544,7 @@ export function MobilePairingCard({
                     size="sm"
                     variant="outline"
                   >
-                    Try again
+                    {uiT("Try again")}
                   </Button>
                 </div>
               ) : step === "idle" ? (
@@ -536,11 +554,11 @@ export function MobilePairingCard({
                     onClick={beginPairing}
                     type="button"
                   >
-                    Start pairing
+                    {uiT("Start pairing")}
                   </Button>
                 ) : (
                   <p className="max-w-44 text-center text-sm text-muted-foreground">
-                    Sign in to generate a mobile pairing code.
+                    {uiT("Sign in to generate a mobile pairing code.")}
                   </p>
                 )
               ) : step === "done" ? (
@@ -548,7 +566,7 @@ export function MobilePairingCard({
                   <div className="flex h-12 w-12 items-center justify-center rounded-full bg-green-100 dark:bg-green-900/30">
                     <Check className="h-6 w-6 text-green-600 dark:text-green-400" />
                   </div>
-                  <p className="text-base font-medium">Paired</p>
+                  <p className="text-base font-medium">{uiT("Paired")}</p>
                 </div>
               ) : (
                 <div className="flex flex-col items-center justify-center gap-3">
@@ -558,7 +576,7 @@ export function MobilePairingCard({
                     data-testid="pairing-loading-spinner"
                   />
                   <p className="text-sm text-muted-foreground">
-                    Starting pairing...
+                    {uiT("Starting pairing...")}
                   </p>
                 </div>
               )}
@@ -575,7 +593,7 @@ export function MobilePairingCard({
                   variant="outline"
                 >
                   <Copy className="mr-1.5 h-4 w-4" />
-                  Copy pairing code
+                  {uiT("Copy pairing code")}
                 </Button>
               ) : null}
             </div>

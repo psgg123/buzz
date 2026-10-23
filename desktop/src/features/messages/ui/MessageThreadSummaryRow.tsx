@@ -1,3 +1,5 @@
+// Buzz source localisation: authored UI strings only; user values stay unchanged.
+import { uiT } from "@/shared/i18n/uiTranslation";
 import * as React from "react";
 
 import type {
@@ -274,7 +276,7 @@ export function MessageThreadSummaryRow({
             </span>
             {unreadCount != null && unreadCount > 0 ? (
               <span className="ml-1" data-testid="thread-unread-badge">
-                ({unreadCount} new)
+                {uiT("({0} new)", { p0: unreadCount })}
               </span>
             ) : null}
             {summary.lastReplyAt ? (
@@ -287,14 +289,15 @@ export function MessageThreadSummaryRow({
                     className="col-start-1 row-start-1 transition-opacity group-hover:opacity-0 group-focus-visible:opacity-0"
                     data-testid="message-thread-summary-last-reply"
                   >
-                    last reply{" "}
-                    {formatThreadSummaryLastReplyTime(summary.lastReplyAt)}
+                    {uiT("last reply {0}", {
+                      p0: formatThreadSummaryLastReplyTime(summary.lastReplyAt),
+                    })}
                   </span>
                   <span
                     className="col-start-1 row-start-1 opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100"
                     data-testid="message-thread-summary-hover-action"
                   >
-                    View thread
+                    {uiT("View thread")}
                   </span>
                 </span>
               </>

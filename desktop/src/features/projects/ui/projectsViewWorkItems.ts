@@ -1,3 +1,5 @@
+// Buzz source localisation: authored UI strings only; user values stay unchanged.
+import { uiT } from "@/shared/i18n/uiTranslation";
 import * as React from "react";
 import { toast } from "sonner";
 
@@ -49,7 +51,7 @@ export function useDeleteProjectHandler(
     async (project: Project) => {
       try {
         await mutateAsync(project);
-        toast.success("Project deleted");
+        toast.success(uiT("Project deleted"));
       } catch (error) {
         toast.error(
           error instanceof Error ? error.message : "Failed to delete project",

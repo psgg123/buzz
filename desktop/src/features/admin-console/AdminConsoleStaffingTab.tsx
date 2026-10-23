@@ -1,3 +1,5 @@
+// Buzz source localisation: authored UI strings only; user values stay unchanged.
+import { uiT, useUiLanguage } from "@/shared/i18n/uiTranslation";
 /**
  * Staffing tab — Operator-only UI for managing relay_operators rows.
  *
@@ -146,8 +148,8 @@ function RestrictionTypeBadge({
     record.mutedUntil !== null && new Date(record.mutedUntil) > now;
   return (
     <span className="flex flex-wrap gap-1">
-      {isBanned && <Badge variant="destructive">banned</Badge>}
-      {isTimedOut && <Badge variant="secondary">timeout</Badge>}
+      {isBanned && <Badge variant="destructive">{uiT("banned")}</Badge>}
+      {isTimedOut && <Badge variant="secondary">{uiT("timeout")}</Badge>}
     </span>
   );
 }
@@ -171,6 +173,8 @@ export function RestrictionsSection({
   pubkey: string;
   generation: number;
 }) {
+  useUiLanguage();
+
   const [listGen, setListGen] = useState(0);
   const [liftError, setLiftError] = useState<string | null>(null);
   const [workingPubkey, setWorkingPubkey] = useState<string | null>(null);
@@ -302,26 +306,28 @@ export function RestrictionsSection({
         >
           <AlertDialogHeader>
             <AlertDialogTitle>
-              {pendingLift?.kind === "ban" ? "Lift ban?" : "Clear timeout?"}
+              {pendingLift?.kind === "ban"
+                ? uiT("Lift ban?")
+                : uiT("Clear timeout?")}
             </AlertDialogTitle>
             <AlertDialogDescription>
-              This will{" "}
+              {uiT("This will")}{" "}
               {pendingLift?.kind === "ban"
-                ? "remove the active ban"
-                : "clear the active timeout"}{" "}
+                ? uiT("remove the active ban")
+                : uiT("clear the active timeout")}{" "}
               for{" "}
               <span className="font-mono">
                 {pendingLift ? truncatePubkey(pendingLift.pubkey) : ""}
               </span>{" "}
-              in <code>{pendingLift?.communityHost}</code>. They will be able to
-              post again.
+              in <code>{pendingLift?.communityHost}</code>
+              {uiT(". They will be able to post again.")}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel
               data-testid={`restrictions-lift-${pendingLift?.kind}-cancel`}
             >
-              Cancel
+              {uiT("Cancel")}
             </AlertDialogCancel>
             <AlertDialogAction
               asChild
@@ -331,7 +337,9 @@ export function RestrictionsSection({
                 onClick={() => void handleConfirmLift()}
                 variant="default"
               >
-                {pendingLift?.kind === "ban" ? "Lift ban" : "Clear timeout"}
+                {pendingLift?.kind === "ban"
+                  ? uiT("Lift ban")
+                  : uiT("Clear timeout")}
               </Button>
             </AlertDialogAction>
           </AlertDialogFooter>
@@ -339,7 +347,7 @@ export function RestrictionsSection({
       </AlertDialog>
 
       <p className="text-xs font-medium text-muted-foreground">
-        Active restrictions
+        {uiT("Active restrictions")}
       </p>
 
       {listState.status === "loading" && <LoadingSpinner />}
@@ -352,7 +360,7 @@ export function RestrictionsSection({
           className="text-sm text-muted-foreground"
           data-testid="restrictions-empty"
         >
-          No active bans or timeouts.
+          {uiT("No active bans or timeouts.")}
         </p>
       )}
       {listState.status === "ok" && items.length > 0 && (
@@ -456,6 +464,8 @@ export function StaffingTab({
    */
   onSelfMutation?: () => void;
 }) {
+  useUiLanguage();
+
   const [listGen, setListGen] = useState(0);
   const [addPubkey, setAddPubkey] = useState("");
   const [addRole, setAddRole] = useState<"operator" | "moderator">("moderator");
@@ -573,23 +583,25 @@ export function StaffingTab({
       >
         <AlertDialogContent data-testid="staffing-remove-dialog">
           <AlertDialogHeader>
-            <AlertDialogTitle>Remove operator?</AlertDialogTitle>
+            <AlertDialogTitle>{uiT("Remove operator?")}</AlertDialogTitle>
             <AlertDialogDescription asChild>
               <div className="space-y-2">
                 <p>
-                  This will remove{" "}
+                  {uiT("This will remove")}{" "}
                   <span className="font-mono">
                     {pendingRemove ? truncatePubkey(pendingRemove.pubkey) : ""}
                   </span>{" "}
-                  ({pendingRemove?.effectiveRole}) from the operator list.
+                  ({pendingRemove?.effectiveRole}
+                  {uiT(") from the operator list.")}
                 </p>
                 {isSelf && (
                   <p
                     className="text-destructive"
                     data-testid="staffing-remove-self-warning"
                   >
-                    You are removing your own operator access. Once removed, you
-                    may lose the ability to undo this action.
+                    {uiT(
+                      "You are removing your own operator access. Once removed, you may lose the ability to undo this action.",
+                    )}
                   </p>
                 )}
               </div>
@@ -597,14 +609,14 @@ export function StaffingTab({
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel data-testid="staffing-remove-cancel">
-              Cancel
+              {uiT("Cancel")}
             </AlertDialogCancel>
             <AlertDialogAction asChild data-testid="staffing-remove-confirm">
               <Button
                 onClick={() => void handleConfirmRemove()}
                 variant="destructive"
               >
-                Remove
+                {uiT("Remove")}
               </Button>
             </AlertDialogAction>
           </AlertDialogFooter>
@@ -614,7 +626,7 @@ export function StaffingTab({
       {/* Add operator form */}
       <div className="rounded-md border border-border/60 px-3 py-2.5 space-y-2">
         <p className="text-xs font-medium text-muted-foreground">
-          Add operator
+          {uiT("Add operator")}
         </p>
         <div className="flex gap-2">
           <input
@@ -622,7 +634,7 @@ export function StaffingTab({
             data-testid="staffing-add-pubkey-input"
             disabled={isAdding}
             onChange={(e) => setAddPubkey(e.target.value)}
-            placeholder="64-hex pubkey"
+            placeholder={uiT("64-hex pubkey")}
             type="text"
             value={addPubkey}
           />
@@ -635,8 +647,8 @@ export function StaffingTab({
             }
             value={addRole}
           >
-            <option value="moderator">moderator</option>
-            <option value="operator">operator</option>
+            <option value="moderator">{uiT("moderator")}</option>
+            <option value="operator">{uiT("operator")}</option>
           </select>
           <Button
             data-testid="staffing-add-btn"
@@ -667,7 +679,7 @@ export function StaffingTab({
         <ul className="space-y-1">
           {listState.data.length === 0 && (
             <p className="text-sm text-muted-foreground">
-              No operators configured.
+              {uiT("No operators configured.")}
             </p>
           )}
           {listState.data.map((op: AdminOperatorDto) => {
@@ -711,8 +723,8 @@ export function StaffingTab({
                     }
                     value={op.effectiveRole}
                   >
-                    <option value="moderator">moderator</option>
-                    <option value="operator">operator</option>
+                    <option value="moderator">{uiT("moderator")}</option>
+                    <option value="operator">{uiT("operator")}</option>
                   </select>
                 )}
                 {/* Config-backed: show role as badge (not editable) */}
@@ -721,15 +733,15 @@ export function StaffingTab({
                 )}
                 {/* Remove button */}
                 <Button
-                  aria-label={`Remove ${displayName}`}
+                  aria-label={uiT("Remove {0}", { p0: displayName })}
                   data-testid={`staffing-remove-btn-${op.pubkey}`}
                   disabled={isConfigBacked || isWorking}
                   onClick={() => setPendingRemove(op)}
                   size="icon-xs"
                   title={
                     isConfigBacked
-                      ? "Config-backed — cannot be removed via API"
-                      : "Remove operator"
+                      ? uiT("Config-backed — cannot be removed via API")
+                      : uiT("Remove operator")
                   }
                   type="button"
                   variant="ghost"

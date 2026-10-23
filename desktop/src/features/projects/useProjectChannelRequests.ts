@@ -1,3 +1,5 @@
+// Buzz source localisation: authored UI strings only; user values stay unchanged.
+import { uiT } from "@/shared/i18n/uiTranslation";
 import * as React from "react";
 import { toast } from "sonner";
 
@@ -154,7 +156,9 @@ export function useProjectChannelRequests() {
         ttlSeconds: request.request.ttlSeconds,
         visibility: request.request.visibility,
       });
-      toast.success(`Channel "#${request.request.name}" created.`);
+      toast.success(
+        uiT('Channel "#{0}" created.', { p0: request.request.name }),
+      );
       advanceRequestQueue();
     } catch (nextError) {
       setError(

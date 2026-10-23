@@ -1,3 +1,5 @@
+// Buzz source localisation: authored UI strings only; user values stay unchanged.
+import { uiT } from "@/shared/i18n/uiTranslation";
 import type { ReactNode } from "react";
 import { Info, Link, Users } from "lucide-react";
 
@@ -55,7 +57,9 @@ export function TeamIdentityCard({
                 </span>
               </TooltipTrigger>
               <TooltipContent side="bottom" className="max-w-xs">
-                <p>Linked from {symlinkTarget ?? sourceDir}</p>
+                <p>
+                  {uiT("Linked from {0}", { p0: symlinkTarget ?? sourceDir })}
+                </p>
               </TooltipContent>
             </Tooltip>
           ) : null}

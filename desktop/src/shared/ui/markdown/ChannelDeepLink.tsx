@@ -1,3 +1,5 @@
+// Buzz source localisation: authored UI strings only; user values stay unchanged.
+import { useUiLanguage } from "@/shared/i18n/uiTranslation";
 import type * as React from "react";
 
 import {
@@ -58,6 +60,8 @@ function ChannelMetadataTooltip({
   channel: Channel | undefined;
   children: React.ReactElement;
 }) {
+  useUiLanguage();
+
   const { contentRef, onPointerMove } = useInlineTooltipPosition();
   const description = channel?.description?.trim();
   if (!channel) return children;
@@ -140,6 +144,8 @@ function ChannelPermalinkChipContents({
 }
 
 function ResolvedChannelPermalinkChip(props: ChannelPermalinkChipProps) {
+  useUiLanguage();
+
   const channel = useChannelReference(props.channelId);
   const openable = isChannelReferenceOpenable(channel);
   const label = openable ? channel.name : props.channelId.slice(0, 8);
@@ -174,6 +180,8 @@ function ResolvedAuthoredDeepLink({
   onOpenChannel,
   onOpenMessageLink,
 }: AuthoredDeepLinkProps) {
+  useUiLanguage();
+
   const channel = useChannelReference(channelId);
   const openable = isChannelReferenceOpenable(channel);
   const label = getReactNodeText(children);
@@ -220,6 +228,8 @@ export function AuthoredDeepLinkAnchor({
   interactive: boolean;
   messageLink: AuthoredMessageLink | null;
 }) {
+  useUiLanguage();
+
   const {
     channels,
     onOpenChannel,
@@ -290,6 +300,8 @@ export function ChannelDeepLinkAnchor({
   href,
   interactive,
 }: React.ComponentPropsWithoutRef<"a"> & { interactive: boolean }) {
+  useUiLanguage();
+
   const {
     channels,
     onOpenChannel,
@@ -351,6 +363,8 @@ export function MarkdownChannelDeepLink({
   children?: React.ReactNode;
   interactive: boolean;
 }) {
+  useUiLanguage();
+
   const {
     channels,
     onOpenChannel,
@@ -434,6 +448,8 @@ function ResolvedChannelReferenceChip({
   interactive,
   onOpenChannel,
 }: Omit<ChannelReferenceChipProps, "channel">) {
+  useUiLanguage();
+
   const { channels } = useResolvedChannelDirectory();
   const channel = channels.find(
     (candidate) =>
@@ -458,6 +474,8 @@ export function MarkdownChannelReference({
   children?: React.ReactNode;
   interactive: boolean;
 }) {
+  useUiLanguage();
+
   const { channels, onOpenChannel, resolveChannelReferences } =
     useMarkdownRuntime();
   const text = String(children ?? "");

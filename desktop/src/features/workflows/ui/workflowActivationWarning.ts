@@ -1,3 +1,5 @@
+// Buzz source localisation: authored UI strings only; user values stay unchanged.
+import { uiT } from "@/shared/i18n/uiTranslation";
 import { parse as yamlParse } from "yaml";
 
 import {
@@ -137,9 +139,14 @@ export function getWorkflowActivationWarning(
 
   if (triggerType === "message_posted" && !nonEmptyString(trigger?.filter)) {
     return {
-      description:
-        "It will run for every new message in this channel. Review the trigger before turning it on.",
-      title: "This workflow may run often",
+      get description() {
+        return uiT(
+          "It will run for every new message in this channel. Review the trigger before turning it on.",
+        );
+      },
+      get title() {
+        return uiT("This workflow may run often");
+      },
     };
   }
 
@@ -152,7 +159,12 @@ export function getWorkflowActivationWarning(
         ? frequentCronDescription(cron)
         : null;
     if (description) {
-      return { description, title: "This workflow may run often" };
+      return {
+        description,
+        get title() {
+          return uiT("This workflow may run often");
+        },
+      };
     }
   }
 

@@ -1,3 +1,5 @@
+// Buzz source localisation: authored UI strings only; user values stay unchanged.
+import { uiT } from "@/shared/i18n/uiTranslation";
 import type { MeshServingUsage } from "@/shared/api/tauriMesh";
 
 /**
@@ -76,7 +78,7 @@ export function deriveServingIndicator(
       show: true,
       active: true,
       hasRemoteConsumers: false,
-      label: `Serving your agent · ${usage.inflight} live`,
+      label: uiT("Serving your agent · {0} live", { p0: usage.inflight }),
       detail: `${Math.round(usage.tokensPerSecond)} tok/s`,
     };
   }
@@ -85,7 +87,9 @@ export function deriveServingIndicator(
       show: true,
       active: false,
       hasRemoteConsumers: false,
-      label: "Idle · no one using it right now",
+      get label() {
+        return uiT("Idle · no one using it right now");
+      },
       detail: `${usage.requestsServed} ${plural(usage.requestsServed, "request")} served this session`,
     };
   }
@@ -95,7 +99,9 @@ export function deriveServingIndicator(
     show: true,
     active: false,
     hasRemoteConsumers: false,
-    label: "Idle · no one using it yet",
+    get label() {
+      return uiT("Idle · no one using it yet");
+    },
     detail: null,
   };
 }

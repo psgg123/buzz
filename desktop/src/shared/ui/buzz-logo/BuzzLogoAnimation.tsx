@@ -1,3 +1,5 @@
+// Buzz source localisation: authored UI strings only; user values stay unchanged.
+import { useUiLanguage } from "@/shared/i18n/uiTranslation";
 import { useId, useLayoutEffect, useRef } from "react";
 import type { CSSProperties } from "react";
 import "./buzz-logo-animation.css";
@@ -633,6 +635,8 @@ export default function BuzzLogoAnimation({
   textured = true,
   variant = "v8",
 }: BuzzLogoAnimationProps) {
+  useUiLanguage();
+
   const markRef = useRef<SVGSVGElement>(null);
   const idSuffix = idPart(useId());
   const baseConfig = VARIANTS[variant] ?? VARIANTS.v8;

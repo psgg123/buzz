@@ -1,3 +1,5 @@
+// Buzz source localisation: authored UI strings only; user values stay unchanged.
+import { uiT } from "@/shared/i18n/uiTranslation";
 import { toast } from "sonner";
 
 import { invokeTauri } from "@/shared/api/tauri";
@@ -5,7 +7,7 @@ import { invokeTauri } from "@/shared/api/tauri";
 export function copyImageToClipboard(src: string | undefined) {
   if (!src) return;
   invokeTauri("copy_image_to_clipboard", { url: src })
-    .then(() => toast.success("Copied to clipboard"))
+    .then(() => toast.success(uiT("Copied to clipboard")))
     .catch((error: unknown) => {
       toast.error(error instanceof Error ? error.message : "Copy failed");
     });

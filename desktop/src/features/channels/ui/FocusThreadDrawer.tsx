@@ -1,3 +1,5 @@
+// Buzz source localisation: authored UI strings only; user values stay unchanged.
+import { useUiLanguage } from "@/shared/i18n/uiTranslation";
 import { motion, useReducedMotion } from "motion/react";
 import * as React from "react";
 
@@ -192,6 +194,8 @@ export function FocusThreadDrawer({
   onClose,
   restoreFocusTarget,
 }: FocusThreadDrawerProps) {
+  useUiLanguage();
+
   const prefersReducedMotion = useReducedMotion();
   const travelPx = prefersReducedMotion ? 0 : THREAD_FOCUS_DRAWER_TRAVEL_PX;
   const drawerRef = React.useRef<HTMLDivElement>(null);

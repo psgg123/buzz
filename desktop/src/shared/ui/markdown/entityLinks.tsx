@@ -1,3 +1,5 @@
+// Buzz source localisation: authored UI strings only; user values stay unchanged.
+import { useUiLanguage } from "@/shared/i18n/uiTranslation";
 import * as React from "react";
 
 import { useAppNavigation } from "@/app/navigation/useAppNavigation";
@@ -42,6 +44,8 @@ function EntityMetadataTooltip({
   link: ParsedEntityLink;
   projects: Project[] | undefined;
 }) {
+  useUiLanguage();
+
   const { contentRef, onPointerMove } = useInlineTooltipPosition();
   const [resolved, setResolved] = React.useState<{
     href: string;

@@ -1,3 +1,5 @@
+// Buzz source localisation: authored UI strings only; user values stay unchanged.
+import { uiT, useUiLanguage } from "@/shared/i18n/uiTranslation";
 import * as React from "react";
 import { isRelayRemovedError } from "@/features/agents/managedAgentRelayCleanup";
 import { toast } from "sonner";
@@ -122,6 +124,8 @@ export function UserProfilePanel({
   widthPx,
   transparentChrome = false,
 }: UserProfilePanelProps) {
+  useUiLanguage();
+
   const { globalConfig } = useGlobalAgentConfig();
   const isOverlay = useIsThreadPanelOverlay();
   const isSplitLayout = layout === "split";
@@ -470,7 +474,7 @@ export function UserProfilePanel({
       } else if (created.spawnError) {
         toast.error(created.spawnError);
       } else {
-        toast.success(`Started ${created.agent.name}.`);
+        toast.success(uiT("Started {0}.", { p0: created.agent.name }));
       }
       if (created.profileSyncError) {
         toast.warning(created.profileSyncError);
@@ -511,7 +515,7 @@ export function UserProfilePanel({
       const result = await deleteManagedAgentRecord(managedAgent);
       if (result.cancelled) return;
 
-      toast.success(`Deleted ${managedAgent.name}.`);
+      toast.success(uiT("Deleted {0}.", { p0: managedAgent.name }));
       onClose();
     } catch (error) {
       toast.error(
@@ -575,7 +579,11 @@ export function UserProfilePanel({
           id: resolvedPersona.id,
           active: false,
         });
-        toast.success(`Removed ${resolvedPersona.displayName} from My Agents.`);
+        toast.success(
+          uiT("Removed {0} from My Agents.", {
+            p0: resolvedPersona.displayName,
+          }),
+        );
         onClose();
       } catch (error) {
         toast.error(
@@ -586,7 +594,7 @@ export function UserProfilePanel({
     }
 
     if (resolvedPersona.sourceTeam) {
-      toast.error("This agent is managed by a team.");
+      toast.error(uiT("This agent is managed by a team."));
       return;
     }
 
@@ -601,14 +609,16 @@ export function UserProfilePanel({
   const handleConfirmDeletePersona = React.useCallback(
     async (personaToConfirm: AgentPersona) => {
       if (personaToConfirm.sourceTeam) {
-        toast.error("This agent is managed by a team.");
+        toast.error(uiT("This agent is managed by a team."));
         setPersonaToDelete(null);
         return;
       }
 
       try {
         await deletePersonaMutation.mutateAsync(personaToConfirm.id);
-        toast.success(`Deleted ${personaToConfirm.displayName}.`);
+        toast.success(
+          uiT("Deleted {0}.", { p0: personaToConfirm.displayName }),
+        );
         setPersonaToDelete(null);
         onClose();
       } catch (error) {
@@ -635,11 +645,20 @@ export function UserProfilePanel({
   const handleAddedToChannel = React.useCallback(
     (channel: Channel, result: AttachManagedAgentToChannelResult) => {
       if (result.started) {
-        toast.success(`Added ${result.agent.name} to ${channel.name}.`);
+        toast.success(
+          uiT("Added {0} to {1}.", { p0: result.agent.name, p1: channel.name }),
+        );
       } else if (result.membershipAdded) {
-        toast.success(`Added ${result.agent.name} to ${channel.name}.`);
+        toast.success(
+          uiT("Added {0} to {1}.", { p0: result.agent.name, p1: channel.name }),
+        );
       } else {
-        toast.success(`${result.agent.name} is already in ${channel.name}.`);
+        toast.success(
+          uiT("{0} is already in {1}.", {
+            p0: result.agent.name,
+            p1: channel.name,
+          }),
+        );
       }
       void managedAgentsQuery.refetch();
       void relayAgentsQuery.refetch();

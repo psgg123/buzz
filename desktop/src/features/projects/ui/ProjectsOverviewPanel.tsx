@@ -1,3 +1,5 @@
+// Buzz source localisation: authored UI strings only; user values stay unchanged.
+import { uiT, useUiLanguage } from "@/shared/i18n/uiTranslation";
 import {
   CheckCircle2,
   CircleDot,
@@ -172,7 +174,7 @@ export function ProjectsActivityIntro({
         className="text-xl font-semibold tracking-tight text-foreground"
         data-testid="projects-page-header"
       >
-        Projects Activity
+        {uiT("Projects Activity")}
       </h2>
       <p
         className="mt-2 max-w-2xl text-sm text-muted-foreground"
@@ -215,6 +217,8 @@ export function ProjectsOverviewContextPanel({
   repositorySummaries,
   summaries,
 }: ProjectsOverviewContextPanelProps) {
+  useUiLanguage();
+
   const selection = useProjectSelection();
   const selectionItems = selection?.items;
   const selectionPresentation = React.useMemo(
