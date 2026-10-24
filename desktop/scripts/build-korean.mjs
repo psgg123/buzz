@@ -11,7 +11,11 @@ import { tmpdir } from "node:os";
 import path from "node:path";
 import { execFileSync, spawnSync } from "node:child_process";
 import { demoBuildConfig } from "./demo-build-config.mjs";
-import { koreanBuildNumber, koreanSourceInfo } from "./korean-build-info.mjs";
+import {
+  koreanBuildNumber,
+  koreanSourceInfo,
+  setKoreanBundleNames,
+} from "./korean-build-info.mjs";
 
 const desktop = path.resolve(import.meta.dirname, "..");
 const identity = demoBuildConfig("Korean", "0000000000000002");
@@ -140,6 +144,7 @@ if (result.status === 0) {
       "Source changed during the build; rebuild a fixed candidate.",
     );
   const buildInfo = {
+    productName: identity.productName,
     version: expectedVersion,
     buildNumber,
     source,
@@ -156,6 +161,7 @@ if (result.status === 0) {
     path.join(app, "Contents/Resources/buzz-korean-build.json"),
     `${JSON.stringify(buildInfo, null, 2)}\n`,
   );
+  setKoreanBundleNames(app, identity.productName);
   // Re-sign only this local bundle; the source official app is never modified.
   // This is an ad-hoc development signature, not Block signing or notarization.
   for (const name of names) {

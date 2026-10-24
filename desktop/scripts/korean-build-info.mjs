@@ -3,6 +3,27 @@ import { createHash } from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 
+/** Override the base Info.plist's names before signing the personal bundle. */
+export function setKoreanBundleNames(app, productName) {
+  const file = path.join(app, "Contents/Info.plist");
+  for (const key of ["CFBundleName", "CFBundleDisplayName"])
+    execFileSync("/usr/libexec/PlistBuddy", [
+      "-c",
+      `Set :${key} ${productName}`,
+      file,
+    ]);
+  const info = JSON.parse(
+    execFileSync("/usr/bin/plutil", ["-convert", "json", "-o", "-", file], {
+      encoding: "utf8",
+    }),
+  );
+  if (
+    info.CFBundleName !== productName ||
+    info.CFBundleDisplayName !== productName
+  )
+    throw new Error("Personal bundle names do not match the product name");
+}
+
 /** Parse the explicit local package revision without changing the app identity. */
 export function koreanBuildNumber(args) {
   const index = args.indexOf("--build-number");

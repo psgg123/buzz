@@ -4,7 +4,45 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import test from "node:test";
-import { koreanBuildNumber, koreanSourceInfo } from "./korean-build-info.mjs";
+import {
+  koreanBuildNumber,
+  koreanSourceInfo,
+  setKoreanBundleNames,
+} from "./korean-build-info.mjs";
+
+test("a base Info.plist cannot leave the personal bundle named Buzz", {
+  skip: process.platform !== "darwin",
+}, () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), "buzz-bundle-name-"));
+  try {
+    fs.mkdirSync(path.join(root, "Contents"));
+    const file = path.join(root, "Contents/Info.plist");
+    fs.writeFileSync(
+      file,
+      JSON.stringify({
+        CFBundleName: "Buzz",
+        CFBundleDisplayName: "Buzz",
+        CFBundleIdentifier: "personal.test",
+        CFBundleVersion: "3",
+      }),
+    );
+    execFileSync("/usr/bin/plutil", ["-convert", "xml1", file]);
+    setKoreanBundleNames(root, "Buzz Korean");
+    const info = JSON.parse(
+      execFileSync("/usr/bin/plutil", ["-convert", "json", "-o", "-", file], {
+        encoding: "utf8",
+      }),
+    );
+    assert.deepEqual(info, {
+      CFBundleName: "Buzz Korean",
+      CFBundleDisplayName: "Buzz Korean",
+      CFBundleIdentifier: "personal.test",
+      CFBundleVersion: "3",
+    });
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
 
 test("local build numbers are explicit bounded revisions independent of the profile ID", () => {
   assert.equal(koreanBuildNumber([]), "1");
