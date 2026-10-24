@@ -9,6 +9,16 @@ const keys = JSON.parse(
   fs.readFileSync(path.join(root, "locales/ui-keys.json"), "utf8"),
 );
 
+test("bundled experimental-feature names and descriptions have registered translations", () => {
+  const manifest = JSON.parse(
+    fs.readFileSync(path.join(root, "../../preview-features.json"), "utf8"),
+  );
+  for (const feature of manifest.features) {
+    assert.ok(keys[feature.name], `${feature.id}: missing feature name`);
+    assert.ok(keys[feature.description], `${feature.id}: missing description`);
+  }
+});
+
 function files(directory) {
   return fs
     .readdirSync(directory, { withFileTypes: true })

@@ -17,10 +17,10 @@ function FeatureRow({ feature }: { feature: FeatureDefinition }) {
     <SettingsOptionRow>
       <div className="min-w-0 flex-1">
         <p className="text-sm font-medium" id={`${switchId}-label`}>
-          {feature.name}
+          {uiT(feature.name)}
         </p>
         <p className="text-xs text-muted-foreground/70" data-settings-subcopy>
-          {feature.description}
+          {uiT(feature.description)}
         </p>
       </div>
       <Switch

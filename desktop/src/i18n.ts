@@ -16,6 +16,7 @@ import zhHant from "@/locales/zh-Hant.json";
 import {
   APP_LANGUAGES,
   DEFAULT_LANGUAGE,
+  LANGUAGE_STORAGE_KEY,
   resolveAppLanguage,
   resolveLanguagePreference,
   readLanguagePreference,
@@ -69,6 +70,8 @@ let preferenceState = {
   preference: readStoredLanguagePreference(),
   saved: true,
   nativeSynced: true,
+  changeFailed: false,
+  failedPreference: null as AppLanguagePreference | null,
 };
 const preferenceListeners = new Set<() => void>();
 
@@ -136,20 +139,85 @@ async function syncNativeLanguage(language: AppLanguage): Promise<boolean> {
   return true;
 }
 
-void syncNativeLanguage(resolveAppLanguage(i18n.resolvedLanguage));
+let languageRequest = 0;
+let languageChangeQueue: Promise<unknown> = syncNativeLanguage(
+  resolveAppLanguage(i18n.resolvedLanguage),
+).then((nativeSynced) => {
+  if (languageRequest !== 0 || nativeSynced) return;
+  preferenceState = { ...preferenceState, nativeSynced };
+  for (const listener of preferenceListeners) listener();
+});
 
-export async function setAppLanguage(
+function applyLanguagePreference(
   preference: AppLanguagePreference,
+  persist: boolean,
 ): Promise<{ saved: boolean; nativeSynced: boolean }> {
+  const request = ++languageRequest;
   const language = resolveAppLanguage(
     preference,
     getSystemLanguageCandidates(),
   );
-  await i18n.changeLanguage(language);
-  applyDocumentLanguage(language);
-  const nativeSynced = await syncNativeLanguage(language);
-  const saved = writeLanguagePreference(getLanguageStorage(), preference);
-  preferenceState = { preference, saved, nativeSynced };
-  for (const listener of preferenceListeners) listener();
-  return { saved, nativeSynced };
+  const currentResult = () => ({
+    saved: preferenceState.saved,
+    nativeSynced: preferenceState.nativeSynced,
+  });
+  const operation = languageChangeQueue.then(async () => {
+    if (request !== languageRequest) return currentResult();
+    try {
+      await i18n.changeLanguage(language);
+      if (request !== languageRequest) return currentResult();
+      applyDocumentLanguage(language);
+      // Native menus are process-wide. A slower retired update must finish
+      // before the latest one starts, even though it may no longer publish UI state.
+      const nativeSynced = await syncNativeLanguage(language);
+      if (request !== languageRequest) return currentResult();
+      const saved =
+        !persist || writeLanguagePreference(getLanguageStorage(), preference);
+      preferenceState = {
+        preference,
+        saved,
+        nativeSynced,
+        changeFailed: false,
+        failedPreference: null,
+      };
+      for (const listener of preferenceListeners) listener();
+      return { saved, nativeSynced };
+    } catch (error) {
+      if (request === languageRequest) {
+        preferenceState = {
+          ...preferenceState,
+          changeFailed: true,
+          failedPreference: preference,
+        };
+        for (const listener of preferenceListeners) listener();
+      }
+      throw error;
+    }
+  });
+  // The caller still receives failures; only the scheduling tail recovers so
+  // that a rejected catalogue load cannot strand every subsequent request.
+  languageChangeQueue = operation.then(
+    () => undefined,
+    () => undefined,
+  );
+  return operation;
+}
+
+export function setAppLanguage(preference: AppLanguagePreference) {
+  return applyLanguagePreference(preference, true);
+}
+
+if (typeof window !== "undefined") {
+  window.addEventListener("storage", (event) => {
+    if (event.key !== null && event.key !== LANGUAGE_STORAGE_KEY) return;
+    if (event.storageArea && event.storageArea !== getLanguageStorage()) return;
+    const preference =
+      event.newValue === null
+        ? readStoredLanguagePreference()
+        : resolveLanguagePreference(event.newValue);
+    void applyLanguagePreference(preference, false).catch(() => {
+      // changeFailed remains in the shared session state and is shown even
+      // after reopening Settings. A storage event has no awaiting UI caller.
+    });
+  });
 }

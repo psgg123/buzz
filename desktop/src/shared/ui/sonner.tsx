@@ -1,5 +1,5 @@
 // Buzz source localisation: authored UI strings only; user values stay unchanged.
-import { useUiLanguage } from "@/shared/i18n/uiTranslation";
+import { uiT, useUiLanguage } from "@/shared/i18n/uiTranslation";
 import { Toaster as Sonner } from "sonner";
 
 import { useTheme } from "@/shared/theme/ThemeProvider";
@@ -13,6 +13,7 @@ const Toaster = ({ ...props }: ToasterProps) => {
 
   return (
     <Sonner
+      containerAriaLabel={uiT("Notifications")}
       theme={isDark ? "dark" : "light"}
       className="toaster group"
       toastOptions={{

@@ -4,7 +4,7 @@ This v1 manifest contains the English source strings extracted from the bounded 
 
 The Korean development branch additionally uses the `ui` namespace (`en.ui.json`,
 `ko.ui.json`, and `ui-keys.json`) for authored UI strings across desktop 0.5.28.
-Its catalogue currently contains 3,358 entries. This is a resource count, not a
+Its catalogue currently contains 4,212 entries. This is a resource count, not a
 claim that every visible string has been translated or reviewed. Source call
 sites provide the rendering context; `ko.grammar-slots.json` records English
 grammatical slots expressed directly in Korean. Provenance is documented in
@@ -54,6 +54,7 @@ grammatical slots expressed directly in Korean. Provenance is documented in
 | `settings.language.english` | English | Language selector row in Appearance settings |
 | `settings.language.traditionalChinese` | Traditional Chinese | Language selector row in Appearance settings |
 | `settings.language.simplifiedChinese` | Simplified Chinese | Language selector row in Appearance settings |
+| `settings.language.retry` | Try again | Retry a failed language load, save, or native menu update |
 | `sidebar.primary.inbox` | Inbox | Main app sidebar primary navigation |
 | `sidebar.primary.pulse` | Pulse | Main app sidebar primary navigation |
 | `sidebar.primary.projects` | Projects | Main app sidebar primary navigation |
@@ -157,4 +158,6 @@ grammatical slots expressed directly in Korean. Provenance is documented in
 | `agents.import` | Import | Agents main screen |
 | `agents.profile` | {{name}} agent profile | Agents main screen |
 
-Total keys: **140**.
+The initial extraction had **140** keys. Language persistence and retry messages
+are added as the runtime gains those states; the locale parity tests check the
+current key set.

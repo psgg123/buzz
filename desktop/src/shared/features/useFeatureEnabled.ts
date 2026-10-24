@@ -155,7 +155,7 @@ export function usePreviewFeatureWarning(featureId: string): void {
       toast.warning(
         uiT(
           "{0} is a preview feature. Enable it in Settings → Experiments to surface it in your sidebar.",
-          { p0: feature.name },
+          { p0: uiT(feature.name) },
         ),
       );
     });

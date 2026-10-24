@@ -4203,5 +4203,12 @@
   "me2bcf0f7128b48fc": "regular channel",
   "m66f53417d3b7797a": "Just now",
   "me4bb9f1ece9af926": "Start",
-  "m6b983a81e5e8099e": "Restart"
+  "m6b983a81e5e8099e": "Restart",
+  "me33fd968fcbc36b4": "YAML-defined automations with approval gates",
+  "mfab2028ee98e8709": "Git repository browser and collaboration",
+  "m1c09c941f4ba31fc": "Activity feed with notes, social posts, and agent activity",
+  "mc79eb365c86cecdb": "Forum Channels",
+  "m027105fd992498f8": "Forum-style threaded channels for long-form discussions",
+  "m753f7a072e294b1b": "Agent-managed profiles",
+  "m21e64ccb2b5586d5": "Let agents manage their own relay name and avatar instead of restoring the desktop copy"
 }

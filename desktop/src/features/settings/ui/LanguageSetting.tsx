@@ -6,7 +6,9 @@ import {
   getLanguagePreferenceState,
   setAppLanguage,
   subscribeLanguagePreference,
+  type AppLanguagePreference,
 } from "@/i18n";
+import { Button } from "@/shared/ui/button";
 import { SettingsOptionGroup, SettingsOptionRow } from "./SettingsOptionGroup";
 
 export function LanguageSetting() {
@@ -15,13 +17,21 @@ export function LanguageSetting() {
     preference: languagePreference,
     saved,
     nativeSynced,
+    changeFailed,
+    failedPreference,
   } = useSyncExternalStore(
     subscribeLanguagePreference,
     getLanguagePreferenceState,
     getLanguagePreferenceState,
   );
-  const [error, setError] = useState(false);
   const [pending, setPending] = useState(false);
+  const changeLanguage = (preference: AppLanguagePreference) => {
+    setPending(true);
+    void setAppLanguage(preference).then(
+      () => setPending(false),
+      () => setPending(false),
+    );
+  };
 
   return (
     <SettingsOptionGroup className="mt-8">
@@ -36,9 +46,25 @@ export function LanguageSetting() {
           {!saved ? (
             <p role="status">{t("settings.language.unsaved")}</p>
           ) : null}
-          {error ? <p role="alert">{t("settings.language.error")}</p> : null}
+          {changeFailed ? (
+            <p role="alert">{t("settings.language.error")}</p>
+          ) : null}
           {!nativeSynced ? (
             <p role="alert">{t("settings.language.nativeError")}</p>
+          ) : null}
+          {!saved || changeFailed || !nativeSynced ? (
+            <Button
+              className="mt-2"
+              data-testid="app-language-retry"
+              disabled={pending}
+              onClick={() =>
+                changeLanguage(failedPreference ?? languagePreference)
+              }
+              size="sm"
+              variant="outline"
+            >
+              {t("settings.language.retry")}
+            </Button>
           ) : null}
         </div>
         <select
@@ -49,17 +75,7 @@ export function LanguageSetting() {
           onChange={(event) => {
             const nextPreference = event.currentTarget.value;
             if (isAppLanguagePreference(nextPreference)) {
-              setError(false);
-              setPending(true);
-              void setAppLanguage(nextPreference).then(
-                () => {
-                  setPending(false);
-                },
-                () => {
-                  setError(true);
-                  setPending(false);
-                },
-              );
+              changeLanguage(nextPreference);
             }
           }}
           value={languagePreference}

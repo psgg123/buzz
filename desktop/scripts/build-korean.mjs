@@ -11,6 +11,7 @@ import { tmpdir } from "node:os";
 import path from "node:path";
 import { execFileSync, spawnSync } from "node:child_process";
 import { demoBuildConfig } from "./demo-build-config.mjs";
+import { koreanBuildNumber, koreanSourceInfo } from "./korean-build-info.mjs";
 
 const desktop = path.resolve(import.meta.dirname, "..");
 const identity = demoBuildConfig("Korean", "0000000000000002");
@@ -22,6 +23,9 @@ if (process.platform !== "darwin")
   throw new Error("This package targets macOS.");
 if (!new Set(["arm64", "x64"]).has(process.arch))
   throw new Error("Unsupported architecture.");
+const buildNumber = koreanBuildNumber(process.argv.slice(2));
+identity.tauriConfig.bundle.macOS = { bundleVersion: buildNumber };
+const source = koreanSourceInfo(path.join(desktop, ".."));
 const index = process.argv.indexOf("--sidecars-from");
 const sourceApp = index >= 0 ? process.argv[index + 1] : null;
 const expectedVersion = JSON.parse(
@@ -128,6 +132,30 @@ if (result.status === 0) {
     "src-tauri/target/release/bundle/macos",
     `${identity.productName}.app`,
   );
+  if (
+    koreanSourceInfo(path.join(desktop, "..")).sourceSha256 !==
+    source.sourceSha256
+  )
+    throw new Error(
+      "Source changed during the build; rebuild a fixed candidate.",
+    );
+  const buildInfo = {
+    version: expectedVersion,
+    buildNumber,
+    source,
+    builtAt: new Date().toISOString(),
+    architecture: process.arch,
+    identifier: identity.identifier,
+    deepLinkScheme: identity.deepLinkScheme,
+    keyringService: identity.keyringService,
+    nestName: identity.nestName,
+    signature: "ad-hoc; not Block-signed or notarized",
+    sidecars,
+  };
+  writeFileSync(
+    path.join(app, "Contents/Resources/buzz-korean-build.json"),
+    `${JSON.stringify(buildInfo, null, 2)}\n`,
+  );
   // Re-sign only this local bundle; the source official app is never modified.
   // This is an ad-hoc development signature, not Block signing or notarization.
   for (const name of names) {
@@ -159,6 +187,19 @@ if (result.status === 0) {
   execFileSync("/usr/bin/codesign", ["--verify", "--deep", "--strict", app], {
     stdio: "inherit",
   });
+  writeFileSync(
+    path.join(evidence, "build-manifest.json"),
+    `${JSON.stringify(
+      {
+        ...buildInfo,
+        executableSha256: createHash("sha256")
+          .update(readFileSync(path.join(app, "Contents/MacOS/buzz-desktop")))
+          .digest("hex"),
+      },
+      null,
+      2,
+    )}\n`,
+  );
   writeFileSync(
     path.join(evidence, "packaged-sidecars.json"),
     JSON.stringify(

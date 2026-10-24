@@ -1450,5 +1450,12 @@
   "regular channel": "일반 채널",
   "Just now": "방금",
   "Start": "시작",
-  "Restart": "재시작"
+  "Restart": "재시작",
+  "YAML-defined automations with approval gates": "승인 단계를 포함한 YAML 기반 자동화",
+  "Git repository browser and collaboration": "Git 저장소 탐색과 협업",
+  "Activity feed with notes, social posts, and agent activity": "노트·소셜 게시물·에이전트 작업을 모아 보는 피드",
+  "Forum Channels": "포럼 채널",
+  "Forum-style threaded channels for long-form discussions": "긴 글로 토론하는 포럼 방식의 스레드 채널",
+  "Agent-managed profiles": "에이전트가 관리하는 프로필",
+  "Let agents manage their own relay name and avatar instead of restoring the desktop copy": "데스크톱에 저장된 프로필을 복원하는 대신 에이전트가 서버의 이름과 아바타를 직접 관리하도록 허용"
 }

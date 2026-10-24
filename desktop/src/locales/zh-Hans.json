@@ -55,7 +55,8 @@
       "simplifiedChinese": "简体中文",
       "unsaved": "Applied for this session. The language preference could not be saved.",
       "error": "The language could not be changed. Try again.",
-      "nativeError": "The app language changed, but the native menus could not be updated. Choose the language again to retry."
+      "nativeError": "The app language changed, but the native menus could not be updated. Choose the language again to retry.",
+      "retry": "Try again"
     }
   },
   "sidebar": {
