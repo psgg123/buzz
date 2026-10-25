@@ -50,7 +50,7 @@
 
 ## 고정 후보와 전체 검사
 
-- 설치본: `/Users/jayk/Downloads/Buzz Korean.app`, 버전 0.5.28, 빌드 3.
+- 설치본: `/Users/jayk/Downloads/Buzz-Korean/local/apps/Buzz Korean.app`, 버전 0.5.28, 빌드 3. 사용자의 폴더 구성 지시에 따라 프로젝트 내부로 이동했으며, 이동 전후 파일 해시와 앱 서명을 확인했다. 이전 실행 기록의 경로는 당시 이력으로 보존한다.
 - 설치 소스: `93488c2c01ca94e9b37a0c75775fd5a2bc85c54a`, dirty=false.
 - 소스 지문: `226934fd1c73989ffa590d91dc5ca56039adc554c25903b44bcf19417cb751cf`.
 - 기여 후보: `6213113f0d6934a750d71563947b3013f87cd7c4`, 원본 기준 `9e8c9fc04daf20259cd259dcaec89109587cc7f5`. 전체 CI는 직전 `045cb877`에서 통과했고, 이후 변경은 Playwright 서버 명령 한 줄뿐이다. 이 변경은 서식 검사 및 양쪽 6개 E2E로 검증했다.
